@@ -1,0 +1,189 @@
+<div class="p-grid">
+    <div *ngIf="ObjOptions.o5_1" class="p-col-12 p-md-6">
+        <h5>{{"Tipo interactividad" | translate}}</h5>
+        <div class="card">
+            <div class="p-fluid">
+                <!-- [(ngModel)]="selectedDrop" -->
+                <p-dropdown [options]="tiposActividad" [(ngModel)]='tiposActividadSelect' name='tiposActividadSelect' (onChange)='cambio_tiposActividad()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                    <ng-template pTemplate="item" let-item>
+                        {{item.label| translate }}
+                    </ng-template>
+                    <ng-template let-selectedItem pTemplate="selectedItem">
+                        {{selectedItem.label | translate }}
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="ObjOptions.o5_2" class="p-col-12 p-md-6">
+        <h5>{{"Tipo de recurso educativo" | translate}}</h5>
+        <div class="card">
+            <div class="p-fluid">
+                <!-- [(ngModel)]="selectedDrop" -->
+                <p-dropdown [options]="tiposRecursEducativos" [(ngModel)]='tiposRecursEducativosSelect' name='tiposRecursEducativosSelect' (onChange)='cambio_tiposRecursEducativos()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                    <ng-template pTemplate="item" let-item>
+                        {{item.label| translate }}
+                    </ng-template>
+                    <ng-template let-selectedItem pTemplate="selectedItem">
+                        {{selectedItem.label | translate }}
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="ObjOptions.o5_3" class="p-col-12 p-md-6">
+        <h5>{{"Nivel de interactividad" | translate}}</h5>
+        <div class="card">
+            <div class="p-fluid">
+                <!-- [(ngModel)]="selectedDrop" -->
+                <p-dropdown [options]="nivelesInteractividad" [(ngModel)]='nivelesInteractividadSelect' name='nivelesInteractividadSelect' (onChange)='cambio_nivelesInteractividadSelect()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                    <ng-template pTemplate="item" let-item>
+                        {{item.label| translate }}
+                    </ng-template>
+                    <ng-template let-selectedItem pTemplate="selectedItem">
+                        {{selectedItem.label | translate }}
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="ObjOptions.o5_4" class="p-col-12 p-md-6">
+        <h5>{{"Densidad Semántica" | translate}}</h5>
+        <div class="card">
+            <div class="p-fluid">
+                <!-- [(ngModel)]="selectedDrop" -->
+                <p-dropdown [options]="densiadesSemanticas" [(ngModel)]='densiadesSemanticasSelect' name='densiadesSemanticasSelect' (onChange)='cambio_densiadesSemanticasSelect()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                    <ng-template pTemplate="item" let-item>
+                        {{item.label| translate }}
+                    </ng-template>
+                    <ng-template let-selectedItem pTemplate="selectedItem">
+                        {{selectedItem.label | translate }}
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="ObjOptions.o5_5" class="p-col-12 p-md-6">
+        <h5>{{"Destinatario" | translate}}</h5>
+        <div class="card">
+            <div class="p-fluid">
+                <!-- [(ngModel)]="selectedDrop" -->
+                <p-dropdown [options]="destinatarios" [(ngModel)]='destinatariosSelect' name='destinatariosSelect' (onChange)='cambio_destinatariosSelect()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                    <ng-template pTemplate="item" let-item>
+                        {{item.label| translate }}
+                    </ng-template>
+                    <ng-template let-selectedItem pTemplate="selectedItem">
+                        {{selectedItem.label | translate }}
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="ObjOptions.o5_6" class="p-col-12 p-md-6">
+        <h5>{{"Contexto" | translate}}</h5>
+        <div class="card">
+            <div class="p-fluid">
+                <!-- [(ngModel)]="selectedDrop" -->
+                <p-dropdown [options]="contextos" [(ngModel)]='contextosSelect' name='contextosSelect' (onChange)='cambio_contextosSelect()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                    <ng-template pTemplate="item" let-item>
+                        {{item.label| translate }}
+                    </ng-template>
+                    <ng-template let-selectedItem pTemplate="selectedItem">
+                        {{selectedItem.label | translate }}
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="ObjOptions.o5_7" class="p-col-12 p-md-6">
+        <h5>{{"Rango típico de edad" | translate}}</h5>
+        <!-- <div class="card">
+            <div class="p-fluid">
+                <label for="rango">{{"Rango" | translate}}</label>
+                <input id="rango" type="text" pInputText>
+            </div>
+        </div> -->
+        <div class="card">
+            <div class="p-fluid">
+                <input type="text" pInputText [(ngModel)]="edad" readonly/>
+                <p-slider [(ngModel)]="edad"></p-slider>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="ObjOptions.o5_8" class="p-col-12 p-md-6">
+        <h5>{{"Dificultad" | translate}}</h5>
+        <div class="card">
+            <div class="p-fluid">
+                <!-- [(ngModel)]="selectedDrop" -->
+                <p-dropdown [options]="dificultades" [(ngModel)]='dificultadesSelect' name='dificultadesSelect' (onChange)='cambio_dificultadesSelect()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true ">
+                    <ng-template pTemplate="item" let-item>
+                        {{item.label| translate }}
+                    </ng-template>
+                    <ng-template let-selectedItem pTemplate="selectedItem">
+                        {{selectedItem.label | translate }}
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </div>
+    </div>
+
+    <!-- class="card" -->
+    <div *ngIf="ObjOptions.o5_9" class="p-col-12 p-md-6">
+        <h5>{{"Tiempo tipico de aprendizaje" | translate}}</h5>
+
+        <div class="card">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col">
+                    <label for="anios">{{"Años" | translate}}</label>
+                    <p-inputNumber id="anios" mode="decimal" [showButtons]="true" [min]="0" [max]="100" [(ngModel)]="years"></p-inputNumber>
+                </div>
+                <div class="p-field p-col">
+                    <label for="meses">{{"Meses" | translate}}</label>
+                    <p-inputNumber id="meses" mode="decimal" [showButtons]="true" [min]="0" [max]="12" [(ngModel)]="months"></p-inputNumber>
+                </div>
+
+                <div class="p-field p-col">
+                    <label for="dias">{{"Días" | translate}}</label>
+                    <p-inputNumber id="dias" mode="decimal" [showButtons]="true" [min]="0" [max]="30" [(ngModel)]="days"></p-inputNumber>
+                </div>
+
+            </div>
+
+
+            <!-- <div class="p-fluid">
+                <div class="p-field p-grid">
+                    <label for="descripcion">{{"Descripción" | translate}}</label>
+                    <textarea id="descripcion" type="text" rows="4" pInputTextarea></textarea>
+                </div>
+            </div> -->
+
+
+        </div>
+
+    </div>
+
+    <!-- class="p-col-12" -->
+
+    <div *ngIf="ObjOptions.o5_10" class="p-col-12 p-md-6">
+        <h5>{{"Descripción" | translate}}</h5>
+        <div class="card">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 ">
+                    <label for="descripcion">{{"Descripción" | translate}}</label>
+                    <textarea id="descripcion" [(ngModel)]='objUsoEdu["Description"]' type="text" rows="4" pInputTextarea></textarea>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

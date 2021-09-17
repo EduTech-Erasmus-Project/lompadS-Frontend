@@ -1,0 +1,66 @@
+<div class="p-grid">
+
+
+    <div *ngIf="ObjOptions.o7_1" class="p-col-12 ">
+        <h5>{{"Tipo" | translate}}</h5>
+        <div class="card">
+            <div class="p-fluid">
+                <!-- [(ngModel)]="selectedDrop" -->
+                <p-dropdown [options]="tipos" [(ngModel)]='tiposSelect' name='tiposSelect' (onChange)='cambio_tiposSelect()' placeholder='{{"Seleccionar"| translate}} ' [showClear]="true">
+                    <ng-template pTemplate="item" let-item>
+                        {{item.label| translate }}
+                    </ng-template>
+                    <ng-template let-selectedItem pTemplate="selectedItem">
+                        {{selectedItem.label | translate }}
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="ObjOptions.o7_2" class="p-col-12 ">
+        <h5>{{"Recurso" | translate}}</h5>
+        <div class="card">
+            <h6>{{"Identificador" | translate}}</h6>
+            <div *ngIf="ObjOptions.o7_2_1" class="p-fluid">
+                <div class="p-field p-grid">
+                    <label for="catalogo" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Catálogo" | translate}}</label>
+                    <div class="p-col-12 p-md-10">
+                        <input id="catalogo" [(ngModel)]='objRelacion["Resource"]["Identifier"]["Catalog"]' type="text" pInputText>
+                    </div>
+                </div>
+                <div class="p-field p-grid">
+                    <label for="entrada" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Entrada" | translate}}</label>
+                    <div class="p-col-12 p-md-10">
+
+                        <input id="entrada" [(ngModel)]='objRelacion["Resource"]["Identifier"]["Entry"]' type="text" pInputText>
+                    </div>
+                </div>
+                <!-- <div class="p-field p-grid">
+                    <label for="lastname4" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Email"| translate}}</label>
+                    <div class="p-col-12 p-md-10">
+                        <input id="lastname4" type="text" pInputText>
+                    </div>
+                </div>
+                <div class="p-field p-grid">
+                    <label for="organizacion" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Organización"| translate}}</label>
+                    <div class="p-col-12 p-md-10">
+                        <input id="organizacion" type="text" pInputText>
+                    </div>
+                </div> -->
+
+            </div>
+
+            <div *ngIf="ObjOptions.o7_2_2" class="card">
+                <h6>{{"Descripción" | translate}}</h6>
+                <div class="p-fluid">
+
+                    <textarea id="descripcion" [(ngModel)]='objRelacion["Resource"]["Description"]' type="text" rows="4" pInputTextarea></textarea>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

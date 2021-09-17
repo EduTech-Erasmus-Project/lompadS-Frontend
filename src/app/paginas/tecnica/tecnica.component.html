@@ -1,0 +1,158 @@
+<div class="p-grid">
+    <div *ngIf="ObjOptions.o4_1" class="p-col-12">
+        <h5>{{"Formato" | translate}}</h5>
+        <div class="card">
+            <!-- <h4>PIAS HAY QUE PREGUNTAR SOBRE ESTE CAMPO</h4> -->
+            <div class="p-field p-fluid">
+                <label for="esquema">{{"Esquema" | translate}}</label>
+                <input [(ngModel)]='objTecnica["Format"]' id="esquema" type="esquema" pInputText aria-describedby="username-help">
+                <!-- <small id="username-help">Enter your username to reset your password.</small> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- perfiles da lo mismo en tamaño y localizacion -->
+
+    <div *ngIf="ObjOptions.o4_2" class="p-col-12 p-md-6">
+        <h5>{{"Tamaño" | translate}}</h5>
+        <div class="card">
+            <div class="p-fluid">
+                <div class="p-field p-grid">
+                    <input [(ngModel)]='objTecnica["Size"]' id="tamanio" type="text" pInputText>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="ObjOptions.o4_3" class="p-col-12 p-md-6">
+        <h5>{{"Localización" | translate}}</h5>
+        <div class="card">
+            <div class="p-fluid">
+                <div class="p-field p-grid">
+                    <input [(ngModel)]='objTecnica["Location"]' id="localizacion" type="text" pInputText>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div *ngIf="ObjOptions.o4_4" class="p-col-12">
+        <h5>{{"Requisitos" | translate}}</h5>
+        <div class="card">
+            <h6>{{"Agregador Or" | translate}}</h6>
+            <div class="p-fluid">
+                <div class="p-field p-grid">
+                    <label for="tipo" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Tipo" | translate}}</label>
+                    <div class="p-col-12 p-md-10">
+                        <p-dropdown id="tipo" [(ngModel)]='req_tipo_select' name='req_tipo_select' [options]="tiposOr" (onChange)='cambioreq_tipo_select()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                            <ng-template pTemplate="item" let-item>
+                                {{item.label| translate }}
+                            </ng-template>
+                            <ng-template let-selectedItem pTemplate="selectedItem">
+                                {{selectedItem.label | translate }}
+                            </ng-template>
+                        </p-dropdown>
+                    </div>
+                </div>
+                <div class="p-field p-grid">
+                    <label for="nombre" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Nombre" | translate}}</label>
+                    <div class="p-col-12 p-md-10">
+                        <p-dropdown id="tipo" [(ngModel)]='nombreSelect' name='req_tipo_select' [options]="tiposSystem" (onChange)='cambioreq_nombre()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                            <ng-template pTemplate="item" let-item>
+                                {{item.label| translate }}
+                            </ng-template>
+                            <ng-template let-selectedItem pTemplate="selectedItem">
+                                {{selectedItem.label | translate }}
+                            </ng-template>
+                        </p-dropdown>
+                    </div>
+                </div>
+                <div class="p-field p-grid">
+                    <label for="ver_minima" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Versión Mínima" | translate}}</label>
+                    <div class="p-col-12 p-md-10">
+                        <input id="ver_minima" [(ngModel)]='objTecnica["Requirement"]["OrComposite"]["Minimum Version"]' type="text" pInputText>
+                    </div>
+                </div>
+                <div class="p-field p-grid">
+                    <label for="ver_maxima" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Versión Máxima" | translate}}</label>
+                    <div class="p-col-12 p-md-10">
+                        <input id="ver_maxima" [(ngModel)]='objTecnica["Requirement"]["OrComposite"]["Maximum Version"]' type="text" pInputText>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="ObjOptions.o4_5" class="p-col-12 p-md-6">
+        <h5>{{"Pautas de Instalación" | translate}}</h5>
+        <div class="card">
+            <div class="p-fluid">
+                <div class="p-field p-grid">
+                    <label for="descripcion">{{"Descripción" | translate}}</label>
+                    <textarea [(ngModel)]='objTecnica["Installation Remarks"]' id="descripcion" type="text" rows="4" pInputTextarea></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="ObjOptions.o4_6" class="p-col-12 p-md-6">
+        <h5>{{"Otros Requisitos de Plataforma" | translate}}</h5>
+        <div class="card">
+            <div class="p-fluid">
+                <div class="p-field p-grid">
+                    <label for="descripcion">{{"Descripción" | translate}}</label>
+                    <textarea [(ngModel)]='objTecnica["Other Platform Requirements"]' id="descripcion" type="text" rows="4" pInputTextarea></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="ObjOptions.o4_7" class="p-col-12">
+        <h5>{{"Duración"| translate}}</h5>
+        <div class="card">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col">
+                    <label for="anios">{{"Años" | translate}}</label>
+                    <p-inputNumber id="anios" mode="decimal" [showButtons]="true" [min]="0" [max]="100" [(ngModel)]='years'></p-inputNumber>
+                </div>
+                <div class="p-field p-col">
+                    <label for="meses">{{"Meses" | translate}}</label>
+                    <p-inputNumber id="meses" mode="decimal" [showButtons]="true" [min]="0" [max]="12" [(ngModel)]='months'></p-inputNumber>
+                </div>
+
+                <div class="p-field p-col">
+                    <label for="dias">{{"Días" | translate}}</label>
+                    <p-inputNumber id="dias" mode="decimal" [showButtons]="true" [min]="0" [max]="30" [(ngModel)]='days'></p-inputNumber>
+                </div>
+                <div class="p-field p-col">
+                    <label for="horas">{{"Horas"| translate}}</label>
+                    <p-inputNumber id="horas" mode="decimal" [showButtons]="true" [min]="0" [max]="24" [(ngModel)]='hours'></p-inputNumber>
+                </div>
+                <div class="p-field p-col">
+                    <label for="minutos">{{"Minutos" | translate}}</label>
+                    <p-inputNumber id="minutos" mode="decimal" [showButtons]="true" [min]="0" [max]="60" [(ngModel)]='minutes'></p-inputNumber>
+                </div>
+                <!-- <div class="p-field p-col">
+                    <label for="segundos">{{"Segundos"| translate}}</label>
+                    <p-inputNumber id="segundos" mode="decimal" [showButtons]="true" [min]="0" [max]="60" [(ngModel)]='second'></p-inputNumber>
+                </div> -->
+            </div>
+
+
+            <!-- <div class="p-fluid">
+                <div class="p-field p-grid">
+                    <label for="descripcion">{{"Descripción" | translate}}</label>
+                    <textarea id="descripcion" type="text" rows="4" pInputTextarea></textarea>
+                </div>
+            </div> -->
+
+
+        </div>
+    </div>
+
+
+</div>

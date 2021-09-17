@@ -1,0 +1,114 @@
+<div class="p-grid">
+
+    <div *ngIf="ObjOptions.o3_1" class="p-col-12">
+        <h5>{{"Idetificador" | translate }}</h5>
+
+        <div class="card">
+            <div class="p-fluid p-formgrid p-grid">
+                <label for="catalogo" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Catálogo" | translate }}</label>
+                <div class="p-field p-col">
+                    <input [(ngModel)]='objMetadatos["Identifier"]["Catalog"]' id="catalogo" type="text" pInputText>
+                </div>
+                <label for="entrada" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Entrada" | translate}}</label>
+                <div class="p-field p-col">
+                    <input id="entrada" [(ngModel)]='objMetadatos["Identifier"]["Schema"]' type="text" pInputText>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div *ngIf="ObjOptions.o3_2" class="p-col-12 ">
+        <h5>{{"Contribución" | translate }}</h5>
+        <div class="card">
+
+            <div *ngIf="ObjOptions.o3_2_1" class="card">
+                <h5>{{"Tipo" | translate}}</h5>
+                <div class="p-fluid">
+                    <!-- [(ngModel)]="selectedDrop" -->
+                    <p-dropdown [options]="tipos" [(ngModel)]='tipos_Select' name='tipos_Select' (onChange)='cambioTipos()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                        <ng-template pTemplate="item" let-item>
+                            {{item.label| translate }}
+                        </ng-template>
+                        <ng-template let-selectedItem pTemplate="selectedItem">
+                            {{selectedItem.label | translate }}
+                        </ng-template>
+                    </p-dropdown>
+                </div>
+
+            </div>
+
+            <div *ngIf="ObjOptions.o3_2_2" class="card">
+                <h5>{{"Entidad" | translate }}</h5>
+                <div class="p-fluid">
+                    <div class="p-field p-grid">
+                        <label for="nombre" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Nombre" | translate }}</label>
+                        <div class="p-col-12 p-md-10">
+                            <input id="nombre" [(ngModel)]='nombreNew' type="text" pInputText>
+                        </div>
+                    </div>
+                    <div class="p-field p-grid">
+                        <label for="apellido" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Apellido" | translate }}</label>
+                        <div class="p-col-12 p-md-10">
+
+                            <input id="apellido" [(ngModel)]='apellidoNew' type="text" pInputText>
+                        </div>
+                    </div>
+                    <div class="p-field p-grid">
+                        <label for="lastname4" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Email" | translate}}</label>
+                        <div class="p-col-12 p-md-10">
+                            <input id="lastname4" [(ngModel)]='mailNew' type="text" pInputText>
+                        </div>
+                    </div>
+                    <div class="p-field p-grid">
+                        <label for="organizacion" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Organización" | translate}}</label>
+                        <div class="p-col-12 p-md-10">
+                            <input id="organizacion" [(ngModel)]='organizacionNew' type="text" pInputText>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div *ngIf="ObjOptions.o3_2_3" class="card">
+                <h5>{{"Fecha" | translate}}</h5>
+
+                <div class="p-fluid">
+
+                    <div class="p-field p-grid">
+                        <div class="p-col-12 p-md-10">
+                            <p-calendar [(ngModel)]='fecha' [showIcon]="true" inputId="icon"></p-calendar>
+                        </div>
+                    </div>
+
+                    <!-- <div class="p-field p-grid">
+                        <label for="descripcion">{{"Descripción" | translate}}</label>
+                        <textarea id="descripcion" type="text" rows="4" pInputTextarea></textarea>
+                    </div> -->
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <div *ngIf="ObjOptions.o3_3" class="p-col-12">
+        <h5>{{"Esquema de meta datos" | translate }}</h5>
+        <div class="card">
+            <div class="p-field p-fluid">
+                <label for="esquema">{{"Esquema" | translate}}</label>
+                <input [(ngModel)]='objMetadatos["Metadata Schema"]' id="esquema" type="esquema" pInputText aria-describedby="username-help">
+                <!-- <small id="username-help">Enter your username to reset your password.</small> -->
+            </div>
+        </div>
+    </div>
+
+</div>

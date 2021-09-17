@@ -1,0 +1,9 @@
+. git 
+. editorconfig
+/idea
+/.idea
+/node_modules 
+/ docs 
+/ gitignore 
+* . zip 
+* . md

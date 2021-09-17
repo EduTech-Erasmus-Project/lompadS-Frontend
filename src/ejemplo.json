@@ -1,0 +1,107 @@
+{
+    "DATA": {
+        "general": {
+            "Identifier": {
+                "Catalog": "Catalogo1",
+                "Entry": "Entrada 1"
+            },
+
+            "Title": "Titutlo del general",
+            "Language": "es",
+            "Description": "Descripcion del general.",
+            "Keyword": [
+                "Key1",
+                "Key2"
+            ],
+            "Coverage": "AmbitoGeneral",
+            "Structure": "atomic",
+            "Aggregation Level": "2"
+        },
+        "lifeCycle": {
+            "Version": "1.0",
+            "Status": "revised",
+            "Contribute": {
+                "Role": "validator",
+                "Entity": "BEGIN:VCARD\nVERSION:3.0\nN:ApellidoEntidad;Entidad1;;;\nFN:Entidad1 ApellidoEntidad\nEMAIL;TYPE=INTERNET:Sin Correo\nORG:Sin organizacion\nEND:VCARD",
+                "Date": "2021-07-15T00:00:00.00Z"
+            }
+        },
+        "metaMetadata": {
+            "Identifier": {
+                "Catalog": "MetadataCatalog",
+                "Schema": ""
+            },
+            "Contribute": {
+                "Role": "creator",
+                "Entity": "BEGIN:VCARD\nVERSION:3.0\nN:MetaApellido;MetaEntidad;;;\nFN:MetaEntidad MetaApellido\nEMAIL;TYPE=INTERNET:MetaEmail\nORG:MetaORG\nEND:VCARD",
+                "Date": "2021-07-15T00:00:00.00Z"
+            },
+            "Metadata Schema": "Sin esquema de metadatos.",
+            "Language": "es"
+        },
+        "technical": {
+            "Format": "text/html",
+            "Size": "200",
+            "Location": "Ecuador",
+            "Requirement": {
+                "OrComposite": {
+                    "Type": "operating system",
+                    "Name": "ms-windows",
+                    "Minimum Version": "0.000",
+                    "Maximum Version": "1.000"
+                }
+            },
+            "Installation Remarks": "No hay ninguna pauta de instalacion",
+            "Other Platform Requirements": "Sin otro requisito",
+            "Duration": "P1Y1M1DT1H1M"
+        },
+        "educational": {
+            "Interactivity Type": "active",
+            "Learning Resource Type": "simulation",
+            "Interactivity Level": "medium",
+            "Semantic Density": "high",
+            "Intended End User Roles": "learner",
+            "Context": "other",
+            "Typical Age Range": "10-12",
+            "Difficulty": "easy",
+            "Typical Learning Time": "P1Y1M1DT1H10M",
+            "Description": "Sin descripcion de uso de educativo.",
+            "Language": "es"
+        },
+        "rights": {
+            "Cost": "yes",
+            "Copyright and Other Restrictions": "yes",
+            "Description": "Sin descripcion de los derechossss"
+        },
+        "relation": {
+            "Kind": "haspart",
+            "Resource": {
+                "Identifier": {
+                    "Catalog": "Sin catalogo relacion",
+                    "Entry": "Sin entrada de relacion"
+                },
+                "Description": "Sin descripcion de relacion."
+            }
+        },
+        "annotation": {
+            "Entity": "BEGIN:VCARD\nVERSION:3.0\nN:AnotacionApellido;AnotacionNombre;;;\nFN:AnotacionNombre AnotacionApellido\nEMAIL;TYPE=INTERNET:AnotacionEmail\nORG:AnotacionOrg\nEND:VCARD",
+            "Date": "2021-07-15",
+            "Description": "Sin descripcion de anotacion.",
+            "Mode Access": "auditory",
+            "Mode Access Sufficient": "tactile",
+            "Rol": "teachers"
+        },
+        "classification": {
+            "Purpose": "accessibility restrictions",
+            "Taxon Path": {
+                "Source": "Sin fuente taxonomica.",
+                "Taxon": {
+                    "Id": "0000",
+                    "Entry": "1111"
+                }
+            },
+            "Description": "Descripcion de la clasificacion.",
+            "Keyword": "Palabra clave 1."
+        }
+    }
+}
