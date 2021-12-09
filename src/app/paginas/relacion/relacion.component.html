@@ -1,8 +1,9 @@
 <div class="p-grid">
 
-
+    <!-- [Temp] Contiene: Tipos (7.1) -->
     <div *ngIf="ObjOptions.o7_1" class="p-col-12 ">
-        <h5>{{"Tipo" | translate}}</h5>
+        <h5>7.1 - {{"Tipo" | translate}}</h5>
+
         <div class="card">
             <div class="p-fluid">
                 <!-- [(ngModel)]="selectedDrop" -->
@@ -18,12 +19,14 @@
         </div>
     </div>
 
-
+    <!-- [Temp] Contiene: Recurso 7.2) -->
     <div *ngIf="ObjOptions.o7_2" class="p-col-12 ">
-        <h5>{{"Recurso" | translate}}</h5>
+        <h5>7.2 - {{"Recurso" | translate}}</h5>
+
         <div class="card">
-            <h6>{{"Identificador" | translate}}</h6>
             <div *ngIf="ObjOptions.o7_2_1" class="p-fluid">
+                <h6> 7.2.1 - {{"Identificador" | translate}}</h6>
+
                 <div class="p-field p-grid">
                     <label for="catalogo" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Catálogo" | translate}}</label>
                     <div class="p-col-12 p-md-10">
@@ -49,17 +52,15 @@
                         <input id="organizacion" type="text" pInputText>
                     </div>
                 </div> -->
-
             </div>
 
             <div *ngIf="ObjOptions.o7_2_2" class="card">
-                <h6>{{"Descripción" | translate}}</h6>
-                <div class="p-fluid">
+                <h6>7.2.2 - {{"Descripción" | translate}}</h6>
 
+                <div class="p-fluid">
                     <textarea id="descripcion" [(ngModel)]='objRelacion["Resource"]["Description"]' type="text" rows="4" pInputTextarea></textarea>
                 </div>
             </div>
-
         </div>
     </div>
 

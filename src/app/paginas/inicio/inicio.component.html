@@ -1,24 +1,22 @@
-<div class="p-grid">
+<!-- <div class="p-grid">
     <div class="p-col-12">
 
     </div>
-</div>
-
+</div> -->
 
 <div class="p-grid">
     <div class="p-col-12">
-
-
         <div class="card">
             <div class="p-mb-3 p-text-center">
                 <h1>{{"Bienvenido a" | translate}} LOMpad Schema</h1>
             </div>
+
             <div class="p-mb-3 p-text-center">
                 <h5>{{"Por favor configure la aplicación de acuerdo a lo que necesite" | translate}}</h5>
             </div>
 
-
             <div *ngIf='fileCharger; then thenBlock else elseBlock'></div>
+
             <ng-template #thenBlock>
                 <div class="p-field-radiobutton">
                     <p-checkbox id='pp' [(ngModel)]='switch' binary="true" (click)='mostrarAdvertencia()'></p-checkbox>
@@ -29,8 +27,10 @@
                     <p-fileUpload (uploadHandler)="onUpload($event)" customUpload="true" multiple="multiple" accept=".rar,.zip,.xml" maxFileSize="1000000000000" [chooseLabel]="'Seleccionar Archivo' | translate" [uploadLabel]="'Subir' | translate" [cancelLabel]="'Cancelar' | translate">
                     </p-fileUpload>
                 </div>
+
                 <p-messages [value]="msgs"></p-messages>
             </ng-template>
+            
             <ng-template #elseBlock>
                 <p-fileUpload (uploadHandler)="onUpload($event)" customUpload="true" multiple="multiple" accept=".rar,.zip,.xml" maxFileSize="1000000000000" [chooseLabel]="'Seleccionar Archivo' | translate" [uploadLabel]="'Subir' | translate" [cancelLabel]="'Cancelar' | translate"></p-fileUpload>
                 <p-messages [value]="msgs"></p-messages>
@@ -39,15 +39,16 @@
     </div>
 </div>
 
+<!-- [TEMP] Borrar cuando sea oportuno -->
 <!-- <ng-template pTemplate="content">
                     <ul *ngIf="uploadedFiles.length">
                         <li *ngFor="let file of uploadedFiles" class="p-mb-3 p-text-center">{{file.name}} - {{file.size}} bytes</li>
                     </ul>
-                </ng-template> -->
-<!-- <br>
+                </ng-template>
+<br>
             <div class="p-mb-3 p-text-center">
                 <button pButton pRipple type="button" label="Empezar" class="p-mr-2 p-mb-2" (click)="habilitar()"></button>
-            </div> -->
+            </div>
 
-<!-- <angular-file-uploader [config]="afuConfig">
+<angular-file-uploader [config]="afuConfig">
 </angular-file-uploader> -->

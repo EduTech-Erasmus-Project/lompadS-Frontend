@@ -1,20 +1,57 @@
 <div class="p-grid">
+
+    <!-- [Temp] Contiene: Formato (4.1) -->
     <div *ngIf="ObjOptions.o4_1" class="p-col-12">
-        <h5>{{"Formato" | translate}}</h5>
+        <h5>4.1 - {{"Formato" | translate}}</h5>
+
         <div class="card">
             <!-- <h4>PIAS HAY QUE PREGUNTAR SOBRE ESTE CAMPO</h4> -->
-            <div class="p-field p-fluid">
-                <label for="esquema">{{"Esquema" | translate}}</label>
-                <input [(ngModel)]='objTecnica["Format"]' id="esquema" type="esquema" pInputText aria-describedby="username-help">
-                <!-- <small id="username-help">Enter your username to reset your password.</small> -->
+            <div class="p-grid">
+                <label class="p-col-12 p-md-6 p-lg-3" for="esquema">{{"Esquema" | translate}}</label>
+                <input class="p-col-12 p-md-6 p-lg-3" [(ngModel)]='objTecnica["Format"]' id="esquema" type="esquema" pInputText aria-describedby="username-help">
+                <p-button class="p-col-12 p-md-6 p-lg-3" icon="pi pi-search" (click)="op.toggle($event)"></p-button>
             </div>
         </div>
     </div>
 
-    <!-- perfiles da lo mismo en tamaño y localizacion -->
+    <p-overlayPanel class="p-field" #op [showCloseIcon]="true" [style]="{width: '500px'}">
+        <ng-template pTemplate>
+            <div class="p-col-12 p-md-6 p-lg-3 p-field">
+                <p-radioButton name="non-digital" value="non-digital" [(ngModel)]="formatType"  (onClick)='cambiarTipoFormato()' inputId="non-digital"></p-radioButton>
+                <label for="non-digital">non-digital</label>
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-3">
+                <p-radioButton name="digital" value="digital" [(ngModel)]="formatType" (onClick)='cambiarTipoFormato()' inputId="digital"></p-radioButton>
+                <label for="digital">digital</label>
+            </div>
 
+            <div *ngIf="isDigitalSelected" class="p-col-12 p-md-6 p-lg-3">
+                <p-dropdown id="format-type" [(ngModel)]='formatDigitalTypeSelected' name='format-type' [options]="tiposFormatosDigitales" placeholder='{{"Seleccionar" | translate}}' [showClear]="true">
+                    <ng-template pTemplate="item" let-item>
+                        {{item.label| translate }}
+                    </ng-template>
+                    <ng-template let-selectedItem pTemplate="selectedItem">
+                        {{selectedItem.label | translate }}
+                    </ng-template>
+                </p-dropdown>
+
+                <p-dropdown id="format-subtype" [(ngModel)]='formatDigitalSubtypeSelected' name='format-subtype' [options]="formatDigitalTypeSelected" (onChange)='cambiarValoresFormatoDigital()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                    <ng-template pTemplate="item" let-item>
+                        {{item.label| translate }}
+                    </ng-template>
+                    <ng-template let-selectedItem pTemplate="selectedItem">
+                        {{selectedItem.label | translate }}
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </ng-template>
+    </p-overlayPanel>
+
+    <!-- perfiles da lo mismo en tamaño y localizacion -->
+    <!-- [Temp] Contiene: Tamaño (4.2) -->
     <div *ngIf="ObjOptions.o4_2" class="p-col-12 p-md-6">
-        <h5>{{"Tamaño" | translate}}</h5>
+        <h5>4.2 - {{"Tamaño" | translate}}</h5>
+
         <div class="card">
             <div class="p-fluid">
                 <div class="p-field p-grid">
@@ -23,8 +60,11 @@
             </div>
         </div>
     </div>
+
+    <!-- [Temp] Contiene: Localización (4.3) -->
     <div *ngIf="ObjOptions.o4_3" class="p-col-12 p-md-6">
-        <h5>{{"Localización" | translate}}</h5>
+        <h5>4.3 - {{"Localización" | translate}}</h5>
+
         <div class="card">
             <div class="p-fluid">
                 <div class="p-field p-grid">
@@ -34,14 +74,13 @@
         </div>
     </div>
 
-
-
-
-
+    <!-- [Temp] Contiene: Requisitos (4.4) -->
     <div *ngIf="ObjOptions.o4_4" class="p-col-12">
-        <h5>{{"Requisitos" | translate}}</h5>
+        <h5>4.4 - {{"Requisitos" | translate}}</h5>
+
         <div class="card">
-            <h6>{{"Agregador Or" | translate}}</h6>
+            <h6>4.4.1 - {{"Agregador Or" | translate}}</h6>
+
             <div class="p-fluid">
                 <div class="p-field p-grid">
                     <label for="tipo" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Tipo" | translate}}</label>
@@ -56,10 +95,11 @@
                         </p-dropdown>
                     </div>
                 </div>
+
                 <div class="p-field p-grid">
                     <label for="nombre" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Nombre" | translate}}</label>
                     <div class="p-col-12 p-md-10">
-                        <p-dropdown id="tipo" [(ngModel)]='nombreSelect' name='req_tipo_select' [options]="tiposSystem" (onChange)='cambioreq_nombre()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                        <p-dropdown id="tipo" [(ngModel)]='nombreSelect' name='tiposActual' [options]="tiposActual" (onChange)='cambioreq_nombre()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
                             <ng-template pTemplate="item" let-item>
                                 {{item.label| translate }}
                             </ng-template>
@@ -81,13 +121,14 @@
                         <input id="ver_maxima" [(ngModel)]='objTecnica["Requirement"]["OrComposite"]["Maximum Version"]' type="text" pInputText>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 
+    <!-- [Temp] Contiene: Pautas de instalación (4.5) -->
     <div *ngIf="ObjOptions.o4_5" class="p-col-12 p-md-6">
-        <h5>{{"Pautas de Instalación" | translate}}</h5>
+        <h5>4.5 - {{"Pautas de Instalación" | translate}}</h5>
+
         <div class="card">
             <div class="p-fluid">
                 <div class="p-field p-grid">
@@ -98,8 +139,10 @@
         </div>
     </div>
 
+    <!-- [Temp] Contiene: Otros requisitos de plataforma (4.6) -->
     <div *ngIf="ObjOptions.o4_6" class="p-col-12 p-md-6">
-        <h5>{{"Otros Requisitos de Plataforma" | translate}}</h5>
+        <h5>4.6 - {{"Otros Requisitos de Plataforma" | translate}}</h5>
+
         <div class="card">
             <div class="p-fluid">
                 <div class="p-field p-grid">
@@ -110,9 +153,10 @@
         </div>
     </div>
 
-
+    <!-- [Temp] Contiene: Duración (4.7) -->
     <div *ngIf="ObjOptions.o4_7" class="p-col-12">
-        <h5>{{"Duración"| translate}}</h5>
+        <h5>4.7 - {{"Duración"| translate}}</h5>
+
         <div class="card">
             <div class="p-fluid p-formgrid p-grid">
                 <div class="p-field p-col">
@@ -123,7 +167,6 @@
                     <label for="meses">{{"Meses" | translate}}</label>
                     <p-inputNumber id="meses" mode="decimal" [showButtons]="true" [min]="0" [max]="12" [(ngModel)]='months'></p-inputNumber>
                 </div>
-
                 <div class="p-field p-col">
                     <label for="dias">{{"Días" | translate}}</label>
                     <p-inputNumber id="dias" mode="decimal" [showButtons]="true" [min]="0" [max]="30" [(ngModel)]='days'></p-inputNumber>
@@ -141,18 +184,13 @@
                     <p-inputNumber id="segundos" mode="decimal" [showButtons]="true" [min]="0" [max]="60" [(ngModel)]='second'></p-inputNumber>
                 </div> -->
             </div>
-
-
             <!-- <div class="p-fluid">
                 <div class="p-field p-grid">
                     <label for="descripcion">{{"Descripción" | translate}}</label>
                     <textarea id="descripcion" type="text" rows="4" pInputTextarea></textarea>
                 </div>
             </div> -->
-
-
         </div>
     </div>
-
-
+    
 </div>

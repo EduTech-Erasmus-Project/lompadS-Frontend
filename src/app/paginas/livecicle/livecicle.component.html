@@ -1,20 +1,23 @@
 <div class="p-grid ">
 
+    <!-- [Temp] Contiene: Versión (2.1) -->
     <div *ngIf="ObjOptions.o2_1" class="p-col-12">
+        <h5>2.1 - {{"Versión" | translate}}</h5>
+
         <div class="card">
-            <h5>{{"Versión" | translate}}</h5>
             <div class="p-fluid p-formgrid p-grid">
                 <div class="p-field p-col-12 ">
-                    <!-- <label for="version">{{"Versión" | translate}}</label> -->
                     <input [(ngModel)]='objLiveClicle["Version"]' id="version" type="text" pInputText>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- [Temp] Contiene: Estado (2.2) -->
     <div *ngIf="ObjOptions.o2_2" class="p-col-12">
+        <h5>2.2 - {{"Estado" | translate}}</h5>
+
         <div class="card">
-            <h5>{{"Estado" | translate}}</h5>
             <div class="p-fluid">
                 <p-dropdown [options]="estados" [(ngModel)]='estadoSelect' name='estadoSelect' (onChange)='cambioEstados()' placeholder='{{"Seleccionar"| translate}} ' [showClear]="true">
                     <ng-template pTemplate="item" let-item>
@@ -25,23 +28,19 @@
                     </ng-template>
                 </p-dropdown>
             </div>
-
         </div>
-
     </div>
 
+    <!-- [Temp] Contiene: Contribución (2.3) -->
+    <div *ngIf="ObjOptions.o2_3" class="p-col-12 ">
+        <h5>2.3 - {{"Contribución" | translate}}</h5>
 
-
-    <div class="p-col-12 ">
-
-        <div *ngIf="ObjOptions.o2_3" class="card">
-            <h5>{{"Contribución" | translate}}</h5>
-
-
+        <div class="card">
+            <!-- [Temp] Contiene: Tipo (2.3.1) -->
             <div *ngIf="ObjOptions.o2_3_1" class="card">
-                <h5>{{"Tipo" | translate}}</h5>
+                <h6>2.3.1 - {{"Tipo" | translate}}</h6>
+
                 <div class="p-fluid">
-                    <!-- [(ngModel)]="selectedDrop" -->
                     <p-dropdown [options]="tipos" [(ngModel)]='tiposSelect' name='tiposSelect' (onChange)='cambio_contr_tipo()' placeholder='{{"Seleccionar"| translate}} ' [showClear]="true">
                         <ng-template pTemplate="item" let-item>
                             {{item.label| translate }}
@@ -51,11 +50,12 @@
                         </ng-template>
                     </p-dropdown>
                 </div>
-
             </div>
 
+            <!-- [Temp] Contiene: Entidad (2.3.2) -->
             <div *ngIf="ObjOptions.o2_3_2" class="card">
-                <h5>{{"Entidad" | translate }}</h5>
+                <h6>2.3.2 - {{"Entidad" | translate }}</h6>
+
                 <div class="p-fluid">
                     <div class="p-field p-grid">
                         <label for="nombre" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Nombre" | translate }}</label>
@@ -82,15 +82,14 @@
                             <input id="organizacion" [(ngModel)]='organizacionNew' type="text" pInputText>
                         </div>
                     </div>
-
                 </div>
             </div>
 
+            <!-- [Temp] Contiene: Fecha (2.3.3) -->
             <div *ngIf="ObjOptions.o2_3_3" class="card">
-                <h5>{{"Fecha" | translate}}</h5>
+                <h6> 2.3.3 - {{"Fecha" | translate}}</h6>
 
                 <div class="p-fluid">
-
                     <div class="p-field p-grid">
                         <div class="p-col-12 p-md-10">
                             <p-calendar [(ngModel)]="fecha" [showIcon]="true" inputId="icon"></p-calendar>
@@ -99,82 +98,11 @@
 
                     <div class="p-field p-grid">
                         <label for="descripcion">{{"Descripción" | translate }}</label>
-                        <textarea id="descripcion" type="text" rows="4" pInputTextarea></textarea>
+                        <textarea [(ngModel)]='objLiveClicle["Version"]' id="descripcion" type="text" rows="4" pInputTextarea></textarea>
                     </div>
                 </div>
-
-
-            </div>
-
-
-        </div>
-
-        <!-- <div class="card">
-            <h5>Inline</h5>
-            <div class="p-formgroup-inline">
-                <div class="p-field">
-                    <label for="firstname5" class="p-sr-only">Firstname</label>
-                    <input id="firstname5" type="text" pInputText placeholder="Firstname">
-                </div>
-                <div class="p-field">
-                    <label for="lastname5" class="p-sr-only">Lastname</label>
-                    <input id="lastname5" type="text" pInputText placeholder="Lastname">
-                </div>
-                <button pButton pRipple type="button" label="Submit"></button>
             </div>
         </div>
-
-        <div class="card">
-            <h5>Help Text</h5>
-            <div class="p-field p-fluid">
-                <label for="username">Username</label>
-                <input id="username" type="username" pInputText aria-describedby="username-help">
-                <small id="username-help">Enter your username to reset your password.</small>
-            </div>
-        </div> -->
     </div>
 
-    <!-- <div class="p-col-12">
-        <div class="card">
-
-            <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-12 ">
-                    <label for="version">Versión</label>
-                    <input id="version" type="text" pInputText>
-                </div>
-            </div>
-
-            <div class="card">
-                <h4>naty card</h4>
-                <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 ">
-                        <label for="version">Versión</label>
-                        <input id="version" type="text" pInputText>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-
-    <!-- <div class="p-col-12">
-        <div class="card">
-            
-            <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-12 ">
-                    <label for="titulo">Título</label>
-                    <input id="titulo" type="text" pInputText>
-                </div>
-
-                <div class="p-field p-col-12">
-                    <label for="address">Address</label>
-                    <textarea id="address" type="text" rows="4" pInputTextarea></textarea>
-                </div>
-                <div class="p-field p-col-12 ">
-                    <label for="palabraClave">Papabra Clave</label>
-                    <input id="palabraClave" type="text" pInputText>
-                </div>
-            </div>
-        </div>
-    </div> -->
 </div>

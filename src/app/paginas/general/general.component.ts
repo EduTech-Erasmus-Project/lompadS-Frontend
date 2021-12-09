@@ -1,11 +1,10 @@
-import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { AppComponent } from "src/app/app.component";
 import { LompadService } from "src/app/servicios/lompad.service";
 import { ObjOptions } from "../../modelo/objOptions";
 import { MessageService } from "primeng/api";
 
-
-import {trigger, state, style, transition, animate} from '@angular/animations';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 
 @Component({
@@ -61,24 +60,20 @@ animations: [
 export class GeneralComponent implements OnInit, OnDestroy {
   estructuras: any = [];
   nivelesAgregacion: any = [];
+  idiomas: any = [];
+
   columns: any[];
 
   palabra: string;
   palabraDialog: boolean;
+
   estructuraSelect: string;
   nivel_select: string;
+  idiomaSelect: string;
+
   general_obj: any;
 
   ObjOptions: ObjOptions = new ObjOptions();
-
-  // @HostListener('window:beforeunload', ['$event'])
-  // beforeunloadHandler(event) {
-  //     console.log("SLIENFO")
-  //     // this.service.add({key: 'tst', severity: 'info', summary: 'Info Message', detail: 'PrimeNG rocks'});
-  //     // this.service.add({key: 'tst', severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
-  //     // this.service.add({ key: 'tst', severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
-  //     // this.toas.add({ key: 'tst', severity: 'success', summary: 'Success Message', detail: 'Message sent' });
-  // }
 
   constructor(
     private componentePrincipal: AppComponent,
@@ -114,13 +109,44 @@ export class GeneralComponent implements OnInit, OnDestroy {
       { label: "3", value: "3", code: "3" },
       { label: "4", value: "4", code: "4" },
     ];
+
+    this.idiomas = [
+      {label: "none", value: "none", code: "none"},
+      {label: "fra", value: "fra", code: "fra"},
+      {label: "fra-CA", value: "fra-CA", code: "fra-CA"},
+      {label: "fra-FR", value: "fra-FR", code: "fra-FR"},
+      {label: "eng", value: "eng", code: "eng"},
+      {label: "eng-AU", value: "eng-AU", code: "eng-AU"},
+      {label: "eng-CA", value: "eng-CA", code: "eng-CA"},
+      {label: "eng-GB", value: "eng-GB", code: "eng-GB"},
+      {label: "eng-US", value: "eng-US", code: "eng-US"},
+      {label: "deu", value: "deu", code: "deu"},
+      {label: "esl", value: "esl", code: "esl"},
+      {label: "ita", value: "ita", code: "ita"},
+      {label: "por", value: "por", code: "por"},
+      {label: "fr", value: "fr", code: "fr"},
+      {label: "fr-CA", value: "fr-CA", code: "fr-CA"},
+      {label: "fr-FR", value: "fr-FR", code: "fr-FR"},
+      {label: "en", value: "en", code: "en"},
+      {label: "en-AU", value: "en-AU", code: "en-AU"},
+      {label: "en-CA", value: "en-CA", code: "en-CA"},
+      {label: "en-GB", value: "en-GB", code: "en-GB"},
+      {label: "en-US", value: "en-US", code: "en-US"},
+      {label: "de", value: "de", code: "de"},
+      {label: "es", value: "es", code: "es"},
+      {label: "it", value: "it", code: "it"},
+      {label: "pt", value: "pt", code: "pt"},
+    ]
+
     this.columns = [];
     this.ObjOptions = this.componentePrincipal.objOptions;
 
     console.log("Desde General: ", this.general_obj);
-    // PILAS CON ESTOS
+
     this.estructuraSelect = this.general_obj["Structure"];
     this.nivel_select = this.general_obj["Aggregation Level"];
+    this.idiomaSelect = this.general_obj["Language"];
+
     this.cargarkeywords();
   }
 
@@ -172,11 +198,11 @@ export class GeneralComponent implements OnInit, OnDestroy {
       summary: "NO lo saques papi!!",
       detail: "Message sent",
     });
+  }
 
-    // this.service.add({key: 'tst', severity: 'info', summary: 'Info Message', detail: 'PrimeNG rocks'});
-    // this.service.add({key: 'tst', severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
-    // this.service.add({ key: 'tst', severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
-    // this.service.add({ key: 'tst', severity: 'success', summary: 'Success Message', detail: 'Message sent' });
+  cambioIdioma(){
+    console.log(this.idiomaSelect);
+    this.general_obj["Language"] = this.idiomaSelect;
   }
 
   public saveInfo() {

@@ -46,6 +46,7 @@ export class ApiService {
 
   getXML(){
     return new Promise((resolve,reject)=>{
+      console.log('[INFO] Entra aca')
       var param;      
       fetch("http://localhost:8000/private/download/?hashed_code=ArchivoExportado_-6482018054697832733",{
         method: 'GET',

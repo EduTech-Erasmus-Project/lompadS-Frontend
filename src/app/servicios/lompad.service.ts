@@ -4,32 +4,29 @@ import { ApiService } from './api.service';
 import { saveAs } from 'file-saver';
 import { CookieService } from 'ngx-cookie-service';
 
-
-
-
 @Injectable({
   providedIn: 'root'
 })
 
 export class LompadService{    
   objPricipal$=new EventEmitter<any>();  
-  objPricipal:JSON;
   objPrincipalXML$=new EventEmitter<any>();  
-  objPrincipalXML:any;
   hash$=new EventEmitter<any>();  
+  perfil$=new EventEmitter<any>();
+
+  objPricipal:JSON;
+  objPrincipalXML:any;
+
   private hash:string;
   private perfil:string;
-  perfil$=new EventEmitter<any>();
   private datosGenerales:any;
   
   constructor(
     private http:HttpClient,
     private api_service:ApiService,
-    private cookieService:CookieService
-    // private toas:MessageService    
-  ) {     
-    this.precarga();    
-    
+    private cookieService:CookieService ) {
+
+    this.precarga();
   }
 
 
@@ -39,30 +36,33 @@ export class LompadService{
     // localStorage.removeItem('perfil_hash');
     // this.cookieService.deleteAll();
 
-    this.objPricipal=JSON.parse(localStorage.getItem('objPrincipal'));    
-    if(this.objPricipal !=undefined){    //PILAS       
-      this.perfil=this.cookieService.get('perfil');
-      this.hash=this.cookieService.get('hash');
-      console.log("perfl: ",this.perfil);
-      console.log("hash; ",this.hash);
+    this.objPricipal = JSON.parse(localStorage.getItem('objPrincipal'));
+
+    if(this.objPricipal != undefined){    //PILAS       
+      this.perfil = this.cookieService.get('perfil');
+      this.hash = this.cookieService.get('hash');
+
+      console.log("perfl: ", this.perfil);
+      console.log("hash; ", this.hash);
       // ESTO NO HACE NADA AL MOMENTO DE RECARGAR LA PAGINA
       // this.objPricipal$.emit(this.objPricipal);
       // this.objPrincipalXML$.emit(this.api_service.api_DownloadFile(this.hash));              
-      console.log("DATA: TYPE: ",(this.objPricipal));                    
+      console.log("DATA: TYPE: ", (this.objPricipal));                    
     }    
 
   }
 
-
-
   // PILAS CON EL FORMATO
   precargaSimple(response:any){//Usado cuando se sube un archivo por primera vez    
-    this.cookieService.set('perfil',response['PERFIL']);
-    this.cookieService.set('hash',response['HASHED_VALUE']);    
-    this.perfil=this.cookieService.get('perfil');
-    this.hash=this.cookieService.get('hash');
-    console.log("perfl: ",this.perfil);
-    console.log("hash; ",this.hash);                        
+    this.cookieService.set('perfil', response['PERFIL']);
+    this.cookieService.set('hash', response['HASHED_VALUE']);   
+
+    this.perfil = this.cookieService.get('perfil');
+    this.hash = this.cookieService.get('hash');
+
+    console.log("perfl: ", this.perfil);
+    console.log("hash; ", this.hash);      
+
     this.getobject();        
     this.downloadXML_API(this.hash);    
   }
@@ -82,25 +82,24 @@ export class LompadService{
   // }
 
   mapReload(param:JSON){
-    this.objPricipal=param;
-    localStorage.setItem('objPrincipal',JSON.stringify(this.objPricipal));
+    this.objPricipal = param;
+    localStorage.setItem('objPrincipal', JSON.stringify(this.objPricipal));
+
     this.objPricipal$.emit(this.objPricipal);
     this.objPrincipalXML$.emit(this.api_service.api_DownloadFile(this.hash));   
     this.perfil$.emit(this.perfil);
     this.hash$.emit(this.hash);
-    console.log("DATA: TYPE: ",typeof(this.objPricipal));  
+
+    console.log("DATA: TYPE: ", typeof(this.objPricipal));  
   }
 
-
   async subGetObject(){
-    
-    const response= await fetch("http://localhost:8000/private/read_file/?hashed_code="+this.hash+"&profile="+this.perfil, {
+    const response = await fetch("http://localhost:8000/private/read_file/?hashed_code="+this.hash+"&profile="+this.perfil, {
       method: 'GET',
       redirect: 'follow'
     });
 
-
-    if(response.status !==200){
+    if(response.status !== 200){
       throw Error("Algo sucede con el api")
     }
         
@@ -109,7 +108,7 @@ export class LompadService{
 
   async getobject(){                      
     try {
-      const objjson=await this.subGetObject();
+      const objjson = await this.subGetObject();
       // console.log(objjson['DATA']['general']);      
       this.mapReload(objjson);      
     } catch (error) {
@@ -119,11 +118,12 @@ export class LompadService{
 
   
   async subSetArchivo(data:any){
-
     const response = await fetch("http://localhost:8000/uploadfile", {method: 'POST', body: data,redirect: 'follow'})
+
     if(response.status !== 200){
       throw Error(" Error con el Api al enviar el objeto ");
     }
+
     return response.json();
   }
 
@@ -138,28 +138,30 @@ export class LompadService{
 
   // AREA DE ACTUALIZACION
 
-  saveObjectLompad(obj:any,hoja:string) {
-    localStorage.setItem('objPrincipal',JSON.stringify(this.objPricipal));
-    console.log("Guardando: => ",hoja)  
-    var data=JSON.stringify(obj)//.toLocaleLowerCase(); 
-    console.log("TIPO DE DATOS ",typeof(data));
+  saveObjectLompad(obj:any, hoja:string) {
+    localStorage.setItem('objPrincipal', JSON.stringify(this.objPricipal));
+    console.log("Guardando: => ", hoja) 
+
+    var data = JSON.stringify(obj)//.toLocaleLowerCase(); 
+    console.log("TIPO DE DATOS ", typeof(data));
+
     // var pedro=JSON.parse(JSON.stringify(this.objPricipal).replace(/\s(?=\w+":)/g, ""));  
-          
     // var data=JSON.parse(JSON.stringify(obj).replace(/\s(?=\w+":)/g, ""));     
     // data=JSON.stringify(data).toLocaleLowerCase(); 
-    console.log("Enviando.... ",data, "Hoja: ",hoja);
+    console.log("Enviando.... ", data, "Hoja: ", hoja);
     
-    this.api_service.send_ObjectApi(data,this.hash,hoja);//enviar solo el objeto y el hash a actualizar                                    
+    this.api_service.send_ObjectApi(data, this.hash, hoja);//enviar solo el objeto y el hash a actualizar                                    
     this.downloadXML_API(this.hash);//Actualiza el objecto cada vez que se guarde los cambiaos realizados
   }
 
 //AREA DE DESCARGA
   downloadJSON(){
-    var pedro=JSON.parse(JSON.stringify(this.objPricipal).replace(/\s(?=\w+":)/g, ""));
+    var pedro = JSON.parse(JSON.stringify(this.objPricipal).replace(/\s(?=\w+":)/g, ""));
     // const file=new Blob([pedro],{type:'application/json'});
     // // const file=new Blob([JSON.stringify(this.objPricipal, null, 2)], {type: 'application/json'});    
     // const url=window.URL.createObjectURL(file);
     // new Blob([pedro], {type: 'application/json'});
+
     try {
       // var FileSaver = require('file-saver');  
       var blob = new Blob([JSON.stringify(pedro, null, 2)], {type: 'application/json'});    
@@ -183,7 +185,6 @@ export class LompadService{
   }
 
   downloadXML_API(hash_param:string){       
-    
     fetch("http://localhost:8000/private/download/?hashed_code="+hash_param, {
     
       method: 'GET',
@@ -196,13 +197,5 @@ export class LompadService{
       })
       .catch(error => console.log('error', error));        
   }
-
-
-  
- 
-
-  
-
-
   
 }

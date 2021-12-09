@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './metadatos.component.html',
   styleUrls: ['./metadatos.component.css']
 })
+
 export class MetadatosComponent implements OnInit {
   objMetadatos:JSON;  
   subcripcion:Subscription
@@ -20,29 +21,31 @@ export class MetadatosComponent implements OnInit {
   mailNew:string;
   organizacionNew:string;  
   fecha:any;
+  
   constructor(
     private componentePrincipal: AppComponent,
     private lompadservice: LompadService
-    ) { }
+  ) { }
     
   
-    loadDatos(){
-      this.objMetadatos=this.lompadservice.objPricipal['DATA']['metaMetadata'];
-    }          
-    ngOnDestroy():void {      
-      console.log("Destroy Metadatos"); 
-      this.actualizarVcard();
-      this.objMetadatos['Contribute']['Date']=this.fecha.toISOString();
-      this.lompadservice.objPricipal['DATA']['metaMetadata']=this.objMetadatos;
-      this.lompadservice.saveObjectLompad(this.objMetadatos,"metaMetadata");  
-    }    
+  loadDatos(){
+    this.objMetadatos=this.lompadservice.objPricipal['DATA']['metaMetadata'];
+  }
+
+  ngOnDestroy():void {      
+    console.log("Destroy Metadatos"); 
+    this.actualizarVcard();
+    this.objMetadatos['Contribute']['Date']=this.fecha.toISOString();
+    this.lompadservice.objPricipal['DATA']['metaMetadata']=this.objMetadatos;
+    this.lompadservice.saveObjectLompad(this.objMetadatos,"metaMetadata");  
+  }    
            
   ngOnInit(): void {
     this.loadDatos();
     this.castVcard(this.objMetadatos['Contribute']['Entity']);
     this.tipos=[
       {label: 'Creador', value: 'creator', code: 'cre'},
-      {label: 'Visor', value: 'validator', code: 'vie'}   
+      {label: 'Revisor', value: 'validator', code: 'vie'}   
     ];
 
     this.ObjOptions=this.componentePrincipal.objOptions;
