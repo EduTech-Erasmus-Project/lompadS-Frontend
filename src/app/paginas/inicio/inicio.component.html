@@ -19,22 +19,26 @@
 
             <ng-template #thenBlock>
                 <div class="p-field-radiobutton">
-                    <p-checkbox id='pp' [(ngModel)]='switch' binary="true" (click)='mostrarAdvertencia()'></p-checkbox>
+                    <p-checkbox id='pp' [(ngModel)]='switch' binary="true" (click)='showDownloadWarning()'></p-checkbox>
                     <label for="pp">{{ "Cargar un nuevo objeto de aprendizaje" | translate}}</label>
                 </div>
 
                 <div *ngIf='switch'>
-                    <p-fileUpload (uploadHandler)="onUpload($event)" customUpload="true" multiple="multiple" accept=".rar,.zip,.xml" maxFileSize="1000000000000" [chooseLabel]="'Seleccionar Archivo' | translate" [uploadLabel]="'Subir' | translate" [cancelLabel]="'Cancelar' | translate">
+                    <p-fileUpload (uploadHandler)="onUpload($event)" customUpload="true" multiple="multiple" accept=".rar,.zip,.xml" 
+                        maxFileSize="1000000000000" [chooseLabel]="'Seleccionar Archivo' | translate" [uploadLabel]="'Subir' | translate" 
+                        [cancelLabel]="'Cancelar' | translate">
                     </p-fileUpload>
                 </div>
+            </ng-template>
 
-                <p-messages [value]="msgs"></p-messages>
-            </ng-template>
-            
             <ng-template #elseBlock>
-                <p-fileUpload (uploadHandler)="onUpload($event)" customUpload="true" multiple="multiple" accept=".rar,.zip,.xml" maxFileSize="1000000000000" [chooseLabel]="'Seleccionar Archivo' | translate" [uploadLabel]="'Subir' | translate" [cancelLabel]="'Cancelar' | translate"></p-fileUpload>
-                <p-messages [value]="msgs"></p-messages>
+                <p-fileUpload (uploadHandler)="onUpload($event)" customUpload="true" multiple="multiple" accept=".rar,.zip,.xml" 
+                    maxFileSize="1000000000000" [chooseLabel]="'Seleccionar Archivo' | translate" [uploadLabel]="'Subir' | translate" 
+                    [cancelLabel]="'Cancelar' | translate">
+                </p-fileUpload>
             </ng-template>
+
+            <p-messages [value]="message"></p-messages>
         </div>
     </div>
 </div>

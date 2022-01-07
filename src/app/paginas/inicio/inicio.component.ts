@@ -12,99 +12,97 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./inicio.component.css']
 })
 export class InicioComponent implements OnInit {
-  objson: JSON;
-  variable:any;
-  mostrar:any;
-  uploadedFiles: any[] = [];
-  fileCharger:boolean=false;
-  switch:boolean=false;
-  
+  fileCharger: boolean = false;
+  switch: boolean = false;
 
-  form: FormGroup;  
-    
-  msgs: Message[] = [];
-  
-  
+  form: FormGroup;
+  message: Message[] = [];
 
- constructor(
-   public fb: FormBuilder,     
-   private lompadservice: LompadService,
-   private appMain:AppMainComponent,
-   private cookieService:CookieService 
-   
-   ) 
-   {
-    this.form = this.fb.group({
+  constructor(public formBuilder: FormBuilder,
+    private lompadService: LompadService,
+    private appMain: AppMainComponent,
+    private cookieService: CookieService) {
+
+    this.form = this.formBuilder.group({
       file: [null]
     });
+  }
+
+
+  ngOnInit(): void {
+    this.preLoad();
+  }
+
+  preLoad() {//Usado para mostrar mensaje 
+    //  var datosGenerales=JSON.parse(localStorage.getItem("perfil_hash"));//recuperacion DAtos
+    if (this.cookieService.check("perfil")) {//PILAS AQUI PUEDE SER EL PERFIL O TAMBIEN EL HASH    
+      this.fileCharger = true;
+      this.appMain.staticMenuActive = true;
+      this.message = [];
+      this.message.push({ severity: 'info', summary: 'OK', detail: 'Objeto de aprendizaje cargado.' });
+    } else {
+      this.message = [];
+      this.message.push({ severity: 'info', summary: '', detail: 'Por favor cargue un objeto de aprendizaje.' });
+    }
+  }
+
+  async onUpload(event) {
+    const file = event.files[0];
+
+    this.form.patchValue({
+      file: file
+    });
+
+    this.form.get('file').updateValueAndValidity();
+
+    var formData: any = new FormData();
+    formData.append("file", this.form.get('file').value);
+
+    this.cookieService.set("tipoArchivo", file.name.split(".")[1]);
+
+    let uploadedData: any;
     
+    await this.lompadService.sendMetadataFile(formData).then((response) => {
+      // console.log('[INFO] send> ', response);
+      uploadedData = response;
+    }).catch(error => console.error('Something went wrong!', error));
 
-   
-  
-}
+    console.log('[DEBUG] Inicio Component> Response 1', uploadedData);
 
-mostrarAdvertencia(){
-  this.msgs = [];
-  this.msgs.push({ severity: 'warn', summary: 'Advertencia: ', detail: 'Asegúrese de haber descargado el objeto de aprendizaje anteriormente cargado.' });
-}
+    if (uploadedData['STATUS_CODE'] == 200){
+      // await this.lompadService.loadMetadataFile(uploadedData);
 
 
-ngOnInit(): void {   
-  this.pregarga();  
-}
+      this.appMain.staticMenuActive = true;
 
-pregarga(){//Usado para mostrar mensaje 
-  //  var datosGenerales=JSON.parse(localStorage.getItem("perfil_hash"));//recuperacion DAtos
-  if(this.cookieService.check("perfil")){//PILAS AQUI PUEDE SER EL PERFIL O TAMBIEN EL HASH    
-    this.fileCharger=true;    
-    this.appMain.staticMenuActive=true;
-    this.msgs = [];
-    this.msgs.push({ severity: 'info', summary: 'OK', detail: 'Objeto de aprendizaje cargado.' });
-  }else{
-    this.msgs = [];
-    this.msgs.push({ severity: 'info', summary: '', detail: 'Por favor carge un objeto de aprendizaje.' });
-  }   
-  
-}
+      this.message = [];
+      this.message.push({
+        severity: 'success',
+        summary: 'Correcto:',
+        detail: 'Objeto de aprendizaje cargado.'
+      });
 
-// comprobacion(){
-//   if (this.lompadservice.revLocal()!=null){
-//     this.lompadservice.getobject(); 
-//     this.appMain.staticMenuActive=true;
-//     this.router.navigateByUrl("/paginas/general");    
-//   }
-// }
+    } else {
+      console.log('[ERROR] Inicio Component> Subir Archivo');
+    }
 
-onUpload(event) {    
-  // const file = (event.target as HTMLInputElement).files[0];
-  const file = event.files[0];
-  this.form.patchValue({
-    file: file
-  });
-  this.form.get('file').updateValueAndValidity()   
-     
-  var formData: any = new FormData();
-  formData.append("file", this.form.get('file').value);  
-  this.cookieService.set("tipoArchivo",file.name.split(".")[1]);
-  
-  this.lompadservice.setArchivo(formData);
-  this.appMain.staticMenuActive=true;
-   //info warn error success
-   this.msgs = [];
-   this.msgs.push({ severity: 'success', summary: 'Correcto', detail: 'Objeto de aprendizaje cargado.' });
-  // this.router.navigateByUrl("/paginas/general");
-}
+    
+    // this.router.navigateByUrl("/paginas/general");
+  }
 
-upload(event) {
+  showDownloadWarning() {
+    this.message = [];
+    this.message.push({ severity: 'warn', summary: 'Advertencia: ', detail: 'Asegúrese de haber descargado el objeto de aprendizaje anteriormente cargado.' });
+  }
+
+  // Borrar cuando sea oportuno
+  upload(event) {
     console.log("subir evento")
     const file = (event.target as HTMLInputElement).files[0];
     this.form.patchValue({
       file: file
     });
     this.form.get('file').updateValueAndValidity()
- }
-
-
+  }
 
 }
-

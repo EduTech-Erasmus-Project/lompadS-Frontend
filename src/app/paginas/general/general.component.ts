@@ -6,7 +6,6 @@ import { MessageService } from "primeng/api";
 
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-
 @Component({
   selector: "app-general",
   styles: [`
@@ -33,69 +32,68 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   .nested-grid .p-col-4 {
       padding-bottom: 1rem;
   }
-`],
-animations: [
-  trigger('animation', [
-      state('visible', style({
-          transform: 'translateX(0)',
-          opacity: 1
-      })),
-      transition('void => *', [
-          style({transform: 'translateX(50%)', opacity: 0}),
-          animate('300ms ease-out')
-      ]),
-      transition('* => void', [
-          animate(('250ms ease-in'), style({
-              height: 0,
-              opacity: 0,
-              transform: 'translateX(50%)'
-          }))
-      ])
-  ])
-],
+  `],
+  animations: [
+    trigger('animation', [
+        state('visible', style({
+            transform: 'translateX(0)',
+            opacity: 1
+        })),
+        transition('void => *', [
+            style({transform: 'translateX(50%)', opacity: 0}),
+            animate('300ms ease-out')
+        ]),
+        transition('* => void', [
+            animate(('250ms ease-in'), style({
+                height: 0,
+                opacity: 0,
+                transform: 'translateX(50%)'
+            }))
+        ])
+    ])
+  ],
   templateUrl: "./general.component.html",
   styleUrls: ["./general.component.css"],
   providers: [MessageService],
 })
 export class GeneralComponent implements OnInit, OnDestroy {
-  estructuras: any = [];
-  nivelesAgregacion: any = [];
-  idiomas: any = [];
+  generalObject: any;
+  objectOptions: ObjOptions = new ObjOptions();
+
+  // Listas predefinidas
+  structureOptions: any = [];
+  structureSelected: string;
+
+  aggregationLevelOptions: any = [];
+  aggregationLevelSelected: string;
+
+  languageOptions: any = [];
+  languageSelected: string;
+
+  // Referentes a los valores
+  // Crear modelo (?)
+  identifierCatalog: any;
+  identifierEntry: any;
+  title: any[];
+  description: any[];
+  coverage: any[];
+  // ------
 
   columns: any[];
 
+  // Auxiliares
   palabra: string;
   palabraDialog: boolean;
 
-  estructuraSelect: string;
-  nivel_select: string;
-  idiomaSelect: string;
-
-  general_obj: any;
-
-  ObjOptions: ObjOptions = new ObjOptions();
-
   constructor(
     private componentePrincipal: AppComponent,
-    private lompadservice: LompadService,
-    private toas: MessageService
+    private lompadservice: LompadService
   ) {}
 
-  loadDatos() {
-    // await this.precargaComprobar();
-    this.general_obj = this.lompadservice.objPricipal["DATA"]["general"];
-  }
-
-  async precargaComprobar() {
-    return new Promise((resolve, reject) => {
-      resolve(2);
-      this.lompadservice.precarga();
-    });
-  }
-
   ngOnInit(): void {
-    this.loadDatos();
-    this.estructuras = [
+    this.loadGeneralObject();
+
+    this.structureOptions = [
       { label: "atómica", value: "atomic", code: "ato" },
       { label: "colección", value: "collection", code: "coll" },
       { label: "en red", value: "networked", code: "red" },
@@ -103,14 +101,14 @@ export class GeneralComponent implements OnInit, OnDestroy {
       { label: "lineal", value: "linear", code: "li" },
     ];
 
-    this.nivelesAgregacion = [
+    this.aggregationLevelOptions = [
       { label: "1", value: "1", code: "1" },
       { label: "2", value: "2", code: "2" },
       { label: "3", value: "3", code: "3" },
       { label: "4", value: "4", code: "4" },
     ];
 
-    this.idiomas = [
+    this.languageOptions = [
       {label: "none", value: "none", code: "none"},
       {label: "fra", value: "fra", code: "fra"},
       {label: "fra-CA", value: "fra-CA", code: "fra-CA"},
@@ -136,76 +134,96 @@ export class GeneralComponent implements OnInit, OnDestroy {
       {label: "es", value: "es", code: "es"},
       {label: "it", value: "it", code: "it"},
       {label: "pt", value: "pt", code: "pt"},
-    ]
+    ];
 
+    this.objectOptions = this.componentePrincipal.objOptions;
+    console.log("[INFO]> General Component:", this.generalObject);
+
+    this.setGeneralData();
+  }
+
+  loadGeneralObject() {
+    this.generalObject = this.lompadservice.objPricipal["DATA"]["general"];
+    // if (this.generalObject != undefined) {
+      
+    // }
+  }
+
+  setGeneralData() {
+    this.identifierCatalog = this.generalObject["Identifier"]["Catalog"];
+    this.identifierEntry = this.generalObject["Identifier"]["Entry"];
+    this.title = this.generalObject["Title"]["Title"][0];
+    this.description = this.generalObject["Description"]["Description"][0];
+    this.coverage = this.generalObject["Coverage"][0];
+
+    this.structureSelected = this.generalObject["Structure"][0];
+    this.aggregationLevelSelected = this.generalObject["Aggregation Level"]["Value"][0];
+    this.languageSelected = this.generalObject["Language"]["Language"][0];
+
+    this.showInfo('Aggregation Level Selected', this.aggregationLevelSelected);
+    this.showInfo('Structure', this.structureSelected);
+    this.showInfo('Language Selected', this.languageSelected);
+
+    this.loadKeywords();
+  }
+
+  loadKeywords() {
     this.columns = [];
-    this.ObjOptions = this.componentePrincipal.objOptions;
+    let keys: [] = this.generalObject["keyword"];
 
-    console.log("Desde General: ", this.general_obj);
-
-    this.estructuraSelect = this.general_obj["Structure"];
-    this.nivel_select = this.general_obj["Aggregation Level"];
-    this.idiomaSelect = this.general_obj["Language"];
-
-    this.cargarkeywords();
+    if (keys != null) {
+      keys.forEach((element) => {
+        console.log("elementos ", element);
+        this.columns.push(element);
+      });
+    }
   }
 
-  ngOnDestroy(): void {
-    this.general_obj["Keyword"] = this.columns;
-    this.lompadservice.objPricipal["DATA"]["general"] = this.general_obj;
-    console.log("Destroy General");
-    this.lompadservice.saveObjectLompad(this.general_obj, "general");
-  }
-
-  addPalabra() {
+  addKeyword() {
     this.palabraDialog = true;
   }
 
-  cancelPalabra() {
-    this.palabraDialog = false;
-  }
-
-  removeColumn() {
+  removeLastKeyword() {
     this.columns.splice(-1, 1);
   }
 
-  savePalabra() {
+  cancel() {
+    this.palabraDialog = false;
+  }
+
+  saveNewKeyword() {
     console.log(this.palabra);
     this.palabraDialog = false;
     this.columns.push(this.palabra);
     this.palabra = "";
   }
 
-  cargarkeywords() {
-    let keys: [] = this.general_obj["Keyword"];
-    keys.forEach((element) => {
-      console.log("elementos ", element);
-      this.columns.push(element);
-    });
+  changeStructure() {
+    this.generalObject["Structure"][0] = this.structureSelected;
   }
 
-  cambioEstructura() {
-    console.log(this.estructuraSelect);
-    this.general_obj["Structure"] = this.estructuraSelect;
+  changeAggregationLevel() {
+    this.generalObject["Aggregation Level"]["Value"][0] = this.aggregationLevelSelected;
   }
 
-  cambio_nivel() {
-    console.log(this.nivel_select);
-    this.general_obj["Aggregation Level"] = this.nivel_select;
-    this.toas.add({
-      key: "tst",
-      severity: "success",
-      summary: "NO lo saques papi!!",
-      detail: "Message sent",
-    });
+  changeLanguage(){
+    this.generalObject["Language"]["Language"][0] = this.languageSelected;
   }
 
-  cambioIdioma(){
-    console.log(this.idiomaSelect);
-    this.general_obj["Language"] = this.idiomaSelect;
+  showInfo(key: any, value: any) {
+    console.log('[INFO] General>', key, ': ', value);
   }
 
-  public saveInfo() {
-    // this.lompadservice.setObjectGeneral(this.general_obj);
+  ngOnDestroy(): void {
+    this.generalObject["Identifier"]["Catalog"] = this.identifierCatalog;
+    this.generalObject["Identifier"]["Entry"] = this.identifierEntry;
+    this.generalObject["Title"]["Title"][0] = this.title;
+    this.generalObject["Description"]["Description"][0] = this.description;
+    this.generalObject["Coverage"][0] = this.coverage;
+    this.generalObject["keyword"] = this.columns;
+    this.lompadservice.objPricipal["DATA"]["general"] = this.generalObject;
+    console.log("Destroy General");
+    this.lompadservice.saveObjectLompad(this.generalObject, "general");
   }
+
 }

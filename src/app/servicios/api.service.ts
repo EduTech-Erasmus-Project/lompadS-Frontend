@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,14 +11,43 @@ import { HttpClient } from '@angular/common/http';
 
 
 export class ApiService {
-  // private objson: any = { value: "", icon_url: "", id: "", url: "" };
-  
 
+  // httpOptions = {
+  //   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  // };
 
   constructor(private http:HttpClient) { }
 
+  uploadMetadataFile(body: any): Observable<any> {
+    return this.http.post<any>(environment.URL_UPLOAD_FILE, body).pipe(
+      map((response: any) => response, (error: any) => error)
+    );
+  }
 
-  send_ObjectApi(obj:any,hascode:string,hoja:string){
+  readMetadataFile(hashedCode: string, profile: string): Observable<any> {
+    let url = environment.URL_READ_FILE+'/?hashed_code='+hashedCode+'&profile='+profile
+
+    return this.http.get<any>(url).pipe(
+      map((response: any) => response, (error: any) => error)
+    );
+  }
+
+  updateMetadata(){
+    environment.URL_UPDATE_FILE
+
+  }
+
+  downloadMetadataFile(){
+    environment.URL_DOWNLOAD
+
+  }
+
+  // 
+  // Para arriba los nuevos
+  // 
+
+
+  send_ObjectApi(obj:any, hascode:string, hoja:string){
     var raw = "";
     console.log("PILAS CON EL api  objecto: ",obj);
     

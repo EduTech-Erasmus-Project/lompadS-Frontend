@@ -1,33 +1,145 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+
 import { ApiService } from './api.service';
 import { saveAs } from 'file-saver';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class LompadService{    
-  objPricipal$=new EventEmitter<any>();  
-  objPrincipalXML$=new EventEmitter<any>();  
-  hash$=new EventEmitter<any>();  
-  perfil$=new EventEmitter<any>();
+  objPricipal$ = new EventEmitter<any>();  
+  objPrincipalXML$ = new EventEmitter<any>();  
+  hash$ = new EventEmitter<any>();  
+  perfil$ = new EventEmitter<any>();
 
   objPricipal:JSON;
   objPrincipalXML:any;
 
-  private hash:string;
-  private perfil:string;
-  private datosGenerales:any;
+  private hash: string;
+  private perfil: string;
   
   constructor(
-    private http:HttpClient,
-    private api_service:ApiService,
-    private cookieService:CookieService ) {
+    private apiService:ApiService,
+    private cookieService:CookieService ){
 
     this.precarga();
+    // this.preLoadMetadataFile();
   }
+
+  async sendMetadataFile(metadataFile: any): Promise<any>{
+    let uploadedData: any;
+
+    await this.apiService.uploadMetadataFile(metadataFile).toPromise().then((response) => {
+      uploadedData = response;
+    }).catch(error => console.error('Something went wrong!', error));
+
+    // console.log('[DEBUG] sendMetadataFile> Response', uploadedData);
+
+    if (uploadedData['STATUS_CODE'] == 200) {
+      this.setMetadataCookies(uploadedData);
+      this.loadMetadataFile(uploadedData);
+
+      return uploadedData;
+    } else {
+      console.log('[DEBUG] sendMetadataFile> If else');
+    }
+    
+  }
+
+  setMetadataCookies(uploadedData: any){
+    this.cookieService.set('perfil', uploadedData['PERFIL']);
+    this.cookieService.set('hash', uploadedData['HASHED_VALUE']);
+
+    this.perfil = this.cookieService.get('perfil');
+    this.hash = this.cookieService.get('hash');
+  }
+
+  async loadMetadataFile(uploadedData: any){
+    let hashedCode = uploadedData['HASHED_VALUE'];
+    let profile = uploadedData['PERFIL'];
+
+    let data: any;
+
+    await this.apiService.readMetadataFile(hashedCode, profile).toPromise().then((response) => {
+      data = response;
+    }).catch(error => console.error('Something went wrong!', error));
+
+    console.log('[DEBUG] loadMetadataFile> Response', data);
+
+    this.mapReload(data);
+  }
+
+  preLoadMetadataFile(){
+
+  }
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   precarga(){//Usado cuando se desconecta el Frontend con el Blackend
@@ -42,12 +154,9 @@ export class LompadService{
       this.perfil = this.cookieService.get('perfil');
       this.hash = this.cookieService.get('hash');
 
-      console.log("perfl: ", this.perfil);
-      console.log("hash; ", this.hash);
-      // ESTO NO HACE NADA AL MOMENTO DE RECARGAR LA PAGINA
-      // this.objPricipal$.emit(this.objPricipal);
-      // this.objPrincipalXML$.emit(this.api_service.api_DownloadFile(this.hash));              
-      console.log("DATA: TYPE: ", (this.objPricipal));                    
+      console.log("[INFO]> Inicio> Perfil: ", this.perfil);
+      console.log("[INFO]> Inicio> Hash: ", this.hash);        
+      console.log("[INFO]> Inicio> Data: ", (this.objPricipal));                    
     }    
 
   }
@@ -78,7 +187,7 @@ export class LompadService{
   // setObjson(param:any){  
   //   this.objPricipal=param;
   //   this.objPricipal$.emit(param);
-  //   this.objPrincipalXML$.emit(this.api_service.api_DownloadFile(this.hash));                      
+  //   this.objPrincipalXML$.emit(this.apiService.api_DownloadFile(this.hash));                      
   // }
 
   mapReload(param:JSON){
@@ -86,7 +195,7 @@ export class LompadService{
     localStorage.setItem('objPrincipal', JSON.stringify(this.objPricipal));
 
     this.objPricipal$.emit(this.objPricipal);
-    this.objPrincipalXML$.emit(this.api_service.api_DownloadFile(this.hash));   
+    this.objPrincipalXML$.emit(this.apiService.api_DownloadFile(this.hash));   
     this.perfil$.emit(this.perfil);
     this.hash$.emit(this.hash);
 
@@ -118,16 +227,23 @@ export class LompadService{
 
   
   async subSetArchivo(data:any){
+    console.log('[INFO] Entra al SubSetArchivo')
+
     const response = await fetch("http://localhost:8000/uploadfile", {method: 'POST', body: data,redirect: 'follow'})
 
-    if(response.status !== 200){
+    console.log(response.status)
+
+    if(response.status != 200){
       throw Error(" Error con el Api al enviar el objeto ");
     }
+
+    // console.log('[INFO] Contenido del Response: ', response.json())
 
     return response.json();
   }
 
-  async setArchivo(data:any){                    
+  async setArchivo(data:any){  
+    console.log('[INFO] Entra al SetArchivo')                  
     this.precargaSimple(await this.subSetArchivo(data));
   }
     
@@ -150,7 +266,7 @@ export class LompadService{
     // data=JSON.stringify(data).toLocaleLowerCase(); 
     console.log("Enviando.... ", data, "Hoja: ", hoja);
     
-    this.api_service.send_ObjectApi(data, this.hash, hoja);//enviar solo el objeto y el hash a actualizar                                    
+    this.apiService.send_ObjectApi(data, this.hash, hoja);//enviar solo el objeto y el hash a actualizar                                    
     this.downloadXML_API(this.hash);//Actualiza el objecto cada vez que se guarde los cambiaos realizados
   }
 
@@ -190,10 +306,15 @@ export class LompadService{
       method: 'GET',
       redirect: 'follow'
     })
-      .then(response => response.text())
+      .then(response => {
+        response.text()
+        console.log('XD XD', JSON.stringify(response))
+      })
       .then(result => {
+        console.log('XD XD', JSON.stringify(result))
         this.objPrincipalXML=result
         this.objPrincipalXML$.emit(this.objPrincipalXML)
+        console.log('[INFO] Parte del objeto principal en download', this.objPrincipalXML);
       })
       .catch(error => console.log('error', error));        
   }

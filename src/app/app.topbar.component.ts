@@ -12,10 +12,7 @@ import { Subscription } from 'rxjs';
     templateUrl: './app.topbar.component.html',
 	providers: [MessageService]
 })
-
-
 export class AppTopBarComponent {
-	
 	idiomas: any[];
     activeItem: number;
 	perfiles: any[];
@@ -30,8 +27,6 @@ export class AppTopBarComponent {
 	private objJson: Subscription;
 	private obj_XML: Subscription;
 	
-
-
     constructor(
 		public appMain: AppMainComponent,
 		private componentePrincipal: AppComponent,
@@ -41,11 +36,6 @@ export class AppTopBarComponent {
 		) {}
 
 	ngOnInit(){
-
-
-		
-				
-		
 		this.idiomas=[
             {label: 'es', value: {id: 1, name: 'es', code: 'es'}},
             {label: 'en', value: {id: 2, name: 'en', code: 'en'}},
@@ -62,7 +52,6 @@ export class AppTopBarComponent {
 		// this.objprincipal$=this.lompadService.getObjectPrincipal$();
 		// this.objprincipal$.subscribe(objto => this.objprincipal=objto);
 
-		
 		this.lompadService.hash$.subscribe(param=>{
 			this.hash=param;
 		});	
@@ -72,6 +61,7 @@ export class AppTopBarComponent {
 		this.objJson=this.lompadService.objPricipal$.subscribe(param=>{
 			this.objprincipal=param;
 		});
+
 		this.obj_XML=this.lompadService.objPrincipalXML$.subscribe(param=>{
 			this.objXML=param;			
 		});
@@ -82,7 +72,6 @@ export class AppTopBarComponent {
 			this.appMain.cambioPerfil();
 		});
 
-		
 		this.display1=false;				
 
 		console.log("DESDE TOOPBAR PERFIL: ",this.perfilesSelect);
@@ -97,9 +86,7 @@ export class AppTopBarComponent {
 			this.appMain.cambioPerfil();   
 			this.hash=this.lompadService.getHash();
 		}
-
 	}
-
 	
     mobileMegaMenuItemClick(index) {
         this.appMain.megaMenuMobileClick = true;
@@ -110,11 +97,11 @@ export class AppTopBarComponent {
 		this.componentePrincipal.cambioIdiomaAplication(event);
 	}
 
-
 	cambioPerfil(event){
 		this.componentePrincipal.cambioPerfil(event);	
 		this.appMain.cambioPerfil()      	
 	}
+
 	band:boolean;
 	runDialog(param:number){
 		// this.appMain.saveInfoGeneral();
@@ -128,7 +115,6 @@ export class AppTopBarComponent {
 			this.rebootXML();
 		}
 	}
-
 
 	descargaJSON(){		
 		this.lompadService.downloadJSON();
@@ -156,7 +142,6 @@ export class AppTopBarComponent {
 		}
 	}
 
-
 	ngOnDestroy(): void {		
 		this.lompadService.objPricipal$.unsubscribe();
 		this.lompadService.objPrincipalXML$.unsubscribe();
@@ -168,7 +153,8 @@ export class AppTopBarComponent {
 		this.objprincipal=this.lompadService.objPricipal;
 	}
 
-	rebootXML(){		
+	rebootXML(){	
+		console.log('[INFO] Llamada al Preview de XML')	
 		this.objXML=this.lompadService.objPrincipalXML;
 	}
 	

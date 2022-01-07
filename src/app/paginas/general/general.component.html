@@ -1,44 +1,44 @@
 <div class="p-grid p-fluid">
 
     <!-- [Temp] Contiene: Identificador (1.1) -->
-    <div *ngIf="ObjOptions.o1_1" class="p-col-12">
+    <div *ngIf="objectOptions.o1_1" class="p-col-12">
         <h5>1.1 - {{"Identificador" | translate}}</h5>
 
         <div class="card">
             <div class="p-fluid p-formgrid p-grid">
                 <label for="catalogo" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Catálogo" | translate}}</label>
                 <div class="p-field p-col">
-                    <input [(ngModel)]='general_obj["Identifier"]["Catalog"]' type="text" pInputText>
+                    <input [(ngModel)]='identifierCatalog' type="text" pInputText>
                 </div>
                 <label for="entrada" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Entrada" | translate}}</label>
                 <div class="p-field p-col">
-                    <input [(ngModel)]='general_obj["Identifier"]["Entry"]' id="entrada" type="text" pInputText>
+                    <input [(ngModel)]='identifierEntry' id="entrada" type="text" pInputText>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- [Temp] Contiene: Titulo (1.2) -->
-    <div *ngIf="ObjOptions.o1_2" class="p-col-12">
+    <div *ngIf="objectOptions.o1_2" class="p-col-12">
         <h5>1.2 - {{"Título" | translate}}</h5>
 
         <div class="card">
             <div class="p-fluid p-formgrid p-grid">
                 <div class="p-field p-col-12 ">
                     <label for="titulo">{{"Título" | translate}}</label>
-                    <input [(ngModel)]='general_obj["Title"]' id="titulo" type="text" pInputText>
+                    <input [(ngModel)]='title' id="titulo" type="text" pInputText>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- [Temp] Complementar con: Idioma (1.3) -->
-    <div *ngIf="ObjOptions.o1_3" class="p-col-12">
+    <div *ngIf="objectOptions.o1_3" class="p-col-12">
         <h5>1.3 - {{"Idioma"|translate}}</h5>
 
         <div class="card">
             <div class="p-fluid">
-                <p-dropdown [(ngModel)]='idiomaSelect' [options]='idiomas' name='idiomaSelect' (onChange)="cambioIdioma()" placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                <p-dropdown [(ngModel)]='languageSelected' [options]='languageOptions' name='languageSelected' (onChange)="changeLanguage()" placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
                     <ng-template pTemplate="item" let-item>
                         {{item.label}}
                     </ng-template>
@@ -51,24 +51,24 @@
     </div>
 
     <!-- [Temp] Complementar con: Descripción (1.4)  -->
-    <div *ngIf="ObjOptions.o1_4" class="p-col-12">
+    <div *ngIf="objectOptions.o1_4" class="p-col-12">
         <h5>1.4 - {{"Descripción"|translate}}</h5>
 
         <div class="card">
             <div class="p-fluid">
                 <div class="p-field p-grid">
-                    <textarea [(ngModel)]='general_obj["Description"]' id="descripcion" type="text" rows="4" pInputTextarea></textarea>
+                    <textarea [(ngModel)]='description' id="descripcion" type="text" rows="4" pInputTextarea></textarea>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- [Temp] Contiene: Palabras Clave (1.5) -->
-    <div *ngIf="ObjOptions.o1_5" class="p-col-12">
+    <div *ngIf="objectOptions.o1_5" class="p-col-12">
         <h5>1.5 - {{"Palabra Clave" | translate}}</h5>
     
-        <button pButton pRipple type="button" icon="pi pi-plus" title="Add Column" (click)="addPalabra()" [disabled]="columns.length === 20" class="p-mr-2"></button>
-        <button pButton pRipple type="button" icon="pi pi-minus" title="Remove Column" (click)="removeColumn()" [disabled]="columns.length === 1"></button>
+        <button pButton pRipple type="button" icon="pi pi-plus" title="Add Column" (click)="addKeyword()" [disabled]="columns.length === 20" class="p-mr-2"></button>
+        <button pButton pRipple type="button" icon="pi pi-minus" title="Remove Column" (click)="removeLastKeyword()" [disabled]="columns.length === 1"></button>
         <div class="p-grid p-mt-2">
             <div class="p-col" *ngFor="let col of columns; let i" [@animation]="'visible'">
                 <div class="box">{{i}}</div>
@@ -77,26 +77,26 @@
     </div>
 
     <!-- [Temp] Contiene: Ámbito (1.6) -->
-    <div *ngIf="ObjOptions.o1_6" class="p-col-12">
+    <div *ngIf="objectOptions.o1_6" class="p-col-12">
         <h5>1.6 - {{"Ámbito" | translate}}</h5>
 
         <div class="card">
             <div class="p-fluid p-formgrid p-grid">
                 <div class="p-field p-col-12 ">
                     <label for="ambito">{{"Ámbito" | translate}}</label>
-                    <input id="ambito" [(ngModel)]='general_obj["Coverage"]' type="text" pInputText>
+                    <input id="ambito" [(ngModel)]='coverage' type="text" pInputText>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- [Temp] Contiene: Estructura (1.7) -->
-    <div *ngIf="ObjOptions.o1_7" class="p-col-12">
+    <div *ngIf="objectOptions.o1_7" class="p-col-12">
         <h5>1.7 - {{"Estructura" | translate}}</h5>
 
         <div class="card">
             <div class="p-fluid">
-                <p-dropdown [(ngModel)]='estructuraSelect' [options]='estructuras' name='estructuraSelect' (onChange)="cambioEstructura()" placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                <p-dropdown [(ngModel)]='structureSelected' [options]='structureOptions' name='structureSelected' (onChange)="changeStructure()" placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
                     <ng-template pTemplate="item" let-item>
                         {{item.label| translate }}
                     </ng-template>
@@ -109,12 +109,12 @@
     </div>
 
     <!-- [Temp] Contiene: Nivel de agregación (1.8) -->
-    <div *ngIf="ObjOptions.o1_8" class="p-col-12">
+    <div *ngIf="objectOptions.o1_8" class="p-col-12">
         <h5>1.8 - {{"Nivel de Agregación" | translate }}</h5>
 
         <div class="card">
             <div class="p-fluid">
-                <p-dropdown [options]="nivelesAgregacion" [(ngModel)]='nivel_select' name='nivel_select' (onChange)="cambio_nivel()" placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                <p-dropdown [(ngModel)]='aggregationLevelSelected' [options]="aggregationLevelOptions" name='aggregationLevelSelected' (onChange)="changeAggregationLevel()" placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
                     <ng-template pTemplate="item" let-item>
                         {{item.label| translate }}
                     </ng-template>
@@ -136,8 +136,8 @@
         </ng-template>
 
         <ng-template pTemplate="footer">
-            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="cancelPalabra()"></button>
-            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="savePalabra()"></button>
+            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="cancel()"></button>
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveNewKeyword()"></button>
         </ng-template>
     </p-dialog>
     
