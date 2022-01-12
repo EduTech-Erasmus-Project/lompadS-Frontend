@@ -1,25 +1,25 @@
 <div class="p-grid ">
 
     <!-- [Temp] Contiene: Versión (2.1) -->
-    <div *ngIf="ObjOptions.o2_1" class="p-col-12">
+    <div *ngIf="objectOptions.o2_1" class="p-col-12">
         <h5>2.1 - {{"Versión" | translate}}</h5>
 
         <div class="card">
             <div class="p-fluid p-formgrid p-grid">
                 <div class="p-field p-col-12 ">
-                    <input [(ngModel)]='objLiveClicle["Version"]' id="version" type="text" pInputText>
+                    <input [(ngModel)]='version' id="version" type="text" pInputText>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- [Temp] Contiene: Estado (2.2) -->
-    <div *ngIf="ObjOptions.o2_2" class="p-col-12">
+    <div *ngIf="objectOptions.o2_2" class="p-col-12">
         <h5>2.2 - {{"Estado" | translate}}</h5>
 
         <div class="card">
             <div class="p-fluid">
-                <p-dropdown [options]="estados" [(ngModel)]='estadoSelect' name='estadoSelect' (onChange)='cambioEstados()' placeholder='{{"Seleccionar"| translate}} ' [showClear]="true">
+                <p-dropdown [options]="statusOptions" [(ngModel)]='statusSelected' name='statusSelected' (onChange)='cambioEstados()' placeholder='{{"Seleccionar"| translate}} ' [showClear]="true">
                     <ng-template pTemplate="item" let-item>
                         {{item.label| translate }}
                     </ng-template>
@@ -32,16 +32,16 @@
     </div>
 
     <!-- [Temp] Contiene: Contribución (2.3) -->
-    <div *ngIf="ObjOptions.o2_3" class="p-col-12 ">
+    <div *ngIf="objectOptions.o2_3" class="p-col-12 ">
         <h5>2.3 - {{"Contribución" | translate}}</h5>
 
         <div class="card">
             <!-- [Temp] Contiene: Tipo (2.3.1) -->
-            <div *ngIf="ObjOptions.o2_3_1" class="card">
+            <div *ngIf="objectOptions.o2_3_1" class="card">
                 <h6>2.3.1 - {{"Tipo" | translate}}</h6>
 
                 <div class="p-fluid">
-                    <p-dropdown [options]="tipos" [(ngModel)]='tiposSelect' name='tiposSelect' (onChange)='cambio_contr_tipo()' placeholder='{{"Seleccionar"| translate}} ' [showClear]="true">
+                    <p-dropdown [options]="roleOptions" [(ngModel)]='roleSelected' name='roleSelected' (onChange)='cambio_contr_tipo()' placeholder='{{"Seleccionar"| translate}} ' [showClear]="true">
                         <ng-template pTemplate="item" let-item>
                             {{item.label| translate }}
                         </ng-template>
@@ -53,52 +53,52 @@
             </div>
 
             <!-- [Temp] Contiene: Entidad (2.3.2) -->
-            <div *ngIf="ObjOptions.o2_3_2" class="card">
+            <div *ngIf="objectOptions.o2_3_2" class="card">
                 <h6>2.3.2 - {{"Entidad" | translate }}</h6>
 
                 <div class="p-fluid">
                     <div class="p-field p-grid">
                         <label for="nombre" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Nombre" | translate }}</label>
                         <div class="p-col-12 p-md-10">
-                            <input id="nombre" [(ngModel)]='nombreNew' type="text" pInputText>
+                            <input id="nombre" [(ngModel)]='entityName' type="text" pInputText>
                         </div>
                     </div>
                     <div class="p-field p-grid">
                         <label for="apellido" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Apellido" | translate }}</label>
                         <div class="p-col-12 p-md-10">
 
-                            <input id="apellido" [(ngModel)]='apellidoNew' type="text" pInputText>
+                            <input id="apellido" [(ngModel)]='entityLastname' type="text" pInputText>
                         </div>
                     </div>
                     <div class="p-field p-grid">
                         <label for="lastname4" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Email" | translate}}</label>
                         <div class="p-col-12 p-md-10">
-                            <input id="lastname4" [(ngModel)]='mailNew' type="text" pInputText>
+                            <input id="lastname4" [(ngModel)]='entityEmail' type="text" pInputText>
                         </div>
                     </div>
                     <div class="p-field p-grid">
                         <label for="organizacion" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Organización" | translate}}</label>
                         <div class="p-col-12 p-md-10">
-                            <input id="organizacion" [(ngModel)]='organizacionNew' type="text" pInputText>
+                            <input id="organizacion" [(ngModel)]='entityOrganization' type="text" pInputText>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- [Temp] Contiene: Fecha (2.3.3) -->
-            <div *ngIf="ObjOptions.o2_3_3" class="card">
+            <div *ngIf="objectOptions.o2_3_3" class="card">
                 <h6> 2.3.3 - {{"Fecha" | translate}}</h6>
 
                 <div class="p-fluid">
                     <div class="p-field p-grid">
                         <div class="p-col-12 p-md-10">
-                            <p-calendar [(ngModel)]="fecha" [showIcon]="true" inputId="icon"></p-calendar>
+                            <p-calendar [(ngModel)]="date" [showIcon]="true" inputId="icon"></p-calendar>
                         </div>
                     </div>
 
                     <div class="p-field p-grid">
                         <label for="descripcion">{{"Descripción" | translate }}</label>
-                        <textarea [(ngModel)]='objLiveClicle["Version"]' id="descripcion" type="text" rows="4" pInputTextarea></textarea>
+                        <textarea [(ngModel)]='dateDescription' id="descripcion" type="text" rows="4" pInputTextarea></textarea>
                     </div>
                 </div>
             </div>

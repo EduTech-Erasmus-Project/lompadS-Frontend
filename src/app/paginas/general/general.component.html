@@ -67,10 +67,10 @@
     <div *ngIf="objectOptions.o1_5" class="p-col-12">
         <h5>1.5 - {{"Palabra Clave" | translate}}</h5>
     
-        <button pButton pRipple type="button" icon="pi pi-plus" title="Add Column" (click)="addKeyword()" [disabled]="columns.length === 20" class="p-mr-2"></button>
-        <button pButton pRipple type="button" icon="pi pi-minus" title="Remove Column" (click)="removeLastKeyword()" [disabled]="columns.length === 1"></button>
+        <button pButton pRipple type="button" icon="pi pi-plus" title="Add Column" (click)="addKeyword()" [disabled]="keywords.length === 20" class="p-mr-2"></button>
+        <button pButton pRipple type="button" icon="pi pi-minus" title="Remove Column" (click)="removeLastKeyword()" [disabled]="keywords.length === 1"></button>
         <div class="p-grid p-mt-2">
-            <div class="p-col" *ngFor="let col of columns; let i" [@animation]="'visible'">
+            <div class="p-col" *ngFor="let key of keywords; let i" [@animation]="'visible'">
                 <div class="box">{{i}}</div>
             </div>
         </div>
@@ -127,11 +127,11 @@
     </div>
 
     <!-- [Temp] Además tiene: Divisor con funcionalidad para las Palabras Clave -->
-    <p-dialog [(visible)]="palabraDialog" [style]="{width: '450px'}" header="" [modal]="true" styleClass="p-fluid">
+    <p-dialog [(visible)]="keywordDialog" [style]="{width: '450px'}" header="" [modal]="true" styleClass="p-fluid">
         <ng-template pTemplate="content">
             <div class="p-field">
                 <label for="name">Name</label>
-                <input type="text" pInputText id="nombrePalabraK" [(ngModel)]="palabra" required autofocus />
+                <input type="text" pInputText id="nombrePalabraK" [(ngModel)]="word" required autofocus />
             </div>
         </ng-template>
 
