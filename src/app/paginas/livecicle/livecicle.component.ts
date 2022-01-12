@@ -94,7 +94,6 @@ export class LivecicleComponent implements OnInit, OnDestroy {
     var emailExpression = /EMAIL;[^:]*:(.*)/g;
     var emptyVcard = 'BEGIN:VCARD\nVERSION:3.0\nN:ApellidoEntidad;Entidad1;;;\nFN:Entidad1 ApellidoEntidad\nEMAIL;TYPE=INTERNET:Sin Correo\nORG:Sin organizacion\nEND:VCARD';
 
-
     const mname = fullNameExpression.exec(card);
     const morg = organizationExpression.exec(card);
     const mmail = emailExpression.exec(card);
@@ -111,7 +110,7 @@ export class LivecicleComponent implements OnInit, OnDestroy {
     this.entityOrganization = morg?.[1];
   }
 
-  actualizarVcard() {//lanzar desde ngOnDestroy
+  updateVcard() {//lanzar desde ngOnDestroy
     const card = `BEGIN:VCARD\nVERSION:3.0
     N:${this.entityLastname.trim()};${this.entityName.trim()};;;
     FN:${this.entityName.trim()} ${this.entityLastname.trim()}
@@ -122,12 +121,12 @@ export class LivecicleComponent implements OnInit, OnDestroy {
     this.lifeCycleObject["Contribute"]["Entity"][0] = card;
   }
 
-  cambioEstados() {
+  changeStatus() {
     console.log(this.statusSelected);
     this.lifeCycleObject["Status"]["Value"][0] = this.statusSelected;
   }
 
-  cambio_contr_tipo() {
+  changeContributeRole() {
     console.log(this.roleSelected);
     this.lifeCycleObject["Contribute"]["Role"][0] = this.roleSelected;
   }
@@ -135,7 +134,7 @@ export class LivecicleComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     console.log("Destroy ciclo de vida");
     this.lifeCycleObject["Version"]["String"][0] = this.version;
-    this.actualizarVcard();
+    this.updateVcard();
     this.lifeCycleObject["Contribute"]["Datetime"][0] = this.date.toISOString();
     this.lifeCycleObject["Contribute"]["Description"][0] = this.dateDescription;
 

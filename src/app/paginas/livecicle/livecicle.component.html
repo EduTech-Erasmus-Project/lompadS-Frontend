@@ -19,7 +19,7 @@
 
         <div class="card">
             <div class="p-fluid">
-                <p-dropdown [options]="statusOptions" [(ngModel)]='statusSelected' name='statusSelected' (onChange)='cambioEstados()' placeholder='{{"Seleccionar"| translate}} ' [showClear]="true">
+                <p-dropdown [options]="statusOptions" [(ngModel)]='statusSelected' name='statusSelected' (onChange)='changeStatus()' placeholder='{{"Seleccionar"| translate}} ' [showClear]="true">
                     <ng-template pTemplate="item" let-item>
                         {{item.label| translate }}
                     </ng-template>
@@ -41,7 +41,7 @@
                 <h6>2.3.1 - {{"Tipo" | translate}}</h6>
 
                 <div class="p-fluid">
-                    <p-dropdown [options]="roleOptions" [(ngModel)]='roleSelected' name='roleSelected' (onChange)='cambio_contr_tipo()' placeholder='{{"Seleccionar"| translate}} ' [showClear]="true">
+                    <p-dropdown [options]="roleOptions" [(ngModel)]='roleSelected' name='roleSelected' (onChange)='changeContributeRole()' placeholder='{{"Seleccionar"| translate}} ' [showClear]="true">
                         <ng-template pTemplate="item" let-item>
                             {{item.label| translate }}
                         </ng-template>
