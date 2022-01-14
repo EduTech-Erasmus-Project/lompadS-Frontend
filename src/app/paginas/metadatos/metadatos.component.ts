@@ -54,7 +54,7 @@ export class MetadatosComponent implements OnInit {
     this.identifierCatalog = this.metametadataObject["Identifier"]["Catalog"][0];
     this.identifierEntry = this.metametadataObject["Identifier"]["Entry"][0];
     this.roleSelected = this.metametadataObject["Contribute"]["Value"][0];
-    this.castVcard(this.metametadataObject['Contribute']['Entity'][0]);
+    this.castVcard(this.metametadataObject["Contribute"]["Entity"][0]);
     this.date = new Date(this.metametadataObject["Contribute"]["Date"][0]);
     this.metadataSchema = this.metametadataObject["MetadataSchema"]["Values"][0];
   }
@@ -96,7 +96,7 @@ export class MetadatosComponent implements OnInit {
     ORG:${this.entityOrganization.trim()}
     END:VCARD`;
 
-    this.metametadataObject["Contribute"]["Entity"] = card;
+    this.metametadataObject["Contribute"]["Entity"][0] = card;
   }
 
   changeRole() {

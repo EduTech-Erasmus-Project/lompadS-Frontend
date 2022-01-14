@@ -1,13 +1,13 @@
 <div class="p-grid">
 
     <!-- [Temp] Contiene: Propósito (9.1) -->
-    <div *ngIf="ObjOptions.o9_1" class="p-col-12">
+    <div *ngIf="objectOptions.o9_1" class="p-col-12">
         <h5>9.1 - {{"Propósito"| translate}}</h5>
 
         <div class="card">
             <div class="p-fluid">
                 <!-- [(ngModel)]="selectedDrop" -->
-                <p-dropdown [options]="propositos" [(ngModel)]='propositosSelect' name='propositosSelect' (onChange)='cambio_propositosSelect()' placeholder='{{"Seleccionar"| translate}} ' [showClear]="true">
+                <p-dropdown [options]="purposeOptions" [(ngModel)]='purposeSelected' name='purposeSelected' (onChange)='changePurpose()' placeholder='{{"Seleccionar"| translate}} ' [showClear]="true">
                     <ng-template pTemplate="item" let-item>
                         {{item.label| translate }}
                     </ng-template>
@@ -20,53 +20,59 @@
     </div>
 
     <!-- [Temp] Contiene: Ruta taxonómica (9.2) -->
-    <div *ngIf="ObjOptions.o9_2" class="p-col-12">
+    <div *ngIf="objectOptions.o9_2" class="p-col-12">
         <h5>9.2 - {{"Ruta Taxonómica"| translate}}</h5>
 
         <div class="card">
-            <div *ngIf="ObjOptions.o9_2_1" class="p-fluid">
+            <div *ngIf="objectOptions.o9_2_1" class="card">
                 <h6>9.2.1 - {{"Fuente"| translate}}</h6>
 
-                <!-- <label for="fuente">{{"Fuente"| translate}}</label>  -->
-                <input id="fuente" [(ngModel)]='objClasification["Taxon Path"]["Source"]' type="text" pInputText>
+                <div class="p-fluid">
+                    <input id="fuente" [(ngModel)]='taxonPathSource' type="text" pInputText>
+                </div>
             </div>
 
-            <div *ngIf="ObjOptions.o9_2_2" class="p-fluid p-formgrid p-grid">
+            <div *ngIf="objectOptions.o9_2_2" class="card">
                 <h6>9.2.2 - {{"Taxón"| translate}}</h6>
 
-                <label for="id" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Id</label>
-                <div class="p-field p-col">
-                    <input id="id" [(ngModel)]='objClasification["Taxon Path"]["Taxon"]["Id"]' type="text" pInputText>
-                </div>
-                <label for="entrada" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Entrada" | translate}}</label>
-                <div class="p-field p-col">
-                    <input id="entrada" [(ngModel)]='objClasification["Taxon Path"]["Taxon"]["Entry"]' type="text" pInputText>
+                <div class="card">
+                    <div class="p-fluid p-formgrid p-grid">
+                        <label for="id" >Id</label>
+                        <div class="p-field p-col">
+                            <input id="id" [(ngModel)]='taxonPathId' type="text" pInputText>
+                        </div>
+                        
+                        <label for="entrada">{{"Entrada" | translate}}</label>
+                        <div class="p-field p-col">
+                            <input id="entrada" [(ngModel)]='taxonPathEntry' type="text" pInputText>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- [Temp] Contiene: Descripción (9.3) -->
-    <div *ngIf="ObjOptions.o9_3" class="p-col-12">
+    <div *ngIf="objectOptions.o9_3" class="p-col-12">
         <h5>9.3 {{"Descripción"| translate}}</h5>
 
         <div class="card">
             <div class="p-fluid">
                 <!-- <label for="descripcion">Descripción</label> -->
-                <textarea id="descripcion" [(ngModel)]='objClasification["Description"]' type="text" rows="4" pInputTextarea></textarea>
+                <textarea id="descripcion" [(ngModel)]='description' type="text" rows="4" pInputTextarea></textarea>
             </div>
         </div>
     </div>
 
     <!-- [Temp] Contiene: Palabras Clave (9.4) -->
-    <div *ngIf="ObjOptions.o9_4" class="p-col-12">
+    <div *ngIf="objectOptions.o9_4" class="p-col-12">
         <h5>9.4 - {{"Palabra Clave"| translate}}</h5>
         
         <div class="card">
             <div class="p-fluid p-formgrid p-grid">
                 <div class="p-field p-col-12 ">
                     <label for="palabraclave1">{{"Palabra Clave" | translate}}</label>
-                    <input id="palabraclave1" [(ngModel)]='objClasification["Keyword"]' type="text" pInputText>
+                    <input id="palabraclave1" [(ngModel)]='columns' type="text" pInputText>
                     <!-- <button pButton pRipple type="button" icon="pi pi-plus" title="Add Column" (click)="addPalabra()" [disabled]="columns.length === 20" class="p-mr-2"></button>
                     <button pButton pRipple type="button" icon="pi pi-minus" title="Remove Column" (click)="removeColumn()" [disabled]="columns.length === 1"></button>
                     <div class="p-col-12 p-md-10" *ngFor="let col of columns; let i" [@animation]="'visible'">

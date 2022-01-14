@@ -1,13 +1,13 @@
 <div class="p-grid">
 
     <!-- [Temp] Contiene: Coste (6.1) -->
-    <div *ngIf="ObjOptions.o6_1" class="p-col-12 p-md-6">
+    <div *ngIf="objectOptions.o6_1" class="p-col-12 p-md-6">
         <h5>6.1 - {{"Coste" | translate}}</h5>
 
         <div class="card">
             <div class="p-fluid">
                 <!-- [(ngModel)]="selectedDrop" -->
-                <p-dropdown [options]="coste" [(ngModel)]='costeSelect' name='costeSelect' (onChange)='cambio_costeSelect()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                <p-dropdown [options]="costOptions" [(ngModel)]='costSelected' name='costSelected' (onChange)='changeCost()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
                     <ng-template pTemplate="item" let-item>
                         {{item.label| translate }}
                     </ng-template>
@@ -20,13 +20,13 @@
     </div>
 
     <!-- [Temp] Contiene: Derechos de Autor y otras Restricciones (6.2) -->
-    <div *ngIf="ObjOptions.o6_2" class="p-col-12 p-md-6">
+    <div *ngIf="objectOptions.o6_2" class="p-col-12 p-md-6">
         <h5>6.2 - {{"Derechos de autor y otras actividades" | translate}}</h5>
 
         <div class="card">
             <div class="p-fluid">
                 <!-- [(ngModel)]="selectedDrop" -->
-                <p-dropdown [options]="decision" [(ngModel)]='decisionSelect' name='decisionSelect' (onChange)='cambio_decisionSelect()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                <p-dropdown [options]="copyrightOptions" [(ngModel)]='copyrightSelected' name='copyrightSelected' (onChange)='changeCopyright()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
                     <ng-template pTemplate="item" let-item>
                         {{item.label| translate }}
                     </ng-template>
@@ -39,14 +39,14 @@
     </div>
 
     <!-- [Temp] Contiene: Descripción (6.3) -->
-    <div *ngIf="ObjOptions.o6_3" class="p-col-12">
+    <div *ngIf="objectOptions.o6_3" class="p-col-12">
         <h5>6.3 - {{"Descripción" | translate}}</h5>
 
         <div class="card">
             <div class="p-fluid">
                 <div class="p-field p-grid">
                     <label for="descripcion">{{"Descripción" | translate}}</label>
-                    <textarea id="descripcion" [(ngModel)]='objderechos["Description"]' type="text" rows="4" pInputTextarea></textarea>
+                    <textarea id="descripcion" [(ngModel)]='description' type="text" rows="4" pInputTextarea></textarea>
                 </div>
             </div>
         </div>

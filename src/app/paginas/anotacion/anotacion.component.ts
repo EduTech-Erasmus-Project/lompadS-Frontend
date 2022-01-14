@@ -9,170 +9,138 @@ import { LompadService } from '../../servicios/lompad.service';
   styleUrls: ['./anotacion.component.css']
 })
 export class AnotacionComponent implements OnInit {
-  ObjOptions:ObjOptions=new ObjOptions();
-  modo_acceso:any[];
-  modo_suficiente:any[];
-  rol:any[];
-  fecha:any;
+  annotationObject: any;
+  objectOptions: ObjOptions = new ObjOptions();
 
-  modo_accesoSelect:string;
-  modo_suficienteSelect:string;
-  rolSelect:string;
+  // Listas predefinidas
+  accessModeOptions: any[];
+  accessModeSelected: string;
 
-  nombreNew:string;
-  apellidoNew:string;
-  mailNew:string;
-  organizacionNew:string;
+  accessModeSufficientOptions: any[];
+  accessModeSufficientSelected: string;
 
-  objAnotacion:any;
+  rolOptions: any[];
+  rolSelected: string;
+  // -----
+
+  // Referente a los valores
+  description: string;
+  entityName: string;
+  entityLastname: string;
+  entityEmail: string;
+  entityOrganization: string;
+  date: any;
+
   constructor(
     private componentePrincipal: AppComponent,
     private lompadservice: LompadService
   ) { }
 
-  loadDatos(){
-    this.objAnotacion=this.lompadservice.objPricipal['DATA']['annotation'];
-  }      
-  ngOnDestroy():void {
-    console.log("Destroy ciclo de vida");    
-    this.actualizarVcard();
-    this.objAnotacion["Date"]=this.fecha.toISOString();
-    this.lompadservice.objPricipal['DATA']['annotation']=this.objAnotacion;
-    this.lompadservice.saveObjectLompad(this.objAnotacion,"annotation");  
-  }     
   ngOnInit(): void {
-    this.loadDatos();
-    this.castVcard(this.objAnotacion["Entity"]);
-    this.ObjOptions=this.componentePrincipal.objOptions;
-    this.modo_acceso=[
-      {label: 'visual', value: 'visual', code: 'visu'},
-      {label: 'auditivo', value:  'auditory', code: 'wartg'},
-      {label: 'texto', value:  'tex', code: 'text'},
-      {label: 'tactil', value: 'tactile', code: 'tac'}
+    this.loadAnnotationData();
+
+    this.accessModeOptions = [
+      { label: 'visual', value: 'visual', code: 'am-vis' },
+      { label: 'auditivo', value: 'auditory', code: 'am-aud' },
+      { label: 'texto', value: 'tex', code: 'am-txt' },
+      { label: 'tactil', value: 'tactile', code: 'am-tcl' }
     ];
 
-    this.modo_suficiente=[
-      {label: 'visual', value: 'visual', code: 'visu'},
-      {label: 'auditivo', value:  'auditory', code: 'audi'},
-      {label: 'texto', value:  'tex', code: 'text'},
-      {label: 'tactil', value: 'tactile', code: 'tac'}
+    this.accessModeSufficientOptions = [
+      { label: 'visual', value: 'visual', code: 'ams-vis' },
+      { label: 'auditivo', value: 'auditory', code: 'ams-aud' },
+      { label: 'texto', value: 'tex', code: 'ams-txt' },
+      { label: 'tactil', value: 'tactile', code: 'ams-tcl' }
     ];
 
-    this.rol=[
-      {label: 'Estudiantes', value:  'student', code: 'est'},
-      {label: 'Profesores', value:  'teachers', code: 'prof'},
-      {label: 'Aplicación', value: 'application', code: 'app'}      
+    this.rolOptions = [
+      { label: 'Estudiantes', value: 'student', code: 'std' },
+      { label: 'Profesores', value: 'teachers', code: 'tch' },
+      { label: 'Aplicación', value: 'application', code: 'app' }
     ];
-    
-    this.modo_accesoSelect=this.objAnotacion["Mode Access"];
-    this.modo_suficienteSelect=this.objAnotacion["Mode Access Sufficient"];
-    this.rolSelect=this.objAnotacion["Rol"];
-    this.fecha=new Date(this.objAnotacion["Date"]);    
-    console.log("Desde Anotacion: ",this.objAnotacion);
-    
+
+    this.objectOptions = this.componentePrincipal.objOptions;
+    console.log('[INFO]> Annotation Component: ', this.annotationObject);
+
+    this.setAnnotationData();
   }
 
-  castVcard(card:string){//lanzar desde ngOninit    
-    //en caso de que las vcard esten llegando sin saltos de linea
-    const keyys=[" VERSION", " FN", " N", " EMAIL", " ORG", " END:VCARD"];
+  loadAnnotationData() {
+    this.annotationObject = this.lompadservice.objPricipal['DATA']['annotation'];
+  }
 
-    keyys.forEach(element =>{
-      card=card.replace(element,element.replace(" ","\n"))
+  setAnnotationData() {
+    this.castVcard(this.annotationObject['Entity']['Entity'][0]);
+    this.date = new Date(this.annotationObject['Date']['DateTime'][0]);
+    this.description = this.annotationObject['Description']['Description'][0];
+    this.accessModeSelected = this.annotationObject['Mode Access']['Value'][0];
+    this.accessModeSufficientSelected = this.annotationObject['Mode Access Sufficient']['Value'][0];
+    this.rolSelected = this.annotationObject['Rol']['Value'][0];
+  }
+
+  castVcard(card: string) {//lanzar desde ngOninit    
+    const vcardElements = [' VERSION', ' FN', ' N', ' EMAIL', ' ORG', ' END:VCARD'];
+
+    vcardElements.forEach(element => {
+      card = card.replace(element, element.replace(' ', '\n'));
     });
 
-    // var inicial=card;
-    // inicial=inicial.replace(" ","_");
-    // var list=inicial.split("\n");
-    // // console.log(list);
+    var fullNameExpression = /FN:(.*)/g;
+    var organizationExpression = /ORG:(.*)/g;
+    var emailExpression = /EMAIL;[^:]*:(.*)/g;
+    var emptyVcard = 'BEGIN:VCARD\nVERSION:3.0\nN:ApellidoEntidad;Entidad1;;;\nFN:Entidad1 ApellidoEntidad\nEMAIL;TYPE=INTERNET:Sin Correo\nORG:Sin organizacion\nEND:VCARD';
 
-    // var varN=list[2].substring(2,list[2].length);
-    // var list_varN=varN.split(";")      
-    // var nombre=list_varN[1];
-    // var apellido=list_varN[0];
-
-    // var mail=list[4].split(":")[1];
-    // var organization=list[5].split(":")[1];
-
-    var fname = /FN:(.*)/g;
-    var org = /ORG:(.*)/g;
-    var mail = /EMAIL;[^:]*:(.*)/g;
-    var str = 'BEGIN:VCARD\nVERSION:3.0\nN:ApellidoEntidad;Entidad1;;;\nFN:Entidad1 ApellidoEntidad\nEMAIL;TYPE=INTERNET:Sin Correo\nORG:Sin organizacion\nEND:VCARD';
-    
-    
-    const mname = fname.exec(str);
-    const morg = org.exec(str);
-    const mmail = mail.exec(str);
-
+    const mname = fullNameExpression.exec(card);
+    const morg = organizationExpression.exec(card);
+    const mmail = emailExpression.exec(card);
 
     console.log(mname?.[1]);
     console.log(morg?.[1]);
     console.log(mmail?.[1]);
 
-    var nombre=mname?.[1];
-    var listnombreApell=nombre.split(" ");
-    this.nombreNew=listnombreApell[0];
-    this.apellidoNew=listnombreApell[1];
-    
-    this.mailNew=mmail?.[1];
-    
-    this.organizacionNew=morg?.[1];
-                 
-
-}
-
-actualizarVcard(){//lanzar desde ngOnDestroy
-
-  const card=`BEGIN:VCARD\nVERSION:3.0
-    N:${this.apellidoNew.trim()};${this.nombreNew.trim()};;;
-    FN:${this.nombreNew.trim()} ${this.apellidoNew.trim()}
-    EMAIL;TYPE=INTERNET:${this.mailNew.trim()}
-    ORG:${this.organizacionNew.trim()}
-    END:VCARD`          
-    this.objAnotacion["Entity"]=card;
-  // var carrd=card;
-  // var inicial=card;
-  //   inicial=inicial.replace(" ","_");
-  //   var list=inicial.split("\n");
-    
-
-  //   var varN=list[2].substring(2,list[2].length);
-  //   var list_varN=varN.split(";")      
-  //   var nombre=list_varN[1];
-  //   var apellido=list_varN[0];
-
-  //   var mail=list[4].split(":")[1];
-  //   var organization=list[5].split(":")[1];
-  
-  //   carrd=carrd.replace(nombre,this.nombreNew.trim());
-  //   carrd=carrd.replace(apellido,this.apellidoNew.trim());
-  //   carrd=carrd.replace(mail,this.mailNew.trim());
-  //   carrd=carrd.replace(organization,this.organizacionNew.trim());   
-  //   const temFN=carrd.split("\n");
-  //   temFN[3]="FN:"+this.nombreNew.trim()+" "+this.apellidoNew.trim();
-  //   var final:string="";
-  //   temFN.forEach(element => {
-  //     final+=element+"\n";        
-  //   });
-  //   final=final.substring(0,final.length-1);
-  //   console.log("fiNal card: ",final);
-}
-
-
-  cambio_modo_accesoSelect(){
-    console.log(this.modo_accesoSelect);
-    this.objAnotacion["Mode Access"]=this.modo_accesoSelect;
-  }    
-
-  cambio_modo_suficienteSelect(){
-    console.log(this.modo_suficienteSelect);
-    this.objAnotacion["Mode Access Sufficient"]=this.modo_suficienteSelect;
+    var nombre = mname?.[1];
+    var listnombreApell = nombre.split(' ');
+    this.entityName = listnombreApell[0];
+    this.entityLastname = listnombreApell[1];
+    this.entityEmail = mmail?.[1];
+    this.entityOrganization = morg?.[1];
   }
 
-  cambio_rolSelect(){
-    console.log(this.rolSelect);
-    this.objAnotacion["Rol"]=this.rolSelect; 
+  updateVcard() {//lanzar desde ngOnDestroy
+    const card = `BEGIN:VCARD\nVERSION:3.0
+    N:${this.entityLastname.trim()};${this.entityName.trim()};;;
+    FN:${this.entityName.trim()} ${this.entityLastname.trim()}
+    EMAIL;TYPE=INTERNET:${this.entityEmail.trim()}
+    ORG:${this.entityOrganization.trim()}
+    END:VCARD`;
+
+    this.annotationObject['Entity']['Entity'][0] = card;
   }
-    
-     
+
+  changeAccessMode() {
+    console.log(this.accessModeSelected);
+    this.annotationObject['Mode Access']['Value'][0] = this.accessModeSelected;
+  }
+
+  changeAccessModeSufficient() {
+    console.log(this.accessModeSufficientSelected);
+    this.annotationObject['Mode Access Sufficient']['Value'][0] = this.accessModeSufficientSelected;
+  }
+
+  changeRol() {
+    console.log(this.rolSelected);
+    this.annotationObject['Rol']['Value'][0] = this.rolSelected;
+  }
+
+  ngOnDestroy(): void {
+    console.log('[INFO]> Destroy Annotation');
+
+    this.updateVcard();
+    this.annotationObject['Date']['DateTime'][0] = this.date.toISOString();
+    this.annotationObject['Description']['Description'][0] = this.description;
+
+    this.lompadservice.objPricipal['DATA']['annotation'] = this.annotationObject;
+    this.lompadservice.saveObjectLompad(this.annotationObject, 'annotation');
+  }
 
 }

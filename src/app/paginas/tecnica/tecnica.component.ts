@@ -527,20 +527,15 @@ export class TecnicaComponent implements OnInit {
     this.formatDigitalSubtypeSelected = this.technicalObject['Format']['Format'][0];
     this.size = this.technicalObject['Size']['Size'][0];
     this.location = this.technicalObject['Location']['Location'][0];
-    this.orCompositeTypeSelected = this.technicalObject['Requirement']['TypeSource'];
-    this.orCompositeNameSelected = this.technicalObject['Requirement']['NameSource'];
+    this.orCompositeTypeSelected = this.technicalObject['Requirement']['TypeSource'][0];
+    this.orCompositeNameSelected = this.technicalObject['Requirement']['NameSource'][0];
     this.minimumVersion = this.technicalObject['Requirement']['MinVersion'][0];
     this.maximumVersion = this.technicalObject['Requirement']['MaxVersion'][0];
     this.installationRemarks = this.technicalObject['Installation Remarks']['InstallationRemarks'][0];
     this.otherPlatformRequirements = this.technicalObject['OtherPlatformRequirements']['OtherPlatformRequirements'][0];
 
     this.changeOrCompositeTypeOptions(this.orCompositeTypeSelected);
-
-    try {
-      this.castTimeDuration(this.technicalObject['Duration']['Duration'][0]);
-    } catch (error) {
-      console.log("[ERROR]> Technical: Something went wrong with casting duration!");
-    }
+    this.castTimeDuration(this.technicalObject['Duration']['Duration'][0]);
   }
 
   changeFormatType() {
@@ -567,27 +562,31 @@ export class TecnicaComponent implements OnInit {
 
   changeOrCompositeType() {
     console.log(this.orCompositeTypeSelected);
-    this.technicalObject['Requirement']['TypeSource'] = this.orCompositeTypeSelected;
+    this.technicalObject['Requirement']['TypeSource'][0] = this.orCompositeTypeSelected;
     this.changeOrCompositeTypeOptions(this.orCompositeTypeSelected);
   }
 
   changeOrCompositeName() {
     console.log(this.orCompositeNameSelected);
-    this.technicalObject['Requirement']['NameSource'] = this.orCompositeNameSelected;
+    this.technicalObject['Requirement']['NameSource'][0] = this.orCompositeNameSelected;
   }
 
   castTimeDuration(duration: string) {
-    var auxDuration1 = duration.split('DT')[0];
-    var auxDuration2 = duration.split('DT')[1];
+    try {
+      var auxDuration1 = duration.split('DT')[0];
+      var auxDuration2 = duration.split('DT')[1];
 
-    auxDuration1 = auxDuration1.substr(1, auxDuration1.length);
+      auxDuration1 = auxDuration1.substr(1, auxDuration1.length);
 
-    this.years = + auxDuration1.split("Y")[0];
-    this.months = + auxDuration1.split("Y")[1].split("M")[0];
-    this.days = + auxDuration1.split("Y")[1].split("M")[1];
+      this.years = + auxDuration1.split("Y")[0];
+      this.months = + auxDuration1.split("Y")[1].split("M")[0];
+      this.days = + auxDuration1.split("Y")[1].split("M")[1];
 
-    this.hours = + auxDuration2.split("H")[0];
-    this.minutes = + auxDuration2.split("H")[1].split('M')[0];
+      this.hours = + auxDuration2.split("H")[0];
+      this.minutes = + auxDuration2.split("H")[1].split('M')[0];
+    } catch (error) {
+      console.log("[ERROR]> Technical: Something went wrong with casting duration!", error);
+    }
   }
 
   saveTime() {
