@@ -116,54 +116,54 @@ export class UsoeducativoComponent implements OnInit {
     ];
 
     this.objectOptions = this.componentePrincipal.objOptions;
-    console.log("[INFO]> Educational Component: ", this.educationalObject);
+    console.log('[INFO]> Educational Component: ', this.educationalObject);
 
     this.setEducationalData();
   }
 
   loadEducationalData() {
-    this.educationalObject = this.lompadservice.objPricipal['DATA']['educational'];
+    this.educationalObject = this.lompadservice.objPricipal['data']['educational'];
   }
 
   setEducationalData() {
-    this.interactivityTypeSelected = this.educationalObject["Interactivity Type"]["Value"][0];
-    this.learningResourceTypeSelected = this.educationalObject["Learning Resource Type"]["Value"][0];
-    this.interactivityLevelSelected = this.educationalObject["Interactivity Level"]["Value"][0];
-    this.semanticDensitySelected = this.educationalObject["Semantic Density"]["Value"][0];
-    this.intendedEndUserRoleSelected = this.educationalObject["Intended End UserRole"]["Value"][0];
-    this.contextSelected = this.educationalObject["Context"]["Value"][0];
-    this.typicalAgeRange = this.educationalObject["Typical Age Range"]["typicalAgeRange"][0];
-    this.difficultySelected = this.educationalObject["Difficulty"]["Value"][0];
-    this.castTime(this.educationalObject["Typical Learning Time"]["Duration"][0]);
-    this.description = this.educationalObject["Description"]["Description"][0];
+    this.interactivityTypeSelected = this.educationalObject['interactivityType']['value'][0];
+    this.learningResourceTypeSelected = this.educationalObject['learningResourceType']['value'][0];
+    this.interactivityLevelSelected = this.educationalObject['interactivityLevel']['value'][0];
+    this.semanticDensitySelected = this.educationalObject['semanticDensity']['value'][0];
+    this.intendedEndUserRoleSelected = this.educationalObject['intendedEndUserRole']['value'][0];
+    this.contextSelected = this.educationalObject['context']['value'][0];
+    this.typicalAgeRange = this.educationalObject['typicalAgeRange']['typicalAgeRange'][0];
+    this.difficultySelected = this.educationalObject['difficulty']['value'][0];
+    this.castTime(this.educationalObject['typicalLearningTime']['duration'][0]);
+    this.description = this.educationalObject['description']['description'][0];
   }
 
   changeInteractivityType() {
-    this.educationalObject["Interactivity Type"]["Value"][0] = this.interactivityTypeSelected;
+    this.educationalObject['interactivityType']['value'][0] = this.interactivityTypeSelected;
   }
 
   changeLearningResourceType() {
-    this.educationalObject["Learning Resource Type"]["Value"][0] = this.learningResourceTypeSelected;
+    this.educationalObject['learningResourceType']['value'][0] = this.learningResourceTypeSelected;
   }
 
   changeInteractivityLevel() {
-    this.educationalObject["Interactivity Level"]["Value"][0] = this.interactivityLevelSelected;
+    this.educationalObject['interactivityLevel']['value'][0] = this.interactivityLevelSelected;
   }
 
   changeSemanticDensity() {
-    this.educationalObject["Semantic Density"]["Value"][0] = this.semanticDensitySelected;
+    this.educationalObject['semanticDensity']['value'][0] = this.semanticDensitySelected;
   }
 
   changeIntentedEndUserRole() {
-    this.educationalObject["Intended End UserRole"]["Value"][0] = this.intendedEndUserRoleSelected;
+    this.educationalObject['intendedEndUserRole']['value'][0] = this.intendedEndUserRoleSelected;
   }
 
   changeContext() {
-    this.educationalObject["Context"]["Value"][0] = this.contextSelected;
+    this.educationalObject['context']['value'][0] = this.contextSelected;
   }
 
   changeDifficulty() {
-    this.educationalObject["Difficulty"]["Value"][0] = this.difficultySelected;
+    this.educationalObject['difficulty']['value'][0] = this.difficultySelected;
   }
 
   castTime(duration: string) {
@@ -173,29 +173,30 @@ export class UsoeducativoComponent implements OnInit {
 
       auxDuration1 = auxDuration1.substr(1, auxDuration1.length);
 
-      this.years = + auxDuration1.split("Y")[0];
-      this.months = + auxDuration1.split("Y")[1].split("M")[0];
-      this.days = + auxDuration1.split("Y")[1].split("M")[1];
+      this.years = + auxDuration1.split('Y')[0];
+      this.months = + auxDuration1.split('Y')[1].split('M')[0];
+      this.days = + auxDuration1.split('Y')[1].split('M')[1];
 
-      this.hours = + auxDuration2.split("H")[0];
-      this.minutes = + auxDuration2.split("H")[1].split('M')[0];
+      this.hours = + auxDuration2.split('H')[0];
+      this.minutes = + auxDuration2.split('H')[1].split('M')[0];
     } catch (error) {
-      console.log("[ERROR]> Technical: Something went wrong with casting duration!", error);
+      console.log('[ERROR]> Technical: Something went wrong with casting duration!', error);
     }
   }
 
   saveTime() {
-    this.educationalObject["Typical Learning Time"]["Duration"][0] = "P" + this.years + "Y" + this.months + "M" + this.days + "DT" + this.hours + "H" + this.minutes + "M";
+    this.educationalObject['typicalLearningTime']['duration'][0] = 'P' + this.years + 'Y' + this.months + 'M' + this.days + 'DT' + this.hours + 'H' + this.minutes + 'M';
   }
 
   ngOnDestroy(): void {
-    console.log("Destroy Uso Educativo");
-    this.educationalObject["Typical Age Range"]["typicalAgeRange"][0] = this.typicalAgeRange;
-    this.educationalObject["Description"]["Description"][0] = this.description;
+    console.log('[INFO]> Destroy Educational');
+    
+    this.educationalObject['typicalAgeRange']['typicalAgeRange'][0] = this.typicalAgeRange;
+    this.educationalObject['description']['description'][0] = this.description;
     this.saveTime();
 
-    this.lompadservice.objPricipal['DATA']['educational'] = this.educationalObject;
-    this.lompadservice.saveObjectLompad(this.educationalObject, "educational");
+    this.lompadservice.objPricipal['data']['educational'] = this.educationalObject;
+    this.lompadservice.saveObjectLompad(this.educationalObject, 'educational');
   }
 
 }

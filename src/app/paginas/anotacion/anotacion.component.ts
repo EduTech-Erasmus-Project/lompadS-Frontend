@@ -66,16 +66,16 @@ export class AnotacionComponent implements OnInit {
   }
 
   loadAnnotationData() {
-    this.annotationObject = this.lompadservice.objPricipal['DATA']['annotation'];
+    this.annotationObject = this.lompadservice.objPricipal['data']['annotation'];
   }
 
   setAnnotationData() {
-    this.castVcard(this.annotationObject['Entity']['Entity'][0]);
-    this.date = new Date(this.annotationObject['Date']['DateTime'][0]);
-    this.description = this.annotationObject['Description']['Description'][0];
-    this.accessModeSelected = this.annotationObject['Mode Access']['Value'][0];
-    this.accessModeSufficientSelected = this.annotationObject['Mode Access Sufficient']['Value'][0];
-    this.rolSelected = this.annotationObject['Rol']['Value'][0];
+    this.castVcard(this.annotationObject['entity']['entity'][0]);
+    this.date = new Date(this.annotationObject['date']['dateTime'][0]);
+    this.description = this.annotationObject['description']['description'][0];
+    this.accessModeSelected = this.annotationObject['modeAccess']['value'][0];
+    this.accessModeSufficientSelected = this.annotationObject['modeAccessSufficient']['value'][0];
+    this.rolSelected = this.annotationObject['rol']['value'][0];
   }
 
   castVcard(card: string) {//lanzar desde ngOninit    
@@ -114,32 +114,32 @@ export class AnotacionComponent implements OnInit {
     ORG:${this.entityOrganization.trim()}
     END:VCARD`;
 
-    this.annotationObject['Entity']['Entity'][0] = card;
+    this.annotationObject['entity']['entity'][0] = card;
   }
 
   changeAccessMode() {
     console.log(this.accessModeSelected);
-    this.annotationObject['Mode Access']['Value'][0] = this.accessModeSelected;
+    this.annotationObject['modeAccess']['value'][0] = this.accessModeSelected;
   }
 
   changeAccessModeSufficient() {
     console.log(this.accessModeSufficientSelected);
-    this.annotationObject['Mode Access Sufficient']['Value'][0] = this.accessModeSufficientSelected;
+    this.annotationObject['modeAccessSufficient']['value'][0] = this.accessModeSufficientSelected;
   }
 
   changeRol() {
     console.log(this.rolSelected);
-    this.annotationObject['Rol']['Value'][0] = this.rolSelected;
+    this.annotationObject['rol']['value'][0] = this.rolSelected;
   }
 
   ngOnDestroy(): void {
     console.log('[INFO]> Destroy Annotation');
 
     this.updateVcard();
-    this.annotationObject['Date']['DateTime'][0] = this.date.toISOString();
-    this.annotationObject['Description']['Description'][0] = this.description;
+    this.annotationObject['date']['dateTime'][0] = this.date.toISOString();
+    this.annotationObject['description']['description'][0] = this.description;
 
-    this.lompadservice.objPricipal['DATA']['annotation'] = this.annotationObject;
+    this.lompadservice.objPricipal['data']['annotation'] = this.annotationObject;
     this.lompadservice.saveObjectLompad(this.annotationObject, 'annotation');
   }
 

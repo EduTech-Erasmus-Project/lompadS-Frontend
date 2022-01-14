@@ -48,30 +48,31 @@ export class DerechosComponent implements OnInit {
   }
 
   loadRightsData() {
-    this.rightsObject = this.lompadservice.objPricipal['DATA']['rights'];
+    this.rightsObject = this.lompadservice.objPricipal['data']['rights'];
   }
 
   setRightsData() {
-    this.description = this.rightsObject['Description']['Description'][0];
-    this.costSelected = this.rightsObject['Cost']['Value'][0];
-    this.copyrightSelected = this.rightsObject['CopyrightAndOtherRestrictions']['Value'][0];
+    this.description = this.rightsObject['description']['description'][0];
+    this.costSelected = this.rightsObject['cost']['value'][0];
+    this.copyrightSelected = this.rightsObject['copyrightAndOtherRestrictions']['value'][0];
   }
 
   changeCost() {
     console.log(this.costSelected);
-    this.rightsObject['Cost']['Value'][0] = this.costSelected;
+    this.rightsObject['cost']['value'][0] = this.costSelected;
   }
 
   changeCopyright() {
     console.log(this.copyrightSelected);
-    this.rightsObject['CopyrightAndOtherRestrictions']['Value'][0] = this.copyrightSelected;
+    this.rightsObject['copyrightAndOtherRestrictions']['value'][0] = this.copyrightSelected;
   }
 
   ngOnDestroy(): void {
-    console.log('Destroy Derechos');
-    this.rightsObject['Description']['Description'][0] = this.description;
+    console.log('[INFO]> Destroy Rights');
 
-    this.lompadservice.objPricipal['DATA']['rights'] = this.rightsObject;
+    this.rightsObject['description']['description'][0] = this.description;
+
+    this.lompadservice.objPricipal['data']['rights'] = this.rightsObject;
     this.lompadservice.saveObjectLompad(this.rightsObject, 'rights');
   }
 

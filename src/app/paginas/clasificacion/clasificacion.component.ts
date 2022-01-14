@@ -50,22 +50,22 @@ export class ClasificacionComponent implements OnInit {
     ];
 
     this.objectOptions = this.componentePrincipal.objOptions;
-    console.log('DEsde Calsificacion: ', this.classificationObject);
+    console.log('[INFO]> Classification Component: ', this.classificationObject);
 
     this.setClassificationData();
   }
 
   loadClassificationData() {
-    this.classificationObject = this.lompadService.objPricipal['DATA']['classification'];
+    this.classificationObject = this.lompadService.objPricipal['data']['classification'];
   }
 
   setClassificationData() {
     this.columns = [];
-    this.purposeSelected = this.classificationObject['Purpose']['Value'][0];
-    this.taxonPathEntry = this.classificationObject['Taxon Path']['Entry'][0];
-    this.taxonPathId = this.classificationObject['Taxon Path']['Id'][0];
-    this.taxonPathSource = this.classificationObject['Taxon Path']['Source'][0];
-    this.description = this.classificationObject['Description']['Description'][0];
+    this.purposeSelected = this.classificationObject['purpose']['value'][0];
+    this.taxonPathEntry = this.classificationObject['taxonPath']['entry'][0];
+    this.taxonPathId = this.classificationObject['taxonPath']['id'][0];
+    this.taxonPathSource = this.classificationObject['taxonPath']['source'][0];
+    this.description = this.classificationObject['description']['description'][0];
   }
 
   addPalabra() {
@@ -89,14 +89,14 @@ export class ClasificacionComponent implements OnInit {
 
   changePurpose() {
     console.log(this.purposeSelected)
-    this.classificationObject['Purpose'] = this.purposeSelected;
+    this.classificationObject['purpose'] = this.purposeSelected;
   }
 
   ngOnDestroy(): void {
     console.log('[INFO]> Destroy Classification');
 
 
-    this.lompadService.objPricipal['DATA']['classification'] = this.classificationObject;
+    this.lompadService.objPricipal['data']['classification'] = this.classificationObject;
     this.lompadService.saveObjectLompad(this.classificationObject, 'classification');
   }
 

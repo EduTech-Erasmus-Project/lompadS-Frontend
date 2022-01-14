@@ -52,29 +52,29 @@ export class RelacionComponent implements OnInit {
   }
 
   loadRelationData() {
-    this.relationObject = this.lompadservice.objPricipal['DATA']['relation'];
+    this.relationObject = this.lompadservice.objPricipal['data']['relation'];
   }
 
   setRelationData() {
-    this.kindSelected = this.relationObject['Kind']['Value'][0];
-    console.log('[INFO]: ', this.kindSelected);
-    this.resourceIdentifierCatalog = this.relationObject['Resource']['Catalog'][0];
-    this.resourceIdentifierEntry = this.relationObject['Resource']['Entry'][0];
-    this.resourceDescription = this.relationObject['Resource']['Description'][0];
+    this.kindSelected = this.relationObject['kind']['value'][0];
+    this.resourceIdentifierCatalog = this.relationObject['resource']['catalog'][0];
+    this.resourceIdentifierEntry = this.relationObject['resource']['entry'][0];
+    this.resourceDescription = this.relationObject['resource']['description'][0];
   }
 
   changeKind() {
     console.log(this.kindSelected);
-    this.relationObject['Kind']['Value'][0] = this.kindSelected;
+    this.relationObject['kind']['value'][0] = this.kindSelected;
   }
 
   ngOnDestroy(): void {
-    console.log('Destroy Relacion');
-    this.relationObject['Resource']['Catalog'][0] = this.resourceIdentifierCatalog;
-    this.relationObject['Resource']['Entry'][0] = this.resourceIdentifierEntry;
-    this.relationObject['Resource']['Description'][0] = this.resourceDescription;
+    console.log('[INFO]> Destroy Relation');
 
-    this.lompadservice.objPricipal['DATA']['relation'] = this.relationObject;
+    this.relationObject['resource']['catalog'][0] = this.resourceIdentifierCatalog;
+    this.relationObject['resource']['entry'][0] = this.resourceIdentifierEntry;
+    this.relationObject['resource']['description'][0] = this.resourceDescription;
+
+    this.lompadservice.objPricipal['data']['relation'] = this.relationObject;
     this.lompadservice.saveObjectLompad(this.relationObject, 'relation');
   }
 

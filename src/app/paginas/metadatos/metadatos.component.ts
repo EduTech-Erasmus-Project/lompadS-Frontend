@@ -41,30 +41,30 @@ export class MetadatosComponent implements OnInit {
     ];
 
     this.objectOptions = this.componentePrincipal.objOptions;
-    console.log("[INFO]> Metametadata Component: ", this.metametadataObject);
+    console.log('[INFO]> Metametadata Component: ', this.metametadataObject);
 
     this.setMetametadataData();
   }
 
   loadMetametadataData() {
-    this.metametadataObject = this.lompadservice.objPricipal['DATA']['metaMetadata'];
+    this.metametadataObject = this.lompadservice.objPricipal['data']['metaMetadata'];
   }
 
   setMetametadataData() {
-    this.identifierCatalog = this.metametadataObject["Identifier"]["Catalog"][0];
-    this.identifierEntry = this.metametadataObject["Identifier"]["Entry"][0];
-    this.roleSelected = this.metametadataObject["Contribute"]["Value"][0];
-    this.castVcard(this.metametadataObject["Contribute"]["Entity"][0]);
-    this.date = new Date(this.metametadataObject["Contribute"]["Date"][0]);
-    this.metadataSchema = this.metametadataObject["MetadataSchema"]["Values"][0];
+    this.identifierCatalog = this.metametadataObject['identifier']['catalog'][0];
+    this.identifierEntry = this.metametadataObject['identifier']['entry'][0];
+    this.roleSelected = this.metametadataObject['contribute']['value'][0];
+    this.castVcard(this.metametadataObject['contribute']['entity'][0]);
+    this.date = new Date(this.metametadataObject['contribute']['date'][0]);
+    this.metadataSchema = this.metametadataObject['metadataSchema']['metadataSchema'][0];
   }
 
   castVcard(card: string) {//lanzar desde ngOninit    
     //en caso de que las vcard esten llegando sin saltos de linea
-    const vcardElements = [" VERSION", " FN", " N", " EMAIL", " ORG", " END:VCARD"];
+    const vcardElements = [' VERSION', ' FN', ' N', ' EMAIL', ' ORG', ' END:VCARD'];
 
     vcardElements.forEach(element => {
-      card = card.replace(element, element.replace(" ", "\n"));
+      card = card.replace(element, element.replace(' ', '\n'));
     });
 
     var fullNameExpression = /FN:(.*)/g;
@@ -81,7 +81,7 @@ export class MetadatosComponent implements OnInit {
     console.log(mmail?.[1]);
 
     var nombre = mname?.[1];
-    var listnombreApell = nombre.split(" ");
+    var listnombreApell = nombre.split(' ');
     this.entityName = listnombreApell[0];
     this.entityLastname = listnombreApell[1];
     this.entityEmail = mmail?.[1];
@@ -96,25 +96,26 @@ export class MetadatosComponent implements OnInit {
     ORG:${this.entityOrganization.trim()}
     END:VCARD`;
 
-    this.metametadataObject["Contribute"]["Entity"][0] = card;
+    this.metametadataObject['contribute']['entity'][0] = card;
   }
 
   changeRole() {
     console.log(this.roleSelected)
-    this.metametadataObject["Contribute"]["Value"][0] = this.roleSelected;
+    this.metametadataObject['contribute']['value'][0] = this.roleSelected;
 
   }
 
   ngOnDestroy(): void {
-    console.log("Destroy Metadatos");
-    this.metametadataObject["Identifier"]["Catalog"][0] = this.identifierCatalog;
-    this.metametadataObject["Identifier"]["Entry"][0] = this.identifierEntry;
-    this.updateVcard();
-    this.metametadataObject["Contribute"]["Date"][0] = this.date.toISOString();
-    this.metametadataObject["MetadataSchema"]["Values"][0] = this.metadataSchema;
+    console.log('[INFO]> Destroy Meta-Metadata');
 
-    this.lompadservice.objPricipal['DATA']['metaMetadata'] = this.metametadataObject;
-    this.lompadservice.saveObjectLompad(this.metametadataObject, "metaMetadata");
+    this.metametadataObject['identifier']['catalog'][0] = this.identifierCatalog;
+    this.metametadataObject['identifier']['entry'][0] = this.identifierEntry;
+    this.updateVcard();
+    this.metametadataObject['contribute']['date'][0] = this.date.toISOString();
+    this.metametadataObject['metadataSchema']['metadataSchema'][0] = this.metadataSchema;
+
+    this.lompadservice.objPricipal['data']['metaMetadata'] = this.metametadataObject;
+    this.lompadservice.saveObjectLompad(this.metametadataObject, 'metaMetadata');
   }
 
 }

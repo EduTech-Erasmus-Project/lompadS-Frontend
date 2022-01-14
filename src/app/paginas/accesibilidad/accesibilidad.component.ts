@@ -12,6 +12,7 @@ export class AccesibilidadComponent implements OnInit, OnDestroy {
   accesibilityObject: any;
   objectOptions: ObjOptions = new ObjOptions();
 
+  description: string;
   accessFeatures: any[];
   accessHazard: any[];
   accessControl: any[];
@@ -95,19 +96,20 @@ export class AccesibilidadComponent implements OnInit, OnDestroy {
   }
 
   loadAccesibilityData() {
-    this.accesibilityObject = this.lompadService.objPricipal['DATA']['accesibility'];
+    this.accesibilityObject = this.lompadService.objPricipal['data']['accesibility'];
   }
 
   setAccesibilityData() {
-    var accessF: [] = this.accesibilityObject['Accessibility Features']['Accessibilityfeatures'];
-    var accessH: [] = this.accesibilityObject['Accessibility Hazard']['Accessibilityhazard'];
-    var accessC: [] = this.accesibilityObject['Accessibility Control']['Accessibilitycontrol'];
-    // var accessA: [] = this.accesibilityObject['Accessibility API']['Compatible Resource']['br'];
+    this.description = this.accesibilityObject['description']['description'][0];
+    var accessF: [] = this.accesibilityObject['accessibilityFeatures']['resourceContent'];
+    var accessH: [] = this.accesibilityObject['accessibilityHazard']['properties'];
+    var accessC: [] = this.accesibilityObject['accessibilityControl']['methods'];
+    var accessA: [] = this.accesibilityObject['accessibilityApi']['compatibleResource'];
 
     this.mapValues(accessF, this.accessFeatures);
     this.mapValues(accessH, this.accessHazard);
     this.mapValues(accessC, this.accessControl);
-    // this.mapValues(accessA, this.accessApi);
+    this.mapValues(accessA, this.accessApi);
   }
 
   mapValues(param: any[], local: any[]) {
@@ -132,18 +134,19 @@ export class AccesibilidadComponent implements OnInit, OnDestroy {
   }
 
   updateValues() {
-    this.accesibilityObject['Accessibility Features']['Accessibilityfeatures'] = this.updateArray(this.accessFeatures);
-    this.accesibilityObject['Accessibility Hazard']['Accessibilityhazard'] = this.updateArray(this.accessHazard);
-    this.accesibilityObject['Accessibility Control']['Accessibilitycontrol'] = this.updateArray(this.accessControl);
-    // this.accesibilityObject['Accessibility API']['Compatible Resource']['br'] = this.updateArray(this.accessApi);
+    this.accesibilityObject['accessibilityFeatures']['resourceContent'] = this.updateArray(this.accessFeatures);
+    this.accesibilityObject['accessibilityHazard']['properties'] = this.updateArray(this.accessHazard);
+    this.accesibilityObject['accessibilityControl']['methods'] = this.updateArray(this.accessControl);
+    this.accesibilityObject['accessibilityApi']['compatibleResource'] = this.updateArray(this.accessApi);
   }
 
   ngOnDestroy(): void {
-    console.log("Destroy Accesibilidad: ");
+    console.log("[INFO]> Destroy Accessibility");
 
+    this.accesibilityObject['description']['description'][0] = this.description;
     this.updateValues();
     
-    this.lompadService.objPricipal['DATA']['accesibility'] = this.accesibilityObject;
+    this.lompadService.objPricipal['data']['accesibility'] = this.accesibilityObject;
     this.lompadService.saveObjectLompad(this.accesibilityObject, "accesibility");
   }
 

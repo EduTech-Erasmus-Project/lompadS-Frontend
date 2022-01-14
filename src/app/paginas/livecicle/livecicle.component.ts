@@ -63,30 +63,30 @@ export class LivecicleComponent implements OnInit, OnDestroy {
     ];
 
     this.objectOptions = this.componentePrincipal.objOptions;
-    console.log("[INFO]> LifeCycle Component:", this.lifeCycleObject);
+    console.log('[INFO]> LifeCycle Component:', this.lifeCycleObject);
 
     this.setLifeCycleData();
   }
 
   loadLifeCycleData() {
-    this.lifeCycleObject = this.lompadservice.objPricipal['DATA']['lifeCycle'];
+    this.lifeCycleObject = this.lompadservice.objPricipal['data']['lifeCycle'];
   }
 
   setLifeCycleData() {
-    this.version = this.lifeCycleObject["Version"]["String"][0];
-    this.statusSelected = this.lifeCycleObject["Status"]["Value"][0];
-    this.roleSelected = this.lifeCycleObject["Contribute"]["Role"][0];
-    this.castVcard(this.lifeCycleObject["Contribute"]["Entity"][0]);
-    this.date = new Date(this.lifeCycleObject["Contribute"]["Datetime"][0]);
-    this.dateDescription = this.lifeCycleObject["Contribute"]["Description"][0];
+    this.version = this.lifeCycleObject['version']['version'][0];
+    this.statusSelected = this.lifeCycleObject['status']['value'][0];
+    this.roleSelected = this.lifeCycleObject['contribute']['role'][0];
+    this.castVcard(this.lifeCycleObject['contribute']['entity'][0]);
+    this.date = new Date(this.lifeCycleObject['contribute']['dateTime'][0]);
+    this.dateDescription = this.lifeCycleObject['contribute']['description'][0];
   }
 
   castVcard(card: string) {//lanzar desde ngOninit    
     //en caso de que las vcard esten llegando sin saltos de linea
-    const vcardElements = [" VERSION", " FN", " N", " EMAIL", " ORG", " END:VCARD"];
+    const vcardElements = [' VERSION', ' FN', ' N', ' EMAIL', ' ORG', ' END:VCARD'];
 
     vcardElements.forEach(element => {
-      card = card.replace(element, element.replace(" ", "\n"));
+      card = card.replace(element, element.replace(' ', '\n'));
     });
 
     var fullNameExpression = /FN:(.*)/g;
@@ -103,7 +103,7 @@ export class LivecicleComponent implements OnInit, OnDestroy {
     console.log(mmail?.[1]);
 
     var nombre = mname?.[1];
-    var listnombreApell = nombre.split(" ");
+    var listnombreApell = nombre.split(' ');
     this.entityName = listnombreApell[0];
     this.entityLastname = listnombreApell[1];
     this.entityEmail = mmail?.[1];
@@ -118,28 +118,29 @@ export class LivecicleComponent implements OnInit, OnDestroy {
     ORG:${this.entityOrganization.trim()}
     END:VCARD`;
 
-    this.lifeCycleObject["Contribute"]["Entity"][0] = card;
+    this.lifeCycleObject['contribute']['entity'][0] = card;
   }
 
   changeStatus() {
     console.log(this.statusSelected);
-    this.lifeCycleObject["Status"]["Value"][0] = this.statusSelected;
+    this.lifeCycleObject['Status']['value'][0] = this.statusSelected;
   }
 
   changeContributeRole() {
     console.log(this.roleSelected);
-    this.lifeCycleObject["Contribute"]["Role"][0] = this.roleSelected;
+    this.lifeCycleObject['contribute']['role'][0] = this.roleSelected;
   }
 
   ngOnDestroy(): void {
-    console.log("Destroy ciclo de vida");
-    this.lifeCycleObject["Version"]["String"][0] = this.version;
+    console.log('[INFO]> Destroy LifeCycle');
+    
+    this.lifeCycleObject['version']['version'][0] = this.version;
     this.updateVcard();
-    this.lifeCycleObject["Contribute"]["Datetime"][0] = this.date.toISOString();
-    this.lifeCycleObject["Contribute"]["Description"][0] = this.dateDescription;
+    this.lifeCycleObject['contribute']['dateTime'][0] = this.date.toISOString();
+    this.lifeCycleObject['contribute']['description'][0] = this.dateDescription;
 
-    this.lompadservice.objPricipal['DATA']['lifeCycle'] = this.lifeCycleObject;
-    this.lompadservice.saveObjectLompad(this.lifeCycleObject, "lifeCycle");
+    this.lompadservice.objPricipal['data']['lifeCycle'] = this.lifeCycleObject;
+    this.lompadservice.saveObjectLompad(this.lifeCycleObject, 'lifeCycle');
   }
 
 }

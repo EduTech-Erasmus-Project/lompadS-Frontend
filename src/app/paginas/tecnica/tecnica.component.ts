@@ -514,42 +514,42 @@ export class TecnicaComponent implements OnInit {
     ];
 
     this.objectOptions = this.componentePrincipal.objOptions;
-    console.log("[INFO]> Technical Component: ", this.technicalObject);
+    console.log('[INFO]> Technical Component: ', this.technicalObject);
 
     this.setTechnicalData();
   }
 
   loadTechnicalData() {
-    this.technicalObject = this.lompadservice.objPricipal['DATA']['technical'];
+    this.technicalObject = this.lompadservice.objPricipal['data']['technical'];
   }
 
   setTechnicalData() {
-    this.formatDigitalSubtypeSelected = this.technicalObject['Format']['Format'][0];
-    this.size = this.technicalObject['Size']['Size'][0];
-    this.location = this.technicalObject['Location']['Location'][0];
-    this.orCompositeTypeSelected = this.technicalObject['Requirement']['TypeSource'][0];
-    this.orCompositeNameSelected = this.technicalObject['Requirement']['NameSource'][0];
-    this.minimumVersion = this.technicalObject['Requirement']['MinVersion'][0];
-    this.maximumVersion = this.technicalObject['Requirement']['MaxVersion'][0];
-    this.installationRemarks = this.technicalObject['Installation Remarks']['InstallationRemarks'][0];
-    this.otherPlatformRequirements = this.technicalObject['OtherPlatformRequirements']['OtherPlatformRequirements'][0];
+    this.formatDigitalSubtypeSelected = this.technicalObject['format']['format'][0];
+    this.size = this.technicalObject['size']['size'][0];
+    this.location = this.technicalObject['location']['location'][0];
+    this.orCompositeTypeSelected = this.technicalObject['requirement']['typeSource'][0];
+    this.orCompositeNameSelected = this.technicalObject['requirement']['nameSource'][0];
+    this.minimumVersion = this.technicalObject['requirement']['minVersion'][0];
+    this.maximumVersion = this.technicalObject['requirement']['maxVersion'][0];
+    this.installationRemarks = this.technicalObject['installationRemarks']['installationRemarks'][0];
+    this.otherPlatformRequirements = this.technicalObject['otherPlatformRequirements']['otherPlatformRequirements'][0];
 
     this.changeOrCompositeTypeOptions(this.orCompositeTypeSelected);
-    this.castTimeDuration(this.technicalObject['Duration']['Duration'][0]);
+    this.castTimeDuration(this.technicalObject['duration']['duration'][0]);
   }
 
   changeFormatType() {
     console.log(this.formatType);
     if (this.formatType == 'non-digital') {
       this.isDigitalSelected = false;
-      this.technicalObject['Format']['Format'][0] = this.formatType;
+      this.technicalObject['format']['format'][0] = this.formatType;
     } else {
       this.isDigitalSelected = true;
     }
   }
 
   changeDigitalFormatType() {
-    this.technicalObject['Format']['Format'][0] = this.formatDigitalSubtypeSelected;
+    this.technicalObject['format']['format'][0] = this.formatDigitalSubtypeSelected;
   }
 
   changeOrCompositeTypeOptions(type: any) {
@@ -562,13 +562,13 @@ export class TecnicaComponent implements OnInit {
 
   changeOrCompositeType() {
     console.log(this.orCompositeTypeSelected);
-    this.technicalObject['Requirement']['TypeSource'][0] = this.orCompositeTypeSelected;
+    this.technicalObject['requirement']['typeSource'][0] = this.orCompositeTypeSelected;
     this.changeOrCompositeTypeOptions(this.orCompositeTypeSelected);
   }
 
   changeOrCompositeName() {
     console.log(this.orCompositeNameSelected);
-    this.technicalObject['Requirement']['NameSource'][0] = this.orCompositeNameSelected;
+    this.technicalObject['requirement']['nameSource'][0] = this.orCompositeNameSelected;
   }
 
   castTimeDuration(duration: string) {
@@ -578,33 +578,34 @@ export class TecnicaComponent implements OnInit {
 
       auxDuration1 = auxDuration1.substr(1, auxDuration1.length);
 
-      this.years = + auxDuration1.split("Y")[0];
-      this.months = + auxDuration1.split("Y")[1].split("M")[0];
-      this.days = + auxDuration1.split("Y")[1].split("M")[1];
+      this.years = + auxDuration1.split('Y')[0];
+      this.months = + auxDuration1.split('Y')[1].split('M')[0];
+      this.days = + auxDuration1.split('Y')[1].split('M')[1];
 
-      this.hours = + auxDuration2.split("H")[0];
-      this.minutes = + auxDuration2.split("H")[1].split('M')[0];
+      this.hours = + auxDuration2.split('H')[0];
+      this.minutes = + auxDuration2.split('H')[1].split('M')[0];
     } catch (error) {
-      console.log("[ERROR]> Technical: Something went wrong with casting duration!", error);
+      console.log('[ERROR]> Technical: Something went wrong with casting duration!', error);
     }
   }
 
   saveTime() {
-    this.technicalObject['Duration']['Duration'][0] = "P" + this.years + "Y" + this.months + "M" + this.days + "DT" + this.hours + "H" + this.minutes + "M";
+    this.technicalObject['duration']['duration'][0] = 'P' + this.years + 'Y' + this.months + 'M' + this.days + 'DT' + this.hours + 'H' + this.minutes + 'M';
   }
 
   ngOnDestroy(): void {
-    console.log("Destroy tecnica");
-    this.technicalObject['Size']['Size'][0] = this.size;
-    this.technicalObject['Location']['Location'][0] = this.location;
-    this.technicalObject['Requirement']['MinVersion'][0] = this.minimumVersion;
-    this.technicalObject['Requirement']['MaxVersion'][0] = this.maximumVersion;
-    this.technicalObject['Installation Remarks']['InstallationRemarks'][0] = this.installationRemarks;
-    this.technicalObject['OtherPlatformRequirements']['OtherPlatformRequirements'][0] = this.otherPlatformRequirements;
+    console.log('[INFO]> Destroy Technical');
+
+    this.technicalObject['size']['size'][0] = this.size;
+    this.technicalObject['location']['location'][0] = this.location;
+    this.technicalObject['requirement']['minVersion'][0] = this.minimumVersion;
+    this.technicalObject['requirement']['maxVersion'][0] = this.maximumVersion;
+    this.technicalObject['installationRemarks']['installationRemarks'][0] = this.installationRemarks;
+    this.technicalObject['otherPlatformRequirements']['otherPlatformRequirements'][0] = this.otherPlatformRequirements;
     this.saveTime();
 
-    this.lompadservice.objPricipal['DATA']['technical'] = this.technicalObject;
-    this.lompadservice.saveObjectLompad(this.technicalObject, "technical");
+    this.lompadservice.objPricipal['data']['technical'] = this.technicalObject;
+    this.lompadservice.saveObjectLompad(this.technicalObject, 'technical');
   }
 
 }
