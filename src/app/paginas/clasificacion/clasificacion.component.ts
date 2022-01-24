@@ -56,7 +56,7 @@ export class ClasificacionComponent implements OnInit {
   }
 
   loadClassificationData() {
-    this.classificationObject = this.lompadService.objPricipal['data']['classification'];
+    this.classificationObject = this.lompadService.objPricipal['classification'];
   }
 
   setClassificationData() {
@@ -96,7 +96,7 @@ export class ClasificacionComponent implements OnInit {
     console.log('[INFO]> Destroy Classification');
 
 
-    this.lompadService.objPricipal['data']['classification'] = this.classificationObject;
+    this.lompadService.objPricipal['classification'] = this.classificationObject;
     this.lompadService.saveObjectLompad(this.classificationObject, 'classification');
   }
 

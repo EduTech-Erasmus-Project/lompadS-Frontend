@@ -122,7 +122,7 @@ export class UsoeducativoComponent implements OnInit {
   }
 
   loadEducationalData() {
-    this.educationalObject = this.lompadservice.objPricipal['data']['educational'];
+    this.educationalObject = this.lompadservice.objPricipal['educational'];
   }
 
   setEducationalData() {
@@ -195,7 +195,7 @@ export class UsoeducativoComponent implements OnInit {
     this.educationalObject['description']['description'][0] = this.description;
     this.saveTime();
 
-    this.lompadservice.objPricipal['data']['educational'] = this.educationalObject;
+    this.lompadservice.objPricipal['educational'] = this.educationalObject;
     this.lompadservice.saveObjectLompad(this.educationalObject, 'educational');
   }
 

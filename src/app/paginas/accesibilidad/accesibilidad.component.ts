@@ -91,12 +91,12 @@ export class AccesibilidadComponent implements OnInit, OnDestroy {
     ]
 
     this.objectOptions = this.componentePrincipal.objOptions;
-    
+
     this.setAccesibilityData();
   }
 
   loadAccesibilityData() {
-    this.accesibilityObject = this.lompadService.objPricipal['data']['accesibility'];
+    this.accesibilityObject = this.lompadService.objPricipal['accesibility'];
   }
 
   setAccesibilityData() {
@@ -141,13 +141,13 @@ export class AccesibilidadComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log("[INFO]> Destroy Accessibility");
+    console.log('[INFO]> Destroy Accessibility');
 
     this.accesibilityObject['description']['description'][0] = this.description;
     this.updateValues();
-    
-    this.lompadService.objPricipal['data']['accesibility'] = this.accesibilityObject;
-    this.lompadService.saveObjectLompad(this.accesibilityObject, "accesibility");
+
+    this.lompadService.objPricipal['accesibility'] = this.accesibilityObject;
+    this.lompadService.saveObjectLompad(this.accesibilityObject, 'accesibility');
   }
 
 }

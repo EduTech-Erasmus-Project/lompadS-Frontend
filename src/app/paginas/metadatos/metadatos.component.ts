@@ -47,7 +47,7 @@ export class MetadatosComponent implements OnInit {
   }
 
   loadMetametadataData() {
-    this.metametadataObject = this.lompadservice.objPricipal['data']['metaMetadata'];
+    this.metametadataObject = this.lompadservice.objPricipal['metaMetadata'];
   }
 
   setMetametadataData() {
@@ -114,7 +114,7 @@ export class MetadatosComponent implements OnInit {
     this.metametadataObject['contribute']['date'][0] = this.date.toISOString();
     this.metametadataObject['metadataSchema']['metadataSchema'][0] = this.metadataSchema;
 
-    this.lompadservice.objPricipal['data']['metaMetadata'] = this.metametadataObject;
+    this.lompadservice.objPricipal['metaMetadata'] = this.metametadataObject;
     this.lompadservice.saveObjectLompad(this.metametadataObject, 'metaMetadata');
   }
 

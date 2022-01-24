@@ -5,6 +5,7 @@ import { AppMainComponent } from '../../app.main.component';
 
 import { Message } from 'primeng/api';
 import { CookieService } from 'ngx-cookie-service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-inicio',
@@ -14,6 +15,8 @@ import { CookieService } from 'ngx-cookie-service';
 export class InicioComponent implements OnInit {
   fileCharger: boolean = false;
   switch: boolean = false;
+
+  eventSubscription: any;
 
   form: FormGroup;
   message: Message[] = [];
@@ -61,18 +64,36 @@ export class InicioComponent implements OnInit {
     this.cookieService.set("tipoArchivo", file.name.split(".")[1]);
 
     let uploadedData: any;
-    
+    let readData: any;
+
     await this.lompadService.sendMetadataFile(formData).then((response) => {
-      // console.log('[INFO] send> ', response);
       uploadedData = response;
-    }).catch(error => console.error('Something went wrong!', error));
+    });
+
+    // await this.lompadService.sendMetadataFile(formData).then((response) => {
+    //   uploadedData = response;
+    // }).catch((error) => {
+    //   uploadedData = {'statusCode': 500};
+    //   console.log('[ERROR] Data>', uploadedData);
+    //   console.error('[ERROR] Upload data: Something went wrong!', error);
+    // });
 
     console.log('[DEBUG] Inicio Component> Response 1', uploadedData);
 
-    if (uploadedData['STATUS_CODE'] == 200){
-      // await this.lompadService.loadMetadataFile(uploadedData);
+    // await this.lompadService.loadMetadataFile(uploadedData).then((response) => {
+    //   // console.log('[INFO] load> ', response);
+    //   readData = response;
+    // }).catch(error => {
+    //   readData = { 'statusCode': 500 }
+    //   console.error('[ERROR] Read data: Something went wrong!', error)
+    // });
 
+    // this.eventSubscription = this.lompadService.loadMetadataFile(uploadedData);
 
+    // console.log('[DEBUG] Inicio Component> Response 2', readData);
+
+    // if (uploadedData['STATUS_CODE'] == 200 && readData['statusCode'] == 200) {
+    if (uploadedData['statusCode'] == 200) {
       this.appMain.staticMenuActive = true;
 
       this.message = [];
@@ -84,9 +105,17 @@ export class InicioComponent implements OnInit {
 
     } else {
       console.log('[ERROR] Inicio Component> Subir Archivo');
+
+      this.appMain.staticMenuActive = false;
+
+      this.message = [];
+      this.message.push({
+        severity: 'error',
+        summary: 'Error:',
+        detail: 'Algo ha ocurrido, intente nuevamente.'
+      });
     }
 
-    
     // this.router.navigateByUrl("/paginas/general");
   }
 

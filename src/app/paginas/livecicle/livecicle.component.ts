@@ -69,7 +69,7 @@ export class LivecicleComponent implements OnInit, OnDestroy {
   }
 
   loadLifeCycleData() {
-    this.lifeCycleObject = this.lompadservice.objPricipal['data']['lifeCycle'];
+    this.lifeCycleObject = this.lompadservice.objPricipal['lifeCycle'];
   }
 
   setLifeCycleData() {
@@ -139,7 +139,7 @@ export class LivecicleComponent implements OnInit, OnDestroy {
     this.lifeCycleObject['contribute']['dateTime'][0] = this.date.toISOString();
     this.lifeCycleObject['contribute']['description'][0] = this.dateDescription;
 
-    this.lompadservice.objPricipal['data']['lifeCycle'] = this.lifeCycleObject;
+    this.lompadservice.objPricipal['lifeCycle'] = this.lifeCycleObject;
     this.lompadservice.saveObjectLompad(this.lifeCycleObject, 'lifeCycle');
   }
 

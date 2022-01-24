@@ -520,7 +520,7 @@ export class TecnicaComponent implements OnInit {
   }
 
   loadTechnicalData() {
-    this.technicalObject = this.lompadservice.objPricipal['data']['technical'];
+    this.technicalObject = this.lompadservice.objPricipal['technical'];
   }
 
   setTechnicalData() {
@@ -604,7 +604,7 @@ export class TecnicaComponent implements OnInit {
     this.technicalObject['otherPlatformRequirements']['otherPlatformRequirements'][0] = this.otherPlatformRequirements;
     this.saveTime();
 
-    this.lompadservice.objPricipal['data']['technical'] = this.technicalObject;
+    this.lompadservice.objPricipal['technical'] = this.technicalObject;
     this.lompadservice.saveObjectLompad(this.technicalObject, 'technical');
   }
 

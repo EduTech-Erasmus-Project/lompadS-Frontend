@@ -8,11 +8,11 @@
             <div class="p-fluid p-formgrid p-grid">
                 <label for="catalogo" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Catálogo" | translate}}</label>
                 <div class="p-field p-col">
-                    <input [(ngModel)]='identifierCatalog' type="text" pInputText>
+                    <input [(ngModel)]='identifierCatalog[0]' type="text" pInputText>
                 </div>
                 <label for="entrada" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Entrada" | translate}}</label>
                 <div class="p-field p-col">
-                    <input [(ngModel)]='identifierEntry' id="entrada" type="text" pInputText>
+                    <input [(ngModel)]='identifierEntry[0]' id="entrada" type="text" pInputText>
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
             <div class="p-fluid p-formgrid p-grid">
                 <div class="p-field p-col-12 ">
                     <label for="titulo">{{"Título" | translate}}</label>
-                    <input [(ngModel)]='title' id="titulo" type="text" pInputText>
+                    <input [(ngModel)]='title[0]' id="titulo" type="text" pInputText>
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
 
         <div class="card">
             <div class="p-fluid">
-                <p-dropdown [(ngModel)]='languageSelected' [options]='languageOptions' name='languageSelected' (onChange)="changeLanguage()" placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                <p-dropdown [(ngModel)]='languageSelected[0]' [options]='languageOptions' name='languageSelected' (onChange)="changeLanguage()" placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
                     <ng-template pTemplate="item" let-item>
                         {{item.label}}
                     </ng-template>
@@ -57,7 +57,7 @@
         <div class="card">
             <div class="p-fluid">
                 <div class="p-field p-grid">
-                    <textarea [(ngModel)]='description' id="descripcion" type="text" rows="4" pInputTextarea></textarea>
+                    <textarea [(ngModel)]='description[0]' id="descripcion" type="text" rows="4" pInputTextarea></textarea>
                 </div>
             </div>
         </div>
@@ -84,7 +84,7 @@
             <div class="p-fluid p-formgrid p-grid">
                 <div class="p-field p-col-12 ">
                     <label for="ambito">{{"Ámbito" | translate}}</label>
-                    <input id="ambito" [(ngModel)]='coverage' type="text" pInputText>
+                    <input id="ambito" [(ngModel)]='coverage[0]' type="text" pInputText>
                 </div>
             </div>
         </div>
@@ -96,7 +96,7 @@
 
         <div class="card">
             <div class="p-fluid">
-                <p-dropdown [(ngModel)]='structureSelected' [options]='structureOptions' name='structureSelected' (onChange)="changeStructure()" placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                <p-dropdown [(ngModel)]='structureSelected[0]' [options]='structureOptions' name='structureSelected' (onChange)="changeStructure()" placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
                     <ng-template pTemplate="item" let-item>
                         {{item.label| translate }}
                     </ng-template>
@@ -114,7 +114,7 @@
 
         <div class="card">
             <div class="p-fluid">
-                <p-dropdown [(ngModel)]='aggregationLevelSelected' [options]="aggregationLevelOptions" name='aggregationLevelSelected' (onChange)="changeAggregationLevel()" placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                <p-dropdown [(ngModel)]='aggregationLevelSelected[0]' [options]="aggregationLevelOptions" name='aggregationLevelSelected' (onChange)="changeAggregationLevel()" placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
                     <ng-template pTemplate="item" let-item>
                         {{item.label| translate }}
                     </ng-template>

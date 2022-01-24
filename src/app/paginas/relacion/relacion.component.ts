@@ -52,7 +52,7 @@ export class RelacionComponent implements OnInit {
   }
 
   loadRelationData() {
-    this.relationObject = this.lompadservice.objPricipal['data']['relation'];
+    this.relationObject = this.lompadservice.objPricipal['relation'];
   }
 
   setRelationData() {
@@ -74,7 +74,7 @@ export class RelacionComponent implements OnInit {
     this.relationObject['resource']['entry'][0] = this.resourceIdentifierEntry;
     this.relationObject['resource']['description'][0] = this.resourceDescription;
 
-    this.lompadservice.objPricipal['data']['relation'] = this.relationObject;
+    this.lompadservice.objPricipal['relation'] = this.relationObject;
     this.lompadservice.saveObjectLompad(this.relationObject, 'relation');
   }
 

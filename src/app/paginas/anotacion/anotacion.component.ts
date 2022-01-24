@@ -66,7 +66,7 @@ export class AnotacionComponent implements OnInit {
   }
 
   loadAnnotationData() {
-    this.annotationObject = this.lompadservice.objPricipal['data']['annotation'];
+    this.annotationObject = this.lompadservice.objPricipal['annotation'];
   }
 
   setAnnotationData() {
@@ -139,7 +139,7 @@ export class AnotacionComponent implements OnInit {
     this.annotationObject['date']['dateTime'][0] = this.date.toISOString();
     this.annotationObject['description']['description'][0] = this.description;
 
-    this.lompadservice.objPricipal['data']['annotation'] = this.annotationObject;
+    this.lompadservice.objPricipal['annotation'] = this.annotationObject;
     this.lompadservice.saveObjectLompad(this.annotationObject, 'annotation');
   }
 

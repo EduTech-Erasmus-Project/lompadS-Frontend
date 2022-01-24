@@ -48,7 +48,7 @@ export class DerechosComponent implements OnInit {
   }
 
   loadRightsData() {
-    this.rightsObject = this.lompadservice.objPricipal['data']['rights'];
+    this.rightsObject = this.lompadservice.objPricipal['rights'];
   }
 
   setRightsData() {
@@ -72,7 +72,7 @@ export class DerechosComponent implements OnInit {
 
     this.rightsObject['description']['description'][0] = this.description;
 
-    this.lompadservice.objPricipal['data']['rights'] = this.rightsObject;
+    this.lompadservice.objPricipal['rights'] = this.rightsObject;
     this.lompadservice.saveObjectLompad(this.rightsObject, 'rights');
   }
 

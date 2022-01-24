@@ -57,26 +57,26 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   providers: [MessageService],
 })
 export class GeneralComponent implements OnInit, OnDestroy {
-  generalObject: any;
+  generalObject: JSON;
   objectOptions: ObjOptions = new ObjOptions();
 
   // Listas predefinidas
   structureOptions: any = [];
-  structureSelected: string;
+  structureSelected: string[];
 
   aggregationLevelOptions: any = [];
-  aggregationLevelSelected: string;
+  aggregationLevelSelected: string[];
 
   languageOptions: any = [];
-  languageSelected: string;
+  languageSelected: string[];
   // -----
 
   // Referentes a los valores
-  identifierCatalog: any;
-  identifierEntry: any;
-  title: any[];
-  description: any[];
-  coverage: any[];
+  identifierCatalog: string[];
+  identifierEntry: string[];
+  title: string[];
+  description: string[];
+  coverage: string[];
   keywords: any[];
   // -----
 
@@ -94,10 +94,10 @@ export class GeneralComponent implements OnInit, OnDestroy {
 
     this.structureOptions = [
       { label: 'atómica', value: 'atomic', code: 'ato' },
-      { label: 'colección', value: 'collection', code: 'coll' },
-      { label: 'en red', value: 'networked', code: 'red' },
-      { label: 'jerárquica', value: 'hiperarchical', code: 'je' },
-      { label: 'lineal', value: 'linear', code: 'li' },
+      { label: 'colección', value: 'collection', code: 'col' },
+      { label: 'en red', value: 'networked', code: 'net' },
+      { label: 'jerárquica', value: 'hiperarchical', code: 'hip' },
+      { label: 'lineal', value: 'linear', code: 'lin' },
     ];
 
     this.aggregationLevelOptions = [
@@ -142,20 +142,26 @@ export class GeneralComponent implements OnInit, OnDestroy {
   }
 
   loadGeneralObject() {
-    this.generalObject = this.lompadservice.objPricipal['data']['general'];
+    this.generalObject = this.lompadservice.objPricipal['general'];
+    // this.generalObject
   }
 
   setGeneralData() {
-    this.identifierCatalog = this.generalObject['identifier']['catalog'][0];
-    this.identifierEntry = this.generalObject['identifier']['entry'][0];
-    this.title = this.generalObject['title']['title'][0];
-    this.description = this.generalObject['description']['description'][0];
-    this.coverage = this.generalObject['coverage']['coverage'][0];
+    this.identifierCatalog = (this.isEmpty(this.generalObject['identifier']['catalog'])) ? this.generalObject['identifier']['catalog'] : [''];
+    this.identifierEntry = (this.isEmpty(this.generalObject['identifier']['entry'])) ? this.generalObject['identifier']['entry'] : [''];
+    this.title = (this.isEmpty(this.generalObject['title']['title'])) ? this.generalObject['title']['title'] : [''];
+    this.description = (this.isEmpty(this.generalObject['description']['description'])) ? this.generalObject['description']['description'] : [''];
+    this.coverage = (this.isEmpty(this.generalObject['coverage']['coverage'])) ? this.generalObject['coverage']['coverage'] : [''];
 
-    this.structureSelected = this.generalObject['structure']['value'][0];
-    this.aggregationLevelSelected = this.generalObject['aggregationLevel']['value'][0];
-    this.languageSelected = this.generalObject['language']['language'][0];
+    this.structureSelected = (this.isEmpty(this.generalObject['structure']['value'])) ? this.generalObject['structure']['value'] : [''];
+    this.aggregationLevelSelected = (this.isEmpty(this.generalObject['aggregationLevel']['value'])) ? this.generalObject['aggregationLevel']['value'] : [''];
+    this.languageSelected = (this.isEmpty(this.generalObject['language']['language'])) ? this.generalObject['language']['language'] : [''];
 
+    this.showInfo('Catalog', this.identifierCatalog);
+    this.showInfo('Entry', this.identifierEntry);
+    this.showInfo('Title', this.title);
+    this.showInfo('Description', this.description);
+    this.showInfo('Coverage', this.coverage);
     this.showInfo('Aggregation Level Selected', this.aggregationLevelSelected);
     this.showInfo('Structure', this.structureSelected);
     this.showInfo('Language Selected', this.languageSelected);
@@ -165,7 +171,7 @@ export class GeneralComponent implements OnInit, OnDestroy {
 
   loadKeywords() {
     this.keywords = [];
-    let keys: [] = this.generalObject['keyword']['keyword'][0];
+    let keys: [] = (this.isEmpty(this.generalObject['keyword']['keyword'])) ? this.generalObject['keyword']['keyword'] : [''];
 
     if (keys != null) {
       keys.forEach((element) => {
@@ -195,32 +201,40 @@ export class GeneralComponent implements OnInit, OnDestroy {
   }
 
   changeStructure() {
-    this.generalObject['structure']['value'][0] = this.structureSelected;
+    this.generalObject['structure']['value'][0] = this.structureSelected[0];
   }
 
   changeAggregationLevel() {
-    this.generalObject['aggregationLevel']['value'][0] = this.aggregationLevelSelected;
+    this.generalObject['aggregationLevel']['value'][0] = this.aggregationLevelSelected[0];
   }
 
   changeLanguage() {
-    this.generalObject['language']['language'][0] = this.languageSelected;
+    this.generalObject['language']['language'][0] = this.languageSelected[0];
   }
 
   showInfo(key: any, value: any) {
     console.log('[INFO] General>', key, ': ', value);
   }
 
+  isEmpty(value: any[]) {
+    if (typeof value[0] !== 'undefined' && value[0]) {
+      return value[0];
+    };
+  }
+
   ngOnDestroy(): void {
     console.log('[INFO]> Destroy General');
 
-    this.generalObject['identifier']['catalog'][0] = this.identifierCatalog;
-    this.generalObject['identifier']['entry'][0] = this.identifierEntry;
-    this.generalObject['title']['title'][0] = this.title;
-    this.generalObject['description']['description'][0] = this.description;
-    this.generalObject['coverage']['coverage'][0] = this.coverage;
-    this.generalObject['keyword']['keyword'][0] = this.keywords;
+    this.generalObject['identifier']['catalog'][0] = this.identifierCatalog[0];
+    this.generalObject['identifier']['entry'][0] = this.identifierEntry[0];
+    this.generalObject['title']['title'][0] = this.title[0];
+    this.generalObject['description']['description'][0] = this.description[0];
+    this.generalObject['coverage']['coverage'][0] = this.coverage[0];
+    this.generalObject['keyword']['keyword'] = this.keywords;
 
-    this.lompadservice.objPricipal['data']['general'] = this.generalObject;
+    this.lompadservice.objPricipal['general'] = this.generalObject;
+
+    console.log('[INFO]: Before send General: ', this.generalObject);
     this.lompadservice.saveObjectLompad(this.generalObject, 'general');
   }
 
