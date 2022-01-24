@@ -89,12 +89,15 @@ export class ClasificacionComponent implements OnInit {
 
   changePurpose() {
     console.log(this.purposeSelected)
-    this.classificationObject['purpose'] = this.purposeSelected;
+    this.classificationObject['purpose']['value'][0] = this.purposeSelected;
   }
 
   ngOnDestroy(): void {
     console.log('[INFO]> Destroy Classification');
-
+    this.classificationObject['taxonPath']['entry'][0] = this.taxonPathEntry;
+    this.classificationObject['taxonPath']['id'][0] = this.taxonPathId;
+    this.classificationObject['taxonPath']['source'][0] = this.taxonPathSource;
+    this.classificationObject['description']['description'][0] = this.description;
 
     this.lompadService.objPricipal['classification'] = this.classificationObject;
     this.lompadService.saveObjectLompad(this.classificationObject, 'classification');
