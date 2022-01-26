@@ -25,7 +25,7 @@ export class ApiService {
   }
 
   readMetadataFile(hashedCode: string, profile: string): Observable<any> {
-    let url = environment.URL_READ_FILE+'/?hashed_code='+hashedCode+'&profile='+profile
+    let url = environment.URL_READ_FILE+'/?hashed_code='+hashedCode+'&profile='+profile;
 
     return this.http.get<any>(url).pipe(
       map((response: any) => response, (error: any) => error)
@@ -37,9 +37,12 @@ export class ApiService {
 
   }
 
-  downloadMetadataFile(){
-    environment.URL_DOWNLOAD
+  downloadMetadataFile(hashedCode: string, option: string){
+    let url = environment.URL_DOWNLOAD+'/?hashed_code='+hashedCode+'&option='+option;
 
+    return this.http.get<any>(url).pipe(
+      map((response: any) => response, (error: any) => error)
+    );
   }
 
   // 
@@ -90,41 +93,5 @@ export class ApiService {
       resolve(param);
     });
   }
-
-
-
-  // send_OjbLifeCycle(obj:any){
- 
-  // }
-
-  // send_ObjMetadata(obj:any){
-    
-  // }
-
-  // send_ObjTecnica(obj:any){
-    
-  // }
-
-  // send_UsoEducativo(obj:any){
-    
-  // }
-
-  // send_Derechos(obj:any){
-    
-  // }
-
-  // send_Relacion(obj:any){
-
-  // }
-
-  // send_Anotacion(obj:any){
-
-  // }
-
-  // send_Clasifiaction(obj:any){
-
-  // }
-
-    
-
+  
 }

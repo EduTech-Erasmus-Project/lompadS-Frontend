@@ -62,9 +62,9 @@ export class AppTopBarComponent {
 			this.objprincipal = param;
 		});
 
-		// this.obj_XML = this.lompadService.objPrincipalXML$.subscribe(param => {
-		// 	this.objXML = param;
-		// });
+		this.obj_XML = this.lompadService.objPrincipalXML$.subscribe(param => {
+			this.objXML = param;
+		});
 
 		this.lompadService.perfil$.subscribe(param => {
 			this.perfilesSelect = param;
@@ -81,6 +81,7 @@ export class AppTopBarComponent {
 		if (this.cookieService.check('perfil')) {//Realizo esto solamente para que aparecza en el top bar
 			// this.lompadService.objPricipal$.unsubscribe();
 			this.objJson.unsubscribe();
+			this.obj_XML.unsubscribe();
 			this.objprincipal = this.lompadService.objPricipal;
 			this.perfilesSelect = this.lompadService.getPerfil();
 			this.componentePrincipal.cambioPerfilLocal(this.lompadService.getPerfil());
@@ -119,32 +120,25 @@ export class AppTopBarComponent {
 
 	descargaJSON() {
 		this.lompadService.downloadJSON();
-		// this.service.add({key: 'tst', severity: 'info', summary: 'Info Message', detail: 'PrimeNG rocks'});
-		// this.service.add({key: 'tst', severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
-		// this.service.add({ key: 'tst', severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
 		this.toas.add({ key: 'tst', severity: 'success', summary: 'JSON descargado exitosamente', detail: 'Message sent' });
 	}
 
 	descargaXML() {
-		if (this.cookieService.get('tipoArchivo') === 'xml') {
-			this.lompadService.downloadXML();
-			this.toas.add({ key: 'tst', severity: 'success', summary: 'XML descargado exitosamente', detail: 'Message sent' });
-		} else {
-			this.toas.add({ key: 'tst', severity: 'error', summary: 'Formato no soportado', detail: 'Message sent' });
-		}
+		this.lompadService.downloadMetadataFile('xml');
+		// this.toas.add({ key: 'tst', severity: 'success', summary: 'XML descargado exitosamente', detail: 'Message sent' });
+		// this.toas.add({ key: 'tst', severity: 'error', summary: 'Formato no soportado', detail: 'Message sent' });
 	}
 
 	descargaZIP() {
-		if (this.cookieService.get('tipoArchivo') === 'zip') {
-			window.location.href = "http://localhost:8000/private/download?hashed_code=" + this.hash;
-			this.toas.add({ key: 'tst', severity: 'success', summary: 'ZIP descargado exitosamente', detail: 'Message sent' });
-		} else {
-			this.toas.add({ key: 'tst', severity: 'error', summary: 'Formato no soportado', detail: 'Message sent' });
-		}
+		this.lompadService.downloadMetadataFile('zip');
+		// window.location.href = "http://localhost:8000/private/download?hashed_code=" + this.hash;
+		// this.toas.add({ key: 'tst', severity: 'success', summary: 'ZIP descargado exitosamente', detail: 'Message sent' });
+		// this.toas.add({ key: 'tst', severity: 'error', summary: 'Formato no soportado', detail: 'Message sent' });
 	}
 
 	ngOnDestroy(): void {
 		this.objJson.unsubscribe();
+		this.obj_XML.unsubscribe();
 		// this.lompadService.objPricipal$.unsubscribe();
 		// // this.lompadService.objPrincipalXML$.unsubscribe();
 		// this.lompadService.perfil$.unsubscribe();

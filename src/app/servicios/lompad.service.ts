@@ -37,7 +37,7 @@ export class LompadService {
 
     await this.apiService.uploadMetadataFile(metadataFile).toPromise().then((response) => {
       uploadedData = response;
-    }).catch(error => console.error('Something went wrong!', error));
+    }).catch(error => console.error('[Upload] Something went wrong!', error));
 
     // this.apiService.uploadMetadataFile(metadataFile).subscribe(
     //   response => uploadedData = response,
@@ -67,7 +67,7 @@ export class LompadService {
 
     await this.apiService.readMetadataFile(hashedCode, profile).toPromise().then((response) => {
       readData = response;
-    }).catch(error => console.error('Something went wrong!', error));
+    }).catch(error => console.error('[Read] Something went wrong!', error));
 
     // this.apiService.readMetadataFile(hashedCode, profile).subscribe();
 
@@ -75,7 +75,9 @@ export class LompadService {
 
     if (readData['statusCode'] == 200) {
       this.setMetadataCookies(uploadedData);
+      this.objPrincipalXML = this.downloadMetadataFile('xml');
       this.mapReload(readData['data']);
+      
       
       return readData;
     } else {
@@ -97,7 +99,23 @@ export class LompadService {
 
   }
 
+  updateMetadataFile() {
 
+  }
+
+  updateXMLFile() {
+
+  }
+
+  downloadMetadataFile(option: string) {
+    let responseFile: any;
+
+    this.apiService.downloadMetadataFile(this.hash, option).toPromise().then((response) => {
+      responseFile = response;
+    }).catch(error => console.error('[Download] Something went wrong!', error));
+
+    return responseFile;
+  }
 
 
 
@@ -211,7 +229,7 @@ export class LompadService {
     // console.log('[INFO]> 3: Después de volver a settear ', JSON.parse(localStorage.getItem('objPrincipal')));
 
     this.objPricipal$.emit(this.objPricipal);
-    // this.objPrincipalXML$.emit(this.apiService.api_DownloadFile(this.hash));
+    this.objPrincipalXML$.emit(this.objPrincipalXML);
     this.perfil$.emit(this.perfil);
     this.hash$.emit(this.hash);
 
@@ -276,14 +294,11 @@ export class LompadService {
 
     var data = JSON.stringify(obj)//.toLocaleLowerCase(); 
     console.log("TIPO DE DATOS ", typeof (data));
-
-    // var pedro=JSON.parse(JSON.stringify(this.objPricipal).replace(/\s(?=\w+":)/g, ""));  
-    // var data=JSON.parse(JSON.stringify(obj).replace(/\s(?=\w+":)/g, ""));     
-    // data=JSON.stringify(data).toLocaleLowerCase(); 
     console.log("Enviando.... ", data, "Hoja: ", hoja);
 
-    this.apiService.send_ObjectApi(data, this.hash, hoja);//enviar solo el objeto y el hash a actualizar                                    
-    this.downloadXML_API(this.hash);//Actualiza el objecto cada vez que se guarde los cambiaos realizados
+    this.apiService.send_ObjectApi(data, this.hash, hoja);//enviar solo el objeto y el hash a actualizar    
+    this.objPrincipalXML = this.downloadMetadataFile('xml');                                
+    // this.downloadXML_API(this.hash);//Actualiza el objecto cada vez que se guarde los cambiaos realizados
   }
 
   //AREA DE DESCARGA
@@ -323,14 +338,13 @@ export class LompadService {
       redirect: 'follow'
     })
       .then(response => {
-        response.text()
-        console.log('XD XD', JSON.stringify(response))
+        response.text();
+        console.log('[DEBUG] First Download Response', JSON.stringify(response));
       })
       .then(result => {
-        console.log('XD XD', JSON.stringify(result))
-        this.objPrincipalXML = result
-        // this.objPrincipalXML$.emit(this.objPrincipalXML)
-        console.log('[INFO] Parte del objeto principal en download', this.objPrincipalXML);
+        console.log('[DEBUG] First Download Result', JSON.stringify(result));
+        this.objPrincipalXML = result;
+        console.log('[INFO] Download Object', this.objPrincipalXML);
       })
       .catch(error => console.log('error', error));
   }
