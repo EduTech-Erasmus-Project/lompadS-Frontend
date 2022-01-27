@@ -1,12 +1,9 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-footer',
-    template: `
+	selector: 'app-footer',
+	template: `
         <div class="layout-footer">
-						
-
-		<!-- <div class="p-mb-3 p-text-left">Left</div> -->
 			<div class="p-mb-3 p-text-left" >
 				<img src="assets/layout/images/logoedutech.svg" alt="assets/layout/images/" style="height: 50px; width:50px" />
 				<div >
@@ -16,7 +13,6 @@ import {Component} from '@angular/core';
     	       		margin: 0;">LOMpad Schema</h1>						
 				</div>
 			</div>
-			
 							
 			<div class="p-mb-3 p-text-center">
 				<a href="https://catedraunescoinclusion.org/">
@@ -27,24 +23,11 @@ import {Component} from '@angular/core';
 				<br>						
 				<span>{{"Términos y condiciones" | translate }}</span>
 				</div>				
+			</div>			
+
+			<div class="p-mb-3 p-text-rigth">											
+				<img src="assets/layout/images/cofinanciado_derecha.png" style="height: 60px; width:235px"  />									
 			</div>
-									
-				
-			
-			
-				<!-- <div class="p-mb-3 p-text-left">Left</div>
-				<div class="p-mb-3 p-text-center">Center</div>
-				<div class="p-text-right">Right</div> -->
-
-				<!-- <div class="p-text-right">
-												
-				</div> -->
-
-				<div class="p-mb-3 p-text-rigth">											
-					<img src="assets/layout/images/cofinanciado_derecha.png" style="height: 60px; width:235px"  />									
-				</div>
-
-		
         </div>
     `
 })

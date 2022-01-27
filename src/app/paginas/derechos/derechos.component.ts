@@ -58,12 +58,10 @@ export class DerechosComponent implements OnInit {
   }
 
   changeCost() {
-    console.log(this.costSelected);
     this.rightsObject['cost']['value'][0] = this.costSelected;
   }
 
   changeCopyright() {
-    console.log(this.copyrightSelected);
     this.rightsObject['copyrightAndOtherRestrictions']['value'][0] = this.copyrightSelected;
   }
 
@@ -73,7 +71,7 @@ export class DerechosComponent implements OnInit {
     this.rightsObject['description']['description'][0] = this.description;
 
     this.lompadservice.objPricipal['rights'] = this.rightsObject;
-    this.lompadservice.saveObjectLompad(this.rightsObject, 'rights');
+    this.lompadservice.sendNewMetadata(this.rightsObject, 'rights');
   }
 
 }

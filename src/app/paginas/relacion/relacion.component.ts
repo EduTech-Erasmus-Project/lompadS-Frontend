@@ -63,7 +63,6 @@ export class RelacionComponent implements OnInit {
   }
 
   changeKind() {
-    console.log(this.kindSelected);
     this.relationObject['kind']['value'][0] = this.kindSelected;
   }
 
@@ -75,7 +74,7 @@ export class RelacionComponent implements OnInit {
     this.relationObject['resource']['description'][0] = this.resourceDescription;
 
     this.lompadservice.objPricipal['relation'] = this.relationObject;
-    this.lompadservice.saveObjectLompad(this.relationObject, 'relation');
+    this.lompadservice.sendNewMetadata(this.relationObject, 'relation');
   }
 
 }

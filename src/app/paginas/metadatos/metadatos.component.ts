@@ -100,9 +100,7 @@ export class MetadatosComponent implements OnInit {
   }
 
   changeRole() {
-    console.log(this.roleSelected)
     this.metametadataObject['contribute']['value'][0] = this.roleSelected;
-
   }
 
   ngOnDestroy(): void {
@@ -115,7 +113,7 @@ export class MetadatosComponent implements OnInit {
     this.metametadataObject['metadataSchema']['metadataSchema'][0] = this.metadataSchema;
 
     this.lompadservice.objPricipal['metaMetadata'] = this.metametadataObject;
-    this.lompadservice.saveObjectLompad(this.metametadataObject, 'metaMetadata');
+    this.lompadservice.sendNewMetadata(this.metametadataObject, 'metaMetadata');
   }
 
 }

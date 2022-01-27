@@ -147,7 +147,7 @@ export class AccesibilidadComponent implements OnInit, OnDestroy {
     this.updateValues();
 
     this.lompadService.objPricipal['accesibility'] = this.accesibilityObject;
-    this.lompadService.saveObjectLompad(this.accesibilityObject, 'accesibility');
+    this.lompadService.sendNewMetadata(this.accesibilityObject, 'accesibility');
   }
 
 }

@@ -1,22 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Header } from 'primeng/api';
 
 @Injectable({
   providedIn: 'root'
 })
-
-
 export class ApiService {
 
-  // httpOptions = {
-  //   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  // };
-
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   uploadMetadataFile(body: any): Observable<any> {
     return this.http.post<any>(environment.URL_UPLOAD_FILE, body).pipe(
@@ -25,20 +20,32 @@ export class ApiService {
   }
 
   readMetadataFile(hashedCode: string, profile: string): Observable<any> {
-    let url = environment.URL_READ_FILE+'/?hashed_code='+hashedCode+'&profile='+profile;
+    let url = environment.URL_READ_FILE + '/?hashed_code=' + hashedCode + '&profile=' + profile;
 
     return this.http.get<any>(url).pipe(
       map((response: any) => response, (error: any) => error)
     );
   }
 
-  updateMetadata(){
-    environment.URL_UPDATE_FILE
+  updateMetadata(object: any, hashedCode: string, leaf: string): Observable<any> {
+    let headers = new HttpHeaders().append('Content-Type', 'application/json');
+    let body = JSON.stringify({});
+    let params = new HttpParams()
+      .append('hashed_code', hashedCode)
+      .append('hoja', leaf)
+      .append('data', object);
 
+    return this.http.post<any>(environment.URL_UPDATE_FILE + '/', body, {
+      headers: headers,
+      params: params
+    })
+      .pipe(map(
+        (response: any) => response, (error: any) => error)
+      );
   }
 
-  downloadMetadataFile(hashedCode: string, option: string){
-    let url = environment.URL_DOWNLOAD+'/?hashed_code='+hashedCode+'&option='+option;
+  downloadMetadataFile(hashedCode: string, option: string): Observable<any> {
+    let url = environment.URL_DOWNLOAD + '/?hashed_code=' + hashedCode + '&option=' + option;
 
     return this.http.get<any>(url).pipe(
       map((response: any) => response, (error: any) => error)
@@ -50,48 +57,48 @@ export class ApiService {
   // 
 
 
-  send_ObjectApi(obj:any, hascode:string, hoja:string){
+  send_ObjectApi(obj: any, hascode: string, hoja: string) {
     var raw = "";
-    console.log("PILAS CON EL api  objecto: ",obj);
-    
+    console.log("PILAS CON EL api  objecto: ", obj);
+
     // console.log("=========================================");
-        
-    fetch("http://localhost:8000/private/update/?hashed_code="+hascode+"&hoja="+hoja+"&data="+obj, {
+
+    fetch("http://localhost:8000/private/update/?hashed_code=" + hascode + "&hoja=" + hoja + "&data=" + obj, {
       method: 'POST',
       body: raw,
       redirect: 'follow'
     })
       .then(response => response.text())
-      .then(result => console.log("$$RESULTADO$$:  ",typeof(result)))
-      .catch(error => console.log('error', error));    
+      .then(result => console.log("$$RESULTADO$$:  ", typeof (result)))
+      .catch(error => console.log('error', error));
   }
 
-   api_DownloadFile(hash_param:string){   
+  api_DownloadFile(hash_param: string) {
     // console.log(hash_param);
     var param;
-    fetch("http://localhost:8000/private/download/?hashed_code="+hash_param, {    
+    fetch("http://localhost:8000/private/download/?hashed_code=" + hash_param, {
       method: 'GET',
       redirect: 'follow'
     })
       .then(response => response.text())
-      .then(result => param=result)
-      .catch(error => console.log('error', error));    
+      .then(result => param = result)
+      .catch(error => console.log('error', error));
     return param;
   }
 
-  getXML(){
-    return new Promise((resolve,reject)=>{
+  getXML() {
+    return new Promise((resolve, reject) => {
       console.log('[INFO] Entra aca')
-      var param;      
-      fetch("http://localhost:8000/private/download/?hashed_code=ArchivoExportado_-6482018054697832733",{
+      var param;
+      fetch("http://localhost:8000/private/download/?hashed_code=ArchivoExportado_-6482018054697832733", {
         method: 'GET',
         redirect: 'follow'
       })
         .then(response => response.text())
-        .then(result => param=result)
-        .catch(error => console.log('error', error));   
+        .then(result => param = result)
+        .catch(error => console.log('error', error));
       resolve(param);
     });
   }
-  
+
 }

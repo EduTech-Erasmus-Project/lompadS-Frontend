@@ -118,17 +118,14 @@ export class AnotacionComponent implements OnInit {
   }
 
   changeAccessMode() {
-    console.log(this.accessModeSelected);
     this.annotationObject['modeAccess']['value'][0] = this.accessModeSelected;
   }
 
   changeAccessModeSufficient() {
-    console.log(this.accessModeSufficientSelected);
     this.annotationObject['modeAccessSufficient']['value'][0] = this.accessModeSufficientSelected;
   }
 
   changeRol() {
-    console.log(this.rolSelected);
     this.annotationObject['rol']['value'][0] = this.rolSelected;
   }
 
@@ -140,7 +137,7 @@ export class AnotacionComponent implements OnInit {
     this.annotationObject['description']['description'][0] = this.description;
 
     this.lompadservice.objPricipal['annotation'] = this.annotationObject;
-    this.lompadservice.saveObjectLompad(this.annotationObject, 'annotation');
+    this.lompadservice.sendNewMetadata(this.annotationObject, 'annotation');
   }
 
 }

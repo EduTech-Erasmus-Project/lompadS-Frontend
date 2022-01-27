@@ -196,7 +196,7 @@ export class UsoeducativoComponent implements OnInit {
     this.saveTime();
 
     this.lompadservice.objPricipal['educational'] = this.educationalObject;
-    this.lompadservice.saveObjectLompad(this.educationalObject, 'educational');
+    this.lompadservice.sendNewMetadata(this.educationalObject, 'educational');
   }
 
 }

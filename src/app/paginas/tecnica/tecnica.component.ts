@@ -539,7 +539,6 @@ export class TecnicaComponent implements OnInit {
   }
 
   changeFormatType() {
-    console.log(this.formatType);
     if (this.formatType == 'non-digital') {
       this.isDigitalSelected = false;
       this.technicalObject['format']['format'][0] = this.formatType;
@@ -561,13 +560,11 @@ export class TecnicaComponent implements OnInit {
   }
 
   changeOrCompositeType() {
-    console.log(this.orCompositeTypeSelected);
     this.technicalObject['requirement']['typeSource'][0] = this.orCompositeTypeSelected;
     this.changeOrCompositeTypeOptions(this.orCompositeTypeSelected);
   }
 
   changeOrCompositeName() {
-    console.log(this.orCompositeNameSelected);
     this.technicalObject['requirement']['nameSource'][0] = this.orCompositeNameSelected;
   }
 
@@ -605,7 +602,7 @@ export class TecnicaComponent implements OnInit {
     this.saveTime();
 
     this.lompadservice.objPricipal['technical'] = this.technicalObject;
-    this.lompadservice.saveObjectLompad(this.technicalObject, 'technical');
+    this.lompadservice.sendNewMetadata(this.technicalObject, 'technical');
   }
 
 }

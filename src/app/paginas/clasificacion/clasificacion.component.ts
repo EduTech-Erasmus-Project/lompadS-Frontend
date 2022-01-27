@@ -88,7 +88,6 @@ export class ClasificacionComponent implements OnInit {
   }
 
   changePurpose() {
-    console.log(this.purposeSelected)
     this.classificationObject['purpose']['value'][0] = this.purposeSelected;
   }
 
@@ -100,7 +99,7 @@ export class ClasificacionComponent implements OnInit {
     this.classificationObject['description']['description'][0] = this.description;
 
     this.lompadService.objPricipal['classification'] = this.classificationObject;
-    this.lompadService.saveObjectLompad(this.classificationObject, 'classification');
+    this.lompadService.sendNewMetadata(this.classificationObject, 'classification');
   }
 
 }

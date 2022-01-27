@@ -122,25 +122,23 @@ export class LivecicleComponent implements OnInit, OnDestroy {
   }
 
   changeStatus() {
-    console.log(this.statusSelected);
-    this.lifeCycleObject['Status']['value'][0] = this.statusSelected;
+    this.lifeCycleObject['status']['value'][0] = this.statusSelected;
   }
 
   changeContributeRole() {
-    console.log(this.roleSelected);
     this.lifeCycleObject['contribute']['role'][0] = this.roleSelected;
   }
 
   ngOnDestroy(): void {
     console.log('[INFO]> Destroy LifeCycle');
-    
+
     this.lifeCycleObject['version']['version'][0] = this.version;
     this.updateVcard();
     this.lifeCycleObject['contribute']['dateTime'][0] = this.date.toISOString();
     this.lifeCycleObject['contribute']['description'][0] = this.dateDescription;
 
     this.lompadservice.objPricipal['lifeCycle'] = this.lifeCycleObject;
-    this.lompadservice.saveObjectLompad(this.lifeCycleObject, 'lifeCycle');
+    this.lompadservice.sendNewMetadata(this.lifeCycleObject, 'lifeCycle');
   }
 
 }

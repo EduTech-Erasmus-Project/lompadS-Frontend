@@ -157,15 +157,6 @@ export class GeneralComponent implements OnInit, OnDestroy {
     this.aggregationLevelSelected = (this.isEmpty(this.generalObject['aggregationLevel']['value'])) ? this.generalObject['aggregationLevel']['value'] : [''];
     this.languageSelected = (this.isEmpty(this.generalObject['language']['language'])) ? this.generalObject['language']['language'] : [''];
 
-    this.showInfo('Catalog', this.identifierCatalog);
-    this.showInfo('Entry', this.identifierEntry);
-    this.showInfo('Title', this.title);
-    this.showInfo('Description', this.description);
-    this.showInfo('Coverage', this.coverage);
-    this.showInfo('Aggregation Level Selected', this.aggregationLevelSelected);
-    this.showInfo('Structure', this.structureSelected);
-    this.showInfo('Language Selected', this.languageSelected);
-
     this.loadKeywords();
   }
 
@@ -175,7 +166,6 @@ export class GeneralComponent implements OnInit, OnDestroy {
 
     if (keys != null) {
       keys.forEach((element) => {
-        console.log('elementos ', element);
         this.keywords.push(element);
       });
     }
@@ -233,9 +223,7 @@ export class GeneralComponent implements OnInit, OnDestroy {
     this.generalObject['keyword']['keyword'] = this.keywords;
 
     this.lompadservice.objPricipal['general'] = this.generalObject;
-
-    console.log('[INFO]: Before send General: ', this.generalObject);
-    this.lompadservice.saveObjectLompad(this.generalObject, 'general');
+    this.lompadservice.sendNewMetadata(this.generalObject, 'general');
   }
 
 }

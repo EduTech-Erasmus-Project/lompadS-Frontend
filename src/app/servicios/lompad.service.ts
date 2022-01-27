@@ -15,8 +15,6 @@ export class LompadService {
   hash$ = new EventEmitter<any>();
   perfil$ = new EventEmitter<any>();
 
-  // uploadedData$ = Observable;
-
   objPricipal: JSON;
   objPrincipalXML: any;
 
@@ -39,21 +37,16 @@ export class LompadService {
       uploadedData = response;
     }).catch(error => console.error('[Upload] Something went wrong!', error));
 
-    // this.apiService.uploadMetadataFile(metadataFile).subscribe(
-    //   response => uploadedData = response,
-    //   err => console.error('Observer sendMetadataFile got an error: ' + err),
-    //   () => console.log('Observer sendMetadataFile got a complete notification')
-    // );
-
     console.log('[DEBUG] sendMetadataFile> Response', uploadedData);
 
+    console.log('[DEBUG] Status?', uploadedData.status)
+
     if (uploadedData['STATUS_CODE'] == 200) {
-      // this.setMetadataCookies(uploadedData);
       readData = await this.loadMetadataFile(uploadedData);
 
       return readData;
     } else {
-      uploadedData = {'statusCode': 500}
+      uploadedData = { 'statusCode': 500 }
       return uploadedData;
     }
 
@@ -69,19 +62,16 @@ export class LompadService {
       readData = response;
     }).catch(error => console.error('[Read] Something went wrong!', error));
 
-    // this.apiService.readMetadataFile(hashedCode, profile).subscribe();
-
     console.log('[DEBUG] loadMetadataFile> Response', readData);
 
     if (readData['statusCode'] == 200) {
       this.setMetadataCookies(uploadedData);
-      this.objPrincipalXML = this.downloadMetadataFile('xml');
+      // this.objPrincipalXML = this.downloadMetadataFile('xml');
       this.mapReload(readData['data']);
-      
-      
+
       return readData;
     } else {
-      readData = {'statusCode': 500};
+      readData = { 'statusCode': 500 };
       return readData;
     }
 
@@ -99,8 +89,16 @@ export class LompadService {
 
   }
 
-  updateMetadataFile() {
+  sendNewMetadata(object: any, leaf: string) {
+    let leaftData = JSON.stringify(object); 
+    let res: any;
 
+    localStorage.setItem('objPrincipal', JSON.stringify(this.objPricipal));
+    console.log("[INFO] sendNewMetadata> Saving:", leaf);
+
+    this.apiService.updateMetadata(leaftData, this.hash, leaf).toPromise().then((response) => {
+      res = response;
+    }).catch(error => console.error('[Update] Something went wrong!', error));
   }
 
   updateXMLFile() {
@@ -229,7 +227,7 @@ export class LompadService {
     // console.log('[INFO]> 3: Después de volver a settear ', JSON.parse(localStorage.getItem('objPrincipal')));
 
     this.objPricipal$.emit(this.objPricipal);
-    this.objPrincipalXML$.emit(this.objPrincipalXML);
+    // this.objPrincipalXML$.emit(this.objPrincipalXML);
     this.perfil$.emit(this.perfil);
     this.hash$.emit(this.hash);
 
@@ -297,7 +295,7 @@ export class LompadService {
     console.log("Enviando.... ", data, "Hoja: ", hoja);
 
     this.apiService.send_ObjectApi(data, this.hash, hoja);//enviar solo el objeto y el hash a actualizar    
-    this.objPrincipalXML = this.downloadMetadataFile('xml');                                
+    // this.objPrincipalXML = this.downloadMetadataFile('xml');                                
     // this.downloadXML_API(this.hash);//Actualiza el objecto cada vez que se guarde los cambiaos realizados
   }
 
