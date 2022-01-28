@@ -70,29 +70,8 @@ export class InicioComponent implements OnInit {
       uploadedData = response;
     });
 
-    // await this.lompadService.sendMetadataFile(formData).then((response) => {
-    //   uploadedData = response;
-    // }).catch((error) => {
-    //   uploadedData = {'statusCode': 500};
-    //   console.log('[ERROR] Data>', uploadedData);
-    //   console.error('[ERROR] Upload data: Something went wrong!', error);
-    // });
-
     console.log('[DEBUG] Inicio Component> Response 1', uploadedData);
 
-    // await this.lompadService.loadMetadataFile(uploadedData).then((response) => {
-    //   // console.log('[INFO] load> ', response);
-    //   readData = response;
-    // }).catch(error => {
-    //   readData = { 'statusCode': 500 }
-    //   console.error('[ERROR] Read data: Something went wrong!', error)
-    // });
-
-    // this.eventSubscription = this.lompadService.loadMetadataFile(uploadedData);
-
-    // console.log('[DEBUG] Inicio Component> Response 2', readData);
-
-    // if (uploadedData['STATUS_CODE'] == 200 && readData['statusCode'] == 200) {
     if (uploadedData['statusCode'] == 200) {
       this.appMain.staticMenuActive = true;
 
@@ -122,16 +101,6 @@ export class InicioComponent implements OnInit {
   showDownloadWarning() {
     this.message = [];
     this.message.push({ severity: 'warn', summary: 'Advertencia: ', detail: 'Asegúrese de haber descargado el objeto de aprendizaje anteriormente cargado.' });
-  }
-
-  // Borrar cuando sea oportuno
-  upload(event) {
-    console.log("subir evento")
-    const file = (event.target as HTMLInputElement).files[0];
-    this.form.patchValue({
-      file: file
-    });
-    this.form.get('file').updateValueAndValidity()
   }
 
 }

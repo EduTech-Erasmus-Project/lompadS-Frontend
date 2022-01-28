@@ -25,16 +25,16 @@
 
                 <div *ngIf='switch'>
                     <p-fileUpload (uploadHandler)="onUpload($event)" customUpload="true" multiple="multiple" accept=".rar,.zip,.xml" 
-                        maxFileSize="1000000000000" [chooseLabel]="'Seleccionar Archivo' | translate" [uploadLabel]="'Subir' | translate" 
-                        [cancelLabel]="'Cancelar' | translate">
+                        maxFileSize="1000000000000" validateContentType="true" fileLimit="1" 
+                        [chooseLabel]="'Seleccionar Archivo' | translate" [uploadLabel]="'Subir' | translate" [cancelLabel]="'Cancelar' | translate">
                     </p-fileUpload>
                 </div>
             </ng-template>
 
             <ng-template #elseBlock>
                 <p-fileUpload (uploadHandler)="onUpload($event)" customUpload="true" multiple="multiple" accept=".rar,.zip,.xml" 
-                    maxFileSize="1000000000000" [chooseLabel]="'Seleccionar Archivo' | translate" [uploadLabel]="'Subir' | translate" 
-                    [cancelLabel]="'Cancelar' | translate">
+                    maxFileSize="1000000000000" validateContentType="true" fileLimit="1" 
+                    [chooseLabel]="'Seleccionar Archivo' | translate" [uploadLabel]="'Subir' | translate" [cancelLabel]="'Cancelar' | translate">
                 </p-fileUpload>
             </ng-template>
 
@@ -42,17 +42,3 @@
         </div>
     </div>
 </div>
-
-<!-- [TEMP] Borrar cuando sea oportuno -->
-<!-- <ng-template pTemplate="content">
-                    <ul *ngIf="uploadedFiles.length">
-                        <li *ngFor="let file of uploadedFiles" class="p-mb-3 p-text-center">{{file.name}} - {{file.size}} bytes</li>
-                    </ul>
-                </ng-template>
-<br>
-            <div class="p-mb-3 p-text-center">
-                <button pButton pRipple type="button" label="Empezar" class="p-mr-2 p-mb-2" (click)="habilitar()"></button>
-            </div>
-
-<angular-file-uploader [config]="afuConfig">
-</angular-file-uploader> -->
