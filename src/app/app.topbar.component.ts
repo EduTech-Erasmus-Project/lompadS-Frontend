@@ -49,14 +49,9 @@ export class AppTopBarComponent {
 			{ label: 'LMRI', value: 'LMRI', code: 'lmri' }
 		];
 
-		// this.objprincipal$=this.lompadService.getObjectPrincipal$();
-		// this.objprincipal$.subscribe(objto => this.objprincipal=objto);
-
 		this.lompadService.hash$.subscribe(param => {
 			this.hash = param;
 		});
-
-		// this.objprincipal=this.lompadService.objPricipal;
 
 		this.objJson = this.lompadService.objPricipal$.subscribe(param => {
 			this.objprincipal = param;
@@ -74,12 +69,8 @@ export class AppTopBarComponent {
 
 		this.display1 = false;
 
-		console.log("[INFO] TopBar Component> Profile: ", this.perfilesSelect);
-		console.log("[INFO] TopBar Component> JSON: ", this.objprincipal);
-		console.log("[INFO] TopBar Component> XML: ", this.objXML);
 
 		if (this.cookieService.check('perfil')) {//Realizo esto solamente para que aparecza en el top bar
-			// this.lompadService.objPricipal$.unsubscribe();
 			this.objJson.unsubscribe();
 			this.obj_XML.unsubscribe();
 			this.objprincipal = this.lompadService.objPricipal;
@@ -119,30 +110,24 @@ export class AppTopBarComponent {
 	}
 
 	descargaJSON() {
-		this.lompadService.downloadJSON();
+		this.lompadService.downloadMetadataFile('json');
 		this.toas.add({ key: 'tst', severity: 'success', summary: 'JSON descargado exitosamente', detail: 'Message sent' });
 	}
 
 	descargaXML() {
 		this.lompadService.downloadMetadataFile('xml');
-		// this.toas.add({ key: 'tst', severity: 'success', summary: 'XML descargado exitosamente', detail: 'Message sent' });
-		// this.toas.add({ key: 'tst', severity: 'error', summary: 'Formato no soportado', detail: 'Message sent' });
+		this.toas.add({ key: 'tst', severity: 'success', summary: 'XML descargado exitosamente', detail: 'Message sent' });
 	}
 
 	descargaZIP() {
 		this.lompadService.downloadMetadataFile('zip');
+		this.toas.add({ key: 'tst', severity: 'success', summary: 'ZIP descargado exitosamente', detail: 'Message sent' });
 		// window.location.href = "http://localhost:8000/private/download?hashed_code=" + this.hash;
-		// this.toas.add({ key: 'tst', severity: 'success', summary: 'ZIP descargado exitosamente', detail: 'Message sent' });
-		// this.toas.add({ key: 'tst', severity: 'error', summary: 'Formato no soportado', detail: 'Message sent' });
 	}
 
 	ngOnDestroy(): void {
 		this.objJson.unsubscribe();
 		this.obj_XML.unsubscribe();
-		// this.lompadService.objPricipal$.unsubscribe();
-		// // this.lompadService.objPrincipalXML$.unsubscribe();
-		// this.lompadService.perfil$.unsubscribe();
-		// this.lompadService.hash$.unsubscribe();
 	}
 
 	rebootPrincipal() {

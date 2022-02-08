@@ -4,7 +4,10 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Header } from 'primeng/api';
+
+import { saveAs } from 'file-saver';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -38,18 +41,22 @@ export class ApiService {
     return this.http.post<any>(environment.URL_UPDATE_FILE + '/', body, {
       headers: headers,
       params: params
-    })
-      .pipe(map(
+    }).pipe(map(
         (response: any) => response, (error: any) => error)
-      );
+    );
   }
 
-  downloadMetadataFile(hashedCode: string, option: string): Observable<any> {
+  downloadMetadataFile(hashedCode: string, option: string, mime: string, params?: HttpParams) {
     let url = environment.URL_DOWNLOAD + '/?hashed_code=' + hashedCode + '&option=' + option;
+    let filename = hashedCode+'.'+option;
 
-    return this.http.get<any>(url).pipe(
-      map((response: any) => response, (error: any) => error)
-    );
+    this.http.get(url, {responseType: "blob", params: params}).subscribe((content: any) => {
+      const blob = new Blob([content], { type: mime });
+      saveAs(blob, filename);
+    }, async (error) => {
+      const message = JSON.parse(await error.error.text()).message;
+      console.log(message);
+    });
   }
 
   // 
