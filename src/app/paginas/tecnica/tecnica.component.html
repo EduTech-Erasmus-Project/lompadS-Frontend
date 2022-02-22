@@ -2,12 +2,12 @@
 
     <!-- [Temp] Contiene: Formato (4.1) -->
     <div *ngIf="objectOptions.o4_1" class="p-col-12">
-        <h5>4.1 - {{"Formato" | translate}}</h5>
+        <h5>4.1 - {{"Technical.format" | translate}}</h5>
 
         <div class="card">
             <!-- <h4>PIAS HAY QUE PREGUNTAR SOBRE ESTE CAMPO</h4> -->
             <div class="p-grid">
-                <label class="p-col-12 p-md-6 p-lg-3" for="esquema">{{"Esquema" | translate}}</label>
+                <!-- <label class="p-col-12 p-md-6 p-lg-3" for="esquema">{{"Common." | translate}}</label> -->
                 <input class="p-col-12 p-md-6 p-lg-3" [(ngModel)]='formatDigitalSubtypeSelected' id="esquema" type="esquema" pInputText aria-describedby="username-help">
                 <p-button class="p-col-12 p-md-6 p-lg-3" icon="pi pi-search" (click)="op.toggle($event)"></p-button>
             </div>
@@ -26,7 +26,7 @@
             </div>
 
             <div *ngIf="isDigitalSelected" class="p-col-12 p-md-6 p-lg-3">
-                <p-dropdown id="format-type" [(ngModel)]='formatDigitalTypeSelected' name='format-type' [options]="formatTypeOptions" placeholder='{{"Seleccionar" | translate}}' [showClear]="true">
+                <p-dropdown id="format-type" [(ngModel)]='formatDigitalTypeSelected' name='format-type' [options]="formatTypeOptions" placeholder='{{"Common.select" | translate}}' [showClear]="true">
                     <ng-template pTemplate="item" let-item>
                         {{item.label| translate }}
                     </ng-template>
@@ -35,7 +35,7 @@
                     </ng-template>
                 </p-dropdown>
 
-                <p-dropdown id="format-subtype" [(ngModel)]='formatDigitalSubtypeSelected' name='format-subtype' [options]="formatDigitalTypeSelected" (onChange)='changeDigitalFormatType()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                <p-dropdown id="format-subtype" [(ngModel)]='formatDigitalSubtypeSelected' name='format-subtype' [options]="formatDigitalTypeSelected" (onChange)='changeDigitalFormatType()' placeholder='{{"Common.select" | translate}} ' [showClear]="true">
                     <ng-template pTemplate="item" let-item>
                         {{item.label| translate }}
                     </ng-template>
@@ -50,7 +50,7 @@
     <!-- perfiles da lo mismo en tamaño y localizacion -->
     <!-- [Temp] Contiene: Tamaño (4.2) -->
     <div *ngIf="objectOptions.o4_2" class="p-col-12 p-md-6">
-        <h5>4.2 - {{"Tamaño" | translate}}</h5>
+        <h5>4.2 - {{"Technical.size" | translate}}</h5>
 
         <div class="card">
             <div class="p-fluid">
@@ -63,7 +63,7 @@
 
     <!-- [Temp] Contiene: Localización (4.3) -->
     <div *ngIf="objectOptions.o4_3" class="p-col-12 p-md-6">
-        <h5>4.3 - {{"Localización" | translate}}</h5>
+        <h5>4.3 - {{"Technical.location" | translate}}</h5>
 
         <div class="card">
             <div class="p-fluid">
@@ -76,16 +76,16 @@
 
     <!-- [Temp] Contiene: Requisitos (4.4) -->
     <div *ngIf="objectOptions.o4_4" class="p-col-12">
-        <h5>4.4 - {{"Requisitos" | translate}}</h5>
+        <h5>4.4 - {{"Technical.requirement.requirement" | translate}}</h5>
 
         <div class="card">
-            <h6>4.4.1 - {{"Agregador Or" | translate}}</h6>
+            <h6>4.4.1 - {{"Technical.requirement.orComposite" | translate}}</h6>
 
             <div class="p-fluid">
                 <div class="p-field p-grid">
-                    <label for="tipo" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Tipo" | translate}}</label>
+                    <label for="tipo" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Technical.requirement.type.type" | translate}}</label>
                     <div class="p-col-12 p-md-10">
-                        <p-dropdown id="tipo" [(ngModel)]='orCompositeTypeSelected' name='orCompositeTypeSelected' [options]="orCompositeTypeOptions" (onChange)='changeOrCompositeType()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                        <p-dropdown id="tipo" [(ngModel)]='orCompositeTypeSelected' name='orCompositeTypeSelected' [options]="orCompositeTypeOptions" (onChange)='changeOrCompositeType()' placeholder='{{"Common.select" | translate}} ' [showClear]="true">
                             <ng-template pTemplate="item" let-item>
                                 {{item.label| translate }}
                             </ng-template>
@@ -97,9 +97,9 @@
                 </div>
 
                 <div class="p-field p-grid">
-                    <label for="nombre" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Nombre" | translate}}</label>
+                    <label for="nombre" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Technical.requirement.name.name" | translate}}</label>
                     <div class="p-col-12 p-md-10">
-                        <p-dropdown id="tipo" [(ngModel)]='orCompositeNameSelected' name='orCompositeNameSelected' [options]="orCompositeNameOptions" (onChange)='changeOrCompositeName()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                        <p-dropdown id="tipo" [(ngModel)]='orCompositeNameSelected' name='orCompositeNameSelected' [options]="orCompositeNameOptions" (onChange)='changeOrCompositeName()' placeholder='{{"Common.select" | translate}} ' [showClear]="true">
                             <ng-template pTemplate="item" let-item>
                                 {{item.label| translate }}
                             </ng-template>
@@ -111,14 +111,14 @@
                 </div>
 
                 <div class="p-field p-grid">
-                    <label for="ver_minima" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Versión Mínima" | translate}}</label>
+                    <label for="ver_minima" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Technical.requirement.minVersion" | translate}}</label>
                     <div class="p-col-12 p-md-10">
                         <input id="ver_minima" [(ngModel)]='minimumVersion' type="text" pInputText>
                     </div>
                 </div>
 
                 <div class="p-field p-grid">
-                    <label for="ver_maxima" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Versión Máxima" | translate}}</label>
+                    <label for="ver_maxima" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Technical.requirement.maxVersion" | translate}}</label>
                     <div class="p-col-12 p-md-10">
                         <input id="ver_maxima" [(ngModel)]='maximumVersion' type="text" pInputText>
                     </div>
@@ -129,12 +129,12 @@
 
     <!-- [Temp] Contiene: Pautas de instalación (4.5) -->
     <div *ngIf="objectOptions.o4_5" class="p-col-12 p-md-6">
-        <h5>4.5 - {{"Pautas de Instalación" | translate}}</h5>
+        <h5>4.5 - {{"Technical.installationRemarks" | translate}}</h5>
 
         <div class="card">
             <div class="p-fluid">
                 <div class="p-field p-grid">
-                    <label for="descripcion">{{"Descripción" | translate}}</label>
+                    <label for="descripcion">{{"Common.description" | translate}}</label>
                     <textarea [(ngModel)]='installationRemarks' id="descripcion" type="text" rows="4" pInputTextarea></textarea>
                 </div>
             </div>
@@ -143,12 +143,12 @@
 
     <!-- [Temp] Contiene: Otros requisitos de plataforma (4.6) -->
     <div *ngIf="objectOptions.o4_6" class="p-col-12 p-md-6">
-        <h5>4.6 - {{"Otros Requisitos de Plataforma" | translate}}</h5>
+        <h5>4.6 - {{"Technical.otherPlatformRequirements" | translate}}</h5>
 
         <div class="card">
             <div class="p-fluid">
                 <div class="p-field p-grid">
-                    <label for="descripcion">{{"Descripción" | translate}}</label>
+                    <label for="descripcion">{{"Common.description" | translate}}</label>
                     <textarea [(ngModel)]='otherPlatformRequirements' id="descripcion" type="text" rows="4" pInputTextarea></textarea>
                 </div>
             </div>
@@ -157,28 +157,28 @@
 
     <!-- [Temp] Contiene: Duración (4.7) -->
     <div *ngIf="objectOptions.o4_7" class="p-col-12">
-        <h5>4.7 - {{"Duración"| translate}}</h5>
+        <h5>4.7 - {{"Technical.duration"| translate}}</h5>
 
         <div class="card">
             <div class="p-fluid p-formgrid p-grid">
                 <div class="p-field p-col">
-                    <label for="anios">{{"Años" | translate}}</label>
+                    <label for="anios">{{"Common.time.years" | translate}}</label>
                     <p-inputNumber id="anios" mode="decimal" [showButtons]="true" [min]="0" [max]="100" [(ngModel)]='years'></p-inputNumber>
                 </div>
                 <div class="p-field p-col">
-                    <label for="meses">{{"Meses" | translate}}</label>
+                    <label for="meses">{{"Common.time.months" | translate}}</label>
                     <p-inputNumber id="meses" mode="decimal" [showButtons]="true" [min]="0" [max]="12" [(ngModel)]='months'></p-inputNumber>
                 </div>
                 <div class="p-field p-col">
-                    <label for="dias">{{"Días" | translate}}</label>
+                    <label for="dias">{{"Common.time.days" | translate}}</label>
                     <p-inputNumber id="dias" mode="decimal" [showButtons]="true" [min]="0" [max]="30" [(ngModel)]='days'></p-inputNumber>
                 </div>
                 <div class="p-field p-col">
-                    <label for="horas">{{"Horas"| translate}}</label>
+                    <label for="horas">{{"Common.time.hours"| translate}}</label>
                     <p-inputNumber id="horas" mode="decimal" [showButtons]="true" [min]="0" [max]="24" [(ngModel)]='hours'></p-inputNumber>
                 </div>
                 <div class="p-field p-col">
-                    <label for="minutos">{{"Minutos" | translate}}</label>
+                    <label for="minutos">{{"Common.time.minutes" | translate}}</label>
                     <p-inputNumber id="minutos" mode="decimal" [showButtons]="true" [min]="0" [max]="60" [(ngModel)]='minutes'></p-inputNumber>
                 </div>
                 <!-- <div class="p-field p-col">

@@ -2,7 +2,7 @@
 
     <!-- [Temp] Contiene: Versión (2.1) -->
     <div *ngIf="objectOptions.o2_1" class="p-col-12">
-        <h5>2.1 - {{"Versión" | translate}}</h5>
+        <h5>2.1 - {{"LifeCycle.version" | translate}}</h5>
 
         <div class="card">
             <div class="p-fluid p-formgrid p-grid">
@@ -15,7 +15,7 @@
 
     <!-- [Temp] Contiene: Estado (2.2) -->
     <div *ngIf="objectOptions.o2_2" class="p-col-12">
-        <h5>2.2 - {{"Estado" | translate}}</h5>
+        <h5>2.2 - {{"LifeCycle.status.status" | translate}}</h5>
 
         <div class="card">
             <div class="p-fluid">
@@ -33,12 +33,12 @@
 
     <!-- [Temp] Contiene: Contribución (2.3) -->
     <div *ngIf="objectOptions.o2_3" class="p-col-12 ">
-        <h5>2.3 - {{"Contribución" | translate}}</h5>
+        <h5>2.3 - {{"Common.contribute.contribute" | translate}}</h5>
 
         <div class="card">
             <!-- [Temp] Contiene: Tipo (2.3.1) -->
             <div *ngIf="objectOptions.o2_3_1" class="card">
-                <h6>2.3.1 - {{"Tipo" | translate}}</h6>
+                <h6>2.3.1 - {{"Common.contribute.role.role" | translate}}</h6>
 
                 <div class="p-fluid">
                     <p-dropdown [options]="roleOptions" [(ngModel)]='roleSelected' name='roleSelected' (onChange)='changeContributeRole()' placeholder='{{"Seleccionar"| translate}} ' [showClear]="true">
@@ -54,30 +54,30 @@
 
             <!-- [Temp] Contiene: Entidad (2.3.2) -->
             <div *ngIf="objectOptions.o2_3_2" class="card">
-                <h6>2.3.2 - {{"Entidad" | translate }}</h6>
+                <h6>2.3.2 - {{"Common.contribute.entity.entity" | translate }}</h6>
 
                 <div class="p-fluid">
                     <div class="p-field p-grid">
-                        <label for="nombre" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Nombre" | translate }}</label>
+                        <label for="nombre" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Common.contribute.entity.givenName" | translate }}</label>
                         <div class="p-col-12 p-md-10">
                             <input id="nombre" [(ngModel)]='entityName' type="text" pInputText>
                         </div>
                     </div>
                     <div class="p-field p-grid">
-                        <label for="apellido" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Apellido" | translate }}</label>
+                        <label for="apellido" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Common.contribute.entity.familyName" | translate }}</label>
                         <div class="p-col-12 p-md-10">
 
                             <input id="apellido" [(ngModel)]='entityLastname' type="text" pInputText>
                         </div>
                     </div>
                     <div class="p-field p-grid">
-                        <label for="lastname4" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Email" | translate}}</label>
+                        <label for="lastname4" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Common.contribute.entity.email" | translate}}</label>
                         <div class="p-col-12 p-md-10">
                             <input id="lastname4" [(ngModel)]='entityEmail' type="text" pInputText>
                         </div>
                     </div>
                     <div class="p-field p-grid">
-                        <label for="organizacion" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Organización" | translate}}</label>
+                        <label for="organizacion" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Common.contribute.entity.organization" | translate}}</label>
                         <div class="p-col-12 p-md-10">
                             <input id="organizacion" [(ngModel)]='entityOrganization' type="text" pInputText>
                         </div>
@@ -87,7 +87,7 @@
 
             <!-- [Temp] Contiene: Fecha (2.3.3) -->
             <div *ngIf="objectOptions.o2_3_3" class="card">
-                <h6> 2.3.3 - {{"Fecha" | translate}}</h6>
+                <h6> 2.3.3 - {{"Common.contribute.date.date" | translate}}</h6>
 
                 <div class="p-fluid">
                     <div class="p-field p-grid">
@@ -97,7 +97,7 @@
                     </div>
 
                     <div class="p-field p-grid">
-                        <label for="descripcion">{{"Descripción" | translate }}</label>
+                        <label for="descripcion">{{"Common.description" | translate }}</label>
                         <textarea [(ngModel)]='dateDescription' id="descripcion" type="text" rows="4" pInputTextarea></textarea>
                     </div>
                 </div>

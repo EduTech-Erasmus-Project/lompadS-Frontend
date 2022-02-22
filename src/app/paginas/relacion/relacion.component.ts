@@ -31,18 +31,18 @@ export class RelacionComponent implements OnInit {
     this.loadRelationData();
 
     this.kindOptions = [
-      { label: 'es parte de', value: 'ispartof', code: 'ipo' },
-      { label: 'tiene parte', value: 'haspart', code: 'hp' },
-      { label: 'es versión de', value: 'isversionof', code: 'ivo' },
-      { label: 'tiene versión', value: 'hasversion', code: 'hv' },
-      { label: 'es formato de', value: 'isformatof', code: 'ifo' },
-      { label: 'tiene formato', value: 'hasformat', code: 'hf' },
-      { label: 'referencia', value: 'references', code: 'rf' },
-      { label: 'es referenciado por', value: 'isreferencedby', code: 'irfb' },
-      { label: 'se basa en', value: 'isbasedon', code: 'ibo' },
-      { label: 'es base para', value: 'isbasisfor', code: 'ibf' },
-      { label: 'requiere', value: 'requires', code: 'rq' },
-      { label: 'es requerido por', value: 'isrequiredby', code: 'irqb' }
+      { label: 'Relation.kind.isPartOf', value: 'is part of', code: 'ipo' },
+      { label: 'Relation.kind.hasPart', value: 'has part', code: 'hp' },
+      { label: 'Relation.kind.isVersionOf', value: 'is version of', code: 'ivo' },
+      { label: 'Relation.kind.hasVersion', value: 'has version', code: 'hv' },
+      { label: 'Relation.kind.isFormatOf', value: 'is format of', code: 'ifo' },
+      { label: 'Relation.kind.hasFormat', value: 'has format', code: 'hf' },
+      { label: 'Relation.kind.references', value: 'references', code: 'rf' },
+      { label: 'Relation.kind.isReferencedBy', value: 'is referenced by', code: 'irfb' },
+      { label: 'Relation.kind.isBasedOn', value: 'is based on', code: 'ibo' },
+      { label: 'Relation.kind.isBasisFor', value: 'is basis for', code: 'ibf' },
+      { label: 'Relation.kind.requires', value: 'requires', code: 'rq' },
+      { label: 'Relation.kind.isRequiredBy', value: 'is required by', code: 'irqb' }
     ];
 
     this.objectOptions = this.componentePrincipal.objOptions;

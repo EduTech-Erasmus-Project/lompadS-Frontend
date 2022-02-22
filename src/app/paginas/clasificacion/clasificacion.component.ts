@@ -22,12 +22,6 @@ export class ClasificacionComponent implements OnInit {
   taxonPathId: string;
   taxonPathSource: string;
   description: string;
-  keywords: any[];
-
-  
-  columns: any[];
-  palabra: string;
-  palabraDialog: boolean;
   
   constructor(
     private componentePrincipal: AppComponent,
@@ -38,15 +32,15 @@ export class ClasificacionComponent implements OnInit {
     this.loadClassificationData();
 
     this.purposeOptions = [
-      { label: 'disciplina', value: 'discipline', code: 'dis' },
-      { label: 'idea', value: 'idea', code: 'id' },
-      { label: 'prerequisito', value: 'prerequisite', code: 'pre' },
-      { label: 'objetivo educativo', value: 'educational objective', code: 'o_b' },
-      { label: 'accesibilidad', value: 'accessibility restrictions', code: 'acc' },
-      { label: 'nivel educativo', value: 'educational level', code: 'n_ed' },
-      { label: 'nivel de habilidad', value: 'skill level', code: 'n_hab' },
-      { label: 'nivel de seguridad', value: 'security level', code: 'n_seg' },
-      { label: 'competencia', value: 'competency', code: 'n_segsr' }
+      { label: 'Classification.purpose.discipline', value: 'discipline', code: 'dis' },
+      { label: 'Classification.purpose.idea', value: 'idea', code: 'id' },
+      { label: 'Classification.purpose.prerequisite', value: 'prerequisite', code: 'pre' },
+      { label: 'Classification.purpose.educationalObjetive', value: 'educational objective', code: 'o_b' },
+      { label: 'Classification.purpose.accessibilityRestrictions', value: 'accessibility restrictions', code: 'acc' },
+      { label: 'Classification.purpose.educationalLevel', value: 'educational level', code: 'n_ed' },
+      { label: 'Classification.purpose.skillLevel', value: 'skill level', code: 'n_hab' },
+      { label: 'Classification.purpose.securityLevel', value: 'security level', code: 'n_seg' },
+      { label: 'Classification.purpose.competency', value: 'competency', code: 'n_segsr' }
     ];
 
     this.objectOptions = this.componentePrincipal.objOptions;
@@ -60,31 +54,11 @@ export class ClasificacionComponent implements OnInit {
   }
 
   setClassificationData() {
-    this.columns = [];
     this.purposeSelected = this.classificationObject['purpose']['value'][0];
     this.taxonPathEntry = this.classificationObject['taxonPath']['entry'][0];
     this.taxonPathId = this.classificationObject['taxonPath']['id'][0];
     this.taxonPathSource = this.classificationObject['taxonPath']['source'][0];
     this.description = this.classificationObject['description']['description'][0];
-  }
-
-  addPalabra() {
-    this.palabraDialog = true;
-  }
-
-  cancelPalabra() {
-    this.palabraDialog = false;
-  }
-
-  removeColumn() {
-    this.columns.splice(-1, 1);
-  }
-
-  savePalabra() {
-    console.log(this.palabra);
-    this.palabraDialog = false;
-    this.columns.push(this.palabra);
-    this.palabra = '';
   }
 
   changePurpose() {

@@ -32,13 +32,13 @@ export class DerechosComponent implements OnInit {
     this.loadRightsData();
 
     this.costOptions = [
-      { label: 'si', value: 'yes', code: 'yes' },
-      { label: 'no', value: 'no', code: 'no' }
+      { label: 'Rights.yes', value: 'yes', code: 'yes' },
+      { label: 'Rights.no', value: 'no', code: 'no' }
     ];
 
     this.copyrightOptions = [
-      { label: 'si', value: 'yes', code: 'yes' },
-      { label: 'no', value: 'no', code: 'no' }
+      { label: 'Rights.yes', value: 'yes', code: 'yes' },
+      { label: 'Rights.no', value: 'no', code: 'no' }
     ];
     
     console.log('[INFO]> Rights Component: ', this.rightsObject);

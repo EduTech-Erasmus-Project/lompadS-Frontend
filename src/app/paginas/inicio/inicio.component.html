@@ -2,11 +2,11 @@
     <div class="p-col-12">
         <div class="card">
             <div class="p-mb-3 p-text-center">
-                <h1>{{"Bienvenido a" | translate}} LOMpad Schema</h1>
+                <h1>{{"Home.title" | translate}}</h1>
             </div>
 
             <div class="p-mb-3 p-text-center">
-                <h5>{{"Por favor configure la aplicación de acuerdo a lo que necesite" | translate}}</h5>
+                <h5>{{"Home.subtitle" | translate}}</h5>
             </div>
 
             <div *ngIf='fileCharger; then thenBlock else elseBlock'></div>
@@ -14,13 +14,13 @@
             <ng-template #thenBlock>
                 <div class="p-field-radiobutton">
                     <p-checkbox id='pp' [(ngModel)]='switch' binary="true" (click)='showDownloadWarning()'></p-checkbox>
-                    <label for="pp">{{ "Cargar un nuevo objeto de aprendizaje" | translate}}</label>
+                    <label for="pp">{{ "Home.uploadAnother" | translate}}</label>
                 </div>
 
                 <div *ngIf='switch'>
                     <p-fileUpload (uploadHandler)="onUpload($event)" customUpload="true" multiple="multiple" accept=".rar,.zip,.xml" 
                         maxFileSize="1000000000000" validateContentType="true" fileLimit="1" 
-                        [chooseLabel]="'Seleccionar Archivo' | translate" [uploadLabel]="'Subir' | translate" [cancelLabel]="'Cancelar' | translate">
+                        [chooseLabel]="'Home.chooseFile' | translate" [uploadLabel]="'Home.uploadFile' | translate" [cancelLabel]="'Home.cancel' | translate">
                     </p-fileUpload>
                 </div>
             </ng-template>
@@ -28,11 +28,11 @@
             <ng-template #elseBlock>
                 <p-fileUpload (uploadHandler)="onUpload($event)" customUpload="true" multiple="multiple" accept=".rar,.zip,.xml" 
                     maxFileSize="1000000000000" validateContentType="true" fileLimit="1" 
-                    [chooseLabel]="'Seleccionar Archivo' | translate" [uploadLabel]="'Subir' | translate" [cancelLabel]="'Cancelar' | translate">
+                    [chooseLabel]="'Home.chooseFile' | translate" [uploadLabel]="'Home.uploadFile' | translate" [cancelLabel]="'Home.cancel' | translate">
                 </p-fileUpload>
             </ng-template>
 
-            <p-messages [value]="message"></p-messages>
+            <p-messages></p-messages>
         </div>
     </div>
 </div>

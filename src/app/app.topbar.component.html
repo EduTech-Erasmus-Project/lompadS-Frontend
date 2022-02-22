@@ -12,13 +12,10 @@
     </div>
 </div>
 
-
 <div class="layout-topbar">
 
-    
     <div class="layout-topbar-wrapper">
         <div class="layout-topbar-left">
-
             <a href="#" class="sidebar-menu-button" (click)="appMain.onMenuButtonClick($event)">
                 <i class="pi pi-bars"></i>
             </a>
@@ -38,95 +35,67 @@
 							Mega Menu
 						</a>						 -->
 
-                <ul class="layout-megamenu" [ngClass]="{'layout-megamenu-active fadeInDown': appMain.megaMenuActive}" (click)="appMain.onMegaMenuClick($event)">
+                <ul class="layout-megamenu" [ngClass]="{'layout-megamenu-active fadeInDown': appMain.megaMenuActive}"
+                    (click)="appMain.onMegaMenuClick($event)">
                     <div class="layout-topbar-wrapper">
                         <div class="layout-topbar-left">
                             <div class="p-col-6">
-                                <label>{{'Lenguaje' | translate}}</label>
+                                <label>{{'Common.language' | translate}}</label>
                             </div>
                             <div class="p-col-6">
-                                <p-dropdown [options]="idiomas" (onChange)="cambioIdioma($event)" styleClass="p-mb-2 p-mb-md-0"></p-dropdown>
+                                <p-dropdown [options]="idiomas" (onChange)="cambioIdioma($event)"
+                                    styleClass="p-mb-2 p-mb-md-0"></p-dropdown>
                             </div>
                         </div>
                     </div>
                 </ul>
 
-
                 <!-- MEGA MENU PERSONALIZADO  -->
-                <ul class="layout-megamenu" [ngClass]="{'layout-megamenu-active fadeInDown': appMain.megaMenuPerfiles}" (click)="appMain.onMegaMenuPerfilClick($event)" style="margin-left: 10cm;">
+                <ul class="layout-megamenu" [ngClass]="{'layout-megamenu-active fadeInDown': appMain.megaMenuPerfiles}"
+                    (click)="appMain.onMegaMenuPerfilClick($event)" style="margin-left: 10cm;">
                     <li>
-                        <a href="#">{{'Perfíles' | translate}}<i class="pi pi-angle-down"></i></a>
+                        <a href="#">{{'Topbar.profiles' | translate}}<i class="pi pi-angle-down"></i></a>
                         <ul>
-                            <!-- (onChange)=""  -->
-                            <p-dropdown [options]="perfiles" [(ngModel)]='perfilesSelect' (onChange)="cambioPerfil($event)" styleClass="p-mb-2 p-mb-md-0"></p-dropdown>
+                            <p-dropdown [options]="perfiles" [(ngModel)]='perfilesSelect'
+                                (onChange)="cambioPerfil($event)" styleClass="p-mb-2 p-mb-md-0"></p-dropdown>
 
                         </ul>
                     </li>
-
                 </ul>
 
-
                 <!-- MEGA MENU PERSONALIZADO  -->
-                <ul class="layout-megamenu" [ngClass]="{'layout-megamenu-active fadeInDown': appMain.megaMenuViewJSON}" (click)="appMain.onMegaMenuJSONClick($event)" style="margin-left: 12.3cm;">
+                <ul class="layout-megamenu" [ngClass]="{'layout-megamenu-active fadeInDown': appMain.megaMenuViewJSON}"
+                    (click)="appMain.onMegaMenuJSONClick($event)" style="margin-left: 12.3cm;">
                     <li>
-                        <a href="#">{{'Descargar como:' | translate}}<i class="pi pi-angle-down"></i></a>
+                        <a href="#">{{'Topbar.download' | translate}}<i class="pi pi-angle-down"></i></a>
                         <ul><button pButton pRipple type="button" label="JSON" (click)="descargaJSON()"></button></ul>
                         <ul><button pButton pRipple type="button" label="XML" (click)="descargaXML()"></button></ul>
                         <ul><button pButton pRipple type="button" label="ZIP" (click)="descargaZIP()"></button></ul>
-                        <!-- <ul><a mat-raised-button href="http://localhost:8000/private/download?hashed_code=aqui iba el sco_-8698188764084338299">Stackoverflow</a></ul> -->
                     </li>
-
                 </ul>
 
+                <a class="layout-megamenu-button" style="margin-left: 30px;" href="#" (click)="runDialog(1)">
+                    {{"Topbar.previewJSON" | translate }}
+                </a>
 
-                <!-- MEGA MENU PERSONALIZADO  
-						<ul class="layout-megamenu" [ngClass]="{'layout-megamenu-active fadeInDown': appMain.megaMenuViewXML}"
-							(click)="appMain.onMegaMenuPerfilClick($event)" style="margin-left: 5cm;">
-							<li>
-								<h5>ver XML</h5>				
-				
-							</li>
-							
-						</ul>-->
+                <a class="layout-megamenu-button" style="margin-left: 30px;" href="#" (click)="runDialog(2)">
+                    {{"Topbar.previewXML" | translate }}
+                </a>
 
-                <a class="layout-megamenu-button" style="margin-left: 30px;" href="#" (click)="runDialog(1)">							
-							{{"Previsualización JSON" | translate }}
-						</a>
+                <a class="layout-megamenu-button" style="margin-left: 30px;" href="#"
+                    (click)="appMain.onMegamenuButtonPerfiles($event)">
+                    {{'Topbar.profiles' | translate}}
+                </a>
 
-                <a class="layout-megamenu-button" style="margin-left: 30px;" href="#" (click)="runDialog(2)">							
-							{{"Previsualización XML" | translate }}
-						</a>
-
-                <a class="layout-megamenu-button" style="margin-left: 30px;" href="#" (click)="appMain.onMegamenuButtonPerfiles($event)">							
-						{{'Perfíles' | translate}}
-						</a>
-
-                <a class="layout-megamenu-button" style="margin-left: 30px;" href="#" (click)="appMain.onMegamenuButtonJSON($event)">							
-						{{'Descargar' | translate}}
-						</a>
-
-
-
-
-
-                <!-- <a class="layout-megamenu-button" href="#" (click)="appMain.onMegaMenuButtonClick($event)">
-							<i class="pi pi-comment"></i>
-							Mega Menu
-						</a> -->
+                <a class="layout-megamenu-button" style="margin-left: 30px;" href="#"
+                    (click)="appMain.onMegamenuButtonJSON($event)">
+                    {{'Topbar.download' | translate}}
+                </a>
             </div>
-
         </div>
-
-        <!-- ICONOS "
-				<div class="icons" style="padding-top: 2.4%;">
-						<div class="icon icon-hastag">
-							<i class="pi pi-home" ></i>
-						</div>							
-				</div>-->
 
         <div class="layout-topbar-wrapper">
             <div class="layout-topbar-left">
-
                 <ul>
                     <div class="icon icon-hastag">
                         <a href="/"><i class="pi pi-home"></i></a>
@@ -134,23 +103,18 @@
                 </ul>
                 <ul>
                     <li style="list-style: none;">
-                        <label>{{'Lenguaje' | translate}}</label>
-                        <p-dropdown [options]="idiomas" (onChange)="cambioIdioma($event)" styleClass="p-mb-2 p-mb-md-0"></p-dropdown>
+                        <label>{{'Common.language' | translate}}</label>
+                        <p-dropdown [options]="idiomas" (onChange)="cambioIdioma($event)" styleClass="p-mb-2 p-mb-md-0">
+                        </p-dropdown>
                     </li>
                 </ul>
-
-
             </div>
-
-
         </div>
     </div>
 </div>
 
-
 <p-dialog id="we" [(visible)]="display1" [style]="{width: '80%'}" header="" [modal]="true" styleClass="p-fluid">
     <ng-template pTemplate="content">
-
         <div class="p-field">
             <div *ngIf="band; then thenBlock else elseBlock"></div>
             <ng-template #thenBlock>
@@ -159,10 +123,8 @@
 
 
             <ng-template #elseBlock>
-                <!-- <pre><div><a [href]='url'> pulsame</a></div></pre> -->
-                <pre>{{objXML }}</pre>
+                <pre>{{ objXML }}</pre>
             </ng-template>
-
         </div>
     </ng-template>
 </p-dialog>

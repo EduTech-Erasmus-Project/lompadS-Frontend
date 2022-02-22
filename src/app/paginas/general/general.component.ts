@@ -93,11 +93,11 @@ export class GeneralComponent implements OnInit, OnDestroy {
     this.loadGeneralObject();
 
     this.structureOptions = [
-      { label: 'atómica', value: 'atomic', code: 'ato' },
-      { label: 'colección', value: 'collection', code: 'col' },
-      { label: 'en red', value: 'networked', code: 'net' },
-      { label: 'jerárquica', value: 'hiperarchical', code: 'hip' },
-      { label: 'lineal', value: 'linear', code: 'lin' },
+      { label: 'General.structure.atomic', value: 'atomic', code: 'ato' },
+      { label: 'General.structure.collection', value: 'collection', code: 'col' },
+      { label: 'General.structure.networked', value: 'networked', code: 'net' },
+      { label: 'General.structure.hierarchical', value: 'hiperarchical', code: 'hip' },
+      { label: 'General.structure.linear', value: 'linear', code: 'lin' },
     ];
 
     this.aggregationLevelOptions = [

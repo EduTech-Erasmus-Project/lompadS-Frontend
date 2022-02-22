@@ -6,7 +6,6 @@ import { MessageService } from 'primeng/api';
 import { CookieService } from 'ngx-cookie-service';
 import { Subscription } from 'rxjs';
 
-
 @Component({
 	selector: 'app-topbar',
 	templateUrl: './app.topbar.component.html',
@@ -69,8 +68,8 @@ export class AppTopBarComponent {
 
 		this.display1 = false;
 
-
-		if (this.cookieService.check('perfil')) {//Realizo esto solamente para que aparecza en el top bar
+		//Realizo esto solamente para que aparezca en el top bar
+		if (this.cookieService.check('perfil')) {
 			this.objJson.unsubscribe();
 			this.obj_XML.unsubscribe();
 			this.objprincipal = this.lompadService.objPricipal;
@@ -97,8 +96,6 @@ export class AppTopBarComponent {
 
 	band: boolean;
 	runDialog(param: number) {
-		// this.appMain.saveInfoGeneral();
-		// this.lompadService.callComponentMethod("DEsde topbar");
 		this.display1 = true;
 		if (param === 1) {
 			this.band = true;
@@ -122,7 +119,6 @@ export class AppTopBarComponent {
 	descargaZIP() {
 		this.lompadService.downloadMetadataFile('zip');
 		this.toas.add({ key: 'tst', severity: 'success', summary: 'ZIP descargado exitosamente', detail: 'Message sent' });
-		// window.location.href = "http://localhost:8000/private/download?hashed_code=" + this.hash;
 	}
 
 	ngOnDestroy(): void {
@@ -135,7 +131,7 @@ export class AppTopBarComponent {
 	}
 
 	rebootXML() {
-		console.log('[INFO] XML Preview')
+		// console.log('[INFO] XML Preview');
 		this.objXML = this.lompadService.objPrincipalXML;
 	}
 

@@ -38,28 +38,28 @@ export class LivecicleComponent implements OnInit, OnDestroy {
     this.loadLifeCycleData();
 
     this.roleOptions = [
-      { label: 'Autor', value: 'author', code: 'au' },
-      { label: 'Revisor', value: 'validator', code: 'rv' },
-      { label: 'Desconocido', value: 'unknown', code: 'des' },
-      { label: 'iniciador', value: 'initiator', code: 'in' },
-      { label: 'terminador', value: 'terminator', code: 'ter' },
-      { label: 'editor', value: 'publisher', code: 'ed' },
-      { label: 'escritor', value: 'editor', code: '324' },
-      { label: 'diseñador grafico', value: 'graphical designer', code: '324' },
-      { label: 'desarrollador técnico', value: 'technical implementer', code: '345' },
-      { label: 'proveedor de contenido', value: 'content provider', code: '645' },
-      { label: 'revisor técnico', value: 'technical validator', code: '6654' },
-      { label: 'revisor educativo', value: 'educational validator', code: '6654' },
-      { label: 'guionista', value: 'script writer', code: '54' },
-      { label: 'diseñador educativo', value: 'instructional designer', code: '76' },
-      { label: 'experto en la materia', value: 'subject matter expert', code: '57' },
+      { label: 'Common.contribute.role.author', value: 'author', code: 'au' },
+      { label: 'Common.contribute.role.validator', value: 'validator', code: 'rv' },
+      { label: 'Common.contribute.role.unknown', value: 'unknown', code: 'des' },
+      { label: 'Common.contribute.role.initiator', value: 'initiator', code: 'in' },
+      { label: 'Common.contribute.role.terminator', value: 'terminator', code: 'ter' },
+      { label: 'Common.contribute.role.publisher', value: 'publisher', code: 'ed' },
+      { label: 'Common.contribute.role.editor', value: 'editor', code: '324' },
+      { label: 'Common.contribute.role.graphicalDesigner', value: 'graphical designer', code: '324' },
+      { label: 'Common.contribute.role.technicalImplementer', value: 'technical implementer', code: '345' },
+      { label: 'Common.contribute.role.contentProvider', value: 'content provider', code: '645' },
+      { label: 'Common.contribute.role.technicalValidator', value: 'technical validator', code: '6654' },
+      { label: 'Common.contribute.role.educationalValidator', value: 'educational validator', code: '6654' },
+      { label: 'Common.contribute.role.scriptWriter', value: 'script writer', code: '54' },
+      { label: 'Common.contribute.role.instructionalDesigner', value: 'instructional designer', code: '76' },
+      { label: 'Common.contribute.role.subjectMatterExpert', value: 'subject matter expert', code: '57' },
     ];
 
     this.statusOptions = [
-      { label: 'borrador', value: 'draft', code: 'brr' },
-      { label: 'final', value: 'final', code: 'fin' },
-      { label: 'revisado', value: 'revised', code: 'rev' },
-      { label: 'no disponible', value: 'unavailable', code: 'ndis' }
+      { label: 'LifeCycle.status.draft', value: 'draft', code: 'brr' },
+      { label: 'LifeCycle.status.final', value: 'final', code: 'fin' },
+      { label: 'LifeCycle.status.revised', value: 'revised', code: 'rev' },
+      { label: 'LifeCycle.status.unavailable', value: 'unavailable', code: 'ndis' }
     ];
 
     this.objectOptions = this.componentePrincipal.objOptions;

@@ -40,23 +40,23 @@ export class AnotacionComponent implements OnInit {
     this.loadAnnotationData();
 
     this.accessModeOptions = [
-      { label: 'visual', value: 'visual', code: 'am-vis' },
-      { label: 'auditivo', value: 'auditory', code: 'am-aud' },
-      { label: 'texto', value: 'tex', code: 'am-txt' },
-      { label: 'tactil', value: 'tactile', code: 'am-tcl' }
+      { label: 'Annotation.accessModeType.visual', value: 'visual', code: 'am-vis' },
+      { label: 'Annotation.accessModeType.auditory', value: 'auditory', code: 'am-aud' },
+      { label: 'Annotation.accessModeType.text', value: 'tex', code: 'am-txt' },
+      { label: 'Annotation.accessModeType.tactil', value: 'tactile', code: 'am-tcl' }
     ];
 
     this.accessModeSufficientOptions = [
-      { label: 'visual', value: 'visual', code: 'ams-vis' },
-      { label: 'auditivo', value: 'auditory', code: 'ams-aud' },
-      { label: 'texto', value: 'tex', code: 'ams-txt' },
-      { label: 'tactil', value: 'tactile', code: 'ams-tcl' }
+      { label: 'Annotation.accessModeType.visual', value: 'visual', code: 'ams-vis' },
+      { label: 'Annotation.accessModeType.auditory', value: 'auditory', code: 'ams-aud' },
+      { label: 'Annotation.accessModeType.text', value: 'tex', code: 'ams-txt' },
+      { label: 'Annotation.accessModeType.tactil', value: 'tactile', code: 'ams-tcl' }
     ];
 
     this.rolOptions = [
-      { label: 'Estudiantes', value: 'student', code: 'std' },
-      { label: 'Profesores', value: 'teachers', code: 'tch' },
-      { label: 'Aplicación', value: 'application', code: 'app' }
+      { label: 'Annotation.role.student', value: 'student', code: 'std' },
+      { label: 'Annotation.role.teacher', value: 'teachers', code: 'tch' },
+      { label: 'Annotation.role.application', value: 'application', code: 'app' }
     ];
 
     this.objectOptions = this.componentePrincipal.objOptions;

@@ -54,65 +54,65 @@ export class UsoeducativoComponent implements OnInit {
     this.loadEducationalData();
 
     this.interactivityTypeOptions = [
-      { label: 'Activo', value: 'active', code: 'ac' },
-      { label: 'Expositivo', value: 'expositive', code: 'ex' },
-      { label: 'Combinado', value: 'mixed', code: 'com' }
+      { label: 'Educational.interactivityType.active', value: 'active', code: 'ac' },
+      { label: 'Educational.interactivityType.expositive', value: 'expositive', code: 'ex' },
+      { label: 'Educational.interactivityType.mixed', value: 'mixed', code: 'com' }
     ];
 
     this.learningResourceTypeOptions = [
-      { label: 'Ejercicio', value: 'exercise', code: 'ejer' },
-      { label: 'Simulación', value: 'simulation', code: 'sim' },
-      { label: 'Cuestionario', value: 'questionnarie', code: 'cuest' },
-      { label: 'Diagrama', value: 'diagram', code: 'dia' },
-      { label: 'Figura', value: 'figure', code: 'fig' },
-      { label: 'Gráfico', value: 'graph', code: 'gra' },
-      { label: 'Indice', value: 'index', code: 'in' },
-      { label: 'Diapositiva', value: 'slide', code: 'in' },
-      { label: 'tabla', value: 'table', code: 'in' },
-      { label: 'texto narrativo', value: 'narrative text', code: 'in' },
-      { label: 'examen', value: 'exam', code: 'in' },
-      { label: 'experimento', value: 'experiment', code: 'in' },
-      { label: 'planteamiento del problema', value: 'problem statement', code: 'in' },
-      { label: 'autoevaluacion', value: 'self assessment', code: 'in' },
-      { label: 'conferencia', value: 'lecture', code: 'in' },
+      { label: 'Educational.learningResourceType.exercise', value: 'exercise', code: 'ejer' },
+      { label: 'Educational.learningResourceType.simulation', value: 'simulation', code: 'sim' },
+      { label: 'Educational.learningResourceType.questionnaire', value: 'questionnarie', code: 'cuest' },
+      { label: 'Educational.learningResourceType.diagram', value: 'diagram', code: 'dia' },
+      { label: 'Educational.learningResourceType.figure', value: 'figure', code: 'fig' },
+      { label: 'Educational.learningResourceType.graph', value: 'graph', code: 'gra' },
+      { label: 'Educational.learningResourceType.index', value: 'index', code: 'in' },
+      { label: 'Educational.learningResourceType.slide', value: 'slide', code: 'in' },
+      { label: 'Educational.learningResourceType.table', value: 'table', code: 'in' },
+      { label: 'Educational.learningResourceType.narrativeText', value: 'narrative text', code: 'in' },
+      { label: 'Educational.learningResourceType.exam', value: 'exam', code: 'in' },
+      { label: 'Educational.learningResourceType.experiment', value: 'experiment', code: 'in' },
+      { label: 'Educational.learningResourceType.problemStatement', value: 'problem statement', code: 'in' },
+      { label: 'Educational.learningResourceType.selfAssessment', value: 'self assessment', code: 'in' },
+      { label: 'Educational.learningResourceType.lecture', value: 'lecture', code: 'in' },
     ];
 
     this.interactivityLevelOptions = [
-      { label: 'muy bajo', value: 'very low', code: 'mb' },
-      { label: 'bajo', value: 'low', code: 'baj' },
-      { label: 'medio', value: 'medium', code: 'med' },
-      { label: 'alto', value: 'high', code: 'alt' },
-      { label: 'muy alto', value: 'very high', code: '34523' },
+      { label: 'Common.levels.veryLow', value: 'very low', code: 'mb' },
+      { label: 'Common.levels.low', value: 'low', code: 'baj' },
+      { label: 'Common.levels.medium', value: 'medium', code: 'med' },
+      { label: 'Common.levels.high', value: 'high', code: 'alt' },
+      { label: 'Common.levels.veryHigh', value: 'very high', code: '34523' },
     ];
 
     this.semanticDensityOptions = [
-      { label: 'muy bajo', value: 'very low', code: 'mb' },
-      { label: 'bajo', value: 'low', code: 'baj' },
-      { label: 'medio', value: 'medium', code: 'med' },
-      { label: 'alto', value: 'high', code: 'alt' },
-      { label: 'muy alto', value: 'very high', code: '34523' },
+      { label: 'Common.levels.veryLow', value: 'very low', code: 'mb' },
+      { label: 'Common.levels.low', value: 'low', code: 'baj' },
+      { label: 'Common.levels.medium', value: 'medium', code: 'med' },
+      { label: 'Common.levels.high', value: 'high', code: 'alt' },
+      { label: 'Common.levels.veryHigh', value: 'very high', code: '34523' },
     ];
 
     this.intendedEndUserRoleOptions = [
-      { label: 'autor', value: 'author', code: 'aut' },
-      { label: 'profesor', value: 'theacher', code: 'pro' },
-      { label: 'aprendiz', value: 'learner', code: 'aprend' },
-      { label: 'admimistrador', value: 'manager', code: 'mana' }
+      { label: 'Educational.intendedEndUserRole.author', value: 'author', code: 'aut' },
+      { label: 'Educational.intendedEndUserRole.teacher', value: 'teacher', code: 'pro' },
+      { label: 'Educational.intendedEndUserRole.learner', value: 'learner', code: 'aprend' },
+      { label: 'Educational.intendedEndUserRole.manager', value: 'manager', code: 'mana' }
     ];
 
     this.contextOptions = [
-      { label: 'escuela', value: 'school', code: 'es' },
-      { label: 'educación secundaria', value: 'higher education', code: 'edu_s' },
-      { label: 'entrenamiento', value: 'training', code: 'entre' },
-      { label: 'otro', value: 'other', code: 'otro' },
+      { label: 'Educational.context.school', value: 'school', code: 'es' },
+      { label: 'Educational.context.higherEducation', value: 'higher education', code: 'edu_s' },
+      { label: 'Educational.context.training', value: 'training', code: 'entre' },
+      { label: 'Educational.context.other', value: 'other', code: 'otro' },
     ];
 
     this.difficultyOptions = [
-      { label: 'muy facíl', value: 'very easy', code: 'mf' },
-      { label: 'facíl', value: 'easy', code: 'f' },
-      { label: 'medio', value: 'medium', code: 'm' },
-      { label: 'dificíl', value: 'difficult', code: 'd' },
-      { label: 'muy dificíl', value: 'very difficult', code: 'md' }
+      { label: 'Educational.difficulty.veryEasy', value: 'very easy', code: 'mf' },
+      { label: 'Educational.difficulty.easy', value: 'easy', code: 'f' },
+      { label: 'Educational.difficulty.medium', value: 'medium', code: 'm' },
+      { label: 'Educational.difficulty.difficult', value: 'difficult', code: 'd' },
+      { label: 'Educational.difficulty.veryDifficult', value: 'very difficult', code: 'md' }
     ];
 
     this.objectOptions = this.componentePrincipal.objOptions;

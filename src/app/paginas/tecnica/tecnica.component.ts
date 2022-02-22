@@ -53,8 +53,8 @@ export class TecnicaComponent implements OnInit {
     this.loadTechnicalData();
 
     this.orCompositeTypeOptions = [
-      { label: 'Sistema Operativo', value: 'operating system', code: 'sys_o' },
-      { label: 'Navegador', value: 'browser', code: 'nav' }
+      { label: 'Technical.requirement.type.operatingSystem', value: 'operating system', code: 'sys_o' },
+      { label: 'Technical.requirement.type.browser', value: 'browser', code: 'nav' }
     ];
 
     this.operativeSystemOptions = [
@@ -63,11 +63,11 @@ export class TecnicaComponent implements OnInit {
       { label: 'macos', value: 'macos', code: 'macos' },
       { label: 'unix', value: 'unix', code: 'unix' },
       { label: 'multi-os', value: 'multi-os', code: 'multi-os' },
-      { label: 'ninguno', value: 'none', code: 'none' }
+      { label: 'Technical.requirement.name.none', value: 'none', code: 'none' }
     ];
 
     this.browserOptions = [
-      { label: 'cualquiera', value: 'any', code: 'any' },
+      { label: 'Technical.requirement.name.any', value: 'any', code: 'any' },
       { label: 'netscape communicator', value: 'netscape communicator', code: 'net-com' },
       { label: 'ms-internet explorer', value: 'ms-internet explorer', code: 'ms-ie' },
       { label: 'opera', value: 'opera', code: 'ope' },

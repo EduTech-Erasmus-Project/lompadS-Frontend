@@ -36,8 +36,8 @@ export class MetadatosComponent implements OnInit {
     this.loadMetametadataData();
     
     this.roleOptions = [
-      { label: 'Creador', value: 'creator', code: 'cre' },
-      { label: 'Revisor', value: 'validator', code: 'vie' }
+      { label: 'Common.contribute.role.creator', value: 'creator', code: 'cre' },
+      { label: 'Common.contribute.role.validator', value: 'validator', code: 'vie' }
     ];
 
     this.objectOptions = this.componentePrincipal.objOptions;

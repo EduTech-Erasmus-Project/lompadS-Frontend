@@ -2,12 +2,12 @@
 
     <!-- [Temp] Contiene: Propósito (9.1) -->
     <div *ngIf="objectOptions.o9_1" class="p-col-12">
-        <h5>9.1 - {{"Propósito"| translate}}</h5>
+        <h5>9.1 - {{"Classification.purpose.purpose"| translate}}</h5>
 
         <div class="card">
             <div class="p-fluid">
                 <!-- [(ngModel)]="selectedDrop" -->
-                <p-dropdown [options]="purposeOptions" [(ngModel)]='purposeSelected' name='purposeSelected' (onChange)='changePurpose()' placeholder='{{"Seleccionar"| translate}} ' [showClear]="true">
+                <p-dropdown [options]="purposeOptions" [(ngModel)]='purposeSelected' name='purposeSelected' (onChange)='changePurpose()' placeholder='{{"Common.select" | translate}} ' [showClear]="true">
                     <ng-template pTemplate="item" let-item>
                         {{item.label| translate }}
                     </ng-template>
@@ -21,11 +21,11 @@
 
     <!-- [Temp] Contiene: Ruta taxonómica (9.2) -->
     <div *ngIf="objectOptions.o9_2" class="p-col-12">
-        <h5>9.2 - {{"Ruta Taxonómica"| translate}}</h5>
+        <h5>9.2 - {{"Classification.taxonPath"| translate}}</h5>
 
         <div class="card">
             <div *ngIf="objectOptions.o9_2_1" class="card">
-                <h6>9.2.1 - {{"Fuente"| translate}}</h6>
+                <h6>9.2.1 - {{"Classification.source"| translate}}</h6>
 
                 <div class="p-fluid">
                     <input id="fuente" [(ngModel)]='taxonPathSource' type="text" pInputText>
@@ -33,7 +33,7 @@
             </div>
 
             <div *ngIf="objectOptions.o9_2_2" class="card">
-                <h6>9.2.2 - {{"Taxón"| translate}}</h6>
+                <h6>9.2.2 - {{"Classification.taxon"| translate}}</h6>
 
                 <div class="card">
                     <div class="p-fluid p-formgrid p-grid">
@@ -42,7 +42,7 @@
                             <input id="id" [(ngModel)]='taxonPathId' type="text" pInputText>
                         </div>
                         
-                        <label for="entrada">{{"Entrada" | translate}}</label>
+                        <label for="entrada">{{"Classification.entry" | translate}}</label>
                         <div class="p-field p-col">
                             <input id="entrada" [(ngModel)]='taxonPathEntry' type="text" pInputText>
                         </div>
@@ -54,7 +54,7 @@
 
     <!-- [Temp] Contiene: Descripción (9.3) -->
     <div *ngIf="objectOptions.o9_3" class="p-col-12">
-        <h5>9.3 {{"Descripción"| translate}}</h5>
+        <h5>9.3 {{"Common.description"| translate}}</h5>
 
         <div class="card">
             <div class="p-fluid">
@@ -63,39 +63,5 @@
             </div>
         </div>
     </div>
-
-    <!-- [Temp] Contiene: Palabras Clave (9.4) -->
-    <div *ngIf="objectOptions.o9_4" class="p-col-12">
-        <h5>9.4 - {{"Palabra Clave"| translate}}</h5>
-        
-        <div class="card">
-            <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-12 ">
-                    <label for="palabraclave1">{{"Palabra Clave" | translate}}</label>
-                    <input id="palabraclave1" [(ngModel)]='columns' type="text" pInputText>
-                    <!-- <button pButton pRipple type="button" icon="pi pi-plus" title="Add Column" (click)="addPalabra()" [disabled]="columns.length === 20" class="p-mr-2"></button>
-                    <button pButton pRipple type="button" icon="pi pi-minus" title="Remove Column" (click)="removeColumn()" [disabled]="columns.length === 1"></button>
-                    <div class="p-col-12 p-md-10" *ngFor="let col of columns; let i" [@animation]="'visible'">
-                        <div class="box">{{i}}</div>
-                    </div> -->
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- [Temp] Revisar: Lo mismo que en general para agregar dinámicamente las palabras clave (?) -->
-    <p-dialog [(visible)]="palabraDialog" [style]="{width: '450px'}" header="" [modal]="true" styleClass="p-fluid">
-        <ng-template pTemplate="content">
-            <div class="p-field">
-                <label for="name">Name</label>
-                <input type="text" pInputText id="nombrePalabraK" [(ngModel)]="palabra" required autofocus />
-                <!-- <small class="p-invalid" *ngIf="![(ngModel)]=""">Name is required.</small> -->
-            </div>
-        </ng-template>
-        <ng-template pTemplate="footer">
-            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="cancelPalabra()"></button>
-            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="savePalabra()"></button>
-        </ng-template>
-    </p-dialog>
 
 </div>
