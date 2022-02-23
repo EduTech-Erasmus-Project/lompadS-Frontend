@@ -9,7 +9,33 @@ import { ObjOptions } from '../../modelo/objOptions';
   styleUrls: ['./accesibilidad.component.css']
 })
 export class AccesibilidadComponent implements OnInit, OnDestroy {
-  accesibilityObject: any;
+  accesibilityObject: any = {
+    "accessibilityApi": {
+      "compatibleResource":[
+
+      ]
+    },
+    "accessibilityControl": {
+      "methods":[
+        
+      ]
+    },
+    "accessibilityFeatures": {
+      "resourceContent":[
+        
+      ]
+    },
+    "accessibilityHazard": {
+      "properties":[
+        
+      ]
+    },
+    "description": {
+      "description":[
+
+      ]
+    }
+  };
   objectOptions: ObjOptions = new ObjOptions();
 
   description: string;
@@ -17,6 +43,8 @@ export class AccesibilidadComponent implements OnInit, OnDestroy {
   accessHazard: any[];
   accessControl: any[];
   accessApi: any[];
+
+  flag: boolean = false;
 
   constructor(
     private componentePrincipal: AppComponent,
@@ -27,67 +55,67 @@ export class AccesibilidadComponent implements OnInit, OnDestroy {
     this.loadAccesibilityData();
 
     this.accessFeatures = [
-      { label: 'Accessibility.accessibilityFeatures.alternativeText', value: false, code: '1' },
-      { label: 'Accessibility.accessibilityFeatures.annotations', value: false, code: '1' },
-      { label: 'Accessibility.accessibilityFeatures.printPageNumbers', value: false, code: '1' },
-      { label: 'Accessibility.accessibilityFeatures.audioDescription', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.bookmarks', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.readingOrder', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.captions', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.braille', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.rubyAnnotations', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.highContrastDisplay', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.chemML', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.tableOfContents', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.longDescription', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.describeMath', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.taggedPDF ', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.signLanguage', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.index', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.tactileGraphic', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.structuralNavigation', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.largePrint', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.tactileObject', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.synchronizedAudioText', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.latex', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.ttsMarkup', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.timingControl', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.mathML', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.unlocked', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.transcript', value: false, code: 'ac' },
-      { label: 'Accessibility.accessibilityFeatures.none', value: false, code: 'ac' },
+      { label: 'alternativeText', value: false, code: '1' },
+      { label: 'annotations', value: false, code: '1' },
+      { label: 'printPageNumbers', value: false, code: '1' },
+      { label: 'audioDescription', value: false, code: 'ac' },
+      { label: 'bookmarks', value: false, code: 'ac' },
+      { label: 'readingOrder', value: false, code: 'ac' },
+      { label: 'captions', value: false, code: 'ac' },
+      { label: 'braille', value: false, code: 'ac' },
+      { label: 'rubyAnnotations', value: false, code: 'ac' },
+      { label: 'highContrastDisplay', value: false, code: 'ac' },
+      { label: 'chemML', value: false, code: 'ac' },
+      { label: 'tableOfContents', value: false, code: 'ac' },
+      { label: 'longDescription', value: false, code: 'ac' },
+      { label: 'describeMath', value: false, code: 'ac' },
+      { label: 'taggedPDF ', value: false, code: 'ac' },
+      { label: 'signLanguage', value: false, code: 'ac' },
+      { label: 'index', value: false, code: 'ac' },
+      { label: 'tactileGraphic', value: false, code: 'ac' },
+      { label: 'structuralNavigation', value: false, code: 'ac' },
+      { label: 'largePrint', value: false, code: 'ac' },
+      { label: 'tactileObject', value: false, code: 'ac' },
+      { label: 'synchronizedAudioText', value: false, code: 'ac' },
+      { label: 'latex', value: false, code: 'ac' },
+      { label: 'ttsMarkup', value: false, code: 'ac' },
+      { label: 'timingControl', value: false, code: 'ac' },
+      { label: 'mathML', value: false, code: 'ac' },
+      { label: 'unlocked', value: false, code: 'ac' },
+      { label: 'transcript', value: false, code: 'ac' },
+      { label: 'none', value: false, code: 'ac' },
     ];
 
     this.accessHazard = [
-      { label: 'Accessibility.accessibilityHazard.flashingHazard', value: false, code: '1' },
-      { label: 'Accessibility.accessibilityHazard.noFlashingHazard', value: false, code: '1' },
-      { label: 'Accessibility.accessibilityHazard.motionSimulationHazard', value: false, code: '1' },
-      { label: 'Accessibility.accessibilityHazard.noMotionSimulationHazard', value: false, code: '1' },
-      { label: 'Accessibility.accessibilityHazard.soundHazard', value: false, code: '1' },
-      { label: 'Accessibility.accessibilityHazard.noSoundHazard', value: false, code: '1' }
+      { label: 'flashingHazard', value: false, code: '1' },
+      { label: 'noFlashingHazard', value: false, code: '1' },
+      { label: 'motionSimulationHazard', value: false, code: '1' },
+      { label: 'noMotionSimulationHazard', value: false, code: '1' },
+      { label: 'soundHazard', value: false, code: '1' },
+      { label: 'noSoundHazard', value: false, code: '1' }
     ]
 
     this.accessControl = [
-      { label: 'Accessibility.accessibilityControl.fullKeyboardControl', value: false, code: '1' },
-      { label: 'Accessibility.accessibilityControl.fullSwitchControl', value: false, code: '1' },
-      { label: 'Accessibility.accessibilityControl.fullMouseControl', value: false, code: '1' },
-      { label: 'Accessibility.accessibilityControl.fullTouchControl', value: false, code: '1' },
-      { label: 'Accessibility.accessibilityControl.fullVoiceControl', value: false, code: '1' },
-      { label: 'Accessibility.accessibilityControl.fullVideoControl', value: false, code: '1' },
+      { label: 'fullKeyboardControl', value: false, code: '1' },
+      { label: 'fullSwitchControl', value: false, code: '1' },
+      { label: 'fullMouseControl', value: false, code: '1' },
+      { label: 'fullTouchControl', value: false, code: '1' },
+      { label: 'fullVoiceControl', value: false, code: '1' },
+      { label: 'fullVideoControl', value: false, code: '1' },
     ]
 
     this.accessApi = [
-      { label: 'Accessibility.accessibilityAPI.aria', value: false, code: '1' },
-      { label: 'Accessibility.accessibilityAPI.androidAccessibility', value: false, code: '1' },
-      { label: 'Accessibility.accessibilityAPI.iosAccessibility', value: false, code: '1' },
-      { label: 'Accessibility.accessibilityAPI.atk', value: false, code: '1' },
-      { label: 'Accessibility.accessibilityAPI.javaAccessibility', value: false, code: '1' },
-      { label: 'Accessibility.accessibilityAPI.atSPI', value: false, code: '1' },
-      { label: 'Accessibility.accessibilityAPI.macOSXAccessibility', value: false, code: '1' },
-      { label: 'Accessibility.accessibilityAPI.blackberryAccessibility', value: false, code: '1' },
-      { label: 'Accessibility.accessibilityAPI.msaa', value: false, code: '1' },
-      { label: 'Accessibility.accessibilityAPI.iAccessible2', value: false, code: '1' },
-      { label: 'Accessibility.accessibilityAPI.uiAutomation', value: false, code: '1' }
+      { label: 'ARIA', value: false, code: '1' },
+      { label: 'androidAccessibility', value: false, code: '1' },
+      { label: 'iosAccessibility', value: false, code: '1' },
+      { label: 'ATK', value: false, code: '1' },
+      { label: 'javaAccessibility', value: false, code: '1' },
+      { label: 'AT-SPI', value: false, code: '1' },
+      { label: 'macOSXAccessibility', value: false, code: '1' },
+      { label: 'blackberryAccessibility', value: false, code: '1' },
+      { label: 'MSAA', value: false, code: '1' },
+      { label: 'iAccessible2', value: false, code: '1' },
+      { label: 'uiAutomation', value: false, code: '1' }
     ]
 
     this.objectOptions = this.componentePrincipal.objOptions;
@@ -96,20 +124,26 @@ export class AccesibilidadComponent implements OnInit, OnDestroy {
   }
 
   loadAccesibilityData() {
-    this.accesibilityObject = this.lompadService.objPricipal['accesibility'];
+    if (this.isEmpty(this.lompadService.objPricipal['accesibility'])) {
+      this.accesibilityObject = this.lompadService.objPricipal['accesibility'];
+      this.flag = true;
+    }
+
   }
 
   setAccesibilityData() {
-    this.description = this.accesibilityObject['description']['description'][0];
-    var accessF: [] = this.accesibilityObject['accessibilityFeatures']['resourceContent'];
-    var accessH: [] = this.accesibilityObject['accessibilityHazard']['properties'];
-    var accessC: [] = this.accesibilityObject['accessibilityControl']['methods'];
-    var accessA: [] = this.accesibilityObject['accessibilityApi']['compatibleResource'];
+    if (this.flag) {
+      this.description = this.accesibilityObject['description']['description'][0];
+      var accessF: [] = this.accesibilityObject['accessibilityFeatures']['resourceContent'];
+      var accessH: [] = this.accesibilityObject['accessibilityHazard']['properties'];
+      var accessC: [] = this.accesibilityObject['accessibilityControl']['methods'];
+      var accessA: [] = this.accesibilityObject['accessibilityApi']['compatibleResource'];
 
-    this.mapValues(accessF, this.accessFeatures);
-    this.mapValues(accessH, this.accessHazard);
-    this.mapValues(accessC, this.accessControl);
-    this.mapValues(accessA, this.accessApi);
+      this.mapValues(accessF, this.accessFeatures);
+      this.mapValues(accessH, this.accessHazard);
+      this.mapValues(accessC, this.accessControl);
+      this.mapValues(accessA, this.accessApi);
+    } 
   }
 
   mapValues(param: any[], local: any[]) {
@@ -138,6 +172,12 @@ export class AccesibilidadComponent implements OnInit, OnDestroy {
     this.accesibilityObject['accessibilityHazard']['properties'] = this.updateArray(this.accessHazard);
     this.accesibilityObject['accessibilityControl']['methods'] = this.updateArray(this.accessControl);
     this.accesibilityObject['accessibilityApi']['compatibleResource'] = this.updateArray(this.accessApi);
+  }
+
+  isEmpty(value: any[]) {
+    if (typeof value !== 'undefined' && value) {
+      return value;
+    };
   }
 
   ngOnDestroy(): void {
