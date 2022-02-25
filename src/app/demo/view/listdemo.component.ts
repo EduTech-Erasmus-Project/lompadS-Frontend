@@ -63,7 +63,7 @@ export class ListDemoComponent implements OnInit {
 
     onSortChange(event) {
         const value = event.value;
-        console.log("naty-< ",event.value);
+        // console.log("naty-< ",event.value);
 
         if (value.indexOf('!') === 0) {
             this.sortOrder = -1;

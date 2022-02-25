@@ -250,7 +250,7 @@ export class AppConfigComponent implements OnInit {
     }
 
     cambioIdioma(event){
-        console.log(event.value.name);
+        // console.log(event.value.name);
         this.translate.use(event.value.name);
     }
 

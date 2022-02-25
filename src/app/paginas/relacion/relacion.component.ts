@@ -58,7 +58,7 @@ export class RelacionComponent implements OnInit {
     ];
 
     this.objectOptions = this.componentePrincipal.objOptions;
-    console.log('[INFO]> Rights Component: ', this.relationObject);
+    // console.log('[INFO]> Rights Component: ', this.relationObject);
 
     this.setRelationData();
   }
@@ -90,7 +90,7 @@ export class RelacionComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    console.log('[INFO]> Destroy Relation');
+    // console.log('[INFO]> Destroy Relation');
 
     this.relationObject['resource']['catalog'][0] = this.resourceIdentifierCatalog;
     this.relationObject['resource']['entry'][0] = this.resourceIdentifierEntry;

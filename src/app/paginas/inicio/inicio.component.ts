@@ -84,7 +84,7 @@ export class InicioComponent implements OnInit {
       });
       
     } else {
-      // console.log('[ERROR] Inicio Component> Subir Archivo');
+      console.log('[ERROR] Inicio Component> Subir Archivo');
       this.appMain.staticMenuActive = false;
 
       this.messageService.clear();

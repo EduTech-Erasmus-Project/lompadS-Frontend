@@ -136,7 +136,7 @@ export class GeneralComponent implements OnInit, OnDestroy {
     ];
 
     this.objectOptions = this.componentePrincipal.objOptions;
-    console.log('[INFO]> General Component:', this.generalObject);
+    // console.log('[INFO]> General Component:', this.generalObject);
 
     this.setGeneralData();
   }
@@ -203,7 +203,7 @@ export class GeneralComponent implements OnInit, OnDestroy {
   }
 
   showInfo(key: any, value: any) {
-    console.log('[INFO] General>', key, ': ', value);
+    // console.log('[INFO] General>', key, ': ', value);
   }
 
   isEmpty(value: any[]) {
@@ -213,7 +213,7 @@ export class GeneralComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('[INFO]> Destroy General');
+    // console.log('[INFO]> Destroy General');
 
     this.generalObject['identifier']['catalog'][0] = this.identifierCatalog[0];
     this.generalObject['identifier']['entry'][0] = this.identifierEntry[0];

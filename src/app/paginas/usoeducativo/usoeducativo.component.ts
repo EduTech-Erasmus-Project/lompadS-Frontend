@@ -160,7 +160,7 @@ export class UsoeducativoComponent implements OnInit {
     ];
 
     this.objectOptions = this.componentePrincipal.objOptions;
-    console.log('[INFO]> Educational Component: ', this.educationalObject);
+    // console.log('[INFO]> Educational Component: ', this.educationalObject);
 
     this.setEducationalData();
   }
@@ -237,7 +237,7 @@ export class UsoeducativoComponent implements OnInit {
 
   castTime(duration: string) {
     try {
-      console.log('duracion', duration)
+      // console.log('duracion', duration)
       var auxDuration1 = duration.split('DT')[0];
       var auxDuration2 = duration.split('DT')[1];
 
@@ -265,7 +265,7 @@ export class UsoeducativoComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    console.log('[INFO]> Destroy Educational');
+    // console.log('[INFO]> Destroy Educational');
     
     this.educationalObject['typicalAgeRange']['typicalAgeRange'][0] = this.typicalAgeRange;
     this.educationalObject['description']['description'][0] = this.description;

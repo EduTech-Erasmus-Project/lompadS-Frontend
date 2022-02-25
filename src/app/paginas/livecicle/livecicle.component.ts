@@ -80,7 +80,7 @@ export class LivecicleComponent implements OnInit, OnDestroy {
     ];
 
     this.objectOptions = this.componentePrincipal.objOptions;
-    console.log('[INFO]> LifeCycle Component:', this.lifeCycleObject);
+    // console.log('[INFO]> LifeCycle Component:', this.lifeCycleObject);
 
     this.setLifeCycleData();
   }

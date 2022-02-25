@@ -61,7 +61,7 @@ export class MetadatosComponent implements OnInit {
     ];
 
     this.objectOptions = this.componentePrincipal.objOptions;
-    console.log('[INFO]> Metametadata Component: ', this.metametadataObject);
+    // console.log('[INFO]> Metametadata Component: ', this.metametadataObject);
 
     this.setMetametadataData();
   }
@@ -155,7 +155,7 @@ export class MetadatosComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    console.log('[INFO]> Destroy Meta-Metadata');
+    // console.log('[INFO]> Destroy Meta-Metadata');
 
     this.metametadataObject['identifier']['catalog'][0] = this.identifierCatalog;
     this.metametadataObject['identifier']['entry'][0] = this.identifierEntry;
