@@ -11,29 +11,19 @@ import { ObjOptions } from '../../modelo/objOptions';
 export class AccesibilidadComponent implements OnInit, OnDestroy {
   accesibilityObject: any = {
     "accessibilityApi": {
-      "compatibleResource":[
-
-      ]
+      "compatibleResource":[]
     },
     "accessibilityControl": {
-      "methods":[
-        
-      ]
+      "methods":[]
     },
     "accessibilityFeatures": {
-      "resourceContent":[
-        
-      ]
+      "resourceContent":[]
     },
     "accessibilityHazard": {
-      "properties":[
-        
-      ]
+      "properties":[]
     },
     "description": {
-      "description":[
-
-      ]
+      "description":[]
     }
   };
   objectOptions: ObjOptions = new ObjOptions();
@@ -128,7 +118,6 @@ export class AccesibilidadComponent implements OnInit, OnDestroy {
       this.accesibilityObject = this.lompadService.objPricipal['accesibility'];
       this.flag = true;
     }
-
   }
 
   setAccesibilityData() {

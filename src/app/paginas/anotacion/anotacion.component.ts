@@ -9,7 +9,30 @@ import { LompadService } from '../../servicios/lompad.service';
   styleUrls: ['./anotacion.component.css']
 })
 export class AnotacionComponent implements OnInit {
-  annotationObject: any;
+  annotationObject: any = {
+    "entity": {
+      "entity": []
+    },
+    "date": {
+      "dateTime": [],
+      "description": []
+    },
+    "description": {
+      "description": []
+    },
+    "modeAccess": {
+      "source": [],
+      "value": []
+    },
+    "modeAccessSufficient": {
+      "source": [],
+      "value": []
+    },
+    "rol": {
+      "source": [],
+      "value": []
+    }
+  };
   objectOptions: ObjOptions = new ObjOptions();
 
   // Listas predefinidas
@@ -30,6 +53,8 @@ export class AnotacionComponent implements OnInit {
   entityEmail: string;
   entityOrganization: string;
   date: any;
+
+  flag: boolean = false;
 
   constructor(
     private componentePrincipal: AppComponent,
@@ -66,16 +91,25 @@ export class AnotacionComponent implements OnInit {
   }
 
   loadAnnotationData() {
-    this.annotationObject = this.lompadservice.objPricipal['annotation'];
+    if (this.isEmpty(this.lompadservice.objPricipal['annotation'])) {
+      this.annotationObject = this.lompadservice.objPricipal['annotation'];
+      this.flag = true;
+    }
   }
 
   setAnnotationData() {
-    this.castVcard(this.annotationObject['entity']['entity'][0]);
-    this.date = new Date(this.annotationObject['date']['dateTime'][0]);
-    this.description = this.annotationObject['description']['description'][0];
-    this.accessModeSelected = this.annotationObject['modeAccess']['value'][0];
-    this.accessModeSufficientSelected = this.annotationObject['modeAccessSufficient']['value'][0];
-    this.rolSelected = this.annotationObject['rol']['value'][0];
+    if (this.flag) {
+      if (this.annotationObject['entity']['entity'][0] != undefined) {
+        this.castVcard(this.annotationObject['entity']['entity'][0]); 
+      }
+      if (this.annotationObject['date']['dateTime'][0] != undefined) {
+        this.date = new Date(this.annotationObject['date']['dateTime'][0]);
+      }
+      this.description = this.annotationObject['description']['description'][0];
+      this.accessModeSelected = this.annotationObject['modeAccess']['value'][0];
+      this.accessModeSufficientSelected = this.annotationObject['modeAccessSufficient']['value'][0];
+      this.rolSelected = this.annotationObject['rol']['value'][0];
+    }
   }
 
   castVcard(card: string) {//lanzar desde ngOninit    
@@ -94,9 +128,9 @@ export class AnotacionComponent implements OnInit {
     const morg = organizationExpression.exec(card);
     const mmail = emailExpression.exec(card);
 
-    console.log(mname?.[1]);
-    console.log(morg?.[1]);
-    console.log(mmail?.[1]);
+    // console.log(mname?.[1]);
+    // console.log(morg?.[1]);
+    // console.log(mmail?.[1]);
 
     var nombre = mname?.[1];
     var listnombreApell = nombre.split(' ');
@@ -107,6 +141,22 @@ export class AnotacionComponent implements OnInit {
   }
 
   updateVcard() {//lanzar desde ngOnDestroy
+    if (this.entityLastname == undefined) {
+      this.entityLastname = '';
+    }
+
+    if (this.entityName == undefined) {
+      this.entityName = '';
+    }
+
+    if (this.entityEmail == undefined) {
+      this.entityEmail = '';
+    }
+
+    if (this.entityOrganization == undefined) {
+      this.entityOrganization = '';
+    }
+
     const card = `BEGIN:VCARD\nVERSION:3.0
     N:${this.entityLastname.trim()};${this.entityName.trim()};;;
     FN:${this.entityName.trim()} ${this.entityLastname.trim()}
@@ -129,11 +179,19 @@ export class AnotacionComponent implements OnInit {
     this.annotationObject['rol']['value'][0] = this.rolSelected;
   }
 
+  isEmpty(value: any[]) {
+    if (typeof value !== 'undefined' && value) {
+      return value;
+    };
+  }
+
   ngOnDestroy(): void {
     console.log('[INFO]> Destroy Annotation');
 
     this.updateVcard();
-    this.annotationObject['date']['dateTime'][0] = this.date.toISOString();
+    if (this.date != undefined) {
+      this.annotationObject['date']['dateTime'][0] = this.date.toISOString();
+    }
     this.annotationObject['description']['description'][0] = this.description;
 
     this.lompadservice.objPricipal['annotation'] = this.annotationObject;

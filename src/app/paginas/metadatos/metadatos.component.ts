@@ -9,7 +9,25 @@ import { LompadService } from '../../servicios/lompad.service';
   styleUrls: ['./metadatos.component.css']
 })
 export class MetadatosComponent implements OnInit {
-  metametadataObject: any;
+  metametadataObject: any = {
+    "identifier": {
+      "catalog": [],
+      "entry": []
+    },
+    "metadataSchema": {
+      "metadataSchema": []
+    },
+    "language": {
+      "language": []
+    },
+    "contribute": {
+      "source": [],
+      "value": [],
+      "entity": [],
+      "date": [],
+      "description": []
+    }
+  };
   objectOptions: ObjOptions = new ObjOptions();
 
   // Listas predefinidas
@@ -26,6 +44,8 @@ export class MetadatosComponent implements OnInit {
   entityOrganization: string;
   date: any;
   metadataSchema: string;
+
+  flag: boolean = false;
 
   constructor(
     private componentePrincipal: AppComponent,
@@ -47,16 +67,25 @@ export class MetadatosComponent implements OnInit {
   }
 
   loadMetametadataData() {
-    this.metametadataObject = this.lompadservice.objPricipal['metaMetadata'];
+    if (this.isEmpty(this.lompadservice.objPricipal['metaMetadata'])) {
+      this.metametadataObject = this.lompadservice.objPricipal['metaMetadata'];
+      this.flag = true;
+    }
   }
 
   setMetametadataData() {
-    this.identifierCatalog = this.metametadataObject['identifier']['catalog'][0];
-    this.identifierEntry = this.metametadataObject['identifier']['entry'][0];
-    this.roleSelected = this.metametadataObject['contribute']['value'][0];
-    this.castVcard(this.metametadataObject['contribute']['entity'][0]);
-    this.date = new Date(this.metametadataObject['contribute']['date'][0]);
-    this.metadataSchema = this.metametadataObject['metadataSchema']['metadataSchema'][0];
+    if (this.flag) {
+      this.identifierCatalog = this.metametadataObject['identifier']['catalog'][0];
+      this.identifierEntry = this.metametadataObject['identifier']['entry'][0];
+      this.roleSelected = this.metametadataObject['contribute']['value'][0];
+      if (this.metametadataObject['contribute']['entity'][0] != undefined) {
+        this.castVcard(this.metametadataObject['contribute']['entity'][0]); 
+      }
+      if (this.metametadataObject['contribute']['date'][0] != undefined) {
+        this.date = new Date(this.metametadataObject['contribute']['date'][0]);
+      }
+      this.metadataSchema = this.metametadataObject['metadataSchema']['metadataSchema'][0];
+    }
   }
 
   castVcard(card: string) {//lanzar desde ngOninit    
@@ -76,9 +105,9 @@ export class MetadatosComponent implements OnInit {
     const morg = organizationExpression.exec(card);
     const mmail = emailExpression.exec(card);
 
-    console.log(mname?.[1]);
-    console.log(morg?.[1]);
-    console.log(mmail?.[1]);
+    // console.log(mname?.[1]);
+    // console.log(morg?.[1]);
+    // console.log(mmail?.[1]);
 
     var nombre = mname?.[1];
     var listnombreApell = nombre.split(' ');
@@ -89,6 +118,22 @@ export class MetadatosComponent implements OnInit {
   }
 
   updateVcard() {//lanzar desde ngOnDestroy
+    if (this.entityLastname == undefined) {
+      this.entityLastname = '';
+    }
+
+    if (this.entityName == undefined) {
+      this.entityName = '';
+    }
+
+    if (this.entityEmail == undefined) {
+      this.entityEmail = '';
+    }
+
+    if (this.entityOrganization == undefined) {
+      this.entityOrganization = '';
+    }
+
     const card = `BEGIN:VCARD\nVERSION:3.0
     N:${this.entityLastname.trim()};${this.entityName.trim()};;;
     FN:${this.entityName.trim()} ${this.entityLastname.trim()}
@@ -103,13 +148,21 @@ export class MetadatosComponent implements OnInit {
     this.metametadataObject['contribute']['value'][0] = this.roleSelected;
   }
 
+  isEmpty(value: any[]) {
+    if (typeof value !== 'undefined' && value) {
+      return value;
+    };
+  }
+
   ngOnDestroy(): void {
     console.log('[INFO]> Destroy Meta-Metadata');
 
     this.metametadataObject['identifier']['catalog'][0] = this.identifierCatalog;
     this.metametadataObject['identifier']['entry'][0] = this.identifierEntry;
     this.updateVcard();
-    this.metametadataObject['contribute']['date'][0] = this.date.toISOString();
+    if (this.date != undefined) {
+      this.metametadataObject['contribute']['date'][0] = this.date.toISOString();
+    }
     this.metametadataObject['metadataSchema']['metadataSchema'][0] = this.metadataSchema;
 
     this.lompadservice.objPricipal['metaMetadata'] = this.metametadataObject;

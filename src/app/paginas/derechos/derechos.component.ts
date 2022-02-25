@@ -9,7 +9,24 @@ import { LompadService } from '../../servicios/lompad.service';
   styleUrls: ['./derechos.component.css']
 })
 export class DerechosComponent implements OnInit {
-  rightsObject: any;
+  rightsObject: any = {
+    "cost": {
+      "source": [],
+      "value": []
+    },
+    "copyrightAndOtherRestrictions": {
+      "source": [],
+      "value": []
+    },
+    "description": {
+      "description": []
+    },
+    "access": {
+      "source": [],
+      "value": [],
+      "description": []
+    }
+  };
   objectOptions: ObjOptions = new ObjOptions();
 
   // Listas predefinidas
@@ -22,6 +39,8 @@ export class DerechosComponent implements OnInit {
 
   // Referentes a los valores
   description: string;
+
+  flag: boolean = false;
 
   constructor(
     private componentePrincipal: AppComponent,
@@ -48,13 +67,18 @@ export class DerechosComponent implements OnInit {
   }
 
   loadRightsData() {
-    this.rightsObject = this.lompadservice.objPricipal['rights'];
+    if (this.isEmpty(this.lompadservice.objPricipal['rights'])) {
+      this.rightsObject = this.lompadservice.objPricipal['rights'];
+      this.flag = true;
+    }
   }
 
   setRightsData() {
-    this.description = this.rightsObject['description']['description'][0];
-    this.costSelected = this.rightsObject['cost']['value'][0];
-    this.copyrightSelected = this.rightsObject['copyrightAndOtherRestrictions']['value'][0];
+    if (this.flag) {
+      this.description = this.rightsObject['description']['description'][0];
+      this.costSelected = this.rightsObject['cost']['value'][0];
+      this.copyrightSelected = this.rightsObject['copyrightAndOtherRestrictions']['value'][0];
+    }
   }
 
   changeCost() {
@@ -63,6 +87,12 @@ export class DerechosComponent implements OnInit {
 
   changeCopyright() {
     this.rightsObject['copyrightAndOtherRestrictions']['value'][0] = this.copyrightSelected;
+  }
+
+  isEmpty(value: any[]) {
+    if (typeof value !== 'undefined' && value) {
+      return value;
+    };
   }
 
   ngOnDestroy(): void {

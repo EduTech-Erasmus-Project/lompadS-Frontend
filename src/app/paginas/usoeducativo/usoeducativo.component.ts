@@ -9,7 +9,49 @@ import { LompadService } from '../../servicios/lompad.service';
   styleUrls: ['./usoeducativo.component.css']
 })
 export class UsoeducativoComponent implements OnInit {
-  educationalObject: any;
+  educationalObject: any = {
+    "interactivityType": {
+      "source": [],
+      "value": []
+    },
+    "learningResourceType": {
+      "source": [],
+      "value": []
+    },
+    "interactivityLevel": {
+      "source": [],
+      "value": []
+    },
+    "intendedEndUserRole": {
+      "source": [],
+      "value": []
+    },
+    "semanticDensity": {
+      "source": [],
+      "value": []
+    },
+    "context": {
+      "source": [],
+      "value": []
+    },
+    "difficulty": {
+      "source": [],
+      "value": []
+    },
+    "description": {
+      "description": []
+    },
+    "typicalAgeRange": {
+      "typicalAgeRange": []
+    },
+    "typicalLearningTime": {
+      "duration": [],
+      "description": []
+    },
+    "language": {
+      "language": []
+    }
+  };
   objectOptions: ObjOptions = new ObjOptions();
 
   // Listas predefinidas
@@ -37,6 +79,8 @@ export class UsoeducativoComponent implements OnInit {
 
   // Referente a los valores
   description: string;
+
+  flag: boolean = false;
 
   typicalAgeRange: number;
   years: number;
@@ -122,20 +166,45 @@ export class UsoeducativoComponent implements OnInit {
   }
 
   loadEducationalData() {
-    this.educationalObject = this.lompadservice.objPricipal['educational'];
+    if (this.isEmpty(this.lompadservice.objPricipal['educational'])) {
+      this.educationalObject = this.lompadservice.objPricipal['educational'];
+      this.flag = true;
+    }
   }
 
   setEducationalData() {
-    this.interactivityTypeSelected = this.educationalObject['interactivityType']['value'][0];
-    this.learningResourceTypeSelected = this.educationalObject['learningResourceType']['value'][0];
-    this.interactivityLevelSelected = this.educationalObject['interactivityLevel']['value'][0];
-    this.semanticDensitySelected = this.educationalObject['semanticDensity']['value'][0];
-    this.intendedEndUserRoleSelected = this.educationalObject['intendedEndUserRole']['value'][0];
-    this.contextSelected = this.educationalObject['context']['value'][0];
-    this.typicalAgeRange = this.educationalObject['typicalAgeRange']['typicalAgeRange'][0];
-    this.difficultySelected = this.educationalObject['difficulty']['value'][0];
-    this.castTime(this.educationalObject['typicalLearningTime']['duration'][0]);
-    this.description = this.educationalObject['description']['description'][0];
+    if (this.flag) {
+      if (this.educationalObject['interactivityType']['value'] != undefined) {
+        this.interactivityTypeSelected = this.educationalObject['interactivityType']['value'][0]; 
+      }
+      if (this.educationalObject['learningResourceType']['value'] != undefined) {
+        this.learningResourceTypeSelected = this.educationalObject['learningResourceType']['value'][0]; 
+      }
+      if (this.educationalObject['interactivityLevel']['value'] != undefined) {
+        this.interactivityLevelSelected = this.educationalObject['interactivityLevel']['value'][0];
+      }
+      if (this.educationalObject['semanticDensity']['value'] != undefined) {
+        this.semanticDensitySelected = this.educationalObject['semanticDensity']['value'][0];
+      }
+      if (this.educationalObject['intendedEndUserRole']['value'] != undefined) {
+        this.intendedEndUserRoleSelected = this.educationalObject['intendedEndUserRole']['value'][0];
+      }
+      if (this.educationalObject['context']['value'] != undefined) {
+        this.contextSelected = this.educationalObject['context']['value'][0];
+      }
+      if (this.educationalObject['typicalAgeRange']['typicalAgeRange'] != undefined) {
+        this.typicalAgeRange = this.educationalObject['typicalAgeRange']['typicalAgeRange'][0];
+      }
+      if (this.educationalObject['difficulty']['value'] != undefined) {
+        this.difficultySelected = this.educationalObject['difficulty']['value'][0]; 
+      }
+      if (this.educationalObject['typicalLearningTime']['duration'][0] != undefined) {
+        this.castTime(this.educationalObject['typicalLearningTime']['duration'][0]); 
+      }
+      if (this.educationalObject['description']['description'] != undefined) {
+        this.description = this.educationalObject['description']['description'][0]; 
+      }
+    }
   }
 
   changeInteractivityType() {
@@ -168,6 +237,7 @@ export class UsoeducativoComponent implements OnInit {
 
   castTime(duration: string) {
     try {
+      console.log('duracion', duration)
       var auxDuration1 = duration.split('DT')[0];
       var auxDuration2 = duration.split('DT')[1];
 
@@ -186,6 +256,12 @@ export class UsoeducativoComponent implements OnInit {
 
   saveTime() {
     this.educationalObject['typicalLearningTime']['duration'][0] = 'P' + this.years + 'Y' + this.months + 'M' + this.days + 'DT' + this.hours + 'H' + this.minutes + 'M';
+  }
+
+  isEmpty(value: any[]) {
+    if (typeof value !== 'undefined' && value) {
+      return value;
+    };
   }
 
   ngOnDestroy(): void {

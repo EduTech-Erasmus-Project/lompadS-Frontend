@@ -9,7 +9,22 @@ import { LompadService } from '../../servicios/lompad.service';
   styleUrls: ['./livecicle.component.css']
 })
 export class LivecicleComponent implements OnInit, OnDestroy {
-  lifeCycleObject: any;
+  lifeCycleObject: any = {
+    "version": {
+      "version": []
+    },
+    "status": {
+      "source": [],
+      "value": []
+    },
+    "contribute": {
+      "source": [],
+      "role": [],
+      "entity": [],
+      "dateTime": [],
+      "description": []
+    }
+  };
   objectOptions: ObjOptions = new ObjOptions();
 
   // Listas predefinidas
@@ -28,6 +43,8 @@ export class LivecicleComponent implements OnInit, OnDestroy {
   entityOrganization: string;
   date: Date;
   dateDescription: string;
+
+  flag: boolean = false;
 
   constructor(
     private componentePrincipal: AppComponent,
@@ -69,16 +86,25 @@ export class LivecicleComponent implements OnInit, OnDestroy {
   }
 
   loadLifeCycleData() {
-    this.lifeCycleObject = this.lompadservice.objPricipal['lifeCycle'];
+    if (this.isEmpty(this.lompadservice.objPricipal['lifeCycle'])) {
+      this.lifeCycleObject = this.lompadservice.objPricipal['lifeCycle'];
+      this.flag = true;
+    }
   }
 
   setLifeCycleData() {
-    this.version = this.lifeCycleObject['version']['version'][0];
-    this.statusSelected = this.lifeCycleObject['status']['value'][0];
-    this.roleSelected = this.lifeCycleObject['contribute']['role'][0];
-    this.castVcard(this.lifeCycleObject['contribute']['entity'][0]);
-    this.date = new Date(this.lifeCycleObject['contribute']['dateTime'][0]);
-    this.dateDescription = this.lifeCycleObject['contribute']['description'][0];
+    if (this.flag) {
+      this.version = this.lifeCycleObject['version']['version'][0];
+      this.statusSelected = this.lifeCycleObject['status']['value'][0];
+      this.roleSelected = this.lifeCycleObject['contribute']['role'][0];
+      if (this.lifeCycleObject['contribute']['entity'][0] != undefined) {
+        this.castVcard(this.lifeCycleObject['contribute']['entity'][0]); 
+      }
+      if (this.lifeCycleObject['contribute']['dateTime'][0] != undefined) {
+        this.date = new Date(this.lifeCycleObject['contribute']['dateTime'][0]); 
+      }
+      this.dateDescription = this.lifeCycleObject['contribute']['description'][0];
+    }
   }
 
   castVcard(card: string) {//lanzar desde ngOninit    
@@ -98,9 +124,9 @@ export class LivecicleComponent implements OnInit, OnDestroy {
     const morg = organizationExpression.exec(card);
     const mmail = emailExpression.exec(card);
 
-    console.log(mname?.[1]);
-    console.log(morg?.[1]);
-    console.log(mmail?.[1]);
+    // console.log(mname?.[1]);
+    // console.log(morg?.[1]);
+    // console.log(mmail?.[1]);
 
     var nombre = mname?.[1];
     var listnombreApell = nombre.split(' ');
@@ -111,11 +137,27 @@ export class LivecicleComponent implements OnInit, OnDestroy {
   }
 
   updateVcard() {//lanzar desde ngOnDestroy
+    if (this.entityLastname == undefined) {
+      this.entityLastname = '';
+    }
+
+    if (this.entityName == undefined) {
+      this.entityName = '';
+    }
+
+    if (this.entityEmail == undefined) {
+      this.entityEmail = '';
+    }
+
+    if (this.entityOrganization == undefined) {
+      this.entityOrganization = '';
+    }
+
     const card = `BEGIN:VCARD\nVERSION:3.0
-    N:${this.entityLastname.trim()};${this.entityName.trim()};;;
-    FN:${this.entityName.trim()} ${this.entityLastname.trim()}
-    EMAIL;TYPE=INTERNET:${this.entityEmail.trim()}
-    ORG:${this.entityOrganization.trim()}
+    N:${this.entityLastname?.trim()};${this.entityName?.trim()};;;
+    FN:${this.entityName?.trim()} ${this.entityLastname?.trim()}
+    EMAIL;TYPE=INTERNET:${this.entityEmail?.trim()}
+    ORG:${this.entityOrganization?.trim()}
     END:VCARD`;
 
     this.lifeCycleObject['contribute']['entity'][0] = card;
@@ -129,12 +171,20 @@ export class LivecicleComponent implements OnInit, OnDestroy {
     this.lifeCycleObject['contribute']['role'][0] = this.roleSelected;
   }
 
+  isEmpty(value: any[]) {
+    if (typeof value !== 'undefined' && value) {
+      return value;
+    };
+  }
+
   ngOnDestroy(): void {
     console.log('[INFO]> Destroy LifeCycle');
 
-    this.lifeCycleObject['version']['version'][0] = this.version;
+    this.lifeCycleObject['version']['version'][0] = this.version; 
     this.updateVcard();
-    this.lifeCycleObject['contribute']['dateTime'][0] = this.date.toISOString();
+    if (this.date != undefined) {
+      this.lifeCycleObject['contribute']['dateTime'][0] = this.date.toISOString();
+    }
     this.lifeCycleObject['contribute']['description'][0] = this.dateDescription;
 
     this.lompadservice.objPricipal['lifeCycle'] = this.lifeCycleObject;

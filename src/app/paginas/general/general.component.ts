@@ -184,7 +184,7 @@ export class GeneralComponent implements OnInit, OnDestroy {
   }
 
   saveNewKeyword() {
-    console.log(this.word);
+    // console.log(this.word);
     this.keywordDialog = false;
     this.keywords.push(this.word);
     this.word = '';

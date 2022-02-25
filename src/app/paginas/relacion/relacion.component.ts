@@ -9,7 +9,17 @@ import { LompadService } from '../../servicios/lompad.service';
   styleUrls: ['./relacion.component.css']
 })
 export class RelacionComponent implements OnInit {
-  relationObject: any;
+  relationObject: any = {
+    "kind": {
+      "source": [],
+      "value": []
+    },
+    "resource": {
+      "catalog": [],
+      "entry": [],
+      "description": []
+    }
+  };
   objectOptions: ObjOptions = new ObjOptions();
   
   // Listas predefinidas
@@ -21,6 +31,8 @@ export class RelacionComponent implements OnInit {
   resourceIdentifierCatalog: any;
   resourceIdentifierEntry: any;
   resourceDescription: any;
+
+  flag: boolean = false;
 
   constructor(
     private componentePrincipal: AppComponent,
@@ -52,18 +64,29 @@ export class RelacionComponent implements OnInit {
   }
 
   loadRelationData() {
-    this.relationObject = this.lompadservice.objPricipal['relation'];
+    if (this.isEmpty(this.lompadservice.objPricipal['relation'])) {
+      this.relationObject = this.lompadservice.objPricipal['relation'];
+      this.flag = true;
+    }
   }
 
   setRelationData() {
-    this.kindSelected = this.relationObject['kind']['value'][0];
-    this.resourceIdentifierCatalog = this.relationObject['resource']['catalog'][0];
-    this.resourceIdentifierEntry = this.relationObject['resource']['entry'][0];
-    this.resourceDescription = this.relationObject['resource']['description'][0];
+    if (this.flag) {
+      this.kindSelected = this.relationObject['kind']['value'][0];
+      this.resourceIdentifierCatalog = this.relationObject['resource']['catalog'][0];
+      this.resourceIdentifierEntry = this.relationObject['resource']['entry'][0];
+      this.resourceDescription = this.relationObject['resource']['description'][0];
+    }
   }
 
   changeKind() {
     this.relationObject['kind']['value'][0] = this.kindSelected;
+  }
+
+  isEmpty(value: any[]) {
+    if (typeof value !== 'undefined' && value) {
+      return value;
+    };
   }
 
   ngOnDestroy(): void {

@@ -9,7 +9,23 @@ import { LompadService } from '../../servicios/lompad.service';
   styleUrls: ['./clasificacion.component.css']
 })
 export class ClasificacionComponent implements OnInit {
-  classificationObject: any;
+  classificationObject: any = {
+    "purpose": {
+      "source": [],
+      "value": []
+    },
+    "taxonPath": {
+      "source": [],
+      "id": [],
+      "entry": []
+    },
+    "description": {
+      "description": []
+    },
+    "keyword": {
+      "keyword": []
+    }
+  };
   objectOptions: ObjOptions = new ObjOptions();
 
   // Listas predefinidas
@@ -22,6 +38,8 @@ export class ClasificacionComponent implements OnInit {
   taxonPathId: string;
   taxonPathSource: string;
   description: string;
+
+  flag: boolean = false;
   
   constructor(
     private componentePrincipal: AppComponent,
@@ -50,19 +68,30 @@ export class ClasificacionComponent implements OnInit {
   }
 
   loadClassificationData() {
-    this.classificationObject = this.lompadService.objPricipal['classification'];
+    if (this.isEmpty(this.lompadService.objPricipal['classification'])) {
+      this.classificationObject = this.lompadService.objPricipal['classification'];
+      this.flag = true;
+    }
   }
 
   setClassificationData() {
-    this.purposeSelected = this.classificationObject['purpose']['value'][0];
-    this.taxonPathEntry = this.classificationObject['taxonPath']['entry'][0];
-    this.taxonPathId = this.classificationObject['taxonPath']['id'][0];
-    this.taxonPathSource = this.classificationObject['taxonPath']['source'][0];
-    this.description = this.classificationObject['description']['description'][0];
+    if (this.flag) {
+      this.purposeSelected = this.classificationObject['purpose']['value'][0];
+      this.taxonPathEntry = this.classificationObject['taxonPath']['entry'][0];
+      this.taxonPathId = this.classificationObject['taxonPath']['id'][0];
+      this.taxonPathSource = this.classificationObject['taxonPath']['source'][0];
+      this.description = this.classificationObject['description']['description'][0];
+    }
   }
 
   changePurpose() {
     this.classificationObject['purpose']['value'][0] = this.purposeSelected;
+  }
+
+  isEmpty(value: any[]) {
+    if (typeof value !== 'undefined' && value) {
+      return value;
+    };
   }
 
   ngOnDestroy(): void {
