@@ -1,5 +1,4 @@
-import { Component, OnInit, enableProdMode } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 import { ObjOptions } from 'src/app/modelo/objOptions';
 import { LompadService } from '../../servicios/lompad.service';
@@ -10,62 +9,99 @@ import { LompadService } from '../../servicios/lompad.service';
   styleUrls: ['./derechos.component.css']
 })
 export class DerechosComponent implements OnInit {
-  decision:any[];
-  coste:any[];
-  decisionSelect:string;
-  costeSelect:string;
-  objderechos:any;
-  
-  ObjOptions:ObjOptions=new ObjOptions();
+  rightsObject: any = {
+    "cost": {
+      "source": [],
+      "value": []
+    },
+    "copyrightAndOtherRestrictions": {
+      "source": [],
+      "value": []
+    },
+    "description": {
+      "description": []
+    },
+    "access": {
+      "source": [],
+      "value": [],
+      "description": []
+    }
+  };
+  objectOptions: ObjOptions = new ObjOptions();
+
+  // Listas predefinidas
+  costOptions: any[];
+  costSelected: string;
+
+  copyrightOptions: any[];
+  copyrightSelected: string;
+  // -----
+
+  // Referentes a los valores
+  description: string;
+
+  flag: boolean = false;
+
   constructor(
     private componentePrincipal: AppComponent,
-    private lompadservice:LompadService
+    private lompadservice: LompadService
   ) { }
 
-  loadDatos(){
-    this.objderechos=this.lompadservice.objPricipal['DATA']['rights'];
-  }
-     
-     
-  ngOnDestroy():void {
-    console.log("Destroy Derechos");    
-    this.lompadservice.objPricipal['DATA']['rights']=this.objderechos;
-    this.lompadservice.saveObjectLompad(this.objderechos,"rights");  
-  } 
-          
   ngOnInit(): void {
-    this.loadDatos();
-    this.decision=[
-      {label: 'si', value: 'yes', code: 'yes'},
-      {label: 'no', value: 'no', code: 'no'}
+    this.loadRightsData();
+
+    this.costOptions = [
+      { label: 'Rights.yes', value: 'yes', code: 'yes' },
+      { label: 'Rights.no', value: 'no', code: 'no' }
     ];
-    this.coste=[
-      {label: 'si', value: 'yes', code: 'yes'},
-      {label: 'no', value: 'no', code: 'no'}
+
+    this.copyrightOptions = [
+      { label: 'Rights.yes', value: 'yes', code: 'yes' },
+      { label: 'Rights.no', value: 'no', code: 'no' }
     ];
-    // this.objderechos=this.lompadservice.getDerechos();
-    console.log("DEsde Derechos: ",this.objderechos);
-    this.ObjOptions=this.componentePrincipal.objOptions;
-    this.costeSelect=this.objderechos['Cost'];
-    this.decisionSelect=this.objderechos['Copyright and Other Restrictions'];     
+    
+    console.log('[INFO]> Rights Component: ', this.rightsObject);
+    this.objectOptions = this.componentePrincipal.objOptions;
+
+    this.setRightsData();
   }
 
-
-  
-    
-  cambio_costeSelect(){
-    console.log(this.costeSelect);
-    this.objderechos['Cost']=this.costeSelect;
+  loadRightsData() {
+    if (this.isEmpty(this.lompadservice.objPricipal['rights'])) {
+      this.rightsObject = this.lompadservice.objPricipal['rights'];
+      this.flag = true;
+    }
   }
 
-  cambio_decisionSelect(){
-    console.log(this.decisionSelect);
-    this.objderechos['Copyright and Other Restrictions']=this.decisionSelect;    
+  setRightsData() {
+    if (this.flag) {
+      this.description = this.rightsObject['description']['description'][0];
+      this.costSelected = this.rightsObject['cost']['value'][0];
+      this.copyrightSelected = this.rightsObject['copyrightAndOtherRestrictions']['value'][0];
+    }
   }
-    
-    
-  // saveInfo(){
-  //   this.lompadservice.setDerechos(this.objderechos);
-  // }
+
+  changeCost() {
+    this.rightsObject['cost']['value'][0] = this.costSelected;
+  }
+
+  changeCopyright() {
+    this.rightsObject['copyrightAndOtherRestrictions']['value'][0] = this.copyrightSelected;
+  }
+
+  isEmpty(value: any[]) {
+    if (typeof value !== 'undefined' && value) {
+      return value;
+    };
+  }
+
+  ngOnDestroy(): void {
+    console.log('[INFO]> Destroy Rights');
+
+    this.rightsObject['description']['description'][0] = this.description;
+
+    this.lompadservice.objPricipal['rights'] = this.rightsObject;
+    this.lompadservice.sendNewMetadata(this.rightsObject, 'rights');
+  }
 
 }

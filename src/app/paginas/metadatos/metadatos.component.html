@@ -1,34 +1,34 @@
 <div class="p-grid">
 
-    <div *ngIf="ObjOptions.o3_1" class="p-col-12">
-        <h5>{{"Idetificador" | translate }}</h5>
+    <!-- [Temp] Contiene: Identificador (3.1) -->
+    <div *ngIf="objectOptions.o3_1" class="p-col-12">
+        <h5>3.1 - {{"Common.identifier.identifier" | translate }}</h5>
 
         <div class="card">
             <div class="p-fluid p-formgrid p-grid">
-                <label for="catalogo" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Catálogo" | translate }}</label>
+                <label for="catalogo" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Common.identifier.catalog" | translate }}</label>
                 <div class="p-field p-col">
-                    <input [(ngModel)]='objMetadatos["Identifier"]["Catalog"]' id="catalogo" type="text" pInputText>
+                    <input [(ngModel)]='identifierCatalog' id="catalogo" type="text" pInputText>
                 </div>
-                <label for="entrada" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Entrada" | translate}}</label>
+                <label for="entrada" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Common.identifier.entry" | translate}}</label>
                 <div class="p-field p-col">
-                    <input id="entrada" [(ngModel)]='objMetadatos["Identifier"]["Schema"]' type="text" pInputText>
+                    <input id="entrada" [(ngModel)]='identifierEntry' type="text" pInputText>
                 </div>
             </div>
         </div>
-
     </div>
 
+    <!-- [Temp] Contiene: Contribución (3.2) -->
+    <div *ngIf="objectOptions.o3_2" class="p-col-12 ">
+        <h5>3.2 - {{"Common.contribute.contribute" | translate }}</h5>
 
-
-    <div *ngIf="ObjOptions.o3_2" class="p-col-12 ">
-        <h5>{{"Contribución" | translate }}</h5>
         <div class="card">
+            <div *ngIf="objectOptions.o3_2_1" class="card">
+                <h6>3.2.1 - {{"Common.contribute.role.role" | translate}}</h6>
 
-            <div *ngIf="ObjOptions.o3_2_1" class="card">
-                <h5>{{"Tipo" | translate}}</h5>
                 <div class="p-fluid">
                     <!-- [(ngModel)]="selectedDrop" -->
-                    <p-dropdown [options]="tipos" [(ngModel)]='tipos_Select' name='tipos_Select' (onChange)='cambioTipos()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                    <p-dropdown [options]="roleOptions" [(ngModel)]='roleSelected' name='roleSelected' (onChange)='changeRole()' placeholder='{{"Common.select" | translate}} ' [showClear]="true">
                         <ng-template pTemplate="item" let-item>
                             {{item.label| translate }}
                         </ng-template>
@@ -37,78 +37,67 @@
                         </ng-template>
                     </p-dropdown>
                 </div>
-
             </div>
 
-            <div *ngIf="ObjOptions.o3_2_2" class="card">
-                <h5>{{"Entidad" | translate }}</h5>
+            <div *ngIf="objectOptions.o3_2_2" class="card">
+                <h6>3.2.2 - {{"Common.contribute.entity.entity" | translate }}</h6>
+
                 <div class="p-fluid">
                     <div class="p-field p-grid">
-                        <label for="nombre" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Nombre" | translate }}</label>
+                        <label for="nombre" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Common.contribute.entity.givenName" | translate }}</label>
                         <div class="p-col-12 p-md-10">
-                            <input id="nombre" [(ngModel)]='nombreNew' type="text" pInputText>
+                            <input id="nombre" [(ngModel)]='entityName' type="text" pInputText>
                         </div>
                     </div>
                     <div class="p-field p-grid">
-                        <label for="apellido" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Apellido" | translate }}</label>
+                        <label for="apellido" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Common.contribute.entity.familyName" | translate }}</label>
                         <div class="p-col-12 p-md-10">
 
-                            <input id="apellido" [(ngModel)]='apellidoNew' type="text" pInputText>
+                            <input id="apellido" [(ngModel)]='entityLastname' type="text" pInputText>
                         </div>
                     </div>
                     <div class="p-field p-grid">
-                        <label for="lastname4" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Email" | translate}}</label>
+                        <label for="lastname4" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Common.contribute.entity.email" | translate}}</label>
                         <div class="p-col-12 p-md-10">
-                            <input id="lastname4" [(ngModel)]='mailNew' type="text" pInputText>
+                            <input id="lastname4" [(ngModel)]='entityEmail' type="text" pInputText>
                         </div>
                     </div>
                     <div class="p-field p-grid">
-                        <label for="organizacion" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Organización" | translate}}</label>
+                        <label for="organizacion" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{"Common.contribute.entity.organization" | translate}}</label>
                         <div class="p-col-12 p-md-10">
-                            <input id="organizacion" [(ngModel)]='organizacionNew' type="text" pInputText>
+                            <input id="organizacion" [(ngModel)]='entityOrganization' type="text" pInputText>
                         </div>
                     </div>
 
                 </div>
             </div>
 
-            <div *ngIf="ObjOptions.o3_2_3" class="card">
-                <h5>{{"Fecha" | translate}}</h5>
+            <div *ngIf="objectOptions.o3_2_3" class="card">
+                <h6>3.2.3 - {{"Common.contribute.date.date" | translate}}</h6>
 
                 <div class="p-fluid">
-
                     <div class="p-field p-grid">
                         <div class="p-col-12 p-md-10">
-                            <p-calendar [(ngModel)]='fecha' [showIcon]="true" inputId="icon"></p-calendar>
+                            <p-calendar [(ngModel)]='date' [showIcon]="true" inputId="icon"></p-calendar>
                         </div>
                     </div>
-
-                    <!-- <div class="p-field p-grid">
-                        <label for="descripcion">{{"Descripción" | translate}}</label>
-                        <textarea id="descripcion" type="text" rows="4" pInputTextarea></textarea>
-                    </div> -->
                 </div>
-
-
-
             </div>
-
-
         </div>
-
-
     </div>
 
+    <!-- [Temp] Contiene: Esquema de Metadatos (3.3) -->
+    <div *ngIf="objectOptions.o3_3" class="p-col-12">
+        <h5>3.3 - {{"MetaMetadata.metadataSchema" | translate }}</h5>
 
-    <div *ngIf="ObjOptions.o3_3" class="p-col-12">
-        <h5>{{"Esquema de meta datos" | translate }}</h5>
         <div class="card">
             <div class="p-field p-fluid">
-                <label for="esquema">{{"Esquema" | translate}}</label>
-                <input [(ngModel)]='objMetadatos["Metadata Schema"]' id="esquema" type="esquema" pInputText aria-describedby="username-help">
-                <!-- <small id="username-help">Enter your username to reset your password.</small> -->
+                <label for="esquema">{{"MetaMetadata.schema" | translate}}</label>
+                <input [(ngModel)]='metadataSchema' id="esquema" type="esquema" pInputText aria-describedby="username-help">
             </div>
         </div>
     </div>
+
+    <!-- [Temp] Complementar con: Idioma (3.4) (? -->
 
 </div>

@@ -1,474 +1,456 @@
 <div class="p-grid p-fluid">
 
-
     <div class="p-col-12">
-
+        <!-- [Temp] Contiene: Resumen de Accesibilidad (10.1) -->
         <div class="p-col-12">
+            <h5>10.1 - {{"Accessibility.accessibilitySumary" | translate}}</h5>
 
             <div class="card">
-                <h5>{{"Resumen de accesibilidad " | translate}}</h5>
                 <div class="p-fluid">
                     <div class="p-field p-grid">
                         <!-- <label for="descripcion">{{"Descripción" | translate}}</label> -->
-                        <textarea id="descripcion" type="text" rows="4" [(ngModel)]='objAccess["Description"]' pInputTextarea></textarea>
+                        <textarea id="descripcion" type="text" rows="4" [(ngModel)]='description' pInputTextarea></textarea>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="card">
-            <h5>{{"Características de accesibilidad" | translate}}</h5>
-            <h5>{{"Contenido del recurso" | translate}}</h5>
-            <div class="p-grid">
+        <!-- [Temp] Contiene: Caracterísitcas de Accesibilidad (10.2) -->
+        <div class="p-col-12">
+            <h5>10.2 - {{"Accessibility.accessibilityFeatures.accessibilityFeatures" | translate}}</h5>
+
+            <div class="card">    
+                <h5>{{"Accessibility.accessibilityFeatures.resourceContent" | translate}}</h5>
+
+                <div class="p-grid">
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="texalternativo" [(ngModel)]="accessFeatures[0].value" binary="true" id="texalternativo1"></p-checkbox>
+                            <label for="texalternativo">{{"Accessibility.accessibilityFeatures.alternativeText" | translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="anotaciones" [(ngModel)]="accessFeatures[1].value" binary="true" id="anotaciones1"></p-checkbox>
+                            <label for="anotaciones1">{{"Accessibility.accessibilityFeatures.annotations" | translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="printnumpag" value="Imprimir número de páginas" [(ngModel)]="accessFeatures[2].value" binary="true" id="printnumpag1"></p-checkbox>
+                            <label for="printnumpag1">{{"Accessibility.accessibilityFeatures.printPageNumbers" | translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="descprideaudio" value="Descripción de audio" [(ngModel)]="accessFeatures[3].value" binary="true" id="descprideaudio1"></p-checkbox>
+                            <label for="descprideaudio1">{{"Accessibility.accessibilityFeatures.audioDescription"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="marcadores" value="Marcadores" [(ngModel)]="accessFeatures[4].value" binary="true" id="marcadores1"></p-checkbox>
+                            <label for="marcadores1">{{"Accessibility.accessibilityFeatures.bookmarks"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="ordlectura" value="Orden de lectura" [(ngModel)]="accessFeatures[5].value" binary="true" id="ordlectura1"></p-checkbox>
+                            <label for="ordlectura1">{{"Accessibility.accessibilityFeatures.readingOrder"|translate}}</label>
+                        </div>
+                    </div>
 
 
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="texalternativo" [(ngModel)]="accessFeatures[0].value" binary="true" id="texalternativo1"></p-checkbox>
-                        <label for="texalternativo">{{"Texto alternativo" | translate}}</label>
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="subtitulios" value="Subtítulos" [(ngModel)]="accessFeatures[6].value" binary="true" id="subtitulios1"></p-checkbox>
+                            <label for="subtitulios1">{{"Accessibility.accessibilityFeatures.captions"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="braile" value="Braile" [(ngModel)]="accessFeatures[7].value" binary="true" id="braile1"></p-checkbox>
+                            <label for="braile1">{{"Accessibility.accessibilityFeatures.braille"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="anotaciones" value="Anotacione de ruby" [(ngModel)]="accessFeatures[8].value" binary="true" id="anotaciones1"></p-checkbox>
+                            <label for="anotaciones1">{{"Accessibility.accessibilityFeatures.rubyAnnotations"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="pantllaltocontraste" value="Pantalla de alto contraste" [(ngModel)]="accessFeatures[9].value" binary="true" id="pantllaltocontraste1"></p-checkbox>
+                            <label for="pantllaltocontraste1">{{"Accessibility.accessibilityFeatures.highContrastDisplay"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="chemml" value="ChemML" [(ngModel)]="accessFeatures[10].value" binary="true" id="chemml1"></p-checkbox>
+                            <label for="chemml1">{{"Accessibility.accessibilityFeatures.chemML"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="tablecontenido" value="Table de contenido" [(ngModel)]="accessFeatures[11].value" binary="true" id="tablecontenido1"></p-checkbox>
+                            <label for="tablecontenido1">{{"Accessibility.accessibilityFeatures.tableOfContents"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="descriplarga" value="Descripción larga" [(ngModel)]="accessFeatures[12].value" binary="true" id="descriplarga1"></p-checkbox>
+                            <label for="descriplarga1">{{"Accessibility.accessibilityFeatures.longDescription"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="descripmatematicas" value="Describe las matemáticas" [(ngModel)]="accessFeatures[13].value" binary="true" id="descripmatematicas1"></p-checkbox>
+                            <label for="descripmatematicas1">{{"Accessibility.accessibilityFeatures.describeMath"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="pdfetiquetado" value="PDF etiquetado" [(ngModel)]="accessFeatures[14].value" binary="true" id="pdfetiquetado1"></p-checkbox>
+                            <label for="pdfetiquetado1">{{"Accessibility.accessibilityFeatures.taggedPDF"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="lengseñas" value="Lenguaje de señas" [(ngModel)]="accessFeatures[15].value" binary="true" id="lengseñas1"></p-checkbox>
+                            <label for="lengseñas1">{{"Accessibility.accessibilityFeatures.signLanguage"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="indice" value="Índice" [(ngModel)]="accessFeatures[16].value" binary="true" id="indice1"></p-checkbox>
+                            <label for="indice1">{{"Accessibility.accessibilityFeatures.index"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="graficotactil" value="Grafico táctil" [(ngModel)]="accessFeatures[17].value" binary="true" id="graficotactil1"></p-checkbox>
+                            <label for="graficotactil">{{"Accessibility.accessibilityFeatures.tactileGraphics"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="navegadorestructural" value="Navegación Estructural" [(ngModel)]="accessFeatures[18].value" binary="true" id="navegadorestructural1"></p-checkbox>
+                            <label for="navegadorestructural1">{{"Accessibility.accessibilityFeatures.structuralNavigation"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="letragande" value="Letra grande" [(ngModel)]="accessFeatures[19].value" binary="true" id="letragande1"></p-checkbox>
+                            <label for="letragande1">{{"Accessibility.accessibilityFeatures.largePrint"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="objetotac" value="Objeto táctil" [(ngModel)]="accessFeatures[20].value" binary="true" id="objetotac1"></p-checkbox>
+                            <label for="objetotac1">{{"Accessibility.accessibilityFeatures.tactileObject"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="texaudisincro" value="Texto de audio sincronizado" [(ngModel)]="accessFeatures[21].value" binary="true" id="texaudisincro1"></p-checkbox>
+                            <label for="texaudisincro1">{{"Accessibility.accessibilityFeatures.synchronizedAudioText"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="latex" value="Latex" [(ngModel)]="accessFeatures[22].value" binary="true" id="latex1"></p-checkbox>
+                            <label for="latex1">{{"Accessibility.accessibilityFeatures.latex"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="marcadodetts" value="Marcado de Tts" [(ngModel)]="accessFeatures[23].value" binary="true" id="marcadodetts1"></p-checkbox>
+                            <label for="marcadodetts1">{{"Accessibility.accessibilityFeatures.ttsMarkup"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="controltiempo" value="Control de tiempo" [(ngModel)]="accessFeatures[24].value" binary="true" id="controltiempo1"></p-checkbox>
+                            <label for="controltiempo1">{{"Accessibility.accessibilityFeatures.timingControl"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="mathml" value="Math ML" [(ngModel)]="accessFeatures[25].value" binary="true" id="mathml1"></p-checkbox>
+                            <label for="mathml1">{{"Accessibility.accessibilityFeatures.mathML"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="desbloqueado1" value="Desbloqueado" [(ngModel)]="accessFeatures[26].value" binary="true" id="desbloqueado1"></p-checkbox>
+                            <label for="desbloqueado1">{{"Accessibility.accessibilityFeatures.unlocked"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="transcripcion" value="Transcripción" [(ngModel)]="accessFeatures[27].value" binary="true" id="transcripcion1"></p-checkbox>
+                            <label for="transcripcion1">{{"Accessibility.accessibilityFeatures.transcript"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="ninguno" value="Ninguno" [(ngModel)]="accessFeatures[28].value" binary="true" id="ninguno1"></p-checkbox>
+                            <label for="ninguno1">{{"Accessibility.accessibilityFeatures.none"|translate}}</label>
+                        </div>
                     </div>
                 </div>
-
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="anotaciones" [(ngModel)]="accessFeatures[1].value" binary="true" id="anotaciones1"></p-checkbox>
-                        <label for="anotaciones1">{{"Anotaciones" | translate}}</label>
-                    </div>
-                </div>
-
-
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="printnumpag" value="Imprimir número de páginas" [(ngModel)]="accessFeatures[2].value" binary="true" id="printnumpag1"></p-checkbox>
-                        <label for="printnumpag1">{{"Imprimir número de páginas" | translate}}</label>
-                    </div>
-                </div>
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="descprideaudio" value="Descripción de audio" [(ngModel)]="accessFeatures[3].value" binary="true" id="descprideaudio1"></p-checkbox>
-                        <label for="descprideaudio1">{{"Descripción de audio"|translate}}</label>
-                    </div>
-                </div>
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="marcadores" value="Marcadores" [(ngModel)]="accessFeatures[4].value" binary="true" id="marcadores1"></p-checkbox>
-                        <label for="marcadores1">{{"Marcadores"|translate}}</label>
-                    </div>
-                </div>
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="ordlectura" value="Orden de lectura" [(ngModel)]="accessFeatures[5].value" binary="true" id="ordlectura1"></p-checkbox>
-                        <label for="ordlectura1">{{"Orden de lectura"|translate}}</label>
-                    </div>
-                </div>
-
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="subtitulios" value="Subtítulos" [(ngModel)]="accessFeatures[6].value" binary="true" id="subtitulios1"></p-checkbox>
-                        <label for="subtitulios1">{{"Subtítulos"|translate}}</label>
-                    </div>
-                </div>
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="braile" value="Braile" [(ngModel)]="accessFeatures[7].value" binary="true" id="braile1"></p-checkbox>
-                        <label for="braile1">{{"Braile"|translate}}</label>
-                    </div>
-                </div>
-
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="anotaciones" value="Anotacione de ruby" [(ngModel)]="accessFeatures[8].value" binary="true" id="anotaciones1"></p-checkbox>
-                        <label for="anotaciones1">{{"Anotacione de ruby"|translate}}</label>
-                    </div>
-                </div>
-
-
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="pantllaltocontraste" value="Pantalla de alto contraste" [(ngModel)]="accessFeatures[9].value" binary="true" id="pantllaltocontraste1"></p-checkbox>
-                        <label for="pantllaltocontraste1">{{"Pantalla de alto contraste"|translate}}</label>
-                    </div>
-                </div>
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="chemml" value="ChemML" [(ngModel)]="accessFeatures[10].value" binary="true" id="chemml1"></p-checkbox>
-                        <label for="chemml1">{{"ChemML"|translate}}</label>
-                    </div>
-                </div>
-
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="tablecontenido" value="Table de contenido" [(ngModel)]="accessFeatures[11].value" binary="true" id="tablecontenido1"></p-checkbox>
-                        <label for="tablecontenido1">{{"Table de contenido"|translate}}</label>
-                    </div>
-                </div>
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="descriplarga" value="Descripción larga" [(ngModel)]="accessFeatures[12].value" binary="true" id="descriplarga1"></p-checkbox>
-                        <label for="descriplarga1">{{"Descripción larga"|translate}}</label>
-                    </div>
-                </div>
-
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="descripmatematicas" value="Describe las matemáticas" [(ngModel)]="accessFeatures[13].value" binary="true" id="descripmatematicas1"></p-checkbox>
-                        <label for="descripmatematicas1">{{"Describe las matemáticas"|translate}}</label>
-                    </div>
-                </div>
-
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="pdfetiquetado" value="PDF etiquetado" [(ngModel)]="accessFeatures[14].value" binary="true" id="pdfetiquetado1"></p-checkbox>
-                        <label for="pdfetiquetado1">{{"PDF etiquetado"|translate}}</label>
-                    </div>
-                </div>
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="lengseñas" value="Lenguaje de señas" [(ngModel)]="accessFeatures[15].value" binary="true" id="lengseñas1"></p-checkbox>
-                        <label for="lengseñas1">{{"Lenguaje de señas"|translate}}</label>
-                    </div>
-                </div>
-
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="indice" value="Índice" [(ngModel)]="accessFeatures[16].value" binary="true" id="indice1"></p-checkbox>
-                        <label for="indice1">{{"índice"|translate}}</label>
-                    </div>
-                </div>
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="graficotactil" value="Grafico táctil" [(ngModel)]="accessFeatures[17].value" binary="true" id="graficotactil1"></p-checkbox>
-                        <label for="graficotactil">{{"Grafico táctil"|translate}}</label>
-                    </div>
-                </div>
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="navegadorestructural" value="Navegación Estructural" [(ngModel)]="accessFeatures[18].value" binary="true" id="navegadorestructural1"></p-checkbox>
-                        <label for="navegadorestructural1">{{"Navegación Estructural"|translate}}</label>
-                    </div>
-                </div>
-
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="letragande" value="Letra grande" [(ngModel)]="accessFeatures[19].value" binary="true" id="letragande1"></p-checkbox>
-                        <label for="letragande1">{{"Letra grande"|translate}}</label>
-                    </div>
-                </div>
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="objetotac" value="Objeto táctil" [(ngModel)]="accessFeatures[20].value" binary="true" id="objetotac1"></p-checkbox>
-                        <label for="objetotac1">{{"Objeto táctil"|translate}}</label>
-                    </div>
-                </div>
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="texaudisincro" value="Texto de audio sincronizado" [(ngModel)]="accessFeatures[21].value" binary="true" id="texaudisincro1"></p-checkbox>
-                        <label for="texaudisincro1">{{"Texto de audio sincronizado"|translate}}</label>
-                    </div>
-                </div>
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="latex" value="Latex" [(ngModel)]="accessFeatures[22].value" binary="true" id="latex1"></p-checkbox>
-                        <label for="latex1">{{"Latex"|translate}}</label>
-                    </div>
-                </div>
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="marcadodetts" value="Marcado de Tts" [(ngModel)]="accessFeatures[23].value" binary="true" id="marcadodetts1"></p-checkbox>
-                        <label for="marcadodetts1">{{"Marcado de Tts"|translate}}</label>
-                    </div>
-                </div>
-
-
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="controltiempo" value="Control de tiempo" [(ngModel)]="accessFeatures[24].value" binary="true" id="controltiempo1"></p-checkbox>
-                        <label for="controltiempo1">{{"Control de tiempo"|translate}}</label>
-                    </div>
-                </div>
-
-
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="mathml" value="Math ML" [(ngModel)]="accessFeatures[25].value" binary="true" id="mathml1"></p-checkbox>
-                        <label for="mathml1">{{"Math ML"|translate}}</label>
-                    </div>
-                </div>
-
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="desbloqueado1" value="Desbloqueado" [(ngModel)]="accessFeatures[26].value" binary="true" id="desbloqueado1"></p-checkbox>
-                        <label for="desbloqueado1">{{"Desbloqueado"|translate}}</label>
-                    </div>
-                </div>
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="transcripcion" value="Transcripción" [(ngModel)]="accessFeatures[27].value" binary="true" id="transcripcion1"></p-checkbox>
-                        <label for="transcripcion1">{{"Transcripción"|translate}}</label>
-                    </div>
-                </div>
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="ninguno" value="Ninguno" [(ngModel)]="accessFeatures[28].value" binary="true" id="ninguno1"></p-checkbox>
-                        <label for="ninguno1">{{"Ninguno"|translate}}</label>
-                    </div>
-                </div>
-
-
             </div>
-
         </div>
 
-        <div class="card">
-            <h5>{{"Peligro de accesibilidad"|translate}}</h5>
-            <div class="p-grid">
-                <div class="p-col-12 p-md-5">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="peligro_parpadeo" value="Peligro de parpadeo" [(ngModel)]="accessHazard[0].value" binary="true" id="peligro_parpadeo1"></p-checkbox>
-                        <label for="peligro_parpadeo1">{{"Peligro de parpadeo"|translate}}</label>
-                    </div>
-                </div>
-                <div class="p-col-12 p-md-5">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="sin_peligro_parpadeo" value="Sin peligro de parpadeo" [(ngModel)]="accessHazard[1].value" binary="true" id="sin_peligro_parpadeo1"></p-checkbox>
-                        <label for="sin_peligro_parpadeo1">{{"Sin peligro de parpadeo"|translate}}</label>
-                    </div>
-                </div>
-                <div class="p-col-12 p-md-5">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="peligrodesimulacion" value="Peligro de simulación de movimiento" [(ngModel)]="accessHazard[2].value" binary="true" id="peligrodesimulacion"></p-checkbox>
-                        <label for="peligrodesimulacion1">{{"Peligro de simulación de movimiento"|translate}}</label>
-                    </div>
-                </div>
-                <div class="p-col-12 p-md-5">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="sinpeligrodesimulacion" value="Sin peligro de simulación de movimiento" [(ngModel)]="accessHazard[3].value" binary="true" id="sinpeligrodesimulacion1"></p-checkbox>
-                        <label for="sinpeligrodesimulacion1">{{"Sin peligro de simulación de movimiento"|translate}}</label>
-                    </div>
-                </div>
+        <!-- [Temp] Contiene: Peligros de Accesibilidad (10.3) -->
+        <div class="p-col-12">
+            <h5>10.3 - {{"Accessibility.accessibilityHazard.accessibilityHazard"|translate}}</h5>
+            
+            <div class="card">
+                <h5>{{"Accessibility.accessibilityHazard.properties" | translate}}</h5>
 
-
-                <div class="p-col-12 p-md-5">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="peligrodelsonido" value="Peligro del sonido" [(ngModel)]="accessHazard[4].value" binary="true" id="peligrodelsonido1"></p-checkbox>
-                        <label for="peligrodelsonido1">{{"Peligro del sonido"|translate}}</label>
+                <div class="p-grid">
+                    <div class="p-col-12 p-md-5">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="peligro_parpadeo" value="Peligro de parpadeo" [(ngModel)]="accessHazard[0].value" binary="true" id="peligro_parpadeo1"></p-checkbox>
+                            <label for="peligro_parpadeo1">{{"Accessibility.accessibilityHazard.flashingHazard"|translate}}</label>
+                        </div>
+                    </div>
+    
+                    <div class="p-col-12 p-md-5">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="sin_peligro_parpadeo" value="Sin peligro de parpadeo" [(ngModel)]="accessHazard[1].value" binary="true" id="sin_peligro_parpadeo1"></p-checkbox>
+                            <label for="sin_peligro_parpadeo1">{{"Accessibility.accessibilityHazard.noFlashingHazard"|translate}}</label>
+                        </div>
+                    </div>
+    
+                    <div class="p-col-12 p-md-5">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="peligrodesimulacion" value="Peligro de simulación de movimiento" [(ngModel)]="accessHazard[2].value" binary="true" id="peligrodesimulacion"></p-checkbox>
+                            <label for="peligrodesimulacion1">{{"Accessibility.accessibilityHazard.motionSimulationHazard"|translate}}</label>
+                        </div>
+                    </div>
+    
+                    <div class="p-col-12 p-md-5">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="sinpeligrodesimulacion" value="Sin peligro de simulación de movimiento" [(ngModel)]="accessHazard[3].value" binary="true" id="sinpeligrodesimulacion1"></p-checkbox>
+                            <label for="sinpeligrodesimulacion1">{{"Accessibility.accessibilityHazard.noMotionSimulationHazard"|translate}}</label>
+                        </div>
+                    </div>
+    
+                    <div class="p-col-12 p-md-5">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="peligrodelsonido" value="Peligro del sonido" [(ngModel)]="accessHazard[4].value" binary="true" id="peligrodelsonido1"></p-checkbox>
+                            <label for="peligrodelsonido1">{{"Accessibility.accessibilityHazard.soundHazard"|translate}}</label>
+                        </div>
+                    </div>
+    
+                    <div class="p-col-12 p-md-5">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="sinpeligrodelsonido" value="Sin peligro del sonido" [(ngModel)]="accessHazard[5].value" binary="true" id="sinpeligrodelsonido1"></p-checkbox>
+                            <label for="sinpeligrodelsonido1">{{"Accessibility.accessibilityHazard.noSoundHazard"|translate}}</label>
+                        </div>
                     </div>
                 </div>
-
-                <div class="p-col-12 p-md-5">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="sinpeligrodelsonido" value="Sin peligro del sonido" [(ngModel)]="accessHazard[5].value" binary="true" id="sinpeligrodelsonido1"></p-checkbox>
-                        <label for="sinpeligrodelsonido1">{{"Sin peligro del sonido"|translate}}</label>
-                    </div>
-                </div>
-
             </div>
-
-
-            <h5>{{"Control de accesibilidad"|translate}}</h5>
-            <h5>{{"Métodos"|translate}}</h5>
-            <div class="p-grid">
-                <div class="p-col-12 p-md-5">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="controldeteclado" value="Control de teclado" [(ngModel)]="accessControl[0].value" binary="true" id="controldeteclado1"></p-checkbox>
-                        <label for="controldeteclado1">{{"Control de teclado"|translate}}</label>
-                    </div>
-                </div>
-                <div class="p-col-12 p-md-5">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="controldeinterruptorcompleto" value="Control de interruptor completo" [(ngModel)]="accessControl[1].value" binary="true" id="controldeinterruptorcompleto1"></p-checkbox>
-                        <label for="controldeinterruptorcompleto1">{{"Control de interruptor completo"|translate}}</label>
-                    </div>
-                </div>
-                <div class="p-col-12 p-md-5">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="controltotaldelmouse" value="Control total del mouse" [(ngModel)]="accessControl[2].value" binary="true" id="controltotaldelmouse1"></p-checkbox>
-                        <label for="controltotaldelmouse1">{{"Control total del mouse"|translate}}</label>
-                    </div>
-                </div>
-
-
-                <div class="p-col-12 p-md-5">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="controltactilcompleto" value="Control táctil completo" [(ngModel)]="accessControl[3].value" binary="true" id="controltactilcompleto1"></p-checkbox>
-                        <label for="controltactilcompleto1">{{"Control táctil completo"|translate}}</label>
-                    </div>
-                </div>
-
-                <div class="p-col-12 p-md-5">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="controldevozcompleto" value="Control de voz completo" [(ngModel)]="accessControl[4].value" binary="true" id="controldevozcompleto1"></p-checkbox>
-                        <label for="controldevozcompleto1">{{"Control de voz completo"|translate}}</label>
-                    </div>
-                </div>
-
-                <div class="p-col-12 p-md-5">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="controltotaldevideo" value="Control total de video" [(ngModel)]="accessControl[5].value" binary="true" id="controltotaldevideo1"></p-checkbox>
-                        <label for="controltotaldevideo1">{{"Control total de video"|translate}}</label>
-                    </div>
-                </div>
-
-
-            </div>
-
-
-
         </div>
 
-        <div class="card">
-            <h5>{{"API de accesibilidad"|translate}}</h5>
-            <h5>{{"Recurso compatible"|translate}}</h5>
-            <div class="p-grid">
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="aria" value="ARIA" [(ngModel)]="accessApi[0].value" binary="true" id="aria1"></p-checkbox>
-                        <label for="aria1">ARIA</label>
+        <!-- [Temp] Contiene: Control de Accesibilidad (10.4) -->
+        <div class="p-col-12">
+            <h5>10.4 - {{"Accessibility.accessibilityControl.accessibilityControl"|translate}}</h5>
+
+            <div class="card">
+                <h5>{{"Accessibility.accessibilityControl.methods"|translate}}</h5>
+
+                <div class="p-grid">
+                    <div class="p-col-12 p-md-5">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="controldeteclado" value="Control de teclado" [(ngModel)]="accessControl[0].value" binary="true" id="controldeteclado1"></p-checkbox>
+                            <label for="controldeteclado1">{{"Accessibility.accessibilityControl.fullKeyboardControl"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-5">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="controldeinterruptorcompleto" value="Control de interruptor completo" [(ngModel)]="accessControl[1].value" binary="true" id="controldeinterruptorcompleto1"></p-checkbox>
+                            <label for="controldeinterruptorcompleto1">{{"Accessibility.accessibilityControl.fullSwitchControl"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-5">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="controltotaldelmouse" value="Control total del mouse" [(ngModel)]="accessControl[2].value" binary="true" id="controltotaldelmouse1"></p-checkbox>
+                            <label for="controltotaldelmouse1">{{"Accessibility.accessibilityControl.fullMouseControl"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-5">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="controltactilcompleto" value="Control táctil completo" [(ngModel)]="accessControl[3].value" binary="true" id="controltactilcompleto1"></p-checkbox>
+                            <label for="controltactilcompleto1">{{"Accessibility.accessibilityControl.fullTouchControl"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-5">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="controldevozcompleto" value="Control de voz completo" [(ngModel)]="accessControl[4].value" binary="true" id="controldevozcompleto1"></p-checkbox>
+                            <label for="controldevozcompleto1">{{"Accessibility.accessibilityControl.fullVoiceControl"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-5">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="controltotaldevideo" value="Control total de video" [(ngModel)]="accessControl[5].value" binary="true" id="controltotaldevideo1"></p-checkbox>
+                            <label for="controltotaldevideo1">{{"Accessibility.accessibilityControl.fullVideoControl"|translate}}</label>
+                        </div>
                     </div>
                 </div>
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="accesibilidaandroid" value="Accesibilidad de android" [(ngModel)]="accessApi[1].value" binary="true" id="accesibilidaandroid1"></p-checkbox>
-                        <label for="accesibilidaandroid1">{{"Accesibilidad de android"|translate}}</label>
-                    </div>
-                </div>
-
-
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="accesibilidios" value="Accesibilidad iOS" [(ngModel)]="accessApi[2].value" binary="true" id="accesibilidios1"></p-checkbox>
-                        <label for="accesibilidios">{{"Accesibilidad iOS"|translate}}</label>
-                    </div>
-                </div>
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton" style="visibility: hidden;">
-                        <p-checkbox name="rellno" value="rellno" id="rellno"></p-checkbox>
-                        <label for="rellno">rellno</label>
-                    </div>
-                </div>
-
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="atk" value="ATK" [(ngModel)]="accessApi[3].value" binary="true" id="atk1"></p-checkbox>
-                        <label for="atk1">ATK</label>
-                    </div>
-                </div>
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="accesibilidadejava" value="Accesibilidad de java" [(ngModel)]="accessApi[4].value" binary="true" id="accesibilidadejava"></p-checkbox>
-                        <label for="accesibilidadejava1">{{"Accesibilidad de java"|translate}}</label>
-                    </div>
-                </div>
-
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton" style="visibility: hidden;">
-                        <p-checkbox name="rellno" value="rellno" id="rellno"></p-checkbox>
-                        <label for="rellno">rellno</label>
-                    </div>
-                </div>
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="AT-SPI" value="AT-SPI" [(ngModel)]="accessApi[5].value" binary="true" id="AT-SPI1"></p-checkbox>
-                        <label for="AT-SPI1">AT-SPI</label>
-                    </div>
-                </div>
-
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="accesibilidadmac" value="Accesibilidad macOSX" [(ngModel)]="accessApi[6].value" binary="true" id="accesibilidadmac1"></p-checkbox>
-                        <label for="accesibilidadmac1">{{"Accesibilidad macOSX"|translate}}</label>
-                    </div>
-                </div>
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton" style="visibility: hidden;">
-                        <p-checkbox name="rellno" value="rellno" id="rellno"></p-checkbox>
-                        <label for="rellno">rellno</label>
-                    </div>
-                </div>
-
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="accesibilidblacberry" value="Accesibilidad blackberry" [(ngModel)]="accessApi[7].value" binary="true" id="accesibilidblacberry1"></p-checkbox>
-                        <label for="accesibilidblacberry1">{{"Accesibilidad blackberry"|translate}}</label>
-                    </div>
-                </div>
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="atk" value="MSAA" [(ngModel)]="accessApi[8].value" binary="true" id="atk1"></p-checkbox>
-                        <label for="atk1">MSAA</label>
-                    </div>
-                </div>
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton" style="visibility: hidden;">
-                        <p-checkbox name="rellno" value="rellno" id="rellno"></p-checkbox>
-                        <label for="rellno">rellno</label>
-                    </div>
-                </div>
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="iaccesible2" value="iAccesible 2" [(ngModel)]="accessApi[9].value" binary="true" id="iaccesible21"></p-checkbox>
-                        <label for="iaccesible21">{{"iAccesible 2"|translate}}</label>
-                    </div>
-                </div>
-
-                <div class="p-col-12 p-md-4">
-                    <div class="p-field-radiobutton">
-                        <p-checkbox name="autom" value="Automatizaci" [(ngModel)]="accessApi[10].value" binary="true" id="autom1"></p-checkbox>
-                        <label for="autom1">{{"Automatizacion"|translate}}</label>
-                    </div>
-                </div>
-
             </div>
-
         </div>
 
+        <!-- [Temp] Contiene: API de Accesibilidad (10.5) -->
+        <div class="p-col-12">
+            <h5>10.5 - {{"Accessibility.accessibilityAPI.accessibilityAPI"|translate}}</h5>
 
+            <div class="card">
+                <h5>{{"Accessibility.accessibilityAPI.compatibleResource"|translate}}</h5>
 
+                <div class="p-grid">
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="aria" value="ARIA" [(ngModel)]="accessApi[0].value" binary="true" id="aria1"></p-checkbox>
+                            <label for="aria1">ARIA</label>
+                        </div>
+                    </div>
 
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="accesibilidaandroid" value="Accesibilidad de android" [(ngModel)]="accessApi[1].value" binary="true" id="accesibilidaandroid1"></p-checkbox>
+                            <label for="accesibilidaandroid1">{{"Accessibility.accessibilityAPI.androidAccessibility"|translate}}</label>
+                        </div>
+                    </div>
 
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="accesibilidios" value="Accesibilidad iOS" [(ngModel)]="accessApi[2].value" binary="true" id="accesibilidios1"></p-checkbox>
+                            <label for="accesibilidios">{{"Accessibility.accessibilityAPI.iosAccessibility"|translate}}</label>
+                        </div>
+                    </div>
 
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton" style="visibility: hidden;">
+                            <p-checkbox name="rellno" value="rellno" id="rellno"></p-checkbox>
+                            <label for="rellno">rellno</label>
+                        </div>
+                    </div>
 
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="atk" value="ATK" [(ngModel)]="accessApi[3].value" binary="true" id="atk1"></p-checkbox>
+                            <label for="atk1">ATK</label>
+                        </div>
+                    </div>
 
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="accesibilidadejava" value="Accesibilidad de java" [(ngModel)]="accessApi[4].value" binary="true" id="accesibilidadejava"></p-checkbox>
+                            <label for="accesibilidadejava1">{{"Accessibility.accessibilityAPI.javaAccessibility"|translate}}</label>
+                        </div>
+                    </div>
 
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton" style="visibility: hidden;">
+                            <p-checkbox name="rellno" value="rellno" id="rellno"></p-checkbox>
+                            <label for="rellno">rellno</label>
+                        </div>
+                    </div>
 
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="AT-SPI" value="AT-SPI" [(ngModel)]="accessApi[5].value" binary="true" id="AT-SPI1"></p-checkbox>
+                            <label for="AT-SPI1">AT-SPI</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="accesibilidadmac" value="Accesibilidad macOSX" [(ngModel)]="accessApi[6].value" binary="true" id="accesibilidadmac1"></p-checkbox>
+                            <label for="accesibilidadmac1">{{"Accessibility.accessibilityAPI.macOSXAccessibility"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton" style="visibility: hidden;">
+                            <p-checkbox name="rellno" value="rellno" id="rellno"></p-checkbox>
+                            <label for="rellno">rellno</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="accesibilidblacberry" value="Accesibilidad blackberry" [(ngModel)]="accessApi[7].value" binary="true" id="accesibilidblacberry1"></p-checkbox>
+                            <label for="accesibilidblacberry1">{{"Accessibility.accessibilityAPI.blackberryAccessibility"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="atk" value="MSAA" [(ngModel)]="accessApi[8].value" binary="true" id="atk1"></p-checkbox>
+                            <label for="atk1">MSAA</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton" style="visibility: hidden;">
+                            <p-checkbox name="rellno" value="rellno" id="rellno"></p-checkbox>
+                            <label for="rellno">rellno</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="iaccesible2" value="iAccesible 2" [(ngModel)]="accessApi[9].value" binary="true" id="iaccesible21"></p-checkbox>
+                            <label for="iaccesible21">{{"Accessibility.accessibilityAPI.iAccessible2"|translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-field-radiobutton">
+                            <p-checkbox name="autom" value="Automatizaci" [(ngModel)]="accessApi[10].value" binary="true" id="autom1"></p-checkbox>
+                            <label for="autom1">{{"Accessibility.accessibilityAPI.uiAutomation"|translate}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>

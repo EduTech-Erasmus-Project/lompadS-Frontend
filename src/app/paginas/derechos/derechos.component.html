@@ -1,10 +1,13 @@
 <div class="p-grid">
-    <div *ngIf="ObjOptions.o6_1" class="p-col-12 p-md-6">
-        <h5>{{"Coste" | translate}}</h5>
+
+    <!-- [Temp] Contiene: Coste (6.1) -->
+    <div *ngIf="objectOptions.o6_1" class="p-col-12 p-md-6">
+        <h5>6.1 - {{"Rights.cost" | translate}}</h5>
+
         <div class="card">
             <div class="p-fluid">
                 <!-- [(ngModel)]="selectedDrop" -->
-                <p-dropdown [options]="coste" [(ngModel)]='costeSelect' name='costeSelect' (onChange)='cambio_costeSelect()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                <p-dropdown [options]="costOptions" [(ngModel)]='costSelected' name='costSelected' (onChange)='changeCost()' placeholder='{{"Common.select" | translate}} ' [showClear]="true">
                     <ng-template pTemplate="item" let-item>
                         {{item.label| translate }}
                     </ng-template>
@@ -16,12 +19,14 @@
         </div>
     </div>
 
-    <div *ngIf="ObjOptions.o6_2" class="p-col-12 p-md-6">
-        <h5>{{"Derechos de autor y otras actividades" | translate}}</h5>
+    <!-- [Temp] Contiene: Derechos de Autor y otras Restricciones (6.2) -->
+    <div *ngIf="objectOptions.o6_2" class="p-col-12 p-md-6">
+        <h5>6.2 - {{"Rights.copyrightAndOtherRestrictions" | translate}}</h5>
+
         <div class="card">
             <div class="p-fluid">
                 <!-- [(ngModel)]="selectedDrop" -->
-                <p-dropdown [options]="decision" [(ngModel)]='decisionSelect' name='decisionSelect' (onChange)='cambio_decisionSelect()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                <p-dropdown [options]="copyrightOptions" [(ngModel)]='copyrightSelected' name='copyrightSelected' (onChange)='changeCopyright()' placeholder='{{"Common.select" | translate}} ' [showClear]="true">
                     <ng-template pTemplate="item" let-item>
                         {{item.label| translate }}
                     </ng-template>
@@ -33,19 +38,18 @@
         </div>
     </div>
 
+    <!-- [Temp] Contiene: Descripción (6.3) -->
+    <div *ngIf="objectOptions.o6_3" class="p-col-12">
+        <h5>6.3 - {{"Common.description" | translate}}</h5>
 
-    <div *ngIf="ObjOptions.o6_3" class="p-col-12">
-        <h5>{{"Descripción" | translate}}</h5>
         <div class="card">
             <div class="p-fluid">
                 <div class="p-field p-grid">
-                    <label for="descripcion">{{"Descripción" | translate}}</label>
-                    <textarea id="descripcion" [(ngModel)]='objderechos["Description"]' type="text" rows="4" pInputTextarea></textarea>
+                    <label for="descripcion">{{"Common.description" | translate}}</label>
+                    <textarea id="descripcion" [(ngModel)]='description' type="text" rows="4" pInputTextarea></textarea>
                 </div>
             </div>
         </div>
     </div>
-
-
 
 </div>

@@ -9,78 +9,100 @@ import { LompadService } from '../../servicios/lompad.service';
   styleUrls: ['./clasificacion.component.css']
 })
 export class ClasificacionComponent implements OnInit {
-  propositos:any[];
-  propositosSelect:string
-  ObjOptions:ObjOptions=new ObjOptions();
+  classificationObject: any = {
+    "purpose": {
+      "source": [],
+      "value": []
+    },
+    "taxonPath": {
+      "source": [],
+      "id": [],
+      "entry": []
+    },
+    "description": {
+      "description": []
+    },
+    "keyword": {
+      "keyword": []
+    }
+  };
+  objectOptions: ObjOptions = new ObjOptions();
 
-  columns:any[];
-  palabra:string;
-  palabraDialog:boolean;
-  objClasification:any;
+  // Listas predefinidas
+  purposeOptions: any[];
+  purposeSelected: string;
+  // -----
 
+  // Referente a los valores
+  taxonPathEntry: string;
+  taxonPathId: string;
+  taxonPathSource: string;
+  description: string;
+
+  flag: boolean = false;
+  
   constructor(
     private componentePrincipal: AppComponent,
-    private lompadservice:LompadService
+    private lompadService: LompadService
   ) { }
-  loadDatos(){
-    this.objClasification=this.lompadservice.objPricipal['DATA']['classification'];
-  }      
-  ngOnDestroy():void {
-    console.log("Destroy ciclo de vida");    
-    this.lompadservice.objPricipal['DATA']['classification']=this.objClasification;
-    this.lompadservice.saveObjectLompad(this.objClasification,"classification");  
-  }       
+
   ngOnInit(): void {
-    this.loadDatos();
-    this.propositos=[
-      {label: 'disciplina', value: 'discipline', code: 'dis'},
-      {label: 'idea', value: 'idea', code: 'id'},
-      {label: 'prerequisito', value:'prerequisite', code: 'pre'},
-      {label: 'objetivo educativo', value:  'educational objective', code: 'o_b'},
-      {label: 'accesibilidad', value: 'accessibility restrictions', code: 'acc'},
-      {label: 'nivel educativo', value: 'educational level', code: 'n_ed'},
-      {label: 'nivel de habilidad', value:  'skill level', code: 'n_hab'},
-      {label: 'nivel de seguridad', value: 'security level', code: 'n_seg'},
-      {label: 'competencia', value: 'competency', code: 'n_segsr'}
+    this.loadClassificationData();
+
+    this.purposeOptions = [
+      { label: 'Classification.purpose.discipline', value: 'discipline', code: 'dis' },
+      { label: 'Classification.purpose.idea', value: 'idea', code: 'id' },
+      { label: 'Classification.purpose.prerequisite', value: 'prerequisite', code: 'pre' },
+      { label: 'Classification.purpose.educationalObjetive', value: 'educational objective', code: 'o_b' },
+      { label: 'Classification.purpose.accessibilityRestrictions', value: 'accessibility restrictions', code: 'acc' },
+      { label: 'Classification.purpose.educationalLevel', value: 'educational level', code: 'n_ed' },
+      { label: 'Classification.purpose.skillLevel', value: 'skill level', code: 'n_hab' },
+      { label: 'Classification.purpose.securityLevel', value: 'security level', code: 'n_seg' },
+      { label: 'Classification.purpose.competency', value: 'competency', code: 'n_segsr' }
     ];
 
-    this.ObjOptions=this.componentePrincipal.objOptions;
-    this.columns = [];
-    
-    this.propositosSelect=this.objClasification["Purpose"];
-    console.log("DEsde Calsificacion: ", this.objClasification);
-    
+    this.objectOptions = this.componentePrincipal.objOptions;
+    console.log('[INFO]> Classification Component: ', this.classificationObject);
+
+    this.setClassificationData();
   }
 
-  addPalabra() {
-    this.palabraDialog=true;
-    
-  }
-  
-  cancelPalabra(){
-    this.palabraDialog=false;
-  }
-  
-  removeColumn() {
-    this.columns.splice(-1, 1);
-  }
-  
-  savePalabra(){
-    console.log(this.palabra);
-    this.palabraDialog=false;
-    this.columns.push(this.palabra);
-    this.palabra="";
-    
+  loadClassificationData() {
+    if (this.isEmpty(this.lompadService.objPricipal['classification'])) {
+      this.classificationObject = this.lompadService.objPricipal['classification'];
+      this.flag = true;
+    }
   }
 
-  cambio_propositosSelect(){
-    console.log(this.propositosSelect)
-    this.objClasification["Purpose"]=this.propositosSelect;
+  setClassificationData() {
+    if (this.flag) {
+      this.purposeSelected = this.classificationObject['purpose']['value'][0];
+      this.taxonPathEntry = this.classificationObject['taxonPath']['entry'][0];
+      this.taxonPathId = this.classificationObject['taxonPath']['id'][0];
+      this.taxonPathSource = this.classificationObject['taxonPath']['source'][0];
+      this.description = this.classificationObject['description']['description'][0];
+    }
   }
 
+  changePurpose() {
+    this.classificationObject['purpose']['value'][0] = this.purposeSelected;
+  }
 
+  isEmpty(value: any[]) {
+    if (typeof value !== 'undefined' && value) {
+      return value;
+    };
+  }
 
+  ngOnDestroy(): void {
+    console.log('[INFO]> Destroy Classification');
+    this.classificationObject['taxonPath']['entry'][0] = this.taxonPathEntry;
+    this.classificationObject['taxonPath']['id'][0] = this.taxonPathId;
+    this.classificationObject['taxonPath']['source'][0] = this.taxonPathSource;
+    this.classificationObject['description']['description'][0] = this.description;
 
-
+    this.lompadService.objPricipal['classification'] = this.classificationObject;
+    this.lompadService.sendNewMetadata(this.classificationObject, 'classification');
+  }
 
 }

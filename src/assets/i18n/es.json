@@ -1,13 +1,344 @@
 {
-    "Seleccionar": "Select",
-    "General": "General",
-    "Ciclo de vida": "Lifecycle",
-    "Técnica": "Technique",
-    "Uso Educativo": "Educational Use",
-    "Derechos": "Rights",
-    "Relación": "Relationship",
-    "Anotación": "Annotation",
-    "Clasificación": "Classification",
-    "Accesibilidad": "Accessibility",
-    "Idetificador": "Identifier"
+
+    "Home": {
+        "title": "Bienvenido a LOMpad Schema",
+        "subtitle": "Por favor configure la aplicación de acuerdo a lo que necesite",
+        "chooseFile": "Seleccionar Archivo",
+        "uploadFile": "Subir",
+        "cancel": "Cancelar",
+        "uploadAnother": "Cargar un nuevo objeto de aprendizaje",
+        "messageUpload":"Por favor cargue un objeto de aprendizaje.",
+        "messageError": "Algo ha ocurrido, intente nuevamente.",
+        "messageWarning": "Asegúrese de haber descargado el objeto de aprendizaje anteriormente cargado.",
+        "messageInfo": "Objeto de aprendizaje cargado."
+    },
+
+    "Topbar": {
+        "previewJSON": "Previsualización JSON",
+        "previewXML": "Previsualización XML",
+        "profiles": "Perfiles",
+        "download": "Descarga"
+    },
+    
+    "Footer": {
+        "copyright": "Todos los derechos reservados | Desarrollado por EduTech",
+        "termsAndConditions": "Términos y Condiciones"
+    },
+
+    "Menu": {
+        "general": "1. General",
+        "lifeCycle": "2. Ciclo de Vida",
+        "metaMetadata": "3. Meta-Metadata",
+        "technical": "4. Técnica",
+        "educational": "5. Uso Educativo",
+        "rights": "6. Derechos",
+        "relation": "7. Relación",
+        "annotation": "8. Anotación",
+        "classification": "9. Clasificación",
+        "accessibility": "10. Accesibilidad"
+    },
+
+    "Common": {
+        "identifier": {
+            "identifier": "Identificador",
+            "catalog": "Catálogo",
+            "entry": "Entrada"
+        },
+        "contribute": {
+            "contribute": "Contribución",
+            "role": {
+                "role": "Tipo",
+                "author": "autor",
+                "validator": "revisor",
+                "creator": "creador",
+                "unknown": "desconocido",
+                "initiator": "iniciador",
+                "terminator": "terminador",
+                "publisher": "editor",
+                "editor": "escritor",
+                "graphicalDesigner": "diseñador gráfico",
+                "technicalImplementer": "desarrollador técnico",
+                "contentProvider": "proveedor de contenido",
+                "technicalValidator": "revisor técnico",
+                "educationalValidator": "revisor educativo",
+                "scriptWriter": "guionista",
+                "instructionalDesigner": "diseñador educativo",
+                "subjectMatterExpert": "experto en la materia"
+            },
+            "entity": {
+                "entity": "Entidad",
+                "givenName": "Nombre",
+                "familyName": "Apellido",
+                "email": "E-Mail",
+                "organization": "Organización"
+            },
+            "date": {
+                "date": "Fecha",
+                "time": "Hora"
+            }
+        },
+        "time": {
+            "years": "Años",
+            "months": "Meses",
+            "days": "Días",
+            "hours": "Horas",
+            "minutes": "Minutos"
+        },
+        "levels": {
+            "veryLow": "muy bajo/a",
+            "low": "bajo/a",
+            "medium": "medio/a",
+            "high": "alto/a",
+            "veryHigh": "muy alto/a"
+        },
+        "language": "Idioma",
+        "keyword": "Palabra Clave",
+        "select": "Seleccionar",
+        "description": "Descripción"
+    },
+
+    "General": {
+        "title": "Título",
+        "coverage": "Ámbito",
+        "structure": {
+            "structure": "Estructura",
+            "atomic": "atómica",
+            "collection": "colección",
+            "networked": "en red",
+            "hierarchical": "jerárquica",
+            "linear": "lineal"
+        },
+        "aggregationLevel": "Nivel de Agregación"
+    },
+
+    "LifeCycle": {
+        "version": "Versión",
+        "status": {
+            "status": "Estado",
+            "draft": "borrador",
+            "final": "final",
+            "revised": "revisado",
+            "unavailable": "no disponible"
+        }
+    },
+
+    "MetaMetadata": {
+        "metadataSchema": "Esquema de Metadatos",
+        "schema": "Esquema"
+    },
+
+    "Technical": {
+        "format": "Formato",
+        "size": "Tamaño",
+        "location": "Localización",
+        "requirement": {
+            "requirement": "Requisitos",
+            "orComposite": "Agregador OR",
+            "type": {
+                "type": "Tipo",
+                "operatingSystem": "sistema operativo",
+                "browser": "navegador"
+            },
+            "name": {
+                "name": "Nombre",
+                "none": "ninguno",
+                "any": "cualquiera"
+            },
+            "minVersion": "Versión Mínima",
+            "maxVersion": "Versión Máxima"
+        },
+        "installationRemarks": "Pautas de Instalación",
+        "otherPlatformRequirements": "Otros Requisitos de Plataforma",
+        "duration": "Duración"
+    },
+
+    "Educational": {
+        "interactivityType": {
+            "interactivityType": "Tipo de Interactividad",
+            "active": "activo",
+            "expositive": "expositivo",
+            "mixed": "combinado"
+        },
+        "learningResourceType": {
+            "learningResourceType": "Tipo de Recurso Educativo",
+            "exercise": "ejercicio",
+            "simulation": "simulación",
+            "questionnaire": "cuestionario",
+            "diagram": "diagrama",
+            "figure": "figura",
+            "graph": "gráfico",
+            "index": "índice",
+            "slide": "diapositiva",
+            "table": "tabla",
+            "narrativeText": "texto narrativo",
+            "exam": "examen",
+            "experiment": "experimento",
+            "problemStatement": "planteamiento del problema",
+            "selfAssessment": "autoevaluación",
+            "lecture": "conferencia"
+        },
+        "interactivityLevel": "Nivel de Interactividad",
+        "semanticDensity": "Densidad Semántica",
+        "intendedEndUserRole": {
+            "intendedEndUserRole": "Destinatario",
+            "author": "autor",
+            "teacher": "profesor",
+            "learner": "aprendiz",
+            "manager": "administrador"
+        },
+        "context": {
+            "context": "Contexto",
+            "school": "escuela",
+            "higherEducation": "educación secundaria",
+            "training": "entrenamiento",
+            "other": "otro"
+        },
+        "typicalAgeRange": "Rango Típico de Edad",
+        "range": "Rango",
+        "difficulty": {
+            "difficulty": "Dificultad",
+            "veryEasy": "muy fácil",
+            "easy": "fácil",
+            "medium": "medio",
+            "difficult": "difícil",
+            "veryDifficult": "muy difícil"
+        },
+        "typicalLearningTime": "Tiempo Típico de Aprendizaje"
+    },
+
+    "Rights": {
+        "cost": "Coste",
+        "copyrightAndOtherRestrictions": "Derechos de Autor y otras Restricciones",
+        "yes": "sí",
+        "no": "no"
+    }, 
+
+    "Relation": {
+        "kind": {
+            "kind": "tipo",
+            "isPartOf": "es parte de",
+            "hasPart": "tiene parte",
+            "isVersionOf": "es versión de",
+            "hasVersion": "tiene versión",
+            "isFormatOf": "es formato de",
+            "hasFormat": "tiene formato",
+            "references": "referencia",
+            "isReferencedBy": "es referenciado por",
+            "isBasedOn": "se basa en",
+            "isBasisFor": "es base para",
+            "requires": "requiere",
+            "isRequiredBy": "es requerido por"
+        },
+        "resource": "Recurso"
+    },
+
+    "Annotation": {
+        "accessMode": "Modo de Acceso",
+        "accessModeSufficient": "Modo de Acceso Suficiente",
+        "role": {
+            "role": "Rol",
+            "student": "estudiante",
+            "teacher": "profesores",
+            "application": "aplicación"
+        },
+        "accessModeType": {
+            "visual": "visual",
+            "auditory": "auditivo",
+            "text": "texto",
+            "tactil": "táctil"   
+        }
+    },
+
+    "Classification": {
+        "purpose": {
+            "purpose": "Propósito",
+            "discipline": "disciplina",
+            "idea": "idea",
+            "prerequisite": "prerrequisito",
+            "educationalObjetive": "objetivo educativo",
+            "accessibilityRestrictions": "accesibilidad",
+            "educationalLevel": "nivel educativo",
+            "skillLevel": "nivel de habilidad",
+            "securityLevel": "nivel de seguridad",
+            "competency": "competencia"
+        },
+        "taxonPath": "Ruta Taxonómica",
+        "source": "Fuente",
+        "taxon": "Taxón",
+        "id": "Id",
+        "entry": "Entrada"
+    },
+
+    "Accessibility": {
+        "accessibilitySumary": "Resumen de Accesibilidad",
+        "accessibilityFeatures": {
+            "alternativeText": "Texto Alternativo",
+            "audioDescription": "Descripción de Audio",
+            "captions": "Subtítulos",
+            "highContrastDisplay": "Pantalla de Alto Contraste",
+            "longDescription": "Descripción Larga",
+            "signLanguage": "Lenguaje de Señas",
+            "structuralNavigation": "Navegación Estructural",
+            "synchronizedAudioText": "Texto de Audio Sincronizado",
+            "timingControl": "Control de Tiempo",
+            "transcript": "Transcripción",
+            "annotations": "Anotaciones",
+            "bookmarks": "Marcadores",
+            "braille": "Braile",
+            "chemML": "ChemML",
+            "describeMath": "Describe las Matemáticas",
+            "index": "Índice",
+            "largePrint": "Letra Grande",
+            "latex": "Latex",
+            "mathML": "MathML",
+            "none": "Ninguno",
+            "printPageNumbers": "Imprimir Números de Página",
+            "readingOrder": "Orden de Lectura",
+            "rubyAnnotations": "Anotaciones Ruby",
+            "tableOfContents": "Tabla de Contenido",
+            "taggedPDF": "PDF Etiquetado",
+            "tactileGraphics": "Gráfico Táctil",
+            "tactileObject": "Objeto Táctil",
+            "ttsMarkup": "Marcado de TTS",
+            "unlocked": "Desbloqueado",
+            "resourceContent": "Contenido de Recurso",
+            "accessibilityFeatures": "Características de Accesibilidad"
+        },
+        "accessibilityHazard": {
+            "flashingHazard": "Peligro de Parpadeo",
+            "motionSimulationHazard": "Peligro de Simulación de Movimiento",
+            "soundHazard": "Peligro de Sonido",
+            "noFlashingHazard": "Sin Peligro de Parpadeo",
+            "noMotionSimulationHazard": "Sin Peligro de Simulación de Movimiento",
+            "noSoundHazard": "Sin Peligro de Sonido",
+            "properties": "Propiedades",
+            "accessibilityHazard": "Peligro de Accesibilidad"
+        },
+        "accessibilityControl": {
+            "fullKeyboardControl": "Control Total del Teclado",
+            "fullMouseControl": "Control Total del Mouse",
+            "fullVoiceControl": "Control de Voz Completo",
+            "fullSwitchControl": "Control de Interruptor Completo",
+            "fullTouchControl": "Control Táctil Completo",
+            "fullVideoControl": "Control Total de Video",
+            "methods": "Métodos",
+            "accessibilityControl": "Control de Accesibilidad"
+        },
+        "accessibilityAPI": {
+            "aria": "ARIA",
+            "androidAccessibility": "Accesibilidad de Android",
+            "atk": "ARK",
+            "atSPI": "AT-SPI",
+            "blackberryAccessibility": "Accesibilidad Blackberry",
+            "iAccessible2": "iAccessible2",
+            "iosAccessibility": "Accesibilidad iOS",
+            "javaAccessibility": "Accesibilidad de Java",
+            "macOSXAccessibility": "Accesibilidad de MacOSX",
+            "msaa": "MSAA",
+            "uiAutomation": "Automatización de UI",
+            "accessibilityAPI": "API de Accesibilidad",
+            "compatibleResource": "Recurso Compatible"
+        }
+    }
+    
 }

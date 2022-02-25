@@ -11,6 +11,11 @@ import { AppTopBarComponent } from './app.topbar.component';
 @Component({
     selector: 'app-main',
     templateUrl: './app.main.component.html',
+    styles: [` 
+        .p-grid.p-fluid{
+            width: 100%;
+        }
+    `],
     animations: [
         trigger('mask-anim', [
             state('void', style({

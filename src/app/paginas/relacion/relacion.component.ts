@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { AppComponent } from 'src/app/app.component';
 import { ObjOptions } from 'src/app/modelo/objOptions';
 import { LompadService } from '../../servicios/lompad.service';
@@ -10,55 +9,95 @@ import { LompadService } from '../../servicios/lompad.service';
   styleUrls: ['./relacion.component.css']
 })
 export class RelacionComponent implements OnInit {
-  ObjOptions:ObjOptions=new ObjOptions();
-  objRelacion:any;
-  tipos:any[];
-  tiposSelect:string;
+  relationObject: any = {
+    "kind": {
+      "source": [],
+      "value": []
+    },
+    "resource": {
+      "catalog": [],
+      "entry": [],
+      "description": []
+    }
+  };
+  objectOptions: ObjOptions = new ObjOptions();
+  
+  // Listas predefinidas
+  kindOptions: any[];
+  kindSelected: string;
+  // -----
+
+  // Referente a los valores
+  resourceIdentifierCatalog: any;
+  resourceIdentifierEntry: any;
+  resourceDescription: any;
+
+  flag: boolean = false;
 
   constructor(
     private componentePrincipal: AppComponent,
-    private lompadservice:LompadService
-    ) { }
+    private lompadservice: LompadService
+  ) { }
 
-  loadDatos(){
-    this.objRelacion=this.lompadservice.objPricipal['DATA']['relation'];
-  }
-     
-     
-  ngOnDestroy():void {
-    console.log("Destroy Relacion");    
-    this.lompadservice.objPricipal['DATA']['relation']=this.objRelacion;
-    this.lompadservice.saveObjectLompad(this.objRelacion,"relation");  
-  }
-     
   ngOnInit(): void {
-    this.loadDatos();
-    this.tipos=[
-      {label: 'es parte de', value: 'ispartof', code: 's_p_d'},
-      {label: 'tiene parte', value:  'haspart', code: 't_p'},
-      {label: 'es versión de', value:  'isversionof', code: 'e_v_d'},
-      {label: 'tiene versión', value: 'hasversion', code: 't_v'},
-      {label: 'es formato de', value: 'isformatof', code: 'e_f_d'},
-      {label: 'tiene formato', value:  'hasformat', code: 't_f'},
-      {label: 'es referenciado por', value:  'is referenced by', code: 't234'},
-      {label: 'se basa en', value:  'is based on', code: 't234'},
-      {label: 'es base para', value:  'is basis for', code: 't234'},
-      {label: 'requiere', value:  'requires', code: 't234'},
-      {label: 'es requerido por', value:  'is required by', code: 't234'}
+    this.loadRelationData();
+
+    this.kindOptions = [
+      { label: 'Relation.kind.isPartOf', value: 'is part of', code: 'ipo' },
+      { label: 'Relation.kind.hasPart', value: 'has part', code: 'hp' },
+      { label: 'Relation.kind.isVersionOf', value: 'is version of', code: 'ivo' },
+      { label: 'Relation.kind.hasVersion', value: 'has version', code: 'hv' },
+      { label: 'Relation.kind.isFormatOf', value: 'is format of', code: 'ifo' },
+      { label: 'Relation.kind.hasFormat', value: 'has format', code: 'hf' },
+      { label: 'Relation.kind.references', value: 'references', code: 'rf' },
+      { label: 'Relation.kind.isReferencedBy', value: 'is referenced by', code: 'irfb' },
+      { label: 'Relation.kind.isBasedOn', value: 'is based on', code: 'ibo' },
+      { label: 'Relation.kind.isBasisFor', value: 'is basis for', code: 'ibf' },
+      { label: 'Relation.kind.requires', value: 'requires', code: 'rq' },
+      { label: 'Relation.kind.isRequiredBy', value: 'is required by', code: 'irqb' }
     ];
-    this.ObjOptions=this.componentePrincipal.objOptions;
-    console.log("Desde Relacion: ",this.objRelacion);
-    this.tiposSelect=this.objRelacion["Kind"];
-    
+
+    this.objectOptions = this.componentePrincipal.objOptions;
+    console.log('[INFO]> Rights Component: ', this.relationObject);
+
+    this.setRelationData();
   }
 
- 
-  cambio_tiposSelect(){
-    console.log(this.tiposSelect);    
-    this.objRelacion["Kind"]=this.tiposSelect;
+  loadRelationData() {
+    if (this.isEmpty(this.lompadservice.objPricipal['relation'])) {
+      this.relationObject = this.lompadservice.objPricipal['relation'];
+      this.flag = true;
+    }
   }
-  // saveInfo(){
-  //   this.lompadservice.setRelacion(this.objRelacion);
-  // }
+
+  setRelationData() {
+    if (this.flag) {
+      this.kindSelected = this.relationObject['kind']['value'][0];
+      this.resourceIdentifierCatalog = this.relationObject['resource']['catalog'][0];
+      this.resourceIdentifierEntry = this.relationObject['resource']['entry'][0];
+      this.resourceDescription = this.relationObject['resource']['description'][0];
+    }
+  }
+
+  changeKind() {
+    this.relationObject['kind']['value'][0] = this.kindSelected;
+  }
+
+  isEmpty(value: any[]) {
+    if (typeof value !== 'undefined' && value) {
+      return value;
+    };
+  }
+
+  ngOnDestroy(): void {
+    console.log('[INFO]> Destroy Relation');
+
+    this.relationObject['resource']['catalog'][0] = this.resourceIdentifierCatalog;
+    this.relationObject['resource']['entry'][0] = this.resourceIdentifierEntry;
+    this.relationObject['resource']['description'][0] = this.resourceDescription;
+
+    this.lompadservice.objPricipal['relation'] = this.relationObject;
+    this.lompadservice.sendNewMetadata(this.relationObject, 'relation');
+  }
 
 }

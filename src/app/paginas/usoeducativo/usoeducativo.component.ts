@@ -9,196 +9,270 @@ import { LompadService } from '../../servicios/lompad.service';
   styleUrls: ['./usoeducativo.component.css']
 })
 export class UsoeducativoComponent implements OnInit {
+  educationalObject: any = {
+    "interactivityType": {
+      "source": [],
+      "value": []
+    },
+    "learningResourceType": {
+      "source": [],
+      "value": []
+    },
+    "interactivityLevel": {
+      "source": [],
+      "value": []
+    },
+    "intendedEndUserRole": {
+      "source": [],
+      "value": []
+    },
+    "semanticDensity": {
+      "source": [],
+      "value": []
+    },
+    "context": {
+      "source": [],
+      "value": []
+    },
+    "difficulty": {
+      "source": [],
+      "value": []
+    },
+    "description": {
+      "description": []
+    },
+    "typicalAgeRange": {
+      "typicalAgeRange": []
+    },
+    "typicalLearningTime": {
+      "duration": [],
+      "description": []
+    },
+    "language": {
+      "language": []
+    }
+  };
+  objectOptions: ObjOptions = new ObjOptions();
 
-  
-  ObjOptions:ObjOptions=new ObjOptions();
-  tiposActividad:any[];
-  tiposRecursEducativos:any[];
-  nivelesInteractividad:any[];
-  densiadesSemanticas:any[];
-  destinatarios:any[];
-  contextos:any[];
-  dificultades:any[];
-  edad:number;
-  objUsoEdu:any[];
+  // Listas predefinidas
+  interactivityTypeOptions: any[];
+  interactivityTypeSelected: string;
 
-  //asdlkfjasdklj
-  tiposActividadSelect:string
-  tiposRecursEducativosSelect:string
-  nivelesInteractividadSelect:string
-  densiadesSemanticasSelect:string
-  destinatariosSelect:string
-  contextosSelect:string
-  dificultadesSelect:string
-  //
-  years:number;
-  months:number;
-  days:number;
-  hours:number;
-  minutes:number;
+  learningResourceTypeOptions: any[];
+  learningResourceTypeSelected: string;
+
+  interactivityLevelOptions: any[];
+  interactivityLevelSelected: string;
+
+  semanticDensityOptions: any[];
+  semanticDensitySelected: string;
+
+  intendedEndUserRoleOptions: any[];
+  intendedEndUserRoleSelected: string;
+
+  contextOptions: any[];
+  contextSelected: string;
+
+  difficultyOptions: any[];
+  difficultySelected: string;
+  // -----
+
+  // Referente a los valores
+  description: string;
+
+  flag: boolean = false;
+
+  typicalAgeRange: number;
+  years: number;
+  months: number;
+  days: number;
+  hours: number;
+  minutes: number;
 
   constructor(
     private componentePrincipal: AppComponent,
-    private lompadservice:LompadService
-    ) { }
-
-  loadDatos(){
-    this.objUsoEdu=this.lompadservice.objPricipal['DATA']['educational'];
-  }
-     
-     
-  ngOnDestroy():void {
-    console.log("Destroy Uso Educativo");    
-    this.saveTime();
-    this.lompadservice.objPricipal['DATA']['educational']=this.objUsoEdu;
-    this.lompadservice.saveObjectLompad(this.objUsoEdu,"educational");  
-  }
-
-  castTime(param:string){
-    try {
-      var one=param.split('DT')[0];
-      var dos=param.split('DT')[1];
-      one=one.substr(1,one.length);
-      this.years=+one.split("Y")[0];
-      this.months=+one.split("Y")[1].split("M")[0];      
-      this.days=+one.split("Y")[1].split("M")[1];
-  
-      this.hours=+dos.split("H")[0];
-      this.minutes=+dos.split("H")[1].split('M')[0];    
-      
-    } catch (error) {
-      console.log(error)
-    }
-    
-  }
-
-  saveTime(){
-    this.objUsoEdu['Typical Learning Time']="P"+this.years+"Y"+this.months+"M"+this.days+"DT"+this.hours+"H"+this.minutes+"M"
-    // console.log("P"+this.years+"Y"+this.months+"M"+this.days+"DT"+this.hours+"H"+this.minutes+"M")
-  }
-   
-       
+    private lompadservice: LompadService
+  ) { }
 
   ngOnInit(): void {
-    this.loadDatos();
-    this.castTime(this.objUsoEdu['Typical Learning Time']);
-    this.tiposActividad=[
-      {label: 'Activo', value: 'active', code: 'ac'},
-      {label: 'Expositivo', value: 'expositive', code: 'ex'},    
-      {label: 'Combinado', value:  'mixed', code: 'com'} 
+    this.loadEducationalData();
+
+    this.interactivityTypeOptions = [
+      { label: 'Educational.interactivityType.active', value: 'active', code: 'ac' },
+      { label: 'Educational.interactivityType.expositive', value: 'expositive', code: 'ex' },
+      { label: 'Educational.interactivityType.mixed', value: 'mixed', code: 'com' }
     ];
 
-    this.tiposRecursEducativos=[
-      {label: 'Ejercicio', value: 'exercise', code: 'ejer'},
-      {label: 'Simulación', value: 'simulation', code: 'sim'},
-      {label: 'Cuestionario', value: 'questionnarie', code: 'cuest'},
-      {label: 'Diagrama', value: 'diagram', code: 'dia'},
-      {label: 'Figura', value: 'figure', code: 'fig'},
-      {label: 'Gráfico', value: 'graph', code: 'gra'},
-      {label: 'Indice', value:  'index', code: 'in'},
-      {label: 'Diapositiva', value:  'slide', code: 'in'},
-      {label: 'tabla', value:  'table', code: 'in'},
-      {label: 'texto narrativo', value:  'narrative text', code: 'in'},
-      {label: 'examen', value:  'exam', code: 'in'},
-      {label: 'experimento', value:  'experiment', code: 'in'},
-      {label: 'planteamiento del problema', value:  'problem statement', code: 'in'},
-      {label: 'autoevaluacion', value:  'self assessment', code: 'in'},
-      {label: 'conferencia', value:  'lecture', code: 'in'},
-      
-     
-    ];
-    this.nivelesInteractividad=[
-      {label: 'muy bajo', value: 'very low', code: 'mb'},
-      {label: 'bajo', value: 'low', code: 'baj'},
-      {label: 'medio', value: 'medium', code: 'med'},
-      {label: 'alto', value: 'high', code: 'alt'},
-      {label: 'muy alto', value: 'very high', code: '34523'},
-    ];
-    this.densiadesSemanticas=[
-      {label: 'muy bajo', value: 'very low', code: 'mb'},
-      {label: 'bajo', value: 'low', code: 'baj'},
-      {label: 'medio', value: 'medium', code: 'med'},
-      {label: 'alto', value: 'high', code: 'alt'},
-      {label: 'muy alto', value: 'very high', code: '34523'},
-    ];
-    this.destinatarios=[
-      {label: 'autor', value: 'author', code: 'aut'},
-      {label: 'profesor', value: 'theacher', code: 'pro'},
-      {label: 'aprendiz', value: 'learner', code: 'aprend'},
-      {label: 'admimistrador', value: 'manager', code: 'mana'}  
-    ];
-    this.contextos=[
-      {label: 'escuela', value:  'school', code: 'es'},    
-      {label: 'educación secundaria', value: 'higher education', code: 'edu_s'},    
-      {label: 'entrenamiento', value: 'training', code: 'entre'},    
-      {label: 'otro', value:  'other', code: 'otro'},    
-
-    ];
-    this.dificultades=[
-      {label: 'muy facíl', value:  'very easy', code: 'mf'},    
-      {label: 'facíl', value: 'easy', code: 'f'},    
-      {label: 'medio', value: 'medium', code: 'm'},    
-      {label: 'dificíl', value: 'difficult', code: 'd'},
-      {label: 'muy dificíl', value:'very difficult', code: 'md'}
+    this.learningResourceTypeOptions = [
+      { label: 'Educational.learningResourceType.exercise', value: 'exercise', code: 'ejer' },
+      { label: 'Educational.learningResourceType.simulation', value: 'simulation', code: 'sim' },
+      { label: 'Educational.learningResourceType.questionnaire', value: 'questionnarie', code: 'cuest' },
+      { label: 'Educational.learningResourceType.diagram', value: 'diagram', code: 'dia' },
+      { label: 'Educational.learningResourceType.figure', value: 'figure', code: 'fig' },
+      { label: 'Educational.learningResourceType.graph', value: 'graph', code: 'gra' },
+      { label: 'Educational.learningResourceType.index', value: 'index', code: 'in' },
+      { label: 'Educational.learningResourceType.slide', value: 'slide', code: 'in' },
+      { label: 'Educational.learningResourceType.table', value: 'table', code: 'in' },
+      { label: 'Educational.learningResourceType.narrativeText', value: 'narrative text', code: 'in' },
+      { label: 'Educational.learningResourceType.exam', value: 'exam', code: 'in' },
+      { label: 'Educational.learningResourceType.experiment', value: 'experiment', code: 'in' },
+      { label: 'Educational.learningResourceType.problemStatement', value: 'problem statement', code: 'in' },
+      { label: 'Educational.learningResourceType.selfAssessment', value: 'self assessment', code: 'in' },
+      { label: 'Educational.learningResourceType.lecture', value: 'lecture', code: 'in' },
     ];
 
-    this.ObjOptions=this.componentePrincipal.objOptions;
+    this.interactivityLevelOptions = [
+      { label: 'Common.levels.veryLow', value: 'very low', code: 'mb' },
+      { label: 'Common.levels.low', value: 'low', code: 'baj' },
+      { label: 'Common.levels.medium', value: 'medium', code: 'med' },
+      { label: 'Common.levels.high', value: 'high', code: 'alt' },
+      { label: 'Common.levels.veryHigh', value: 'very high', code: '34523' },
+    ];
 
-    // this.objUsoEdu=this.lompadservice.getUsoEducativo();
-    console.log("DEsde Uso Edu: ", this.objUsoEdu);
+    this.semanticDensityOptions = [
+      { label: 'Common.levels.veryLow', value: 'very low', code: 'mb' },
+      { label: 'Common.levels.low', value: 'low', code: 'baj' },
+      { label: 'Common.levels.medium', value: 'medium', code: 'med' },
+      { label: 'Common.levels.high', value: 'high', code: 'alt' },
+      { label: 'Common.levels.veryHigh', value: 'very high', code: '34523' },
+    ];
 
-    this.tiposActividadSelect=this.objUsoEdu["Interactivity Type"];
-    this.tiposRecursEducativosSelect=this.objUsoEdu["Learning Resource Type"];
-    this.nivelesInteractividadSelect=this.objUsoEdu["Interactivity Level"];
-    this.densiadesSemanticasSelect=this.objUsoEdu["Semantic Density"];
-    this.destinatariosSelect=this.objUsoEdu["Intended End User Roles"];
-    this.contextosSelect=this.objUsoEdu["Context"];
-    this.dificultadesSelect=this.objUsoEdu["Difficulty"];
+    this.intendedEndUserRoleOptions = [
+      { label: 'Educational.intendedEndUserRole.author', value: 'author', code: 'aut' },
+      { label: 'Educational.intendedEndUserRole.teacher', value: 'teacher', code: 'pro' },
+      { label: 'Educational.intendedEndUserRole.learner', value: 'learner', code: 'aprend' },
+      { label: 'Educational.intendedEndUserRole.manager', value: 'manager', code: 'mana' }
+    ];
 
-    this.edad=+this.objUsoEdu["Typical Age Range"];
+    this.contextOptions = [
+      { label: 'Educational.context.school', value: 'school', code: 'es' },
+      { label: 'Educational.context.higherEducation', value: 'higher education', code: 'edu_s' },
+      { label: 'Educational.context.training', value: 'training', code: 'entre' },
+      { label: 'Educational.context.other', value: 'other', code: 'otro' },
+    ];
 
+    this.difficultyOptions = [
+      { label: 'Educational.difficulty.veryEasy', value: 'very easy', code: 'mf' },
+      { label: 'Educational.difficulty.easy', value: 'easy', code: 'f' },
+      { label: 'Educational.difficulty.medium', value: 'medium', code: 'm' },
+      { label: 'Educational.difficulty.difficult', value: 'difficult', code: 'd' },
+      { label: 'Educational.difficulty.veryDifficult', value: 'very difficult', code: 'md' }
+    ];
 
-    
+    this.objectOptions = this.componentePrincipal.objOptions;
+    console.log('[INFO]> Educational Component: ', this.educationalObject);
+
+    this.setEducationalData();
   }
 
-
-
-  
-                                  
-    cambio_tiposActividad(){
-      console.log(this.tiposActividadSelect)
-      this.objUsoEdu["Interactivity Type"]=this.tiposActividadSelect;
+  loadEducationalData() {
+    if (this.isEmpty(this.lompadservice.objPricipal['educational'])) {
+      this.educationalObject = this.lompadservice.objPricipal['educational'];
+      this.flag = true;
     }
+  }
 
-    cambio_tiposRecursEducativos(){
-      console.log(this.tiposRecursEducativosSelect);
-      this.objUsoEdu["Learning Resource Type"]=this.tiposRecursEducativosSelect;
+  setEducationalData() {
+    if (this.flag) {
+      if (this.educationalObject['interactivityType']['value'] != undefined) {
+        this.interactivityTypeSelected = this.educationalObject['interactivityType']['value'][0]; 
+      }
+      if (this.educationalObject['learningResourceType']['value'] != undefined) {
+        this.learningResourceTypeSelected = this.educationalObject['learningResourceType']['value'][0]; 
+      }
+      if (this.educationalObject['interactivityLevel']['value'] != undefined) {
+        this.interactivityLevelSelected = this.educationalObject['interactivityLevel']['value'][0];
+      }
+      if (this.educationalObject['semanticDensity']['value'] != undefined) {
+        this.semanticDensitySelected = this.educationalObject['semanticDensity']['value'][0];
+      }
+      if (this.educationalObject['intendedEndUserRole']['value'] != undefined) {
+        this.intendedEndUserRoleSelected = this.educationalObject['intendedEndUserRole']['value'][0];
+      }
+      if (this.educationalObject['context']['value'] != undefined) {
+        this.contextSelected = this.educationalObject['context']['value'][0];
+      }
+      if (this.educationalObject['typicalAgeRange']['typicalAgeRange'] != undefined) {
+        this.typicalAgeRange = this.educationalObject['typicalAgeRange']['typicalAgeRange'][0];
+      }
+      if (this.educationalObject['difficulty']['value'] != undefined) {
+        this.difficultySelected = this.educationalObject['difficulty']['value'][0]; 
+      }
+      if (this.educationalObject['typicalLearningTime']['duration'][0] != undefined) {
+        this.castTime(this.educationalObject['typicalLearningTime']['duration'][0]); 
+      }
+      if (this.educationalObject['description']['description'] != undefined) {
+        this.description = this.educationalObject['description']['description'][0]; 
+      }
     }
+  }
+
+  changeInteractivityType() {
+    this.educationalObject['interactivityType']['value'][0] = this.interactivityTypeSelected;
+  }
+
+  changeLearningResourceType() {
+    this.educationalObject['learningResourceType']['value'][0] = this.learningResourceTypeSelected;
+  }
+
+  changeInteractivityLevel() {
+    this.educationalObject['interactivityLevel']['value'][0] = this.interactivityLevelSelected;
+  }
+
+  changeSemanticDensity() {
+    this.educationalObject['semanticDensity']['value'][0] = this.semanticDensitySelected;
+  }
+
+  changeIntentedEndUserRole() {
+    this.educationalObject['intendedEndUserRole']['value'][0] = this.intendedEndUserRoleSelected;
+  }
+
+  changeContext() {
+    this.educationalObject['context']['value'][0] = this.contextSelected;
+  }
+
+  changeDifficulty() {
+    this.educationalObject['difficulty']['value'][0] = this.difficultySelected;
+  }
+
+  castTime(duration: string) {
+    try {
+      console.log('duracion', duration)
+      var auxDuration1 = duration.split('DT')[0];
+      var auxDuration2 = duration.split('DT')[1];
+
+      auxDuration1 = auxDuration1.substr(1, auxDuration1.length);
+
+      this.years = + auxDuration1.split('Y')[0];
+      this.months = + auxDuration1.split('Y')[1].split('M')[0];
+      this.days = + auxDuration1.split('Y')[1].split('M')[1];
+
+      this.hours = + auxDuration2.split('H')[0];
+      this.minutes = + auxDuration2.split('H')[1].split('M')[0];
+    } catch (error) {
+      console.log('[ERROR]> Technical: Something went wrong with casting duration!', error);
+    }
+  }
+
+  saveTime() {
+    this.educationalObject['typicalLearningTime']['duration'][0] = 'P' + this.years + 'Y' + this.months + 'M' + this.days + 'DT' + this.hours + 'H' + this.minutes + 'M';
+  }
+
+  isEmpty(value: any[]) {
+    if (typeof value !== 'undefined' && value) {
+      return value;
+    };
+  }
+
+  ngOnDestroy(): void {
+    console.log('[INFO]> Destroy Educational');
     
-    cambio_nivelesInteractividadSelect(){
-      console.log(this.nivelesInteractividadSelect);
-      this.objUsoEdu["Interactivity Level"]=this.nivelesInteractividadSelect;
-    }
+    this.educationalObject['typicalAgeRange']['typicalAgeRange'][0] = this.typicalAgeRange;
+    this.educationalObject['description']['description'][0] = this.description;
+    this.saveTime();
 
-    cambio_densiadesSemanticasSelect(){
-      console.log(this.densiadesSemanticasSelect);
-      this.objUsoEdu["Semantic Density"]=this.densiadesSemanticasSelect;
-    }
-    
-    cambio_destinatariosSelect(){
-      console.log(this.destinatariosSelect);
-      this.objUsoEdu["Intended End User Roles"]=this.destinatariosSelect;
-    }
-    
-    cambio_contextosSelect(){
-      console.log(this.contextosSelect)  
-      this.objUsoEdu["Context"]=this.contextosSelect;
-    }
-    
-    cambio_dificultadesSelect(){
-      console.log(this.dificultadesSelect);
-      this.objUsoEdu["Difficulty"]=this.dificultadesSelect;
-    }
-
+    this.lompadservice.objPricipal['educational'] = this.educationalObject;
+    this.lompadservice.sendNewMetadata(this.educationalObject, 'educational');
+  }
 
 }

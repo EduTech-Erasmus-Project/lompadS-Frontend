@@ -1,10 +1,12 @@
 <div class="p-grid">
-    <div *ngIf="ObjOptions.o5_1" class="p-col-12 p-md-6">
-        <h5>{{"Tipo interactividad" | translate}}</h5>
+
+    <!-- [Temp] Contiene: -Tipo de interactividad (5.1) -->
+    <div *ngIf="objectOptions.o5_1" class="p-col-12 p-md-6">
+        <h5>5.1 - {{"Educational.interactivityType.interactivityType" | translate}}</h5>
+
         <div class="card">
             <div class="p-fluid">
-                <!-- [(ngModel)]="selectedDrop" -->
-                <p-dropdown [options]="tiposActividad" [(ngModel)]='tiposActividadSelect' name='tiposActividadSelect' (onChange)='cambio_tiposActividad()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                <p-dropdown [options]="interactivityTypeOptions" [(ngModel)]='interactivityTypeSelected' name='interactivityTypeSelected' (onChange)='changeInteractivityType()' placeholder='{{"Common.select" | translate}} ' [showClear]="true">
                     <ng-template pTemplate="item" let-item>
                         {{item.label| translate }}
                     </ng-template>
@@ -16,13 +18,13 @@
         </div>
     </div>
 
+    <!-- [Temp] Contiene: Tipo de recurso educativo (5.2) -->
+    <div *ngIf="objectOptions.o5_2" class="p-col-12 p-md-6">
+        <h5>5.2 - {{"Educational.learningResourceType.learningResourceType" | translate}}</h5>
 
-    <div *ngIf="ObjOptions.o5_2" class="p-col-12 p-md-6">
-        <h5>{{"Tipo de recurso educativo" | translate}}</h5>
         <div class="card">
             <div class="p-fluid">
-                <!-- [(ngModel)]="selectedDrop" -->
-                <p-dropdown [options]="tiposRecursEducativos" [(ngModel)]='tiposRecursEducativosSelect' name='tiposRecursEducativosSelect' (onChange)='cambio_tiposRecursEducativos()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                <p-dropdown [options]="learningResourceTypeOptions" [(ngModel)]='learningResourceTypeSelected' name='learningResourceTypeSelected' (onChange)='changeLearningResourceType()' placeholder='{{"Common.select" | translate}} ' [showClear]="true">
                     <ng-template pTemplate="item" let-item>
                         {{item.label| translate }}
                     </ng-template>
@@ -34,60 +36,13 @@
         </div>
     </div>
 
-    <div *ngIf="ObjOptions.o5_3" class="p-col-12 p-md-6">
-        <h5>{{"Nivel de interactividad" | translate}}</h5>
+    <!-- [Temp] Contiene: Nivel de interactividad (5.3) -->
+    <div *ngIf="objectOptions.o5_3" class="p-col-12 p-md-6">
+        <h5>5.3 - {{"Educational.interactivityLevel" | translate}}</h5>
+
         <div class="card">
             <div class="p-fluid">
-                <!-- [(ngModel)]="selectedDrop" -->
-                <p-dropdown [options]="nivelesInteractividad" [(ngModel)]='nivelesInteractividadSelect' name='nivelesInteractividadSelect' (onChange)='cambio_nivelesInteractividadSelect()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
-                    <ng-template pTemplate="item" let-item>
-                        {{item.label| translate }}
-                    </ng-template>
-                    <ng-template let-selectedItem pTemplate="selectedItem">
-                        {{selectedItem.label | translate }}
-                    </ng-template>
-                </p-dropdown>
-            </div>
-        </div>
-    </div>
-    <div *ngIf="ObjOptions.o5_4" class="p-col-12 p-md-6">
-        <h5>{{"Densidad Semántica" | translate}}</h5>
-        <div class="card">
-            <div class="p-fluid">
-                <!-- [(ngModel)]="selectedDrop" -->
-                <p-dropdown [options]="densiadesSemanticas" [(ngModel)]='densiadesSemanticasSelect' name='densiadesSemanticasSelect' (onChange)='cambio_densiadesSemanticasSelect()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
-                    <ng-template pTemplate="item" let-item>
-                        {{item.label| translate }}
-                    </ng-template>
-                    <ng-template let-selectedItem pTemplate="selectedItem">
-                        {{selectedItem.label | translate }}
-                    </ng-template>
-                </p-dropdown>
-            </div>
-        </div>
-    </div>
-    <div *ngIf="ObjOptions.o5_5" class="p-col-12 p-md-6">
-        <h5>{{"Destinatario" | translate}}</h5>
-        <div class="card">
-            <div class="p-fluid">
-                <!-- [(ngModel)]="selectedDrop" -->
-                <p-dropdown [options]="destinatarios" [(ngModel)]='destinatariosSelect' name='destinatariosSelect' (onChange)='cambio_destinatariosSelect()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
-                    <ng-template pTemplate="item" let-item>
-                        {{item.label| translate }}
-                    </ng-template>
-                    <ng-template let-selectedItem pTemplate="selectedItem">
-                        {{selectedItem.label | translate }}
-                    </ng-template>
-                </p-dropdown>
-            </div>
-        </div>
-    </div>
-    <div *ngIf="ObjOptions.o5_6" class="p-col-12 p-md-6">
-        <h5>{{"Contexto" | translate}}</h5>
-        <div class="card">
-            <div class="p-fluid">
-                <!-- [(ngModel)]="selectedDrop" -->
-                <p-dropdown [options]="contextos" [(ngModel)]='contextosSelect' name='contextosSelect' (onChange)='cambio_contextosSelect()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true">
+                <p-dropdown [options]="interactivityLevelOptions" [(ngModel)]='interactivityLevelSelected' name='interactivityLevelSelected' (onChange)='changeInteractivityLevel()' placeholder='{{"Common.select" | translate}} ' [showClear]="true">
                     <ng-template pTemplate="item" let-item>
                         {{item.label| translate }}
                     </ng-template>
@@ -99,30 +54,13 @@
         </div>
     </div>
 
+    <!-- [Temp] Contiene: Densidad semántica (5.4) -->
+    <div *ngIf="objectOptions.o5_4" class="p-col-12 p-md-6">
+        <h5>5.4 - {{"Educational.semanticDensity" | translate}}</h5>
 
-    <div *ngIf="ObjOptions.o5_7" class="p-col-12 p-md-6">
-        <h5>{{"Rango típico de edad" | translate}}</h5>
-        <!-- <div class="card">
-            <div class="p-fluid">
-                <label for="rango">{{"Rango" | translate}}</label>
-                <input id="rango" type="text" pInputText>
-            </div>
-        </div> -->
         <div class="card">
             <div class="p-fluid">
-                <input type="text" pInputText [(ngModel)]="edad" readonly/>
-                <p-slider [(ngModel)]="edad"></p-slider>
-            </div>
-        </div>
-    </div>
-
-
-    <div *ngIf="ObjOptions.o5_8" class="p-col-12 p-md-6">
-        <h5>{{"Dificultad" | translate}}</h5>
-        <div class="card">
-            <div class="p-fluid">
-                <!-- [(ngModel)]="selectedDrop" -->
-                <p-dropdown [options]="dificultades" [(ngModel)]='dificultadesSelect' name='dificultadesSelect' (onChange)='cambio_dificultadesSelect()' placeholder='{{"Seleccionar" | translate}} ' [showClear]="true ">
+                <p-dropdown [options]="semanticDensityOptions" [(ngModel)]='semanticDensitySelected' name='semanticDensitySelected' (onChange)='changeSemanticDensity()' placeholder='{{"Common.select" | translate}} ' [showClear]="true">
                     <ng-template pTemplate="item" let-item>
                         {{item.label| translate }}
                     </ng-template>
@@ -134,56 +72,107 @@
         </div>
     </div>
 
-    <!-- class="card" -->
-    <div *ngIf="ObjOptions.o5_9" class="p-col-12 p-md-6">
-        <h5>{{"Tiempo tipico de aprendizaje" | translate}}</h5>
+    <!-- [Temp] Contiene: Destinatario (5.5) -->
+    <div *ngIf="objectOptions.o5_5" class="p-col-12 p-md-6">
+        <h5>5.5 - {{"Educational.intendedEndUserRole.intendedEndUserRole" | translate}}</h5>
+
+        <div class="card">
+            <div class="p-fluid">
+                <p-dropdown [options]="intendedEndUserRoleOptions" [(ngModel)]='intendedEndUserRoleSelected' name='intendedEndUserRoleSelected' (onChange)='changeIntentedEndUserRole()' placeholder='{{"Common.select" | translate}} ' [showClear]="true">
+                    <ng-template pTemplate="item" let-item>
+                        {{item.label| translate }}
+                    </ng-template>
+                    <ng-template let-selectedItem pTemplate="selectedItem">
+                        {{selectedItem.label | translate }}
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </div>
+    </div>
+
+    <!-- [Temp] Contiene: Contexto (5.6) -->
+    <div *ngIf="objectOptions.o5_6" class="p-col-12 p-md-6">
+        <h5>5.6 - {{"Educational.context.context" | translate}}</h5>
+
+        <div class="card">
+            <div class="p-fluid">
+                <p-dropdown [options]="contextOptions" [(ngModel)]='contextSelected' name='contextSelected' (onChange)='changeContext()' placeholder='{{"Common.select" | translate}} ' [showClear]="true">
+                    <ng-template pTemplate="item" let-item>
+                        {{item.label| translate }}
+                    </ng-template>
+                    <ng-template let-selectedItem pTemplate="selectedItem">
+                        {{selectedItem.label | translate }}
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </div>
+    </div>
+
+    <!-- [Temp] Contiene: Rango típico de edad (5.7) -->
+    <div *ngIf="objectOptions.o5_7" class="p-col-12 p-md-6">
+        <h5>5.7 - {{"Educational.typicalAgeRange" | translate}}</h5>
+
+        <div class="card">
+            <div class="p-fluid">
+                <label for="rango">{{"Educational.range" | translate}}</label>
+                <input id="rango" [(ngModel)]="typicalAgeRange" type="text" pInputText>
+            </div>
+        </div>
+    </div>
+
+    <!-- [Temp] Contiene: Dificultad (5.8) -->
+    <div *ngIf="objectOptions.o5_8" class="p-col-12 p-md-6">
+        <h5>5.8 - {{"Educational.difficulty.difficulty" | translate}}</h5>
+
+        <div class="card">
+            <div class="p-fluid">
+                <!-- [(ngModel)]="selectedDrop" -->
+                <p-dropdown [options]="difficultyOptions" [(ngModel)]='difficultySelected' name='difficultySelected' (onChange)='changeDifficulty()' placeholder='{{"Common.select" | translate}} ' [showClear]="true ">
+                    <ng-template pTemplate="item" let-item>
+                        {{item.label| translate }}
+                    </ng-template>
+                    <ng-template let-selectedItem pTemplate="selectedItem">
+                        {{selectedItem.label | translate }}
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </div>
+    </div>
+
+    <!-- [Temp] Contiene: Tiempo típico de aprendizaje (5.9) -->
+    <div *ngIf="objectOptions.o5_9" class="p-col-12 p-md-6">
+        <h5>5.9 - {{"Educational.typicalLearningTime" | translate}}</h5>
 
         <div class="card">
             <div class="p-fluid p-formgrid p-grid">
                 <div class="p-field p-col">
-                    <label for="anios">{{"Años" | translate}}</label>
+                    <label for="anios">{{"Common.time.years" | translate}}</label>
                     <p-inputNumber id="anios" mode="decimal" [showButtons]="true" [min]="0" [max]="100" [(ngModel)]="years"></p-inputNumber>
                 </div>
                 <div class="p-field p-col">
-                    <label for="meses">{{"Meses" | translate}}</label>
+                    <label for="meses">{{"Common.time.months" | translate}}</label>
                     <p-inputNumber id="meses" mode="decimal" [showButtons]="true" [min]="0" [max]="12" [(ngModel)]="months"></p-inputNumber>
                 </div>
-
                 <div class="p-field p-col">
-                    <label for="dias">{{"Días" | translate}}</label>
+                    <label for="dias">{{"Common.time.days" | translate}}</label>
                     <p-inputNumber id="dias" mode="decimal" [showButtons]="true" [min]="0" [max]="30" [(ngModel)]="days"></p-inputNumber>
                 </div>
-
             </div>
-
-
-            <!-- <div class="p-fluid">
-                <div class="p-field p-grid">
-                    <label for="descripcion">{{"Descripción" | translate}}</label>
-                    <textarea id="descripcion" type="text" rows="4" pInputTextarea></textarea>
-                </div>
-            </div> -->
-
-
         </div>
-
     </div>
 
-    <!-- class="p-col-12" -->
-
-    <div *ngIf="ObjOptions.o5_10" class="p-col-12 p-md-6">
-        <h5>{{"Descripción" | translate}}</h5>
+    <!-- [Temp] Contiene: Descripción (5.10) -->
+    <div *ngIf="objectOptions.o5_10" class="p-col-12 p-md-6">
+        <h5>5.10 - {{"Common.description" | translate}}</h5>
+        
         <div class="card">
             <div class="p-fluid p-formgrid p-grid">
                 <div class="p-field p-col-12 ">
-                    <label for="descripcion">{{"Descripción" | translate}}</label>
-                    <textarea id="descripcion" [(ngModel)]='objUsoEdu["Description"]' type="text" rows="4" pInputTextarea></textarea>
+                    <label for="descripcion">{{"Common.description" | translate}}</label>
+                    <textarea id="descripcion" [(ngModel)]='description' type="text" rows="4" pInputTextarea></textarea>
                 </div>
-
             </div>
         </div>
     </div>
-
-
 
 </div>

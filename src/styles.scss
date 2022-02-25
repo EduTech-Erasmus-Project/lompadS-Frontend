@@ -8,3 +8,29 @@ $gutter: .5rem; //for primeflex grid system
 @import "../node_modules/@fullcalendar/daygrid/main.min.css";
 @import "../node_modules/@fullcalendar/timegrid/main.min.css";
 @import "assets/demo/flags/flags.css";
+
+.main-content {
+  padding: 0 75px;
+}
+
+.fl-prefsEditor-buttons {
+  z-index: 50000;
+  //position: absolute;
+  //top: 0;
+  //right: 0;
+  margin: 0 25px !important;
+  border: none !important;
+  background-color: var(--primary-color) !important;
+  box-shadow: none !important;
+
+  button {
+    background-color: var(--primary-color) !important;
+    color: #FFF !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .main-content {
+    padding: 0 25px;
+  }
+}

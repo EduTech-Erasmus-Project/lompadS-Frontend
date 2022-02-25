@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 import { ObjOptions } from 'src/app/modelo/objOptions';
 import { LompadService } from '../../servicios/lompad.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-metadatos',
@@ -10,143 +9,164 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./metadatos.component.css']
 })
 export class MetadatosComponent implements OnInit {
-  objMetadatos:JSON;  
-  subcripcion:Subscription
-  tipos:any[];
-  tipos_Select:string;  
-  ObjOptions:ObjOptions=new ObjOptions();
-  nombreNew:string;
-  apellidoNew:string;
-  mailNew:string;
-  organizacionNew:string;  
-  fecha:any;
+  metametadataObject: any = {
+    "identifier": {
+      "catalog": [],
+      "entry": []
+    },
+    "metadataSchema": {
+      "metadataSchema": []
+    },
+    "language": {
+      "language": []
+    },
+    "contribute": {
+      "source": [],
+      "value": [],
+      "entity": [],
+      "date": [],
+      "description": []
+    }
+  };
+  objectOptions: ObjOptions = new ObjOptions();
+
+  // Listas predefinidas
+  roleOptions: any[];
+  roleSelected: string;
+  // ----- 
+  
+  // Referente a los valores
+  identifierCatalog: string;
+  identifierEntry: string;
+  entityName: string;
+  entityLastname: string;
+  entityEmail: string;
+  entityOrganization: string;
+  date: any;
+  metadataSchema: string;
+
+  flag: boolean = false;
+
   constructor(
     private componentePrincipal: AppComponent,
     private lompadservice: LompadService
-    ) { }
-    
-  
-    loadDatos(){
-      this.objMetadatos=this.lompadservice.objPricipal['DATA']['metaMetadata'];
-    }          
-    ngOnDestroy():void {      
-      console.log("Destroy Metadatos"); 
-      this.actualizarVcard();
-      this.objMetadatos['Contribute']['Date']=this.fecha.toISOString();
-      this.lompadservice.objPricipal['DATA']['metaMetadata']=this.objMetadatos;
-      this.lompadservice.saveObjectLompad(this.objMetadatos,"metaMetadata");  
-    }    
-           
+  ) { }
+
   ngOnInit(): void {
-    this.loadDatos();
-    this.castVcard(this.objMetadatos['Contribute']['Entity']);
-    this.tipos=[
-      {label: 'Creador', value: 'creator', code: 'cre'},
-      {label: 'Visor', value: 'validator', code: 'vie'}   
+    this.loadMetametadataData();
+    
+    this.roleOptions = [
+      { label: 'Common.contribute.role.creator', value: 'creator', code: 'cre' },
+      { label: 'Common.contribute.role.validator', value: 'validator', code: 'vie' }
     ];
 
-    this.ObjOptions=this.componentePrincipal.objOptions;
-    // this.objMetadatos=this.lomapdService.getObjMetadata();
+    this.objectOptions = this.componentePrincipal.objOptions;
+    console.log('[INFO]> Metametadata Component: ', this.metametadataObject);
 
-    console.log("Desde metadatos: ",this.objMetadatos);
-    this.fecha=new Date(this.objMetadatos["Contribute"]["Date"])
-    this.tipos_Select=this.objMetadatos["Contribute"]["Role"]
-
-    
+    this.setMetametadataData();
   }
-  castVcard(card:string){//lanzar desde ngOninit    
-    //en caso de que las vcard esten llegando sin saltos de linea
-    const keyys=[" VERSION", " FN", " N", " EMAIL", " ORG", " END:VCARD"];
 
-    keyys.forEach(element =>{
-      card=card.replace(element,element.replace(" ","\n"))
+  loadMetametadataData() {
+    if (this.isEmpty(this.lompadservice.objPricipal['metaMetadata'])) {
+      this.metametadataObject = this.lompadservice.objPricipal['metaMetadata'];
+      this.flag = true;
+    }
+  }
+
+  setMetametadataData() {
+    if (this.flag) {
+      this.identifierCatalog = this.metametadataObject['identifier']['catalog'][0];
+      this.identifierEntry = this.metametadataObject['identifier']['entry'][0];
+      this.roleSelected = this.metametadataObject['contribute']['value'][0];
+      if (this.metametadataObject['contribute']['entity'][0] != undefined) {
+        this.castVcard(this.metametadataObject['contribute']['entity'][0]); 
+      }
+      if (this.metametadataObject['contribute']['date'][0] != undefined) {
+        this.date = new Date(this.metametadataObject['contribute']['date'][0]);
+      }
+      this.metadataSchema = this.metametadataObject['metadataSchema']['metadataSchema'][0];
+    }
+  }
+
+  castVcard(card: string) {//lanzar desde ngOninit    
+    //en caso de que las vcard esten llegando sin saltos de linea
+    const vcardElements = [' VERSION', ' FN', ' N', ' EMAIL', ' ORG', ' END:VCARD'];
+
+    vcardElements.forEach(element => {
+      card = card.replace(element, element.replace(' ', '\n'));
     });
 
-    // var inicial=card;
-    // inicial=inicial.replace(" ","_");
-    // var list=inicial.split("\n");
-    // // console.log(list);
+    var fullNameExpression = /FN:(.*)/g;
+    var organizationExpression = /ORG:(.*)/g;
+    var emailExpression = /EMAIL;[^:]*:(.*)/g;
+    var emptyVcard = 'BEGIN:VCARD\nVERSION:3.0\nN:ApellidoEntidad;Entidad1;;;\nFN:Entidad1 ApellidoEntidad\nEMAIL;TYPE=INTERNET:Sin Correo\nORG:Sin organizacion\nEND:VCARD';
 
-    // var varN=list[2].substring(2,list[2].length);
-    // var list_varN=varN.split(";")      
-    // var nombre=list_varN[1];
-    // var apellido=list_varN[0];
+    const mname = fullNameExpression.exec(card);
+    const morg = organizationExpression.exec(card);
+    const mmail = emailExpression.exec(card);
 
-    // var mail=list[4].split(":")[1];
-    // var organization=list[5].split(":")[1];
+    // console.log(mname?.[1]);
+    // console.log(morg?.[1]);
+    // console.log(mmail?.[1]);
 
-    var fname = /FN:(.*)/g;
-    var org = /ORG:(.*)/g;
-    var mail = /EMAIL;[^:]*:(.*)/g;
-    var str = 'BEGIN:VCARD\nVERSION:3.0\nN:ApellidoEntidad;Entidad1;;;\nFN:Entidad1 ApellidoEntidad\nEMAIL;TYPE=INTERNET:Sin Correo\nORG:Sin organizacion\nEND:VCARD';
-    
-    
-    const mname = fname.exec(str);
-    const morg = org.exec(str);
-    const mmail = mail.exec(str);
+    var nombre = mname?.[1];
+    var listnombreApell = nombre.split(' ');
+    this.entityName = listnombreApell[0];
+    this.entityLastname = listnombreApell[1];
+    this.entityEmail = mmail?.[1];
+    this.entityOrganization = morg?.[1];
+  }
 
-
-    console.log(mname?.[1]);
-    console.log(morg?.[1]);
-    console.log(mmail?.[1]);
-
-    var nombre=mname?.[1];
-    var listnombreApell=nombre.split(" ");
-    this.nombreNew=listnombreApell[0];
-    this.apellidoNew=listnombreApell[1];
-    
-    this.mailNew=mmail?.[1];
-    
-    this.organizacionNew=morg?.[1];
-                 
-
-}
-
-actualizarVcard(){//lanzar desde ngOnDestroy
-
-  const card=`BEGIN:VCARD\nVERSION:3.0
-    N:${this.apellidoNew.trim()};${this.nombreNew.trim()};;;
-    FN:${this.nombreNew.trim()} ${this.apellidoNew.trim()}
-    EMAIL;TYPE=INTERNET:${this.mailNew.trim()}
-    ORG:${this.organizacionNew.trim()}
-    END:VCARD`         
-    this.objMetadatos["Contribute"]["Entity"]=card;
-  // var carrd=card;
-  // var inicial=card;
-  //   inicial=inicial.replace(" ","_");
-  //   var list=inicial.split("\n");
-    
-
-  //   var varN=list[2].substring(2,list[2].length);
-  //   var list_varN=varN.split(";")      
-  //   var nombre=list_varN[1];
-  //   var apellido=list_varN[0];
-
-  //   var mail=list[4].split(":")[1];
-  //   var organization=list[5].split(":")[1];
-  
-  //   carrd=carrd.replace(nombre,this.nombreNew.trim());
-  //   carrd=carrd.replace(apellido,this.apellidoNew.trim());
-  //   carrd=carrd.replace(mail,this.mailNew.trim());
-  //   carrd=carrd.replace(organization,this.organizacionNew.trim());   
-  //   const temFN=carrd.split("\n");
-  //   temFN[3]="FN:"+this.nombreNew.trim()+" "+this.apellidoNew.trim();
-  //   var final:string="";
-  //   temFN.forEach(element => {
-  //     final+=element+"\n";        
-  //   });
-  //   final=final.substring(0,final.length-1);
-  //   console.log("fiNal card: ",final);
-}
-
-
- 
-    cambioTipos(){
-      console.log(this.tipos_Select)
-      this.objMetadatos["Contribute"]["Role"]=this.tipos_Select;
-
+  updateVcard() {//lanzar desde ngOnDestroy
+    if (this.entityLastname == undefined) {
+      this.entityLastname = '';
     }
 
+    if (this.entityName == undefined) {
+      this.entityName = '';
+    }
 
+    if (this.entityEmail == undefined) {
+      this.entityEmail = '';
+    }
+
+    if (this.entityOrganization == undefined) {
+      this.entityOrganization = '';
+    }
+
+    const card = `BEGIN:VCARD\nVERSION:3.0
+    N:${this.entityLastname.trim()};${this.entityName.trim()};;;
+    FN:${this.entityName.trim()} ${this.entityLastname.trim()}
+    EMAIL;TYPE=INTERNET:${this.entityEmail.trim()}
+    ORG:${this.entityOrganization.trim()}
+    END:VCARD`;
+
+    this.metametadataObject['contribute']['entity'][0] = card;
+  }
+
+  changeRole() {
+    this.metametadataObject['contribute']['value'][0] = this.roleSelected;
+  }
+
+  isEmpty(value: any[]) {
+    if (typeof value !== 'undefined' && value) {
+      return value;
+    };
+  }
+
+  ngOnDestroy(): void {
+    console.log('[INFO]> Destroy Meta-Metadata');
+
+    this.metametadataObject['identifier']['catalog'][0] = this.identifierCatalog;
+    this.metametadataObject['identifier']['entry'][0] = this.identifierEntry;
+    this.updateVcard();
+    if (this.date != undefined) {
+      this.metametadataObject['contribute']['date'][0] = this.date.toISOString();
+    }
+    this.metametadataObject['metadataSchema']['metadataSchema'][0] = this.metadataSchema;
+
+    this.lompadservice.objPricipal['metaMetadata'] = this.metametadataObject;
+    this.lompadservice.sendNewMetadata(this.metametadataObject, 'metaMetadata');
+  }
 
 }
