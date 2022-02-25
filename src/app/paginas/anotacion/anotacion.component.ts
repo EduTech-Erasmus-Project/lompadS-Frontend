@@ -85,7 +85,7 @@ export class AnotacionComponent implements OnInit {
     ];
 
     this.objectOptions = this.componentePrincipal.objOptions;
-    console.log('[INFO]> Annotation Component: ', this.annotationObject);
+    // console.log('[INFO]> Annotation Component: ', this.annotationObject);
 
     this.setAnnotationData();
   }
@@ -186,7 +186,7 @@ export class AnotacionComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    console.log('[INFO]> Destroy Annotation');
+    // console.log('[INFO]> Destroy Annotation');
 
     this.updateVcard();
     if (this.date != undefined) {

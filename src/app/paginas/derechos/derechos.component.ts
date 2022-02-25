@@ -60,7 +60,7 @@ export class DerechosComponent implements OnInit {
       { label: 'Rights.no', value: 'no', code: 'no' }
     ];
     
-    console.log('[INFO]> Rights Component: ', this.rightsObject);
+    // console.log('[INFO]> Rights Component: ', this.rightsObject);
     this.objectOptions = this.componentePrincipal.objOptions;
 
     this.setRightsData();
@@ -96,7 +96,7 @@ export class DerechosComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    console.log('[INFO]> Destroy Rights');
+    // console.log('[INFO]> Destroy Rights');
 
     this.rightsObject['description']['description'][0] = this.description;
 

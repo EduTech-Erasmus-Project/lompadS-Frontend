@@ -62,7 +62,7 @@ export class ClasificacionComponent implements OnInit {
     ];
 
     this.objectOptions = this.componentePrincipal.objOptions;
-    console.log('[INFO]> Classification Component: ', this.classificationObject);
+    // console.log('[INFO]> Classification Component: ', this.classificationObject);
 
     this.setClassificationData();
   }
@@ -95,7 +95,7 @@ export class ClasificacionComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    console.log('[INFO]> Destroy Classification');
+    // console.log('[INFO]> Destroy Classification');
     this.classificationObject['taxonPath']['entry'][0] = this.taxonPathEntry;
     this.classificationObject['taxonPath']['id'][0] = this.taxonPathId;
     this.classificationObject['taxonPath']['source'][0] = this.taxonPathSource;

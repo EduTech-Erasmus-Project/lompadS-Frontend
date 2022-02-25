@@ -36,9 +36,9 @@ export class LompadService {
       uploadedData = response;
     }).catch(error => console.error('[Upload] Something went wrong!', error));
 
-    console.log('[DEBUG] sendMetadataFile> Response', uploadedData);
+    // console.log('[DEBUG] sendMetadataFile> Response', uploadedData);
 
-    console.log('[DEBUG] Status?', uploadedData.status)
+    // console.log('[DEBUG] Status?', uploadedData.status)
 
     if (uploadedData['STATUS_CODE'] == 200) {
       readData = await this.loadMetadataFile(uploadedData);
@@ -61,7 +61,7 @@ export class LompadService {
       readData = response;
     }).catch(error => console.error('[Read] Something went wrong!', error));
 
-    console.log('[DEBUG] loadMetadataFile> Response', readData);
+    // console.log('[DEBUG] loadMetadataFile> Response', readData);
 
     if (readData['statusCode'] == 200) {
       this.setMetadataCookies(uploadedData);
@@ -88,7 +88,7 @@ export class LompadService {
     let res: any;
 
     localStorage.setItem('objPrincipal', JSON.stringify(this.objPricipal));
-    console.log("[INFO] sendNewMetadata> Saving:", leaf);
+    // console.log("[INFO] sendNewMetadata> Saving:", leaf);
 
     this.apiService.updateMetadata(leaftData, this.hash, leaf).toPromise().then((response) => {
       res = response;
@@ -111,7 +111,7 @@ export class LompadService {
     if (option == 'json') {
       var metadataObject = JSON.parse(JSON.stringify(this.objPricipal).replace(/\s(?=\w+":)/g, ""));
 
-      console.log('INFO', metadataObject)
+      // console.log('INFO', metadataObject)
       try {
         var blob = new Blob([JSON.stringify(metadataObject, null, 2)], { type: 'application/json' });
         filename = filename + '.json';
@@ -131,9 +131,9 @@ export class LompadService {
       this.perfil = this.cookieService.get('perfil');
       this.hash = this.cookieService.get('hash');
 
-      console.log("[INFO] LompadService> Perfil: ", this.perfil);
-      console.log("[INFO] LompadService> Hash: ", this.hash);
-      console.log("[INFO] LompadService> Data: ", this.objPricipal);
+      // console.log("[INFO] LompadService> Perfil: ", this.perfil);
+      // console.log("[INFO] LompadService> Hash: ", this.hash);
+      // console.log("[INFO] LompadService> Data: ", this.objPricipal);
     }
 
   }

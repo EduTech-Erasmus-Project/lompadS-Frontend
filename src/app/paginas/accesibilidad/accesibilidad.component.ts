@@ -170,7 +170,7 @@ export class AccesibilidadComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('[INFO]> Destroy Accessibility');
+    // console.log('[INFO]> Destroy Accessibility');
 
     this.accesibilityObject['description']['description'][0] = this.description;
     this.updateValues();

@@ -543,7 +543,7 @@ export class TecnicaComponent implements OnInit {
     ];
 
     this.objectOptions = this.componentePrincipal.objOptions;
-    console.log('[INFO]> Technical Component: ', this.technicalObject);
+    // console.log('[INFO]> Technical Component: ', this.technicalObject);
 
     this.setTechnicalData();
   }
@@ -631,7 +631,7 @@ export class TecnicaComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    console.log('[INFO]> Destroy Technical');
+    // console.log('[INFO]> Destroy Technical');
 
     this.technicalObject['size']['size'][0] = this.size;
     this.technicalObject['location']['location'][0] = this.location;
