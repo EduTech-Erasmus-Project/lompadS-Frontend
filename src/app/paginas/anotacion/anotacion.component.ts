@@ -106,8 +106,8 @@ export class AnotacionComponent implements OnInit {
         this.date = new Date(this.annotationObject['date']['dateTime'][0]);
       }
       this.description = this.annotationObject['description']['description'][0];
-      this.accessModeSelected = this.annotationObject['modeAccess']['value'][0];
-      this.accessModeSufficientSelected = this.annotationObject['modeAccessSufficient']['value'][0];
+      this.accessModeSelected = this.annotationObject['accessmode']['value'][0];
+      this.accessModeSufficientSelected = this.annotationObject['accessmodesufficient']['value'][0];
       this.rolSelected = this.annotationObject['rol']['value'][0];
     }
   }

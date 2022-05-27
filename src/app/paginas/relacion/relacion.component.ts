@@ -43,18 +43,18 @@ export class RelacionComponent implements OnInit {
     this.loadRelationData();
 
     this.kindOptions = [
-      { label: 'Relation.kind.isPartOf', value: 'is part of', code: 'ipo' },
-      { label: 'Relation.kind.hasPart', value: 'has part', code: 'hp' },
-      { label: 'Relation.kind.isVersionOf', value: 'is version of', code: 'ivo' },
-      { label: 'Relation.kind.hasVersion', value: 'has version', code: 'hv' },
-      { label: 'Relation.kind.isFormatOf', value: 'is format of', code: 'ifo' },
-      { label: 'Relation.kind.hasFormat', value: 'has format', code: 'hf' },
+      { label: 'Relation.kind.isPartOf', value: 'ispartof', code: 'ipo' },
+      { label: 'Relation.kind.hasPart', value: 'haspart', code: 'hp' },
+      { label: 'Relation.kind.isVersionOf', value: 'isversionof', code: 'ivo' },
+      { label: 'Relation.kind.hasVersion', value: 'hasversion', code: 'hv' },
+      { label: 'Relation.kind.isFormatOf', value: 'isformatof', code: 'ifo' },
+      { label: 'Relation.kind.hasFormat', value: 'hasformat', code: 'hf' },
       { label: 'Relation.kind.references', value: 'references', code: 'rf' },
-      { label: 'Relation.kind.isReferencedBy', value: 'is referenced by', code: 'irfb' },
-      { label: 'Relation.kind.isBasedOn', value: 'is based on', code: 'ibo' },
-      { label: 'Relation.kind.isBasisFor', value: 'is basis for', code: 'ibf' },
+      { label: 'Relation.kind.isReferencedBy', value: 'isreferencedby', code: 'irfb' },
+      { label: 'Relation.kind.isBasedOn', value: 'isbasedon', code: 'ibo' },
+      { label: 'Relation.kind.isBasisFor', value: 'isbasisfor', code: 'ibf' },
       { label: 'Relation.kind.requires', value: 'requires', code: 'rq' },
-      { label: 'Relation.kind.isRequiredBy', value: 'is required by', code: 'irqb' }
+      { label: 'Relation.kind.isRequiredBy', value: 'isrequiredby', code: 'irqb' }
     ];
 
     this.objectOptions = this.componentePrincipal.objOptions;

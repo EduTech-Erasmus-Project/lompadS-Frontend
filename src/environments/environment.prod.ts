@@ -1,4 +1,4 @@
-const API_BACKEND="http://localhost:8000";
+const API_BACKEND="https://lompads.edutech-project.org/api";
 export const environment = {
   production: true,
   URL_UPLOAD_FILE: `${API_BACKEND}/uploadfile`,

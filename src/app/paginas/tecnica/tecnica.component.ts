@@ -560,14 +560,20 @@ export class TecnicaComponent implements OnInit {
       this.formatDigitalSubtypeSelected = this.technicalObject['format']['format'][0];
       this.size = this.technicalObject['size']['size'][0];
       this.location = this.technicalObject['location']['location'][0];
-      this.orCompositeTypeSelected = this.technicalObject['requirement']['typeSource'][0];
-      this.orCompositeNameSelected = this.technicalObject['requirement']['nameSource'][0];
+      
+      this.orCompositeTypeSelected = this.technicalObject['requirement']['typeValue'][0];
+      console.log(" ---------------"+this.technicalObject['requirement']['typeValue'][0]); 
+      
+      this.orCompositeNameSelected = this.technicalObject['requirement']['nameValue'][0];
+      console.log(" ---------------"+this.technicalObject['requirement']['nameValue'][0]); 
+      
       this.minimumVersion = this.technicalObject['requirement']['minVersion'][0];
       this.maximumVersion = this.technicalObject['requirement']['maxVersion'][0];
       this.installationRemarks = this.technicalObject['installationRemarks']['installationRemarks'][0];
       this.otherPlatformRequirements = this.technicalObject['otherPlatformRequirements']['otherPlatformRequirements'][0];
 
       this.changeOrCompositeTypeOptions(this.orCompositeTypeSelected);
+      
       this.castTimeDuration(this.technicalObject['duration']['duration'][0]);
     }
   }
@@ -632,17 +638,22 @@ export class TecnicaComponent implements OnInit {
 
   ngOnDestroy(): void {
     // console.log('[INFO]> Destroy Technical');
-
+    try{
     this.technicalObject['size']['size'][0] = this.size;
     this.technicalObject['location']['location'][0] = this.location;
-    this.technicalObject['requirement']['minVersion'][0] = this.minimumVersion;
-    this.technicalObject['requirement']['maxVersion'][0] = this.maximumVersion;
+    this.technicalObject.requirement.minimumVersion=[this.minimumVersion];
+    this.technicalObject.requirement.maximumVersion= [this.maximumVersion];
     this.technicalObject['installationRemarks']['installationRemarks'][0] = this.installationRemarks;
     this.technicalObject['otherPlatformRequirements']['otherPlatformRequirements'][0] = this.otherPlatformRequirements;
     this.saveTime();
-
     this.lompadservice.objPricipal['technical'] = this.technicalObject;
     this.lompadservice.sendNewMetadata(this.technicalObject, 'technical');
   }
+
+catch(error){
+  console.log(error)
+}
+}
+
 
 }

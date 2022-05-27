@@ -96,7 +96,7 @@ export class GeneralComponent implements OnInit, OnDestroy {
       { label: 'General.structure.atomic', value: 'atomic', code: 'ato' },
       { label: 'General.structure.collection', value: 'collection', code: 'col' },
       { label: 'General.structure.networked', value: 'networked', code: 'net' },
-      { label: 'General.structure.hierarchical', value: 'hiperarchical', code: 'hip' },
+      { label: 'General.structure.hierarchical', value: 'hierarchical', code: 'hip' },
       { label: 'General.structure.linear', value: 'linear', code: 'lin' },
     ];
 
@@ -163,8 +163,10 @@ export class GeneralComponent implements OnInit, OnDestroy {
   loadKeywords() {
     this.keywords = [];
     let keys: [] = (this.isEmpty(this.generalObject['keyword']['keyword'])) ? this.generalObject['keyword']['keyword'] : [''];
-
+    //console.log('---- - [INFO]> loadKeywords 166: ',this.generalObject['keyword']['keyword']);
+    //console.log('---- - [INFO]> loadKeywords 167: ',this.generalObject['keyword']);
     if (keys != null) {
+      //cars.forEach((element) => {
       keys.forEach((element) => {
         this.keywords.push(element);
       });
@@ -184,7 +186,7 @@ export class GeneralComponent implements OnInit, OnDestroy {
   }
 
   saveNewKeyword() {
-    // console.log(this.word);
+    //console.log("-----",this.word);
     this.keywordDialog = false;
     this.keywords.push(this.word);
     this.word = '';
@@ -214,16 +216,21 @@ export class GeneralComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // console.log('[INFO]> Destroy General');
-
+  try{
     this.generalObject['identifier']['catalog'][0] = this.identifierCatalog[0];
     this.generalObject['identifier']['entry'][0] = this.identifierEntry[0];
     this.generalObject['title']['title'][0] = this.title[0];
     this.generalObject['description']['description'][0] = this.description[0];
     this.generalObject['coverage']['coverage'][0] = this.coverage[0];
+    console.log('----------**B*** ',this.keywords);
     this.generalObject['keyword']['keyword'] = this.keywords;
 
     this.lompadservice.objPricipal['general'] = this.generalObject;
     this.lompadservice.sendNewMetadata(this.generalObject, 'general');
+  }catch(error){
+      console.log(error)
+    }
+  
   }
 
 }

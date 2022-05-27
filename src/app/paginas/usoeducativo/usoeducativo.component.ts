@@ -106,7 +106,7 @@ export class UsoeducativoComponent implements OnInit {
     this.learningResourceTypeOptions = [
       { label: 'Educational.learningResourceType.exercise', value: 'exercise', code: 'ejer' },
       { label: 'Educational.learningResourceType.simulation', value: 'simulation', code: 'sim' },
-      { label: 'Educational.learningResourceType.questionnaire', value: 'questionnarie', code: 'cuest' },
+      { label: 'Educational.learningResourceType.questionnaire', value: 'questionnaire', code: 'cuest' },
       { label: 'Educational.learningResourceType.diagram', value: 'diagram', code: 'dia' },
       { label: 'Educational.learningResourceType.figure', value: 'figure', code: 'fig' },
       { label: 'Educational.learningResourceType.graph', value: 'graph', code: 'gra' },

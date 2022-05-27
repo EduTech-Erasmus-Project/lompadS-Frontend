@@ -84,6 +84,7 @@ export class LompadService {
   }
 
   sendNewMetadata(object: any, leaf: string) {
+    console.log("****", leaf)
     let leaftData = JSON.stringify(object);
     let res: any;
 

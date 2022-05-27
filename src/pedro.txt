@@ -1,7 +1,7 @@
 "atómica":"atomic",
 "colección":"collection",
 "en red":"networked",
-"jerárquica":"hiperarchical",
+"jerárquica":"hierarchical",
 "lineal":"linear",      
 "Autor":  "author", 
 "Revisor":  "validator", 

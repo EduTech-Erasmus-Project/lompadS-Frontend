@@ -123,10 +123,11 @@ export class AccesibilidadComponent implements OnInit, OnDestroy {
   setAccesibilityData() {
     if (this.flag) {
       this.description = this.accesibilityObject['description']['description'][0];
-      var accessF: [] = this.accesibilityObject['accessibilityFeatures']['resourceContent'];
-      var accessH: [] = this.accesibilityObject['accessibilityHazard']['properties'];
-      var accessC: [] = this.accesibilityObject['accessibilityControl']['methods'];
-      var accessA: [] = this.accesibilityObject['accessibilityApi']['compatibleResource'];
+      console.log(" -------   "+this.accesibilityObject['accessibilityFeatures']['value']);
+      var accessF: [] = this.accesibilityObject['accessibilityFeatures']['value'];
+      var accessH: [] = this.accesibilityObject['accessibilityHazard']['value'];
+      var accessC: [] = this.accesibilityObject['accessibilityControl']['value'];
+      var accessA: [] = this.accesibilityObject['accessibilityApi']['value'];
 
       this.mapValues(accessF, this.accessFeatures);
       this.mapValues(accessH, this.accessHazard);

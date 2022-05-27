@@ -96,6 +96,7 @@ export class ClasificacionComponent implements OnInit {
 
   ngOnDestroy(): void {
     // console.log('[INFO]> Destroy Classification');
+    
     this.classificationObject['taxonPath']['entry'][0] = this.taxonPathEntry;
     this.classificationObject['taxonPath']['id'][0] = this.taxonPathId;
     this.classificationObject['taxonPath']['source'][0] = this.taxonPathSource;
@@ -103,6 +104,8 @@ export class ClasificacionComponent implements OnInit {
 
     this.lompadService.objPricipal['classification'] = this.classificationObject;
     this.lompadService.sendNewMetadata(this.classificationObject, 'classification');
+  
+
   }
 
 }

@@ -60,7 +60,7 @@ export class DerechosComponent implements OnInit {
       { label: 'Rights.no', value: 'no', code: 'no' }
     ];
     
-    // console.log('[INFO]> Rights Component: ', this.rightsObject);
+    //console.log('[INFO]> Rights Component: ', this.rightsObject);
     this.objectOptions = this.componentePrincipal.objOptions;
 
     this.setRightsData();
@@ -76,8 +76,11 @@ export class DerechosComponent implements OnInit {
   setRightsData() {
     if (this.flag) {
       this.description = this.rightsObject['description']['description'][0];
-      this.costSelected = this.rightsObject['cost']['value'][0];
-      this.copyrightSelected = this.rightsObject['copyrightAndOtherRestrictions']['value'][0];
+      //console.log('---- - [INFO]> description: ', this.rightsObject['description']['description'][0]);
+      this.costSelected = this.rightsObject['cost']['value'];
+      //console.log('---- - [INFO]> cost ', this.rightsObject['cost']['value']);
+      this.copyrightSelected = this.rightsObject['copyrightAndOtherRestrictions']['value'];
+      //console.log('---- - [INFO]> copyrightSelected ', this.rightsObject['copyrightAndOtherRestrictions']['value']);
     }
   }
 
